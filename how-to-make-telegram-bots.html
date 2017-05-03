@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="Recently Telegram has introduced a new feature, the bots. Basically the bots enable human Telegram users to talk to machines, i.e. customly written little programs. A bot could be a daily helper, be i">
+<meta property="og:type" content="article">
+<meta property="og:title" content="How to make Telegram Bots">
+<meta property="og:url" content="https://ferdinand-muetsch.de/how-to-make-telegram-bots.html">
+<meta property="og:site_name" content="Ferdinand Mütsch">
+<meta property="og:description" content="Recently Telegram has introduced a new feature, the bots. Basically the bots enable human Telegram users to talk to machines, i.e. customly written little programs. A bot could be a daily helper, be i">
+<meta property="og:updated_time" content="2017-05-03T20:40:55.791Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="How to make Telegram Bots">
+<meta name="twitter:description" content="Recently Telegram has introduced a new feature, the bots. Basically the bots enable human Telegram users to talk to machines, i.e. customly written little programs. A bot could be a daily helper, be i">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon.png" sizes="192x192">
+          
+        
+        
+    
+    <!-- title -->
+    <title>How to make Telegram Bots</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- rss -->
+    
+    
+</head>
+
+<body>
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fa fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fa fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Blog</a></li>
+         
+          <li><a href="/imprint/">Imprint</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/why-raid-10-is-better-than-raid-01.html"><i class="fa fa-chevron-left" aria-hidden="true" onmouseover='$("#i-prev").toggle();' onmouseout='$("#i-prev").toggle();'></i></a></li>
+        
+        
+        <li><a class="icon" href="/linux-cache-information-bash-script.html"><i class="fa fa-chevron-right" aria-hidden="true" onmouseover='$("#i-next").toggle();' onmouseout='$("#i-next").toggle();'></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa fa-chevron-up" aria-hidden="true" onmouseover='$("#i-top").toggle();' onmouseout='$("#i-top").toggle();'></i></a></li>
+        <li><a class="icon" href="#"><i class="fa fa-share-alt" aria-hidden="true" onmouseover='$("#i-share").toggle();' onmouseout='$("#i-share").toggle();' onclick='$("#share").toggle();return false;'></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://ferdinand-muetsch.de/how-to-make-telegram-bots.html"><i class="fa fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://ferdinand-muetsch.de/how-to-make-telegram-bots.html&text=How to make Telegram Bots"><i class="fa fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://ferdinand-muetsch.de/how-to-make-telegram-bots.html&title=How to make Telegram Bots"><i class="fa fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://ferdinand-muetsch.de/how-to-make-telegram-bots.html&is_video=false&description=How to make Telegram Bots"><i class="fa fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=How to make Telegram Bots&body=Check out this article: https://ferdinand-muetsch.de/how-to-make-telegram-bots.html"><i class="fa fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://ferdinand-muetsch.de/how-to-make-telegram-bots.html&title=How to make Telegram Bots"><i class="fa fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://ferdinand-muetsch.de/how-to-make-telegram-bots.html&title=How to make Telegram Bots"><i class="fa fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://ferdinand-muetsch.de/how-to-make-telegram-bots.html&title=How to make Telegram Bots"><i class="fa fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://ferdinand-muetsch.de/how-to-make-telegram-bots.html&title=How to make Telegram Bots"><i class="fa fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://ferdinand-muetsch.de/how-to-make-telegram-bots.html&name=How to make Telegram Bots&description="><i class="fa fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index width mx-auto px2 my4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        How to make Telegram Bots
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">Ferdinand Mütsch</span>
+      </span>
+      
+    <div class="postdate">
+        <time datetime="2015-06-28T20:39:44.000Z" itemprop="datePublished">2015-06-28</time>
+    </div>
+
+
+      
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p>Recently <a href="http://telegram.org" title="Telegram" target="_blank" rel="external">Telegram</a> has introduced a new feature, the bots. Basically the bots enable human Telegram users to talk to machines, i.e. customly written little programs. A bot could be a daily helper, be it a bot that you can ask for the current temperature, one that googles something for you, one to manage your todo’s or even a little text based game – everything within the Telegram chat. The nice thing about them is that they’re really simple to create. You can read more about the bots in general here: <a href="https://telegram.org/blog/bot-revolution" target="_blank" rel="external">https://telegram.org/blog/bot-revolution</a></p>
+<p>This article shouldn’t cover how to create and publish a bot (which actually is the same step), but how to write its actual functionality – its backend. On how to initially set up one, please refer to this little guide: <a href="https://core.telegram.org/bots" target="_blank" rel="external">https://core.telegram.org/bots</a>. It’s very easy, trust me. Everything you need for that is your Telegram app.</p>
+<p>What you need further to program your bot basically is a favorite programming language, an IDE or at least a text editor, <a href="https://core.telegram.org/bots/api" title="this" target="_blank" rel="external">this</a> page to be open and again your app. In this tutorial we will use Node.js as programming language (or more precisely as programming platform), but you really could use any other language, as well. Probably Python or PHP would do the job well, but you could even write a Java application.</p>
+<p>First some basic things to understand. For the most parts your bot is your own application which we will try to create here, running on your own local PC or server. Telegram won’t host any code. All functionality and data storage is kept in your program on your machine. Basically Telegram doesn’t provide more than kind of an interface between your users’ Telegram client (app) and your bot application. The flow would be like:</p>
+<ol>
+<li><p>You create a new bot with @BotFather and set its description and commands (the commands you set there are – strictly speaking – completely independent of which commands your program will actually accept – they are just strings which the user gets suggested in a chat with your bot) so that the bot gets publicly accessible as any other (human) Telegram user is via her @ nickname.</p>
+</li>
+<li><p>You write the backend and run it to be listening.</p>
+</li>
+<li><p>A user sends a message to your bot.</p>
+</li>
+<li><p>The (JSON formatted) Telegram message object gets passed to your backend via HTTPS by Telegram.</p>
+</li>
+<li><p>Your backend parses the message text, extract the commands and arguments, processes some logic, possibly does some database actions and so on.</p>
+</li>
+<li><p>Your backend passes a response message object to the Telegram API via HTTPS (the other way round now).</p>
+</li>
+<li><p>Telegram shows the message to your user’s chat window.</p>
+</li>
+</ol>
+<p>Alright, now let’s get into the code. I require you to already have set up a bot and got its authentication token (all using @BotFather). As I said, we will make a little Node.js program here, but for those who don’t understand JavaScript too well, I’ll try to explain everything as clear as you need to re-do this in your programming language.</p>
+<p>First, you need any library that can do HTTP requests, because basically your backend will be busy doing POSTs and GETs for the most time. For Node.js we’ll use the <a href="http://unirest.io/nodejs.html" title="Unirest" target="_blank" rel="external">Unirest</a> library, which probably is a little bit overkill, but very simple for our purpose. The library is available for Python, PHP, Ruby, Java and many others as well.</p>
+<p>So first step is setting up a Node application and requiring Unirest (i assume you know how to set up a Node application and you’re familiar with npm).</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/* app.js */</span></div><div class="line"></div><div class="line"><span class="keyword">var</span> unirest = <span class="built_in">require</span>(<span class="string">'unirest'</span>);</div></pre></td></tr></table></figure>
+<p>Next is to receive messages from your users. Telegram offers two ways to do this. The first way would be to use Webhooks, which basically means that you’re backend runs on a webserver (or for Node it actually is one itself), Telegram knows your HTTPS endpoint and does a request to your backend every time a message is sent by a user. I would consider this the more elegant way. But the minus about this is that you would need to have a valid SSL certificate (which costs monthly charge) to provide a secure HTTPS connection. Telegram won’t send any data to an unsecure or unverified endpoint. This is why we will take the other approach, which works kind of the other way round. Your backend will continuously request the Telegram API if there are new messages available. In detail your backend won’t do request after request after request (because this would be so inefficient!) but use <a href="http://www.pubnub.com/blog/http-long-polling/" title="long polling" target="_blank" rel="external">long polling</a>. To put it simple long polling means that a request won’t be answered instantly, but kept open until there is some data available.</p>
+<p>We need to specify some constants. As i said, everything between your backend and Telegram happens via their HTTPS interface. We set up constants for the base API url, containing your bot token, the URL for the <a href="https://core.telegram.org/bots/api#getupdates" title="getUpdates" target="_blank" rel="external">getUpdates</a> method endpoint and the URL for the <a href="https://core.telegram.org/bots/api#sendmessage" title="sendMessage" target="_blank" rel="external">sendMessage</a> method endpoint. The <em>:offset:</em> within the URL string will get replaced by a number, specifying, which new messages to fetch from Telegram later.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/* app.js */</span></div><div class="line"></div><div class="line"><span class="comment">/* ... */</span></div><div class="line"></div><div class="line"><span class="keyword">var</span> BASE_URL = <span class="string">"https://api.telegram.org/botYOUR_TOKEN_HERE/"</span>;</div><div class="line"><span class="keyword">var</span> POLLING_URL = BASE_URL + <span class="string">"getUpdates?offset=:offset:&amp;timeout=60"</span>;</div><div class="line"><span class="keyword">var</span> SEND_MESSAGE_URL = BASE_URL + <span class="string">"sendMessage"</span>;</div></pre></td></tr></table></figure>
+<p>Now we’ll introduce a function called <em>poll</em> (you can choose any other name), which basically is kind of the main loop of our program. Here’s the code for this method, explanation follows.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/* ... */</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">poll</span>(<span class="params">offset</span>) </span>&#123;</div><div class="line">    <span class="keyword">var</span> url = POLLING_URL.replace(<span class="string">":offset:"</span>, offset);</div><div class="line"></div><div class="line">    unirest.get(url)</div><div class="line">        .end(<span class="function"><span class="keyword">function</span>(<span class="params">response</span>) </span>&#123;</div><div class="line">            <span class="keyword">var</span> body = response.raw_body;</div><div class="line">            <span class="keyword">if</span> (response.status == <span class="number">200</span>) &#123;</div><div class="line">                <span class="keyword">var</span> jsonData = <span class="built_in">JSON</span>.parse(body);</div><div class="line">                <span class="keyword">var</span> result = jsonData.result;</div><div class="line"></div><div class="line">                <span class="keyword">if</span> (result.length &gt; <span class="number">0</span>) &#123;</div><div class="line">                    <span class="keyword">for</span> (i <span class="keyword">in</span> result) &#123;</div><div class="line">                        <span class="keyword">if</span> (runCommand(result[i].message)) <span class="keyword">continue</span>;</div><div class="line">                    &#125;</div><div class="line"></div><div class="line">                    max_offset = <span class="built_in">parseInt</span>(result[result.length - <span class="number">1</span>].update_id) + <span class="number">1</span>; <span class="comment">// update max offset</span></div><div class="line">                &#125;</div><div class="line">                poll(max_offset);</div><div class="line">            &#125;</div><div class="line">        &#125;);</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<p>Alright. The function is recursive, meaning it will call itself – namely each time, a request was answered (which is, when a new message was fetched). The http request to Telegram API to get updates will be pending until a message arrives. Then it gets answered, but has to be re-opened again instantly now to continue listening for message updates again. As a parameter it takes an offset number, which replaces the <em>:offset:</em> placeholder in the url string. To read more about this parameter, go to <a href="https://core.telegram.org/bots/api#getupdates" target="_blank" rel="external">https://core.telegram.org/bots/api#getupdates</a>. Unirest opens an http request to the specified url and executes the callback function given to end(), if the request was answered. First, we extract the response body. Afterwards, we check if our request was successful. If this is the case, we parse the body (which is a JSON object, consisting of an <em>ok</em> field and a <em>result</em> array. The result array contains one or more message objects. These are the ones that are relevant for us. For each message object, we try to parse it as a command (i’ll give you the runCommand() function is a second…) and depending on which command we got, execute the respective method. Afterwards the offset gets updates to the id of the latest message plus one (to not receive it again next time) and a new request gets opened.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/* ... */</span></div><div class="line"></div><div class="line"><span class="keyword">var</span> dosth = <span class="function"><span class="keyword">function</span>(<span class="params">message</span>) </span>&#123;</div><div class="line">    <span class="comment">// to be implemented....</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">var</span> COMMANDS = &#123;</div><div class="line">    <span class="string">"dosth"</span> : dosth</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<p>Now we specify a map, which maps strings (representing the users’ command input – in this case <em>/dosth</em> to actual functions.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">    <span class="keyword">var</span> msgtext = message.text;</div><div class="line"></div><div class="line">    <span class="keyword">if</span> (msgtext.indexOf(<span class="string">"/"</span>) != <span class="number">0</span>) <span class="keyword">return</span> <span class="literal">false</span>; <span class="comment">// no slash at beginning?</span></div><div class="line">    <span class="keyword">var</span> command = msgtext.substring(<span class="number">1</span>, msgtext.indexOf(<span class="string">" "</span>));</div><div class="line">    <span class="keyword">if</span> (COMMANDS[command] == <span class="literal">null</span>) <span class="keyword">return</span> <span class="literal">false</span>; <span class="comment">// not a valid command?</span></div><div class="line">    COMMANDS[command](message);</div><div class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>And this is the runCommand method. It takes the entire Telegram message object, which we got as a response from the Telegram API above and tries to parse its text as a command. A command string always starts with a slash. So if there is not slash in the beginning, we can be sure that we didn’t get a valid command. We simply return here, but we also could send a message to the user telling him “Hey, please enter a valid command.”. But let’s keep it simple. In the following line we extract everything after the slash and before the first blank space (assuming a command mustn’t contain a blank space) as the command. Afterwards we look into our map if the command actually is a key for a method and if so, we just run this method, passing it the message object as a parameter as the function will need information out of it.</p>
+<p>What have we done so far? We wrote a program that requests the Telegram API for new messages, parses potentially contained commands and runs functions depending on these commands.</p>
+<p>All we still need is to implement the method belonging to the <em>/dosth</em> command.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">    <span class="keyword">var</span> caps = message.text.toUpperCase();</div><div class="line">    <span class="keyword">var</span> answer = &#123;</div><div class="line">        <span class="attr">chat_id</span> : message.chat.id,</div><div class="line">        <span class="attr">text</span> : <span class="string">"You told be to do something, so I took your input and made it all caps. Look: "</span> + caps</div><div class="line">    &#125;;</div><div class="line"></div><div class="line">    unirest.post(SEND_MESSAGE_URL)</div><div class="line">        .send(answer)</div><div class="line">        .end(<span class="function"><span class="keyword">function</span> (<span class="params">response</span>) </span>&#123;</div><div class="line">            <span class="keyword">if</span> (response.status == <span class="number">200</span>) <span class="built_in">console</span>.log(<span class="string">"Successfully sent message to "</span> + message.chat.id);</div><div class="line">        &#125;);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>Most times you’ll want to send a message as response to your user. You could also send an image, an audio, a location, … (see <a href="https://core.telegram.org/bots/api#available-methods" target="_blank" rel="external">https://core.telegram.org/bots/api#available-methods</a>). Every message object needs a <em>chat_id</em> field, containing a Telegram user id, so that Telegram knows which user to deliver your message to. We simply extract this id out of the message object’s chat object we received from the user. The second mandatory field in a message object is the <em>text</em>. This is up to you. After having set up the new message object (you could add other fields, e.g. to show bot-buttons to the user – see <a href="https://core.telegram.org/bots/api#message" target="_blank" rel="external">https://core.telegram.org/bots/api#message</a> for this), we just need to HTTP POST it to Telegram using Unirest again. Finished.</p>
+<p>This example was kept veeeery simple. Of course you could implement your bot to do really fancy things. You could process media, do location-specific operations, include a database (MongoDB suits really well!) and many, many other things. You could write any complex application you can imagine – with a Telegram chat as the text i/o interface. Please tell be your ideas – what would be a great bot?</p>
+<p>If you like to try by bot, simply write a message to <strong>@FavoriteBot</strong> and share it to your friends, if you like it.</p>
+<p>If you have any questions, contact me via mail to <em>mail(at)ferdinand-muetsch.de.</em></p>
+
+  </div>
+</article>
+
+
+
+    </div>
+    
+      <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Blog</a></li>
+         
+          <li><a href="/imprint/">Imprint</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://ferdinand-muetsch.de/how-to-make-telegram-bots.html"><i class="fa fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://ferdinand-muetsch.de/how-to-make-telegram-bots.html&text=How to make Telegram Bots"><i class="fa fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://ferdinand-muetsch.de/how-to-make-telegram-bots.html&title=How to make Telegram Bots"><i class="fa fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://ferdinand-muetsch.de/how-to-make-telegram-bots.html&is_video=false&description=How to make Telegram Bots"><i class="fa fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=How to make Telegram Bots&body=Check out this article: https://ferdinand-muetsch.de/how-to-make-telegram-bots.html"><i class="fa fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://ferdinand-muetsch.de/how-to-make-telegram-bots.html&title=How to make Telegram Bots"><i class="fa fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://ferdinand-muetsch.de/how-to-make-telegram-bots.html&title=How to make Telegram Bots"><i class="fa fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://ferdinand-muetsch.de/how-to-make-telegram-bots.html&title=How to make Telegram Bots"><i class="fa fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://ferdinand-muetsch.de/how-to-make-telegram-bots.html&title=How to make Telegram Bots"><i class="fa fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://ferdinand-muetsch.de/how-to-make-telegram-bots.html&name=How to make Telegram Bots&description="><i class="fa fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+      <ul>
+        <li id="toc"><a class="icon" href="#" onclick='$("#toc-footer").toggle();return false;'><i class="fa fa-list fa-lg" aria-hidden="true"></i> TOC</a></li>
+        <li id="share"><a class="icon" href="#" onclick='$("#share-footer").toggle();return false;'><i class="fa fa-share-alt fa-lg" aria-hidden="true"></i> Share</a></li>
+        <li id="top" style="display:none"><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a></li>
+        <li id="menu"><a class="icon" href="#" onclick='$("#nav-footer").toggle();return false;'><i class="fa fa-bars fa-lg" aria-hidden="true"></i> Menu</a></li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+    
+    <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2017 Ferdinand Mütsch
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Blog</a></li>
+         
+          <li><a href="/imprint/">Imprint</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+</body>
+</html>
+<!-- styles -->
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+<link rel="stylesheet" href="/lib/meslo-LG/styles.css">
+<link rel="stylesheet" href="/lib/justified-gallery/justifiedGallery.min.css">
+
+
+<!-- jquery -->
+<script src="/lib/jquery/jquery.min.js"></script>
+<script src="/lib/justified-gallery/jquery.justifiedGallery.min.js"></script>
+<script src="/js/main.js"></script>
+<!-- Google Analytics -->
+
+    <script type="text/javascript">
+        (function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+        ga('create', 'UA-3922933-8', 'auto');
+        ga('send', 'pageview');
+    </script>
+
+<!-- Disqus Comments -->
+
+

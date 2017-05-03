@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="This is a little tutorial for mailserver administrators, who want to migrate to a new server while keeping all e-mails. This works for mailservers whose MDA uses the Maildir format – like Dovecot by d">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Migrate Maildir to new server using imapsync">
+<meta property="og:url" content="https://ferdinand-muetsch.de/migrate-maildir-to-new-server-using-imapsync.html">
+<meta property="og:site_name" content="Ferdinand Mütsch">
+<meta property="og:description" content="This is a little tutorial for mailserver administrators, who want to migrate to a new server while keeping all e-mails. This works for mailservers whose MDA uses the Maildir format – like Dovecot by d">
+<meta property="og:updated_time" content="2017-05-03T21:01:58.241Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Migrate Maildir to new server using imapsync">
+<meta name="twitter:description" content="This is a little tutorial for mailserver administrators, who want to migrate to a new server while keeping all e-mails. This works for mailservers whose MDA uses the Maildir format – like Dovecot by d">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon.png" sizes="192x192">
+          
+        
+        
+    
+    <!-- title -->
+    <title>Migrate Maildir to new server using imapsync</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- rss -->
+    
+    
+</head>
+
+<body>
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fa fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fa fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Blog</a></li>
+         
+          <li><a href="/imprint/">Imprint</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/webdevlistnet-the-developers-resource-collection.html"><i class="fa fa-chevron-left" aria-hidden="true" onmouseover='$("#i-prev").toggle();' onmouseout='$("#i-prev").toggle();'></i></a></li>
+        
+        
+        <li><a class="icon" href="/innovation-in-germany-not.html"><i class="fa fa-chevron-right" aria-hidden="true" onmouseover='$("#i-next").toggle();' onmouseout='$("#i-next").toggle();'></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa fa-chevron-up" aria-hidden="true" onmouseover='$("#i-top").toggle();' onmouseout='$("#i-top").toggle();'></i></a></li>
+        <li><a class="icon" href="#"><i class="fa fa-share-alt" aria-hidden="true" onmouseover='$("#i-share").toggle();' onmouseout='$("#i-share").toggle();' onclick='$("#share").toggle();return false;'></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://ferdinand-muetsch.de/migrate-maildir-to-new-server-using-imapsync.html"><i class="fa fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://ferdinand-muetsch.de/migrate-maildir-to-new-server-using-imapsync.html&text=Migrate Maildir to new server using imapsync"><i class="fa fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://ferdinand-muetsch.de/migrate-maildir-to-new-server-using-imapsync.html&title=Migrate Maildir to new server using imapsync"><i class="fa fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://ferdinand-muetsch.de/migrate-maildir-to-new-server-using-imapsync.html&is_video=false&description=Migrate Maildir to new server using imapsync"><i class="fa fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Migrate Maildir to new server using imapsync&body=Check out this article: https://ferdinand-muetsch.de/migrate-maildir-to-new-server-using-imapsync.html"><i class="fa fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://ferdinand-muetsch.de/migrate-maildir-to-new-server-using-imapsync.html&title=Migrate Maildir to new server using imapsync"><i class="fa fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://ferdinand-muetsch.de/migrate-maildir-to-new-server-using-imapsync.html&title=Migrate Maildir to new server using imapsync"><i class="fa fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://ferdinand-muetsch.de/migrate-maildir-to-new-server-using-imapsync.html&title=Migrate Maildir to new server using imapsync"><i class="fa fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://ferdinand-muetsch.de/migrate-maildir-to-new-server-using-imapsync.html&title=Migrate Maildir to new server using imapsync"><i class="fa fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://ferdinand-muetsch.de/migrate-maildir-to-new-server-using-imapsync.html&name=Migrate Maildir to new server using imapsync&description="><i class="fa fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index width mx-auto px2 my4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        Migrate Maildir to new server using imapsync
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">Ferdinand Mütsch</span>
+      </span>
+      
+    <div class="postdate">
+        <time datetime="2016-07-23T21:01:44.000Z" itemprop="datePublished">2016-07-23</time>
+    </div>
+
+
+      
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p>This is a little tutorial for mailserver administrators, who want to <em>migrate</em> to a new server while <em>keeping all e-mails</em>. This works for mailservers whose MDA uses the <a href="https://en.wikipedia.org/wiki/Maildir" target="_blank" rel="external">Maildir</a> format – like Dovecot by default – and have <em>IMAP</em> enabled.<br>This tutorial does <em>not</em> cover how to set up and configure a new mailserver on a new machine, based on the old one’s configuration, but only how to migrate the e-mails. Simply <em>tar</em>ing the Maildir folder and un_tar_ing it on the new machine again usually won’t work. But don’t worry, there is a cleaner way that abstracts away any actual mailserver or file-level considerations by only using the IMAP protocol’s methods. Therefore, we use a tool <em>imapsync</em>, which is written Perl. It acts as an ordinary IMAP client – just as Outlook or Thunderbird – that connects to both mailservers, the old and the new one. All information needed is how to authenticate the respective user with both servers. Actually one “manual” way to migrate the mails would be to set up both mail accounts in Outlook or Thunderbird, let download the mails via IMAP from the old one and Ctrl+A and Drag&amp;Drop them over to the new one. imapsync does just that – yet automatically and without Outlook or Thunderbird.</p>
+<p>First we need to <em>install imapsync</em>. You could install imapsync on your local PC, just as you would with Outlook or Thunderbird, but then there would be a unnecessary detour from server 1 over your PC to server 2. And since your local internet connection is probably ways slower then the servers’, your PC would be a bottleneck. So I recommend to install imapsync on either the old or the new mailserver’s host machine. Let’s do it.</p>
+<ol>
+<li><p>Clone the imapsync repository to any folder on your machine, e.g. <code>/opt/imapsync</code>: <code>git clone https://github.com/imapsync/imapsync</code></p>
+</li>
+<li><p>Read the installation notes for your specific operation system at <a href="https://github.com/imapsync/imapsync/tree/master/INSTALL.d" target="_blank" rel="external">https://github.com/imapsync/imapsync/tree/master/INSTALL.d</a> and do exactly what’s described there. Usually, you will need to install some dependencies and the like.</p>
+</li>
+<li><p>Now you should be able to execute <code>./imapsync</code> from within the directory where you have cloned it to, e.g. <code>/opt/imapsync</code>. You should see a description on how to use the program.</p>
+</li>
+</ol>
+<p>Let’s now assume that you want to migrate mails from your old server with ip <em>12.34.45.78</em> for user “<em>foo@example.org”</em> with password “<em>suchsecret”</em> to your new server with ip <em>98.76.54.32</em>. A prerequisite is that on both machines the mailserver is up and running and the respective user is configured. Further, let’s assume that on the new machine the user, as it makes sense, is called “<em>foo@example.org”</em> again, but his password is “<em>ssshhhhh”</em> now and that both MDAs require a <em>TLS</em>-secured connection, use standard <em>PLAIN</em> login method and are listening on <em>port 143</em>.</p>
+<p>To perform the migration now, run the following command:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">./imapsync --host1 12.34.45.78 --user1 foo@example.org --password1 suchsecret --authmech1 PLAIN --tls1 --host2 98.76.54.32 --user2 foo@example.org --password2 ssshhhhh --authmech2 PLAIN --tls2</div></pre></td></tr></table></figure>
+<p>Now all mails should be transferred from <code>host1</code> through the imapsync client to <code>host2</code>, using nothing but the IMAP protocol. If you want to test if everything is working fine first, before actually transferring data, you could add the <code>--dry</code> option to the above command.</p>
+<p>To migrate multiple accounts at once, you could write a small scripts that takes username-password combinations from a text file, as described here: <a href="https://wiki.ubuntuusers.de/imapsync/#Massenmigration" target="_blank" rel="external">https://wiki.ubuntuusers.de/imapsync/#Massenmigration</a> (although that article is in German, the code should be clear).</p>
+
+  </div>
+</article>
+
+
+
+    </div>
+    
+      <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Blog</a></li>
+         
+          <li><a href="/imprint/">Imprint</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://ferdinand-muetsch.de/migrate-maildir-to-new-server-using-imapsync.html"><i class="fa fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://ferdinand-muetsch.de/migrate-maildir-to-new-server-using-imapsync.html&text=Migrate Maildir to new server using imapsync"><i class="fa fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://ferdinand-muetsch.de/migrate-maildir-to-new-server-using-imapsync.html&title=Migrate Maildir to new server using imapsync"><i class="fa fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://ferdinand-muetsch.de/migrate-maildir-to-new-server-using-imapsync.html&is_video=false&description=Migrate Maildir to new server using imapsync"><i class="fa fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Migrate Maildir to new server using imapsync&body=Check out this article: https://ferdinand-muetsch.de/migrate-maildir-to-new-server-using-imapsync.html"><i class="fa fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://ferdinand-muetsch.de/migrate-maildir-to-new-server-using-imapsync.html&title=Migrate Maildir to new server using imapsync"><i class="fa fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://ferdinand-muetsch.de/migrate-maildir-to-new-server-using-imapsync.html&title=Migrate Maildir to new server using imapsync"><i class="fa fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://ferdinand-muetsch.de/migrate-maildir-to-new-server-using-imapsync.html&title=Migrate Maildir to new server using imapsync"><i class="fa fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://ferdinand-muetsch.de/migrate-maildir-to-new-server-using-imapsync.html&title=Migrate Maildir to new server using imapsync"><i class="fa fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://ferdinand-muetsch.de/migrate-maildir-to-new-server-using-imapsync.html&name=Migrate Maildir to new server using imapsync&description="><i class="fa fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+      <ul>
+        <li id="toc"><a class="icon" href="#" onclick='$("#toc-footer").toggle();return false;'><i class="fa fa-list fa-lg" aria-hidden="true"></i> TOC</a></li>
+        <li id="share"><a class="icon" href="#" onclick='$("#share-footer").toggle();return false;'><i class="fa fa-share-alt fa-lg" aria-hidden="true"></i> Share</a></li>
+        <li id="top" style="display:none"><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a></li>
+        <li id="menu"><a class="icon" href="#" onclick='$("#nav-footer").toggle();return false;'><i class="fa fa-bars fa-lg" aria-hidden="true"></i> Menu</a></li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+    
+    <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2017 Ferdinand Mütsch
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Blog</a></li>
+         
+          <li><a href="/imprint/">Imprint</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+</body>
+</html>
+<!-- styles -->
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+<link rel="stylesheet" href="/lib/meslo-LG/styles.css">
+<link rel="stylesheet" href="/lib/justified-gallery/justifiedGallery.min.css">
+
+
+<!-- jquery -->
+<script src="/lib/jquery/jquery.min.js"></script>
+<script src="/lib/justified-gallery/jquery.justifiedGallery.min.js"></script>
+<script src="/js/main.js"></script>
+<!-- Google Analytics -->
+
+    <script type="text/javascript">
+        (function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+        ga('create', 'UA-3922933-8', 'auto');
+        ga('send', 'pageview');
+    </script>
+
+<!-- Disqus Comments -->
+
+

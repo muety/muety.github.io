@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="IntroFirst of all, a short disclaimer: I’m not an expert in machine learning at all. In fact I’m in a rather early stage of the learning process, have basic knowledge and this project is kind of my fi">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ML: Telegram chat message classification">
+<meta property="og:url" content="https://ferdinand-muetsch.de/ml-telegram-chat-message-classification.html">
+<meta property="og:site_name" content="Ferdinand Mütsch">
+<meta property="og:description" content="IntroFirst of all, a short disclaimer: I’m not an expert in machine learning at all. In fact I’m in a rather early stage of the learning process, have basic knowledge and this project is kind of my fi">
+<meta property="og:updated_time" content="2017-05-03T21:10:26.656Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ML: Telegram chat message classification">
+<meta name="twitter:description" content="IntroFirst of all, a short disclaimer: I’m not an expert in machine learning at all. In fact I’m in a rather early stage of the learning process, have basic knowledge and this project is kind of my fi">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon.png" sizes="192x192">
+          
+        
+        
+    
+    <!-- title -->
+    <title>ML: Telegram chat message classification</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- rss -->
+    
+    
+</head>
+
+<body>
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fa fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fa fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Blog</a></li>
+         
+          <li><a href="/imprint/">Imprint</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" href="/linkeddata-trivia-game.html"><i class="fa fa-chevron-right" aria-hidden="true" onmouseover='$("#i-next").toggle();' onmouseout='$("#i-next").toggle();'></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa fa-chevron-up" aria-hidden="true" onmouseover='$("#i-top").toggle();' onmouseout='$("#i-top").toggle();'></i></a></li>
+        <li><a class="icon" href="#"><i class="fa fa-share-alt" aria-hidden="true" onmouseover='$("#i-share").toggle();' onmouseout='$("#i-share").toggle();' onclick='$("#share").toggle();return false;'></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://ferdinand-muetsch.de/ml-telegram-chat-message-classification.html"><i class="fa fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://ferdinand-muetsch.de/ml-telegram-chat-message-classification.html&text=ML: Telegram chat message classification"><i class="fa fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://ferdinand-muetsch.de/ml-telegram-chat-message-classification.html&title=ML: Telegram chat message classification"><i class="fa fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://ferdinand-muetsch.de/ml-telegram-chat-message-classification.html&is_video=false&description=ML: Telegram chat message classification"><i class="fa fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=ML: Telegram chat message classification&body=Check out this article: https://ferdinand-muetsch.de/ml-telegram-chat-message-classification.html"><i class="fa fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://ferdinand-muetsch.de/ml-telegram-chat-message-classification.html&title=ML: Telegram chat message classification"><i class="fa fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://ferdinand-muetsch.de/ml-telegram-chat-message-classification.html&title=ML: Telegram chat message classification"><i class="fa fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://ferdinand-muetsch.de/ml-telegram-chat-message-classification.html&title=ML: Telegram chat message classification"><i class="fa fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://ferdinand-muetsch.de/ml-telegram-chat-message-classification.html&title=ML: Telegram chat message classification"><i class="fa fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://ferdinand-muetsch.de/ml-telegram-chat-message-classification.html&name=ML: Telegram chat message classification&description="><i class="fa fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Intro"><span class="toc-number">1.</span> <span class="toc-text">Intro</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Basic-Steps"><span class="toc-number">2.</span> <span class="toc-text">Basic Steps</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Optimizations"><span class="toc-number">3.</span> <span class="toc-text">Optimizations</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Conclusion"><span class="toc-number">4.</span> <span class="toc-text">Conclusion</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index width mx-auto px2 my4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        ML: Telegram chat message classification
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">Ferdinand Mütsch</span>
+      </span>
+      
+    <div class="postdate">
+        <time datetime="2017-02-28T22:10:05.000Z" itemprop="datePublished">2017-02-28</time>
+    </div>
+
+
+      
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <h3 id="Intro"><a href="#Intro" class="headerlink" title="Intro"></a>Intro</h3><p>First of all, a short disclaimer: I’m not an expert in machine learning at all. In fact I’m in a rather early stage of the learning process, have basic knowledge and this project is kind of my first practical hands-on ML. I’ve done the <a href="https://www.youtube.com/user/UWCSE/playlists?sort=dd&amp;shelf_id=16&amp;view=50" target="_blank" rel="external">machine learning course</a> by <a href="https://homes.cs.washington.edu/~pedrod/" target="_blank" rel="external">Pedro Domingos</a> at University of Washington, <a href="https://www.udacity.com/course/intro-to-machine-learning--ud120" target="_blank" rel="external">Intro to Machine Learning</a> by Udacity and Google and the <a href="https://his.anthropomatik.kit.edu/english/28_315.php" target="_blank" rel="external">Machine Learning 1 lecture at Karlsruhe Institute Of Technology</a>, all of which I can really recommend.<br>After having gathered all that theoretical knowledge, I wanted to try something practical on my own. I decided to learn a simple classifier for chat messages from my <a href="https://telegram.com" target="_blank" rel="external">Telegram</a> messenger history. I wanted to learn a program that can, given a chat message, tell who the sender of that message is. I further got inspired after having read the papers related to Facebook’s <a href="https://github.com/facebookresearch/fastText" target="_blank" rel="external">fastText</a> text classification algorithm. In their examples they classify Wikipedia abstracts / descriptions to <a href="https://dbpedia.org" target="_blank" rel="external">DBPedia</a> classes or news article headlines to their respective news categories, only based on plain, natural words. Basically these problems are very similar to mine, so I decided to give it a try. Since I found that many text classifiers are learned using the Naive Bayes algorithm (especially popular in spam detection and part of <a href="http://spamassassin.apache.org/" target="_blank" rel="external">SpamAssassin</a>) and it’s really easy to understand, I decided to go for that one, too. Inspired by <a href="http://www.laurentluce.com/posts/twitter-sentiment-analysis-using-python-and-nltk/" target="_blank" rel="external">this article</a>, where the sentiment of tweets is analyzed, I chose to also use the <a href="http://www.nltk.org/" target="_blank" rel="external">natural language toolkit</a> for Python. Another option would have been <a href="http://scikit-learn.org/" target="_blank" rel="external">sklearn</a>, but NLTK also provided some useful utilities beyond the pure ML scope. </p>
+<p>All of my <strong>code is <a href="https://github.com/n1try/tg-chat-classification/" target="_blank" rel="external">available on GitHub</a></strong>.</p>
+<h3 id="Basic-Steps"><a href="#Basic-Steps" class="headerlink" title="Basic Steps"></a>Basic Steps</h3><ol>
+<li>The very first step was to download the data, namely the chat messages. Luckily, Telegram has an open API. However it’s not a classical REST API, but instead they’re using the <a href="https://core.telegram.org/mtproto" target="_blank" rel="external">MTProto</a> protocol. I found <a href="https://github.com/vysheng/tg" target="_blank" rel="external">vysheng/tg</a> as a cool C++-written commandline client on GitHub as well as <a href="https://github.com/tvdstaaij/telegram-history-dump" target="_blank" rel="external">tvdstaaij/telegram-history-dump</a> as a Ruby script to automate the history download for a set of users / chat partners. I told the script (ran in a Docker container, since I didn’t want to install Ruby) to fetch at max 40,000 messages for my top three chat partners (let’s call them <em>M</em>, <em>P</em> and <em>J</em>). The outcome were three <a href="http://jsonlines.org/" target="_blank" rel="external">JSON Lines</a> files.</li>
+<li>To pre-process these files as needed for my learning algorithm, I wrote a Python script that extracted only message text and sender from all incoming messages and dumped these data to a JSON file. Additionally I also extracted the same information for all outgoing messages, i.e. all messages where the sender was me. Consequently, there are four classes: <strong>C = { <em>M</em>, <em>P</em>, <em>J</em>, <em>F</em> }</strong></li>
+<li>Another data-preprocessing step was to convert the JSON objects with class names as keys for message-arrays to one large list of tuples of the form <em>(text, label)</em>, where <em>label</em> is the name of the message’s sender and <em>text</em> is the respective message text. In this step I also discarded words with a length of less than 2 characters and converted everything to lower case.</li>
+<li>Next step was to extract the features. In text classification, there is often one binary (<em>contains</em> / <em>contains not</em>) feature for every possible word. So if all messages in total comprise X different words, there will be a X-dimensional feature vector.</li>
+<li>Last step before actually training the classifier is to compute the feature vector for every messages. For examples if the total feature set is <code>[&#39;in&#39;, &#39;case&#39;, &#39;of&#39;, &#39;fire&#39;, &#39;coffee&#39;, &#39;we&#39;, &#39;trust&#39;]</code>, the resultung feature vector for a message <em>“in coffee we trust”</em> would be <code>(&#39;in&#39;=True, &#39;case&#39;=False, &#39;of&#39;=False, &#39;fire&#39;=False, &#39;coffee&#39;=True, &#39;we&#39;=True, &#39;trust&#39;=True)</code>.</li>
+<li>One more minor thing: shuffle the feature set so that the order of messages and message senders is random. Also divide the feature set into training- and test data, where test data contains about 10 % of the number of messages in the train data.</li>
+<li>Train <a href="http://www.nltk.org/api/nltk.classify.html" target="_blank" rel="external">nltk.NaiveBayesClassifier</a> classifier. This is really just one line of code.</li>
+<li>Use the returned classifier to predict classes for the test messages, validate them and compute the accuracy.</li>
+</ol>
+<p>Using that basic initial setup on a set of <strong>37257 messages</strong>, (7931 from M, 9795 from P, 9314 from F and 10217 from J), I ended up with an <strong>accuracy of 0.58</strong>. There seemed to be room for optimization.</p>
+<h3 id="Optimizations"><a href="#Optimizations" class="headerlink" title="Optimizations"></a>Optimizations</h3><ul>
+<li>Inspired by <em>fastText</em>, I decided to include n-grams. This seemed resonable to me, because intuitively I’d say that single words a way less characteristic for a person’s writing style than certain phrases. I extended the feature list from step 4 by all possible <strong>bi- and tri-grams</strong>, which are easy to compute with NLTK. Actually I’m not taking ALL bi- and tri-grams and I’m not even take all single words as features. Reason for that is that there were approx. 35k different words in the dataset. Plus the n-grams this would make an extremely multi-dimensional feature vector and as it turned out, it was way to complex for my 16 GB MacBook Pro to compute. Consequently, I only took the <strong>top 5000 single words, bigrams and trigrams</strong>, ranked descending by their overall frequency. </li>
+<li>Since NLTK already provides a corpus of <strong>stopwords</strong> (like “in”, “and”, “of”, etc.), which are obviously not characteristic for a person’s style of chatting, I decided to remove them (the German ones) from the message set in step 2.</li>
+</ul>
+<p>With these optimizations, I ended up with an <strong>accuracy of 0.61</strong> after a training time of 348 seconds (I didn’t log testing time at that point).</p>
+<h3 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h3><p>Certainly 61 % accuracy isn’t really a good classifier, but at least significantly better than random guessing (chance of 1/4 in this case). However, I trained a <strong>fastText</strong> classifier on my data as a comparison baseline and it even only reached <strong>60 % accuracy</strong> (but with a much better <strong>training time of only 0.66 seconds</strong>).<br>My intuitive explanation for these rather bad results is the complexity of the problem itself. Given only a set of words without any context and semantics, it’s not only hard for a machine to predict the message’s sender but also for a human.<br>Moreover, given more training data (I’d need a longer message history) and more computing power to handle larger feature sets, the accuracy might further improve slightly.<br>Actually, the practical relevance of this project isn’t quit high anyway, but it was a good practice for me to get into the basics of ML and it’s really fun!</p>
+<p>Please leave me feedback if you like to.</p>
+
+  </div>
+</article>
+
+
+
+    </div>
+    
+      <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Blog</a></li>
+         
+          <li><a href="/imprint/">Imprint</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Intro"><span class="toc-number">1.</span> <span class="toc-text">Intro</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Basic-Steps"><span class="toc-number">2.</span> <span class="toc-text">Basic Steps</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Optimizations"><span class="toc-number">3.</span> <span class="toc-text">Optimizations</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Conclusion"><span class="toc-number">4.</span> <span class="toc-text">Conclusion</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://ferdinand-muetsch.de/ml-telegram-chat-message-classification.html"><i class="fa fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://ferdinand-muetsch.de/ml-telegram-chat-message-classification.html&text=ML: Telegram chat message classification"><i class="fa fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://ferdinand-muetsch.de/ml-telegram-chat-message-classification.html&title=ML: Telegram chat message classification"><i class="fa fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://ferdinand-muetsch.de/ml-telegram-chat-message-classification.html&is_video=false&description=ML: Telegram chat message classification"><i class="fa fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=ML: Telegram chat message classification&body=Check out this article: https://ferdinand-muetsch.de/ml-telegram-chat-message-classification.html"><i class="fa fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://ferdinand-muetsch.de/ml-telegram-chat-message-classification.html&title=ML: Telegram chat message classification"><i class="fa fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://ferdinand-muetsch.de/ml-telegram-chat-message-classification.html&title=ML: Telegram chat message classification"><i class="fa fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://ferdinand-muetsch.de/ml-telegram-chat-message-classification.html&title=ML: Telegram chat message classification"><i class="fa fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://ferdinand-muetsch.de/ml-telegram-chat-message-classification.html&title=ML: Telegram chat message classification"><i class="fa fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://ferdinand-muetsch.de/ml-telegram-chat-message-classification.html&name=ML: Telegram chat message classification&description="><i class="fa fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+      <ul>
+        <li id="toc"><a class="icon" href="#" onclick='$("#toc-footer").toggle();return false;'><i class="fa fa-list fa-lg" aria-hidden="true"></i> TOC</a></li>
+        <li id="share"><a class="icon" href="#" onclick='$("#share-footer").toggle();return false;'><i class="fa fa-share-alt fa-lg" aria-hidden="true"></i> Share</a></li>
+        <li id="top" style="display:none"><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a></li>
+        <li id="menu"><a class="icon" href="#" onclick='$("#nav-footer").toggle();return false;'><i class="fa fa-bars fa-lg" aria-hidden="true"></i> Menu</a></li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+    
+    <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2017 Ferdinand Mütsch
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Blog</a></li>
+         
+          <li><a href="/imprint/">Imprint</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+</body>
+</html>
+<!-- styles -->
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+<link rel="stylesheet" href="/lib/meslo-LG/styles.css">
+<link rel="stylesheet" href="/lib/justified-gallery/justifiedGallery.min.css">
+
+
+<!-- jquery -->
+<script src="/lib/jquery/jquery.min.js"></script>
+<script src="/lib/justified-gallery/jquery.justifiedGallery.min.js"></script>
+<script src="/js/main.js"></script>
+<!-- Google Analytics -->
+
+    <script type="text/javascript">
+        (function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+        ga('create', 'UA-3922933-8', 'auto');
+        ga('send', 'pageview');
+    </script>
+
+<!-- Disqus Comments -->
+
+

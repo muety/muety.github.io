@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="Since it took me a while to completely understand why a RAID 1+0 configuration should be better than a RAID 0+1 one in terms of failure tolerance I want to put my insights down.First you should have a">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Why RAID 10 is better than RAID 01">
+<meta property="og:url" content="https://ferdinand-muetsch.de/why-raid-10-is-better-than-raid-01.html">
+<meta property="og:site_name" content="Ferdinand Mütsch">
+<meta property="og:description" content="Since it took me a while to completely understand why a RAID 1+0 configuration should be better than a RAID 0+1 one in terms of failure tolerance I want to put my insights down.First you should have a">
+<meta property="og:image" content="https://ferdinand-muetsch.de/images/raid01.png">
+<meta property="og:image" content="https://ferdinand-muetsch.de/images/raid10.png">
+<meta property="og:updated_time" content="2017-05-03T20:46:40.668Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Why RAID 10 is better than RAID 01">
+<meta name="twitter:description" content="Since it took me a while to completely understand why a RAID 1+0 configuration should be better than a RAID 0+1 one in terms of failure tolerance I want to put my insights down.First you should have a">
+<meta name="twitter:image" content="https://ferdinand-muetsch.de/images/raid01.png">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon.png" sizes="192x192">
+          
+        
+        
+    
+    <!-- title -->
+    <title>Why RAID 10 is better than RAID 01</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- rss -->
+    
+    
+</head>
+
+<body>
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fa fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fa fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Blog</a></li>
+         
+          <li><a href="/imprint/">Imprint</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/telegram-bot-example-code-in-nodejs.html"><i class="fa fa-chevron-left" aria-hidden="true" onmouseover='$("#i-prev").toggle();' onmouseout='$("#i-prev").toggle();'></i></a></li>
+        
+        
+        <li><a class="icon" href="/how-to-make-telegram-bots.html"><i class="fa fa-chevron-right" aria-hidden="true" onmouseover='$("#i-next").toggle();' onmouseout='$("#i-next").toggle();'></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa fa-chevron-up" aria-hidden="true" onmouseover='$("#i-top").toggle();' onmouseout='$("#i-top").toggle();'></i></a></li>
+        <li><a class="icon" href="#"><i class="fa fa-share-alt" aria-hidden="true" onmouseover='$("#i-share").toggle();' onmouseout='$("#i-share").toggle();' onclick='$("#share").toggle();return false;'></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://ferdinand-muetsch.de/why-raid-10-is-better-than-raid-01.html"><i class="fa fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://ferdinand-muetsch.de/why-raid-10-is-better-than-raid-01.html&text=Why RAID 10 is better than RAID 01"><i class="fa fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://ferdinand-muetsch.de/why-raid-10-is-better-than-raid-01.html&title=Why RAID 10 is better than RAID 01"><i class="fa fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://ferdinand-muetsch.de/why-raid-10-is-better-than-raid-01.html&is_video=false&description=Why RAID 10 is better than RAID 01"><i class="fa fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Why RAID 10 is better than RAID 01&body=Check out this article: https://ferdinand-muetsch.de/why-raid-10-is-better-than-raid-01.html"><i class="fa fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://ferdinand-muetsch.de/why-raid-10-is-better-than-raid-01.html&title=Why RAID 10 is better than RAID 01"><i class="fa fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://ferdinand-muetsch.de/why-raid-10-is-better-than-raid-01.html&title=Why RAID 10 is better than RAID 01"><i class="fa fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://ferdinand-muetsch.de/why-raid-10-is-better-than-raid-01.html&title=Why RAID 10 is better than RAID 01"><i class="fa fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://ferdinand-muetsch.de/why-raid-10-is-better-than-raid-01.html&title=Why RAID 10 is better than RAID 01"><i class="fa fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://ferdinand-muetsch.de/why-raid-10-is-better-than-raid-01.html&name=Why RAID 10 is better than RAID 01&description="><i class="fa fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index width mx-auto px2 my4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        Why RAID 10 is better than RAID 01
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">Ferdinand Mütsch</span>
+      </span>
+      
+    <div class="postdate">
+        <time datetime="2015-11-19T21:43:31.000Z" itemprop="datePublished">2015-11-19</time>
+    </div>
+
+
+      
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p>Since it took me a while to completely understand why a RAID 1+0 configuration should be better than a RAID 0+1 one in terms of failure tolerance I want to put my insights down.<br>First you should have a basic understanding of what the first two RAID levels are and what it means to nest them. Very basically at level 0 data gets striped, meaning a datum gets split up into two or more blocks that get stored on a different hard drive each. Goal is to improve read and write performance linearly to the number of disks used, because the fragments don’t have to be read sequentially anymore but in parallel. Level 1 is about mirroring a datum on two disks with the goal to improve security. Of course, both levels can be combined – you could either mirror striped data or stripe mirrored data which finally gives both: security and performance. In each case at least four disks are needed, while the half of the disks usually is a mirror. So if you took six disks you would do 3-striping. With eight disks you would do 4-striping and so on. Technically you could have more than one mirror (like doing 2-striping and having a 3-mirror or even more) but it’s very unusual.<br>The following diagrams shall illustrate these two ways and are useful for further explanations. In both cases we have a RAID with six disks.</p>
+<p><img src="/images/raid01.png" alt="raid01">  </p>
+<p><em>Disks 4, 5 and 6 are the mirrors of 1, 2 and 3.</em></p>
+<p><img src="/images/raid10.png" alt="raid10">  </p>
+<p><em>Disk 2 mirrors 1, 4 mirrors 3 and 6 mirrors 5.</em></p>
+<p>We assert that RAID 10 is better in terms of fault tolerance because a total failure (= loss of data) is less likely. In other words if some drives crash in a RAID 01 configuration the chance that those are the right drives for suffering a data loss is higher.<br>First of all, both configurations can easily survive the crash of one drive. No matter which drive (see figures above) crashes, we have a second one with the exact same data on it in any case. Potentially both configurations can handle the simultaneous crash of two or even more drives (up to N/2), if they’re the right ones, but in the worst case, the second crash could end up in a total failure. What you need to make clear before understanding how RAID 01 is worse than RAID 10 is that a RAID 0 (sub)system immediately gets unusable if one of its disks goes down. This is apparent: In the upper figure (figure 1 from now on) data is divided up into three strips in both RAID 0 subsystem. So if one of their disks fails (assume a crash of Disc1), the subsystem is broken since the first two parts of a date won’t make sense without the third. You would still be in posession of all data, nothing is lost yet, but nevertheless the left RAID 0 subsystem is down. If a second drive fails this should only be 2 or 3 (since the left system in inacessible anyway) to keep the entire system up. Disc 4, 5 or 6 failing would cause a total crash. So the chance of the second failing disk resulting in a total crash is 3/5. Now take a look at figure 2. The crash of one disk in a RAID 1 (sub)system won’t make this subsystem go down because the RAID controller will seamlessly switch to the mirror drive which has exactly identical data. In figure 2 all RAID 0 disks (which actually are stanalone RAID 1 systems again) need to keep running for the entire system to stay up. So theoretically there wouldn’t be a problem with disks 1, 3 and 5 (or 2, 4 and 6) could crashing simultaneously. After one disk having failed (assume a crash of Disc1 again) the second one failing could be 3, 4, 5 or 6 – all but NOT 2. The probability of a total crash is 1/5 (namely Disc2 of the remaining five) now and therefore lower than 3/5 with RAID 01. Hope you got it…</p>
+
+  </div>
+</article>
+
+
+
+    </div>
+    
+      <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Blog</a></li>
+         
+          <li><a href="/imprint/">Imprint</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://ferdinand-muetsch.de/why-raid-10-is-better-than-raid-01.html"><i class="fa fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://ferdinand-muetsch.de/why-raid-10-is-better-than-raid-01.html&text=Why RAID 10 is better than RAID 01"><i class="fa fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://ferdinand-muetsch.de/why-raid-10-is-better-than-raid-01.html&title=Why RAID 10 is better than RAID 01"><i class="fa fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://ferdinand-muetsch.de/why-raid-10-is-better-than-raid-01.html&is_video=false&description=Why RAID 10 is better than RAID 01"><i class="fa fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Why RAID 10 is better than RAID 01&body=Check out this article: https://ferdinand-muetsch.de/why-raid-10-is-better-than-raid-01.html"><i class="fa fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://ferdinand-muetsch.de/why-raid-10-is-better-than-raid-01.html&title=Why RAID 10 is better than RAID 01"><i class="fa fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://ferdinand-muetsch.de/why-raid-10-is-better-than-raid-01.html&title=Why RAID 10 is better than RAID 01"><i class="fa fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://ferdinand-muetsch.de/why-raid-10-is-better-than-raid-01.html&title=Why RAID 10 is better than RAID 01"><i class="fa fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://ferdinand-muetsch.de/why-raid-10-is-better-than-raid-01.html&title=Why RAID 10 is better than RAID 01"><i class="fa fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://ferdinand-muetsch.de/why-raid-10-is-better-than-raid-01.html&name=Why RAID 10 is better than RAID 01&description="><i class="fa fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+      <ul>
+        <li id="toc"><a class="icon" href="#" onclick='$("#toc-footer").toggle();return false;'><i class="fa fa-list fa-lg" aria-hidden="true"></i> TOC</a></li>
+        <li id="share"><a class="icon" href="#" onclick='$("#share-footer").toggle();return false;'><i class="fa fa-share-alt fa-lg" aria-hidden="true"></i> Share</a></li>
+        <li id="top" style="display:none"><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a></li>
+        <li id="menu"><a class="icon" href="#" onclick='$("#nav-footer").toggle();return false;'><i class="fa fa-bars fa-lg" aria-hidden="true"></i> Menu</a></li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+    
+    <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2017 Ferdinand Mütsch
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Blog</a></li>
+         
+          <li><a href="/imprint/">Imprint</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+</body>
+</html>
+<!-- styles -->
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+<link rel="stylesheet" href="/lib/meslo-LG/styles.css">
+<link rel="stylesheet" href="/lib/justified-gallery/justifiedGallery.min.css">
+
+
+<!-- jquery -->
+<script src="/lib/jquery/jquery.min.js"></script>
+<script src="/lib/justified-gallery/jquery.justifiedGallery.min.js"></script>
+<script src="/js/main.js"></script>
+<!-- Google Analytics -->
+
+    <script type="text/javascript">
+        (function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+        ga('create', 'UA-3922933-8', 'auto');
+        ga('send', 'pageview');
+    </script>
+
+<!-- Disqus Comments -->
+
+

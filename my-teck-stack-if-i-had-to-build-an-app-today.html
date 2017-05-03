@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="What technology stack would I choose, if I had to develop a web application completely from scratch? That’s the question this article will cover. First of all: by saying web application I’m referring">
+<meta property="og:type" content="article">
+<meta property="og:title" content="My teck stack if I had to build an app today">
+<meta property="og:url" content="https://ferdinand-muetsch.de/my-teck-stack-if-i-had-to-build-an-app-today.html">
+<meta property="og:site_name" content="Ferdinand Mütsch">
+<meta property="og:description" content="What technology stack would I choose, if I had to develop a web application completely from scratch? That’s the question this article will cover. First of all: by saying web application I’m referring">
+<meta property="og:updated_time" content="2017-05-03T21:05:15.804Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="My teck stack if I had to build an app today">
+<meta name="twitter:description" content="What technology stack would I choose, if I had to develop a web application completely from scratch? That’s the question this article will cover. First of all: by saying web application I’m referring">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon.png" sizes="192x192">
+          
+        
+        
+    
+    <!-- title -->
+    <title>My teck stack if I had to build an app today</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- rss -->
+    
+    
+</head>
+
+<body>
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fa fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fa fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Blog</a></li>
+         
+          <li><a href="/imprint/">Imprint</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/http20-server-push-proxy.html"><i class="fa fa-chevron-left" aria-hidden="true" onmouseover='$("#i-prev").toggle();' onmouseout='$("#i-prev").toggle();'></i></a></li>
+        
+        
+        <li><a class="icon" href="/how-to-load-yago-into-apache-jena-fuseki.html"><i class="fa fa-chevron-right" aria-hidden="true" onmouseover='$("#i-next").toggle();' onmouseout='$("#i-next").toggle();'></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa fa-chevron-up" aria-hidden="true" onmouseover='$("#i-top").toggle();' onmouseout='$("#i-top").toggle();'></i></a></li>
+        <li><a class="icon" href="#"><i class="fa fa-share-alt" aria-hidden="true" onmouseover='$("#i-share").toggle();' onmouseout='$("#i-share").toggle();' onclick='$("#share").toggle();return false;'></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://ferdinand-muetsch.de/my-teck-stack-if-i-had-to-build-an-app-today.html"><i class="fa fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://ferdinand-muetsch.de/my-teck-stack-if-i-had-to-build-an-app-today.html&text=My teck stack if I had to build an app today"><i class="fa fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://ferdinand-muetsch.de/my-teck-stack-if-i-had-to-build-an-app-today.html&title=My teck stack if I had to build an app today"><i class="fa fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://ferdinand-muetsch.de/my-teck-stack-if-i-had-to-build-an-app-today.html&is_video=false&description=My teck stack if I had to build an app today"><i class="fa fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=My teck stack if I had to build an app today&body=Check out this article: https://ferdinand-muetsch.de/my-teck-stack-if-i-had-to-build-an-app-today.html"><i class="fa fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://ferdinand-muetsch.de/my-teck-stack-if-i-had-to-build-an-app-today.html&title=My teck stack if I had to build an app today"><i class="fa fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://ferdinand-muetsch.de/my-teck-stack-if-i-had-to-build-an-app-today.html&title=My teck stack if I had to build an app today"><i class="fa fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://ferdinand-muetsch.de/my-teck-stack-if-i-had-to-build-an-app-today.html&title=My teck stack if I had to build an app today"><i class="fa fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://ferdinand-muetsch.de/my-teck-stack-if-i-had-to-build-an-app-today.html&title=My teck stack if I had to build an app today"><i class="fa fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://ferdinand-muetsch.de/my-teck-stack-if-i-had-to-build-an-app-today.html&name=My teck stack if I had to build an app today&description="><i class="fa fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#The-base-stack"><span class="toc-number">1.</span> <span class="toc-text">The base stack</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#The-super-fancy-stack"><span class="toc-number">2.</span> <span class="toc-text">The super fancy stack</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#The-fancy-stack"><span class="toc-number">3.</span> <span class="toc-text">The fancy stack</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index width mx-auto px2 my4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        My teck stack if I had to build an app today
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">Ferdinand Mütsch</span>
+      </span>
+      
+    <div class="postdate">
+        <time datetime="2016-11-11T22:04:56.000Z" itemprop="datePublished">2016-11-11</time>
+    </div>
+
+
+      
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p>What technology stack would I choose, if I had to develop a web application completely from scratch? That’s the question this article will cover.</p>
+<p>First of all: by saying web application I’m referring to something between a plain static HTML page and an entire Facebook. Basically, an application that fulfills a certain domain of tasks for the user and that requires the usual features like user management, a backend database, multiple UI views and controls, etc. The size of application I’m thinking of could be a browser-based chat app, password-manager or something similar. Neither too simple, nor too complex.</p>
+<p>Back to the topic. Choosing the right technology for a web app feels much like customizing a new PC or even a new car. There are nearly endless options to be weighed to finally pick a bunch of them for a new web application. This super famous article <a href="https://hackernoon.com/how-it-feels-to-learn-javascript-in-2016-d3a717dd577f#.m1nodqu6f" target="_blank" rel="external">How it feels to learn JavaScript in 2016</a> complains about the confusing and ever-growing, chaotic jungle of new JavaScript frameworks in an ironical way. Indeed, I hear similar arguments from many developers these days. Many of them claim that code quality was getting worse in the web and that every newbie JavaScript programmer threw out his own new framework on yet another .io domain. Although that might be true to a certain extent, I personally still like the great technological variety and innovation. I love to browse GitHub, Reddit, Hackernews and Co. to discover new cool libraries to try out in a project some day. And here’s what I would pick if I had to realize such a project right today and if there weren’t any restrictions. </p>
+<p>Of course, the technology choice depends on the concrete project requirements to a certain extent, but not completely. Consequently, a new project is always a chance to try something new. ThoughtWorks just published their new <a href="https://www.thoughtworks.com/de/radar" target="_blank" rel="external">technology radar for 2016</a>, where they separate into categories <em>adopt</em>, <em>trial</em>, <em>assess</em> and <em>hold</em>. Of course, <em>hold</em>-techs are not an option for new projects and I actually pretty much agree with their views on what has to be in the <em>hold</em> category. <em>Adopt</em> basically are things that are modern, but also well-established enough to avoid too much risk. <em>Trial</em>-techs are more experimental and <em>assess</em> are the latest fancy s<em>*</em>, so to say. Since I’m extremely eager to try out new things, my stack would probably mostly consist of technologies from the last category. So what would my stack now look like? Actually, I couldn’t decide on one stack, but set up two: <em>the fancy one</em> and <em>the super fancy one</em>. Additionally, I define their intersection as <em>the base stack</em>, which consists of fundamental tools etc. that both have in common.</p>
+<h3 id="The-base-stack"><a href="#The-base-stack" class="headerlink" title="The base stack"></a>The base stack</h3><p>First of all, I’d use <strong>Git</strong> for version control, <strong>Visual Studio Code</strong> as code editor and <strong>GitLab</strong> for repository hosting and as build server. If I didn’t had to implement user management myself, I’d pick <strong>Auth0</strong> for that. For deployment, I’d use containers with <strong>Docker</strong> on <strong>DigitalOcean</strong> machines and if I needed multiple instances, <strong>Rancher</strong> would help me to manage them. As reverse proxy in front of the backend I’d choose <strong>nginx</strong> since it’s extremely efficient, performant and has <strong>HTTP/2.0</strong> support. For bundling, <strong>Webpack</strong> would be my choice and task automation would be done using plain <strong>npm scripts</strong>. For styling the UI, I’d simply use <strong>Bootstrap 4</strong> and <strong>SCSS</strong>.  </p>
+<h3 id="The-super-fancy-stack"><a href="#The-super-fancy-stack" class="headerlink" title="The super fancy stack"></a>The super fancy stack</h3><p>The key point here is that I’d want to abandon a traditional REST API in my project and use <strong>GraphQL</strong> instead. The backend would be written in <strong>NodeJS</strong> with <a href="https://github.com/RisingStack/graffiti" target="_blank" rel="external"><strong>Graffiti</strong></a> as GraphQL implementation. I don’t know much about the latter one, yet, except for that it’s the de-facto GraphQL solution for Node. Why Node? Because it’s simply the best choice for the web (my view…). It’s performant, comfortable to develop and especially brings consistency by having JS in front- and backend. By always being quite up-to-date with the latest ES* features, Node doesn’t get boring. Since GraphQL is told to work best with other Facebook technology, I’d not be that experimental here and build the frontend on <strong>React</strong> plus <strong>Relay</strong> (which is still completely new for me). Database would probably be a <strong>MongoDB</strong> (JSON everywhere!) with <a href="https://github.com/balderdashy/waterline" target="_blank" rel="external"><strong>Waterline</strong></a> ORM. To put a cherry on the cake, I’d also introduce <strong>Redux</strong> in addition. I haven’t worked with it much, yet, and I heard that it’s kind of mind-blowing in the beginning. However, I consider its concept to cover a large potential to manage consistency in my app. The last thing here is that I desperately want is ES6 syntax. It isn’t supported by the React compiler afaik (please correct me, if I’m wrong), so I’d use <strong>Babel</strong> to have latest JavaScript features. If having to go mobile, <strong>React Native</strong> would be the rational choice.</p>
+<h3 id="The-fancy-stack"><a href="#The-fancy-stack" class="headerlink" title="The fancy stack"></a>The fancy stack</h3><p>This stack differs from the <em>super fancy stack</em> in a few points. A key point is that it would not use GraphQL, but a good old REST API. This API would be written in <strong>Go</strong>, since I like the language - especially its efficiency and its good suitability for web development. More precisely, I’d use the <a href="http://iris-go.com/" target="_blank" rel="external"><strong>Iris</strong></a> framework. I’ve read the documentation and it looked incredibly powerful to me (in terms of both functionality and perfomance). <em>(<strong>EDIT:</strong> It’s not what it seems! Please see my comment below!).</em> For the frontend I’m balancing between <strong>Angular 2</strong> and <a href="http://aurelia.io/" target="_blank" rel="external"><strong>Aurelia</strong></a>. Angular 2 is guaranteed to work for any potential case, is extremely powerful and has great community- and library support. However, Aurelia look promising, too, and probably is even more clear and less boilerplate code. Consequently, I’d give it a try. But if having to go mobile, I’d still favor Angular 2, since it perfectly aligns with <strong>Ionic 2</strong>.</p>
+<p>Two other options, which look really interesting to me are <strong>Meteor</strong> and <strong>HorizonJS</strong>. However, I’m not sure, if it’s a good idea to commit to only one comprehensive framework through the full stack.</p>
+<p>So these are my two alternative ways through the webdev jungle - btw, <a href="https://medium.freecodecamp.com/a-study-plan-to-cure-javascript-fatigue-8ad3a54f2eb1#.3ri3a1fdv" target="_blank" rel="external">this good article</a> describes another one, especially for newcomer web developers. Sorry, that I haven’t justified all choices. Actually, as you probably know, if you’re a developer, subjective views like these often aren’t even based on pure rational considerations, but are rather emotional and spontaneous.</p>
+<p>Please feel free to give me feedback on my tech stack of choice! </p>
+<p><strong>EDIT:</strong> Another framework I’d really like to try out is <a href="https://infernojs.org/" target="_blank" rel="external">InfernoJS</a>, because it claims to be extremely lightweight and performant. However, before using Inferno, one should probably be familiar with React, since it uses very similar concepts and syntaxes.</p>
+<p><strong>EDIT 2:</strong> After having read <a href="http://www.florinpatan.ro/2016/10/why-you-should-not-use-iris-for-your-go.html" target="_blank" rel="external">this article</a> and having done some further research on the Iris framework I really have to retract my above statement that I’d use it as a web backend. While it looks nice on paper, after diving a little deeper I really have to admit that it’d be morally tenable to support the authors of that project. So please forget about Iris and take a look at <a href="https://beego.me/" target="_blank" rel="external">Beego</a> instead.</p>
+
+  </div>
+</article>
+
+
+
+    </div>
+    
+      <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Blog</a></li>
+         
+          <li><a href="/imprint/">Imprint</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#The-base-stack"><span class="toc-number">1.</span> <span class="toc-text">The base stack</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#The-super-fancy-stack"><span class="toc-number">2.</span> <span class="toc-text">The super fancy stack</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#The-fancy-stack"><span class="toc-number">3.</span> <span class="toc-text">The fancy stack</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://ferdinand-muetsch.de/my-teck-stack-if-i-had-to-build-an-app-today.html"><i class="fa fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://ferdinand-muetsch.de/my-teck-stack-if-i-had-to-build-an-app-today.html&text=My teck stack if I had to build an app today"><i class="fa fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://ferdinand-muetsch.de/my-teck-stack-if-i-had-to-build-an-app-today.html&title=My teck stack if I had to build an app today"><i class="fa fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://ferdinand-muetsch.de/my-teck-stack-if-i-had-to-build-an-app-today.html&is_video=false&description=My teck stack if I had to build an app today"><i class="fa fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=My teck stack if I had to build an app today&body=Check out this article: https://ferdinand-muetsch.de/my-teck-stack-if-i-had-to-build-an-app-today.html"><i class="fa fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://ferdinand-muetsch.de/my-teck-stack-if-i-had-to-build-an-app-today.html&title=My teck stack if I had to build an app today"><i class="fa fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://ferdinand-muetsch.de/my-teck-stack-if-i-had-to-build-an-app-today.html&title=My teck stack if I had to build an app today"><i class="fa fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://ferdinand-muetsch.de/my-teck-stack-if-i-had-to-build-an-app-today.html&title=My teck stack if I had to build an app today"><i class="fa fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://ferdinand-muetsch.de/my-teck-stack-if-i-had-to-build-an-app-today.html&title=My teck stack if I had to build an app today"><i class="fa fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://ferdinand-muetsch.de/my-teck-stack-if-i-had-to-build-an-app-today.html&name=My teck stack if I had to build an app today&description="><i class="fa fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+      <ul>
+        <li id="toc"><a class="icon" href="#" onclick='$("#toc-footer").toggle();return false;'><i class="fa fa-list fa-lg" aria-hidden="true"></i> TOC</a></li>
+        <li id="share"><a class="icon" href="#" onclick='$("#share-footer").toggle();return false;'><i class="fa fa-share-alt fa-lg" aria-hidden="true"></i> Share</a></li>
+        <li id="top" style="display:none"><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a></li>
+        <li id="menu"><a class="icon" href="#" onclick='$("#nav-footer").toggle();return false;'><i class="fa fa-bars fa-lg" aria-hidden="true"></i> Menu</a></li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+    
+    <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2017 Ferdinand Mütsch
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Blog</a></li>
+         
+          <li><a href="/imprint/">Imprint</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+</body>
+</html>
+<!-- styles -->
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+<link rel="stylesheet" href="/lib/meslo-LG/styles.css">
+<link rel="stylesheet" href="/lib/justified-gallery/justifiedGallery.min.css">
+
+
+<!-- jquery -->
+<script src="/lib/jquery/jquery.min.js"></script>
+<script src="/lib/justified-gallery/jquery.justifiedGallery.min.js"></script>
+<script src="/js/main.js"></script>
+<!-- Google Analytics -->
+
+    <script type="text/javascript">
+        (function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+        ga('create', 'UA-3922933-8', 'auto');
+        ga('send', 'pageview');
+    </script>
+
+<!-- Disqus Comments -->
+
+

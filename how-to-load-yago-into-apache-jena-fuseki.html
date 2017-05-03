@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="This article describes how to load the Yago Linked Data knowledge collection into an Apache Jena triple store database on Windows 10 as well as on Linux.  At very first, please make sure you have Java">
+<meta property="og:type" content="article">
+<meta property="og:title" content="How to load Yago into Apache Jena &#x2F; Fuseki">
+<meta property="og:url" content="https://ferdinand-muetsch.de/how-to-load-yago-into-apache-jena-fuseki.html">
+<meta property="og:site_name" content="Ferdinand Mütsch">
+<meta property="og:description" content="This article describes how to load the Yago Linked Data knowledge collection into an Apache Jena triple store database on Windows 10 as well as on Linux.  At very first, please make sure you have Java">
+<meta property="og:updated_time" content="2017-05-03T21:04:31.934Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="How to load Yago into Apache Jena &#x2F; Fuseki">
+<meta name="twitter:description" content="This article describes how to load the Yago Linked Data knowledge collection into an Apache Jena triple store database on Windows 10 as well as on Linux.  At very first, please make sure you have Java">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon.png" sizes="192x192">
+          
+        
+        
+    
+    <!-- title -->
+    <title>How to load Yago into Apache Jena / Fuseki</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- rss -->
+    
+    
+</head>
+
+<body>
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fa fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fa fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Blog</a></li>
+         
+          <li><a href="/imprint/">Imprint</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/my-teck-stack-if-i-had-to-build-an-app-today.html"><i class="fa fa-chevron-left" aria-hidden="true" onmouseover='$("#i-prev").toggle();' onmouseout='$("#i-prev").toggle();'></i></a></li>
+        
+        
+        <li><a class="icon" href="/design-of-a-linked-data-enabled-microservice-platform-for-the-industrial-internet-of-things.html"><i class="fa fa-chevron-right" aria-hidden="true" onmouseover='$("#i-next").toggle();' onmouseout='$("#i-next").toggle();'></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa fa-chevron-up" aria-hidden="true" onmouseover='$("#i-top").toggle();' onmouseout='$("#i-top").toggle();'></i></a></li>
+        <li><a class="icon" href="#"><i class="fa fa-share-alt" aria-hidden="true" onmouseover='$("#i-share").toggle();' onmouseout='$("#i-share").toggle();' onclick='$("#share").toggle();return false;'></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://ferdinand-muetsch.de/how-to-load-yago-into-apache-jena-fuseki.html"><i class="fa fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://ferdinand-muetsch.de/how-to-load-yago-into-apache-jena-fuseki.html&text=How to load Yago into Apache Jena / Fuseki"><i class="fa fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://ferdinand-muetsch.de/how-to-load-yago-into-apache-jena-fuseki.html&title=How to load Yago into Apache Jena / Fuseki"><i class="fa fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://ferdinand-muetsch.de/how-to-load-yago-into-apache-jena-fuseki.html&is_video=false&description=How to load Yago into Apache Jena / Fuseki"><i class="fa fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=How to load Yago into Apache Jena / Fuseki&body=Check out this article: https://ferdinand-muetsch.de/how-to-load-yago-into-apache-jena-fuseki.html"><i class="fa fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://ferdinand-muetsch.de/how-to-load-yago-into-apache-jena-fuseki.html&title=How to load Yago into Apache Jena / Fuseki"><i class="fa fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://ferdinand-muetsch.de/how-to-load-yago-into-apache-jena-fuseki.html&title=How to load Yago into Apache Jena / Fuseki"><i class="fa fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://ferdinand-muetsch.de/how-to-load-yago-into-apache-jena-fuseki.html&title=How to load Yago into Apache Jena / Fuseki"><i class="fa fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://ferdinand-muetsch.de/how-to-load-yago-into-apache-jena-fuseki.html&title=How to load Yago into Apache Jena / Fuseki"><i class="fa fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://ferdinand-muetsch.de/how-to-load-yago-into-apache-jena-fuseki.html&name=How to load Yago into Apache Jena / Fuseki&description="><i class="fa fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index width mx-auto px2 my4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        How to load Yago into Apache Jena / Fuseki
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">Ferdinand Mütsch</span>
+      </span>
+      
+    <div class="postdate">
+        <time datetime="2016-11-11T22:04:09.000Z" itemprop="datePublished">2016-11-11</time>
+    </div>
+
+
+      
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p>This article describes how to load the <a href="http://yago-knowledge.org" target="_blank" rel="external">Yago</a> Linked Data knowledge collection into an <a href="https://jena.apache.org/" target="_blank" rel="external">Apache Jena</a> triple store database on Windows 10 as well as on Linux.</p>
+<ol>
+<li><p>At very first, please make sure you have Java 8 Runtime Environment installed on your system.</p>
+</li>
+<li><p>Download all Yago graphs you need from the <a href="http://www.mpi-inf.mpg.de/departments/databases-and-information-systems/research/yago-naga/yago/downloads/" target="_blank" rel="external">downloads section</a> as .ttl files. In my case I took all graphs from <em>TAXONOMY</em>, <em>CORE</em> and additonally the <em>yagoDBpediaInstances</em> and <em>yagoDBpediaClasses</em> collections to have relations from Yago entities to DBpedia ones. Download the files to a folder on your system, let’s say <code>/home/ferdinand/yago/</code> on Linux or <code>C:\Users\Ferdinand\yago</code> on Windows and extract them using 7zip.</p>
+</li>
+<li><p>Delete all <code>.7z</code> files.</p>
+</li>
+<li><p>Download <code>apache-jena-3.1.1.zip</code> (or newer version) and <code>apache-jena-fuseki-2.4.1.zip</code> from <a href="https://jena.apache.org/download/index.cgi" target="_blank" rel="external">here</a> and extract them to, let’s say <code>/home/ferdinand/jena/</code> and <code>/home/ferdinand/fuseki/</code> (or the analogue directories on Windows).</p>
+</li>
+<li><p>Now the .ttl files needs to get some kind of preprocessed, where non-unicode characters are replaced in order for Jena to accept the data. On Linux run <code>sed -i &#39;s/|/-/g&#39; ./* &amp;&amp; sed -i &#39;s/\\\\/-/g&#39; ./* &amp;&amp; sed -i &#39;s/–/-/g&#39; ./*</code> from within the directory where your .ttl files are. On Windows, start the Ubuntu Bash, navigate to the respective directory (e.g. <code>/mnt/c/Users/Ferdinand/yago</code>) and do the same command. It will take several minutes. I mean, really several…</p>
+</li>
+<li><p>Create a folder to be used for the database later, e.g. <code>/home/ferdinand/yago/data</code>.</p>
+</li>
+<li><p>Add the Fuseki root directory (e.g. <code>/home/ferdinand/fuseki</code>) and the Jena <em>bin</em> (or <em>bat</em> on Win) (e.g. <code>/home/ferdinand/jena/bin</code>) to your <code>PATH</code> environment variable. On Linux you would do this by editing your <code>~/.bash_profile</code>, on Windows you can search for <em>“envionment variables”</em> and then use the Windows system settings dialog.</p>
+</li>
+<li><p>Load the graphs using <em>tdbloader</em>: <code>tdbloader.bat --loc data ./*</code> from the directory where your .ttl files are located. This may take several hours. Not joking…</p>
+</li>
+<li><p>Start Fuseki typing <code>java -jar fuseki-server.jar --update --loc /home/ferdinand/yago/data /myGraph</code> to run fuseki with your entire Yago graph available under the <em>myGraph</em> alias.</p>
+</li>
+<li><p>Open <a href="http://localhost:3030" target="_blank" rel="external">http://localhost:3030</a> in your browser and start making queries.</p>
+</li>
+</ol>
+<p>If you’re about to run really expensive queries, consider the following.</p>
+<ol>
+<li><p>Set the <code>JVM_ARGS</code> environment variable to <code>-Xms512m -Xmx2048M -XX:-UseGCOverheadLimit -XX:+UseParallelGC</code>. This will basically prevent you from getting <em>OutOfMemory</em> errors.</p>
+</li>
+<li><p>Use <em>tdbquery</em> since it might be a little more performant than the web SPARQL endpoint. An example <em>tdbquery</em> command might look like this, assuming you have a file <code>q.txt</code> that contains your SPARQL query: <code>tdbquery --loc=/home/ferdinand/yago/data --time --results=CSV --query=q.txt &gt; output.txt</code></p>
+</li>
+</ol>
+
+  </div>
+</article>
+
+
+
+    </div>
+    
+      <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Blog</a></li>
+         
+          <li><a href="/imprint/">Imprint</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://ferdinand-muetsch.de/how-to-load-yago-into-apache-jena-fuseki.html"><i class="fa fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://ferdinand-muetsch.de/how-to-load-yago-into-apache-jena-fuseki.html&text=How to load Yago into Apache Jena / Fuseki"><i class="fa fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://ferdinand-muetsch.de/how-to-load-yago-into-apache-jena-fuseki.html&title=How to load Yago into Apache Jena / Fuseki"><i class="fa fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://ferdinand-muetsch.de/how-to-load-yago-into-apache-jena-fuseki.html&is_video=false&description=How to load Yago into Apache Jena / Fuseki"><i class="fa fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=How to load Yago into Apache Jena / Fuseki&body=Check out this article: https://ferdinand-muetsch.de/how-to-load-yago-into-apache-jena-fuseki.html"><i class="fa fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://ferdinand-muetsch.de/how-to-load-yago-into-apache-jena-fuseki.html&title=How to load Yago into Apache Jena / Fuseki"><i class="fa fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://ferdinand-muetsch.de/how-to-load-yago-into-apache-jena-fuseki.html&title=How to load Yago into Apache Jena / Fuseki"><i class="fa fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://ferdinand-muetsch.de/how-to-load-yago-into-apache-jena-fuseki.html&title=How to load Yago into Apache Jena / Fuseki"><i class="fa fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://ferdinand-muetsch.de/how-to-load-yago-into-apache-jena-fuseki.html&title=How to load Yago into Apache Jena / Fuseki"><i class="fa fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://ferdinand-muetsch.de/how-to-load-yago-into-apache-jena-fuseki.html&name=How to load Yago into Apache Jena / Fuseki&description="><i class="fa fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+      <ul>
+        <li id="toc"><a class="icon" href="#" onclick='$("#toc-footer").toggle();return false;'><i class="fa fa-list fa-lg" aria-hidden="true"></i> TOC</a></li>
+        <li id="share"><a class="icon" href="#" onclick='$("#share-footer").toggle();return false;'><i class="fa fa-share-alt fa-lg" aria-hidden="true"></i> Share</a></li>
+        <li id="top" style="display:none"><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a></li>
+        <li id="menu"><a class="icon" href="#" onclick='$("#nav-footer").toggle();return false;'><i class="fa fa-bars fa-lg" aria-hidden="true"></i> Menu</a></li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+    
+    <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2017 Ferdinand Mütsch
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Blog</a></li>
+         
+          <li><a href="/imprint/">Imprint</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+</body>
+</html>
+<!-- styles -->
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+<link rel="stylesheet" href="/lib/meslo-LG/styles.css">
+<link rel="stylesheet" href="/lib/justified-gallery/justifiedGallery.min.css">
+
+
+<!-- jquery -->
+<script src="/lib/jquery/jquery.min.js"></script>
+<script src="/lib/justified-gallery/jquery.justifiedGallery.min.js"></script>
+<script src="/js/main.js"></script>
+<!-- Google Analytics -->
+
+    <script type="text/javascript">
+        (function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+        ga('create', 'UA-3922933-8', 'auto');
+        ga('send', 'pageview');
+    </script>
+
+<!-- Disqus Comments -->
+
+
