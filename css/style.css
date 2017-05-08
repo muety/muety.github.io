@@ -635,8 +635,8 @@ body {
   #header #nav ul li.icon {
     display: inline-block;
     position: absolute;
-    top: 55px;
-    right: 1rem;
+    top: 15px;
+    right: 5px;
   }
   #header #nav ul.responsive li {
     display: block;
