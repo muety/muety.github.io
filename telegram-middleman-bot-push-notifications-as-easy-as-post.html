@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="E-Mails are so 2010E-Mails are everywhere. Literally anybody who gets in contact with a computer in some way will use the electronic mail system, which dates back to 1971. And certainly the E-Mail st">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Middleman Bot - Push notifications as easy as POST">
+<meta property="og:url" content="https://ferdinand-muetsch.de/telegram-middleman-bot-push-notifications-as-easy-as-post.html">
+<meta property="og:site_name" content="Ferdinand Mütsch">
+<meta property="og:description" content="E-Mails are so 2010E-Mails are everywhere. Literally anybody who gets in contact with a computer in some way will use the electronic mail system, which dates back to 1971. And certainly the E-Mail st">
+<meta property="og:image" content="https://ferdinand-muetsch.de/images/middleman.png">
+<meta property="og:image" content="https://ferdinand-muetsch.de/images/middleman2.png">
+<meta property="og:updated_time" content="2017-07-04T20:58:25.710Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Middleman Bot - Push notifications as easy as POST">
+<meta name="twitter:description" content="E-Mails are so 2010E-Mails are everywhere. Literally anybody who gets in contact with a computer in some way will use the electronic mail system, which dates back to 1971. And certainly the E-Mail st">
+<meta name="twitter:image" content="https://ferdinand-muetsch.de/images/middleman.png">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon-192x192.png">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+    
+    <!-- title -->
+    <title>Middleman Bot - Push notifications as easy as POST</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- rss -->
+    
+    
+</head>
+
+<body>
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fa fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fa fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Blog</a></li>
+         
+          <li><a href="/imprint/">Imprint</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" href="/ml-telegram-chat-message-classification.html"><i class="fa fa-chevron-right" aria-hidden="true" onmouseover='$("#i-next").toggle();' onmouseout='$("#i-next").toggle();'></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa fa-chevron-up" aria-hidden="true" onmouseover='$("#i-top").toggle();' onmouseout='$("#i-top").toggle();'></i></a></li>
+        <li><a class="icon" href="#"><i class="fa fa-share-alt" aria-hidden="true" onmouseover='$("#i-share").toggle();' onmouseout='$("#i-share").toggle();' onclick='$("#share").toggle();return false;'></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://ferdinand-muetsch.de/telegram-middleman-bot-push-notifications-as-easy-as-post.html"><i class="fa fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://ferdinand-muetsch.de/telegram-middleman-bot-push-notifications-as-easy-as-post.html&text=Middleman Bot - Push notifications as easy as POST"><i class="fa fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://ferdinand-muetsch.de/telegram-middleman-bot-push-notifications-as-easy-as-post.html&title=Middleman Bot - Push notifications as easy as POST"><i class="fa fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://ferdinand-muetsch.de/telegram-middleman-bot-push-notifications-as-easy-as-post.html&is_video=false&description=Middleman Bot - Push notifications as easy as POST"><i class="fa fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Middleman Bot - Push notifications as easy as POST&body=Check out this article: https://ferdinand-muetsch.de/telegram-middleman-bot-push-notifications-as-easy-as-post.html"><i class="fa fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://ferdinand-muetsch.de/telegram-middleman-bot-push-notifications-as-easy-as-post.html&title=Middleman Bot - Push notifications as easy as POST"><i class="fa fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://ferdinand-muetsch.de/telegram-middleman-bot-push-notifications-as-easy-as-post.html&title=Middleman Bot - Push notifications as easy as POST"><i class="fa fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://ferdinand-muetsch.de/telegram-middleman-bot-push-notifications-as-easy-as-post.html&title=Middleman Bot - Push notifications as easy as POST"><i class="fa fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://ferdinand-muetsch.de/telegram-middleman-bot-push-notifications-as-easy-as-post.html&title=Middleman Bot - Push notifications as easy as POST"><i class="fa fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://ferdinand-muetsch.de/telegram-middleman-bot-push-notifications-as-easy-as-post.html&name=Middleman Bot - Push notifications as easy as POST&description="><i class="fa fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#E-Mails-are-so-2010"><span class="toc-number">1.</span> <span class="toc-text">E-Mails are so 2010</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#The-pain-I-had"><span class="toc-number">2.</span> <span class="toc-text">The pain I had</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#The-simple-solution-I-created"><span class="toc-number">3.</span> <span class="toc-text">The simple solution I created</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Example"><span class="toc-number">4.</span> <span class="toc-text">Example</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Give-it-a-try"><span class="toc-number">5.</span> <span class="toc-text">Give it a try</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index width mx-auto px2 my4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        Middleman Bot - Push notifications as easy as POST
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">Ferdinand Mütsch</span>
+      </span>
+      
+    <div class="postdate">
+        <time datetime="2017-07-04T20:13:57.000Z" itemprop="datePublished">2017-07-04</time>
+    </div>
+
+
+      
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p><img src="images/middleman.png" alt=""></p>
+<h2 id="E-Mails-are-so-2010"><a href="#E-Mails-are-so-2010" class="headerlink" title="E-Mails are so 2010"></a>E-Mails are so 2010</h2><p>E-Mails are everywhere. Literally anybody who gets in contact with a computer in some way will use the electronic mail system, which dates back to 1971. And certainly the E-Mail still has its right to exist, even in 2017. Especially in a business context it simply makes sense for many use cases - however not for all of those it is nowadays used for. The smaller the piece of information you want to communicate is, the less efficient e-mails are. Due to tons of header rows and other heavy load, a mail has a large overhead. Just look at a small random sample of mail from your inbox, find out the core information you get from it and look at the file size. Often you will find an overhead of more than 70 %. Great examples are subscription mails from online forum posts. Their essential information is basically only one bit in size, namely that something new has happened. However, they usually contain lots of HTML code, CSS, attachment pictures and some boilerplate text. Another example is those chatty-like conversations between two or more people, where each of them responds with only a few words to his conversation partner’s last question or the like. Although only few words are added, the whole previous mail is replicated again, enriched with some headers and then sent to the server, where it is stored and delivered to the recipients. I’m glad that for those cases apps like Slack are gradually establishing and I hope they will replace the e-mail some day. Anyway, I get off the topic. This shouldn’t be a hate letter against the e-mail. Rather I want to present another bot for the <strong>Telegram</strong> instant messenger.</p>
+<h2 id="The-pain-I-had"><a href="#The-pain-I-had" class="headerlink" title="The pain I had"></a>The pain I had</h2><p>It mainly aims at developers and sysadmins, but is not limited to these addressees. Once I had the problem that I wanted to code a little watcher that regularly visits my university’s website to check whether an announcement about the exam results has been made and notify me, if that was the case. The only way for realizing that notification that came to my mind was to send an e-mail. However, I had to integrate an SMTP library into my script then, which authenticates against my mail server using my account credentials - comparatively high effort. Then I wanted to write a little script that runs on my server in regular intervals to gather some basic statistics from log files and databases and send them to me so I could passively consume them (instead of me having to actively go to some webpage or so). Again, same problem. </p>
+<h2 id="The-simple-solution-I-created"><a href="#The-simple-solution-I-created" class="headerlink" title="The simple solution I created"></a>The simple solution I created</h2><p>For these reasons I created the Middleman Bot. It takes a simple, small JSON fragment as an input via HTTP call and forwards it to my Telegram chat. There’s no need for an additional library (nearly every programming language has a built-in API for HTTP calls or you could use cURL) or authentication process. Simply register at the bot once and fire lightweight HTTP calls afterwards. </p>
+<h2 id="Example"><a href="#Example" class="headerlink" title="Example"></a>Example</h2><p>To make my webserver send me a notification when its load is above a certain threshold, the only thing it would need to do is a <code>POST http://middleman.ferdinand-muetsch.de/api/messages</code> with this body: </p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">	<span class="attr">"recipient_token"</span>: <span class="string">"3edf633a-eab0-45ea-9721-16c07bb8f245"</span>,</div><div class="line">	<span class="attr">"text"</span>: <span class="string">"Watch out! Average load in the last 10 minutes is &gt;= 10000 requests per second."</span>,</div><div class="line">	<span class="attr">"origin"</span>: <span class="string">"Caddy webserver @ ferdinand-muetsch.de"</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>The token is your unique identifier the bot uses internally to decide to which chat / recipient to route an incoming message to. (For the trolls among you: I’ve invalidated the token from the example, so nobody could spam me.)</p>
+<p>And there you go. </p>
+<p><img src="images/middleman2.png" alt=""></p>
+<h2 id="Give-it-a-try"><a href="#Give-it-a-try" class="headerlink" title="Give it a try"></a>Give it a try</h2><p>I’ve pushed the code as well as some introductions on how to run and use that bot to GitHub at  <a href="https://github.com/n1try/telegram-middleman-bot" target="_blank" rel="external">n1try/telegram-middleman-bot</a>. You can either run your own instance of the bot or use mine, which is running at <em><a href="http://middleman.ferdinand-muetsch.de" target="_blank" rel="external">http://middleman.ferdinand-muetsch.de</a></em>. Let me know what you think!</p>
+
+  </div>
+</article>
+
+
+
+    </div>
+    
+      <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Blog</a></li>
+         
+          <li><a href="/imprint/">Imprint</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#E-Mails-are-so-2010"><span class="toc-number">1.</span> <span class="toc-text">E-Mails are so 2010</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#The-pain-I-had"><span class="toc-number">2.</span> <span class="toc-text">The pain I had</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#The-simple-solution-I-created"><span class="toc-number">3.</span> <span class="toc-text">The simple solution I created</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Example"><span class="toc-number">4.</span> <span class="toc-text">Example</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Give-it-a-try"><span class="toc-number">5.</span> <span class="toc-text">Give it a try</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://ferdinand-muetsch.de/telegram-middleman-bot-push-notifications-as-easy-as-post.html"><i class="fa fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://ferdinand-muetsch.de/telegram-middleman-bot-push-notifications-as-easy-as-post.html&text=Middleman Bot - Push notifications as easy as POST"><i class="fa fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://ferdinand-muetsch.de/telegram-middleman-bot-push-notifications-as-easy-as-post.html&title=Middleman Bot - Push notifications as easy as POST"><i class="fa fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://ferdinand-muetsch.de/telegram-middleman-bot-push-notifications-as-easy-as-post.html&is_video=false&description=Middleman Bot - Push notifications as easy as POST"><i class="fa fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Middleman Bot - Push notifications as easy as POST&body=Check out this article: https://ferdinand-muetsch.de/telegram-middleman-bot-push-notifications-as-easy-as-post.html"><i class="fa fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://ferdinand-muetsch.de/telegram-middleman-bot-push-notifications-as-easy-as-post.html&title=Middleman Bot - Push notifications as easy as POST"><i class="fa fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://ferdinand-muetsch.de/telegram-middleman-bot-push-notifications-as-easy-as-post.html&title=Middleman Bot - Push notifications as easy as POST"><i class="fa fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://ferdinand-muetsch.de/telegram-middleman-bot-push-notifications-as-easy-as-post.html&title=Middleman Bot - Push notifications as easy as POST"><i class="fa fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://ferdinand-muetsch.de/telegram-middleman-bot-push-notifications-as-easy-as-post.html&title=Middleman Bot - Push notifications as easy as POST"><i class="fa fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://ferdinand-muetsch.de/telegram-middleman-bot-push-notifications-as-easy-as-post.html&name=Middleman Bot - Push notifications as easy as POST&description="><i class="fa fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+      <ul>
+        <li id="toc"><a class="icon" href="#" onclick='$("#toc-footer").toggle();return false;'><i class="fa fa-list fa-lg" aria-hidden="true"></i> TOC</a></li>
+        <li id="share"><a class="icon" href="#" onclick='$("#share-footer").toggle();return false;'><i class="fa fa-share-alt fa-lg" aria-hidden="true"></i> Share</a></li>
+        <li id="top" style="display:none"><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a></li>
+        <li id="menu"><a class="icon" href="#" onclick='$("#nav-footer").toggle();return false;'><i class="fa fa-bars fa-lg" aria-hidden="true"></i> Menu</a></li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+    
+    <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2017 Ferdinand Mütsch
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Blog</a></li>
+         
+          <li><a href="/imprint/">Imprint</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+</body>
+</html>
+<!-- styles -->
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+<link rel="stylesheet" href="/lib/meslo-LG/styles.css">
+<link rel="stylesheet" href="/lib/justified-gallery/justifiedGallery.min.css">
+
+
+<!-- jquery -->
+<script src="/lib/jquery/jquery.min.js"></script>
+<script src="/lib/justified-gallery/jquery.justifiedGallery.min.js"></script>
+<script src="/js/main.js"></script>
+<!-- Google Analytics -->
+
+    <script type="text/javascript">
+        (function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+        ga('create', 'UA-3922933-8', 'auto');
+        ga('send', 'pageview');
+    </script>
+
+<!-- Disqus Comments -->
+
+
