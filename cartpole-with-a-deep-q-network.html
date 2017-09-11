@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="In my last post I developed a solution to OpenAI Gym’s CartPole environment, based on a classical Q-Learning algorithm. The best score I achieved with it 120, although the score I uploaded to the lead">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CartPole with a Deep Q-Network">
+<meta property="og:url" content="https://ferdinand-muetsch.de/cartpole-with-a-deep-q-network.html">
+<meta property="og:site_name" content="Ferdinand Mütsch">
+<meta property="og:description" content="In my last post I developed a solution to OpenAI Gym’s CartPole environment, based on a classical Q-Learning algorithm. The best score I achieved with it 120, although the score I uploaded to the lead">
+<meta property="og:image" content="https://ferdinand-muetsch.de/images/dqn4.png">
+<meta property="og:image" content="https://ferdinand-muetsch.de/images/dqn3.png">
+<meta property="og:image" content="https://ferdinand-muetsch.de/images/dqn2.png">
+<meta property="og:image" content="https://ferdinand-muetsch.de/images/dqn1.png">
+<meta property="og:updated_time" content="2017-09-11T16:58:09.265Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="CartPole with a Deep Q-Network">
+<meta name="twitter:description" content="In my last post I developed a solution to OpenAI Gym’s CartPole environment, based on a classical Q-Learning algorithm. The best score I achieved with it 120, although the score I uploaded to the lead">
+<meta name="twitter:image" content="https://ferdinand-muetsch.de/images/dqn4.png">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon-192x192.png">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+    
+    <!-- title -->
+    <title>CartPole with a Deep Q-Network</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- rss -->
+    
+    
+</head>
+
+<body>
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fa fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fa fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Blog</a></li>
+         
+          <li><a href="/imprint/">Imprint</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" href="/cartpole-with-qlearning-first-experiences-with-openai-gym.html"><i class="fa fa-chevron-right" aria-hidden="true" onmouseover='$("#i-next").toggle();' onmouseout='$("#i-next").toggle();'></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa fa-chevron-up" aria-hidden="true" onmouseover='$("#i-top").toggle();' onmouseout='$("#i-top").toggle();'></i></a></li>
+        <li><a class="icon" href="#"><i class="fa fa-share-alt" aria-hidden="true" onmouseover='$("#i-share").toggle();' onmouseout='$("#i-share").toggle();' onclick='$("#share").toggle();return false;'></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://ferdinand-muetsch.de/cartpole-with-a-deep-q-network.html"><i class="fa fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://ferdinand-muetsch.de/cartpole-with-a-deep-q-network.html&text=CartPole with a Deep Q-Network"><i class="fa fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://ferdinand-muetsch.de/cartpole-with-a-deep-q-network.html&title=CartPole with a Deep Q-Network"><i class="fa fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://ferdinand-muetsch.de/cartpole-with-a-deep-q-network.html&is_video=false&description=CartPole with a Deep Q-Network"><i class="fa fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=CartPole with a Deep Q-Network&body=Check out this article: https://ferdinand-muetsch.de/cartpole-with-a-deep-q-network.html"><i class="fa fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://ferdinand-muetsch.de/cartpole-with-a-deep-q-network.html&title=CartPole with a Deep Q-Network"><i class="fa fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://ferdinand-muetsch.de/cartpole-with-a-deep-q-network.html&title=CartPole with a Deep Q-Network"><i class="fa fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://ferdinand-muetsch.de/cartpole-with-a-deep-q-network.html&title=CartPole with a Deep Q-Network"><i class="fa fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://ferdinand-muetsch.de/cartpole-with-a-deep-q-network.html&title=CartPole with a Deep Q-Network"><i class="fa fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://ferdinand-muetsch.de/cartpole-with-a-deep-q-network.html&name=CartPole with a Deep Q-Network&description="><i class="fa fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Motivation"><span class="toc-number">1.</span> <span class="toc-text">Motivation</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Deep-Q-Learning"><span class="toc-number">2.</span> <span class="toc-text">Deep Q-Learning</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#My-implementation"><span class="toc-number">3.</span> <span class="toc-text">My implementation</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Tweak-1-More-hodden-neurons"><span class="toc-number">3.1.</span> <span class="toc-text">Tweak #1: More hodden neurons</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Tweak-2-Larger-replay-memory"><span class="toc-number">3.2.</span> <span class="toc-text">Tweak #2: Larger replay memory</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Tweak-3-Mini-batch-training"><span class="toc-number">3.3.</span> <span class="toc-text">Tweak #3: Mini-batch training</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Tweak-4-Setting-γ-1"><span class="toc-number">3.4.</span> <span class="toc-text">Tweak #4: Setting γ = 1</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Tweak-5-Logarithmic-ε-decay"><span class="toc-number">3.5.</span> <span class="toc-text">Tweak #5: Logarithmic ε-decay</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Tweak-6-tanh-activation-function"><span class="toc-number">3.6.</span> <span class="toc-text">Tweak #6: tanh activation function</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Tweak-7-Cross-validate-hyperparameters"><span class="toc-number">3.7.</span> <span class="toc-text">Tweak #7: Cross-validate hyperparameters</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Results"><span class="toc-number">4.</span> <span class="toc-text">Results</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index width mx-auto px2 my4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        CartPole with a Deep Q-Network
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">Ferdinand Mütsch</span>
+      </span>
+      
+    <div class="postdate">
+        <time datetime="2017-09-11T16:47:39.000Z" itemprop="datePublished">2017-09-11</time>
+    </div>
+
+
+      
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p>In my <a href="https://ferdinand-muetsch.de/cartpole-with-qlearning-first-experiences-with-openai-gym.html">last post</a> I developed a solution to <a href="https://gym.openai.com/envs/CartPole-v0" target="_blank" rel="external">OpenAI Gym’s CartPole environment</a>, based on a classical Q-Learning algorithm. <strong>The best score I achieved with it 120</strong>, although the score I uploaded to the <a href="https://gym.openai.com/evaluations/eval_emRbuGdHRnWoJuMUnPwd1Q" target="_blank" rel="external">leaderboard</a> was 188. While this is certainly not a bad result, I wondered if I could do better using more advanced techniques. Besides that I also wanted to practice the concepts I had recently learned in the <a href="http://www.aifb.kit.edu/web/Lehre/Vorlesung_Maschinelles_Lernen_2_%E2%80%93_Fortgeschrittene_Verfahren/en" target="_blank" rel="external">Machine Learning 2</a> course at university. By the way, to all the students among you: I found that one of the best way to learn about new algorithms etc. is to actually <strong>try to implement them in code</strong>!</p>
+<h2 id="Motivation"><a href="#Motivation" class="headerlink" title="Motivation"></a>Motivation</h2><p>One major limitation of my classical Q-Learning approach was that the number of possible states had to be reduced from basically infinity (due to the observations’ continuous nature) to, in my case, <code>1 * 1 * 6 * 12 = 72</code> discrete states. Considering this extreme simpification, the results were astonishingly good! However, what if we could utilize more of the information, the observations give us? One solution is to combine Q-Learning with a (deep) neural network, which results in a technique called Deep Q-Learning (DQN). Neural networks are inherently efficient when handling very high dimensional problems. That’s why they are doing so well with image-, video- and audio data. Additionally, they can easily handle continuous inputs, whereas with our classical approach we needed the Q-table to be a finite (in this case (4+1)-dimensional) matrix (or tensor). Accordingly, with DQN we don’t need discrete buckets anymore, but are able to directly use the raw observations.</p>
+<h2 id="Deep-Q-Learning"><a href="#Deep-Q-Learning" class="headerlink" title="Deep Q-Learning"></a>Deep Q-Learning</h2><p>But how does this even work? While I don’t want to explain DQN in detail here, the basic idea is to replace the Q-table by a neural network, which is trained to predict Q-values for a state. The input is a state-vector (or a batch of such) - consisting of four features in this case (which corresponds to four input neurons). The output is a vector of Q-values, one for each possible action - two in our case (corresponding to two output neurons). The training is done using <strong>experience replay</strong>. Basically, the agent begins to try some random actions and stores its “experiences” into a memory. An experience is a tuple like <code>(old_state, performed_action, received_reward, new_state)</code>. At fixed intervals (e.g. after each training episode, but NOT after each step), batches are sampled from memory and used as training data for the network. Consequently, the network (hopefully) improves every episode and predicts more precise Q-values for state-action pairs. </p>
+<h2 id="My-implementation"><a href="#My-implementation" class="headerlink" title="My implementation"></a>My implementation</h2><p>My implementation is essentially based on <a href="https://keon.io/deep-q-learning/" target="_blank" rel="external">this great blog post</a> by <a href="https://github.com/keon" target="_blank" rel="external">Keon</a>. It uses <a href="http://keras.io" target="_blank" rel="external">Keras</a> as a high-level abstraction on top of <a href="http://tensorflow.com" target="_blank" rel="external">TensorFlow</a>. However, while I adopted the general structure, I made a several tweaks and fixes to massively improve performance. </p>
+<h3 id="Tweak-1-More-hodden-neurons"><a href="#Tweak-1-More-hodden-neurons" class="headerlink" title="Tweak #1: More hodden neurons"></a>Tweak #1: More hodden neurons</h3><p>I slightly modified the network layout by <strong>doubling the number of hidden neurons</strong> in the second hidden layer. While randomly experimenting with some layouts I found that this one seemed to work better on average. Generally, determining a neural network’s layout is basically trial and error for the most parts. Mainly you want to master the <a href="https://en.wikipedia.org/wiki/Bias%E2%80%93variance_tradeoff" target="_blank" rel="external">bias-variance tradeoff</a>, but there is no rule on how to choose network structure in order to do so. Mine looks like this now:</p>
+<p><img src="images/dqn4.png" alt=""></p>
+<h3 id="Tweak-2-Larger-replay-memory"><a href="#Tweak-2-Larger-replay-memory" class="headerlink" title="Tweak #2: Larger replay memory"></a>Tweak #2: Larger replay memory</h3><p>In <a href="https://github.com/keon" target="_blank" rel="external">Keon</a>‘s original implementation, the replay memory had a maxmimum size of 2,000. Assuming an average “survival” time of 100 steps, it would only hold experiences from 20 episodes, which is not much. I didn’t see any reason why they shouldn’t be a greater variety in training examples, so I increased the <strong>memory size to 100,000</strong>.</p>
+<h3 id="Tweak-3-Mini-batch-training"><a href="#Tweak-3-Mini-batch-training" class="headerlink" title="Tweak #3: Mini-batch training"></a>Tweak #3: Mini-batch training</h3><p>While originally the network trained from batches of 32 examples in each episode, the way the training was conducted was not efficient in my opinion. Instead of giving TensorFlow a <strong>32 x 4 matrix</strong>, it was given a <strong>1 x 4 matrix 32 times</strong>, so the actual training procedure effectively used a mini-batch size of 1. Without having technical knowledge on how TensorFlow works, I’m still pretty sure that training the network with one large batch instead of 32 small ones is faster - especially when using a GPU. </p>
+<h3 id="Tweak-4-Setting-γ-1"><a href="#Tweak-4-Setting-γ-1" class="headerlink" title="Tweak #4: Setting γ = 1"></a>Tweak #4: Setting γ = 1</h3><p>As already mentioned in my last post, I’m of the opinion that it wouldn’t make sense to set the gamma parameter to less than one. Its purpose is to “penalize” the agent if it takes long to reach its goal. However, in CartPole <strong>its even our goal</strong> to do as many steps as possible. </p>
+<h3 id="Tweak-5-Logarithmic-ε-decay"><a href="#Tweak-5-Logarithmic-ε-decay" class="headerlink" title="Tweak #5: Logarithmic ε-decay"></a>Tweak #5: Logarithmic ε-decay</h3><p>Since the adaptive exploration rate from <a href="https://medium.com/@tuzzer/cart-pole-balancing-with-q-learning-b54c6068d947" target="_blank" rel="external">@tuzzer’s solution</a> was very effective in my last implementation, I simply adopted it for this one, too. I didn’t cross-validate whether it’s better or worse than <a href="https://github.com/keon" target="_blank" rel="external">Keon</a>‘s epsilon decay, but at least it doesn’t seem to do bad.</p>
+<p><img src="images/dqn3.png" alt=""></p>
+<h3 id="Tweak-6-tanh-activation-function"><a href="#Tweak-6-tanh-activation-function" class="headerlink" title="Tweak #6: tanh activation function"></a>Tweak #6: tanh activation function</h3><p>I’m really not sure about this point, so please correct me if I’m wrong. The original implementation used the ReLU activation function, which is a linear function that maps the input to itself, but thesholded at zero.</p>
+<p><img src="images/dqn2.png" alt=""></p>
+<p>However, since the input features can be negative, ReLU might cause dead neurons, doesn’t it? To overcome that problem, I decided to <em>tanh</em> as an activation function.</p>
+<h3 id="Tweak-7-Cross-validate-hyperparameters"><a href="#Tweak-7-Cross-validate-hyperparameters" class="headerlink" title="Tweak #7: Cross-validate hyperparameters"></a>Tweak #7: Cross-validate hyperparameters</h3><p>Eventually, I conducted a grid search (using my <a href="https://gist.github.com/n1try/87b442fce7f7d58606f462191c6d6033" target="_blank" rel="external">script</a> from the last time) to find good values for <code>alpha</code> (learning rate), <code>alpha_decay</code> and <code>epsilon_min</code> (minimum exploration rate). It turned out that <code>alpha=0.01</code>, <code>alpha_decay=0.01</code> and <code>epsilon_min=0.01</code> seem to work best among all tested values on average.</p>
+<h2 id="Results"><a href="#Results" class="headerlink" title="Results"></a>Results</h2><p>After all these optimizations, I ran the algorithm several times and the best score I achieved was actually <strong>24</strong>. However, I didn’t record that run, so my best score in the <a href="https://gym.openai.com/evaluations/eval_EIcM1ZBnQW2LBaFN6FY65g" target="_blank" rel="external">leaderboard</a> in <strong>85</strong>, which is better then with my classical Q-Learning approach.<br>However, I found that although the DQN approach <em>can</em> converge faster, it also seems to be way more unstable at the same time. Performing two consecutive runs of the exact same algorithm and configuration often resulted in one score to be extremely good, while the second one didn’t even solve the environment at all (&gt; 999 episodes). In other words, DQN has a way larger variance, than the table-based approach, as depicted in the chart below, where I performed 25 runs of each algorithm. Additionally, as expected, the neural network is slower. Running DQN 25 times took <strong>744 seconds</strong>, while running table-based Q-Learning 25 times only took <strong>24 seconds</strong> on my machine’s CPU using four threads on four cores. </p>
+<p><a href="https://gist.github.com/n1try/2a6722407117e4d668921fce53845432" target="_blank" rel="external">&gt;&gt; Code on GitHub (dqn_cartpole.py)</a></p>
+<p><img src="images/dqn1.png" alt=""></p>
+<p><strong>Q</strong>: <code>Min 120, Max 999, Mean 197.16, Std: 183.223</code><br><strong>DQN</strong>: <code>Min 56, Max 999, Mean 600.04, Std: 356.046</code></p>
+
+  </div>
+</article>
+
+
+
+    </div>
+    
+      <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Blog</a></li>
+         
+          <li><a href="/imprint/">Imprint</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Motivation"><span class="toc-number">1.</span> <span class="toc-text">Motivation</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Deep-Q-Learning"><span class="toc-number">2.</span> <span class="toc-text">Deep Q-Learning</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#My-implementation"><span class="toc-number">3.</span> <span class="toc-text">My implementation</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Tweak-1-More-hodden-neurons"><span class="toc-number">3.1.</span> <span class="toc-text">Tweak #1: More hodden neurons</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Tweak-2-Larger-replay-memory"><span class="toc-number">3.2.</span> <span class="toc-text">Tweak #2: Larger replay memory</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Tweak-3-Mini-batch-training"><span class="toc-number">3.3.</span> <span class="toc-text">Tweak #3: Mini-batch training</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Tweak-4-Setting-γ-1"><span class="toc-number">3.4.</span> <span class="toc-text">Tweak #4: Setting γ = 1</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Tweak-5-Logarithmic-ε-decay"><span class="toc-number">3.5.</span> <span class="toc-text">Tweak #5: Logarithmic ε-decay</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Tweak-6-tanh-activation-function"><span class="toc-number">3.6.</span> <span class="toc-text">Tweak #6: tanh activation function</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Tweak-7-Cross-validate-hyperparameters"><span class="toc-number">3.7.</span> <span class="toc-text">Tweak #7: Cross-validate hyperparameters</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Results"><span class="toc-number">4.</span> <span class="toc-text">Results</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://ferdinand-muetsch.de/cartpole-with-a-deep-q-network.html"><i class="fa fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://ferdinand-muetsch.de/cartpole-with-a-deep-q-network.html&text=CartPole with a Deep Q-Network"><i class="fa fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://ferdinand-muetsch.de/cartpole-with-a-deep-q-network.html&title=CartPole with a Deep Q-Network"><i class="fa fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://ferdinand-muetsch.de/cartpole-with-a-deep-q-network.html&is_video=false&description=CartPole with a Deep Q-Network"><i class="fa fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=CartPole with a Deep Q-Network&body=Check out this article: https://ferdinand-muetsch.de/cartpole-with-a-deep-q-network.html"><i class="fa fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://ferdinand-muetsch.de/cartpole-with-a-deep-q-network.html&title=CartPole with a Deep Q-Network"><i class="fa fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://ferdinand-muetsch.de/cartpole-with-a-deep-q-network.html&title=CartPole with a Deep Q-Network"><i class="fa fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://ferdinand-muetsch.de/cartpole-with-a-deep-q-network.html&title=CartPole with a Deep Q-Network"><i class="fa fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://ferdinand-muetsch.de/cartpole-with-a-deep-q-network.html&title=CartPole with a Deep Q-Network"><i class="fa fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://ferdinand-muetsch.de/cartpole-with-a-deep-q-network.html&name=CartPole with a Deep Q-Network&description="><i class="fa fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+      <ul>
+        <li id="toc"><a class="icon" href="#" onclick='$("#toc-footer").toggle();return false;'><i class="fa fa-list fa-lg" aria-hidden="true"></i> TOC</a></li>
+        <li id="share"><a class="icon" href="#" onclick='$("#share-footer").toggle();return false;'><i class="fa fa-share-alt fa-lg" aria-hidden="true"></i> Share</a></li>
+        <li id="top" style="display:none"><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a></li>
+        <li id="menu"><a class="icon" href="#" onclick='$("#nav-footer").toggle();return false;'><i class="fa fa-bars fa-lg" aria-hidden="true"></i> Menu</a></li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+    
+    <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2017 Ferdinand Mütsch
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Blog</a></li>
+         
+          <li><a href="/imprint/">Imprint</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+</body>
+</html>
+<!-- styles -->
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+<link rel="stylesheet" href="/lib/meslo-LG/styles.css">
+<link rel="stylesheet" href="/lib/justified-gallery/justifiedGallery.min.css">
+
+
+<!-- jquery -->
+<script src="/lib/jquery/jquery.min.js"></script>
+<script src="/lib/justified-gallery/jquery.justifiedGallery.min.js"></script>
+<script src="/js/main.js"></script>
+<!-- Google Analytics -->
+
+    <script type="text/javascript">
+        (function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+        ga('create', 'UA-3922933-8', 'auto');
+        ga('send', 'pageview');
+    </script>
+
+<!-- Disqus Comments -->
+
+
