@@ -1028,6 +1028,9 @@ body {
 .project-list .project-item {
   margin-bottom: 5px;
 }
+article {
+  margin-bottom: 30px;
+}
 article header .posttitle {
   margin-top: 0;
   margin-bottom: 0;
