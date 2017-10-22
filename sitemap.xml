@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://ferdinand-muetsch.de/imprint/index.html</loc>
+    
+    <lastmod>2017-10-22T20:23:47.292Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://ferdinand-muetsch.de/about/index.html</loc>
     
     <lastmod>2017-10-04T14:10:00.571Z</lastmod>
@@ -12,13 +19,6 @@
     <loc>https://ferdinand-muetsch.de/articles/index.html</loc>
     
     <lastmod>2017-09-13T21:05:47.247Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://ferdinand-muetsch.de/imprint/index.html</loc>
-    
-    <lastmod>2017-09-13T20:49:32.165Z</lastmod>
     
   </url>
   
