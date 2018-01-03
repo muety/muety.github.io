@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="After having spent a considerable amount of time with it the last weekend, I wanted to make a short comment on Halite.io. Halite is a programming- and AI competition where people can write programs or">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Halite - A rule-based AI bot">
+<meta property="og:url" content="https://ferdinand-muetsch.de/halite-a-rule-based-ai-bot.html">
+<meta property="og:site_name" content="Ferdinand Mütsch">
+<meta property="og:description" content="After having spent a considerable amount of time with it the last weekend, I wanted to make a short comment on Halite.io. Halite is a programming- and AI competition where people can write programs or">
+<meta property="og:image" content="https://ferdinand-muetsch.de/images/halite_game.png">
+<meta property="og:image" content="https://ferdinand-muetsch.de/images/halite_langs.png">
+<meta property="og:updated_time" content="2018-01-03T07:52:12.340Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Halite - A rule-based AI bot">
+<meta name="twitter:description" content="After having spent a considerable amount of time with it the last weekend, I wanted to make a short comment on Halite.io. Halite is a programming- and AI competition where people can write programs or">
+<meta name="twitter:image" content="https://ferdinand-muetsch.de/images/halite_game.png">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon-192x192.png">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+          
+        
+        
+    
+    <!-- title -->
+    <title>Halite - A rule-based AI bot</title>
+    <!-- styles -->
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- rss -->
+    
+    
+
+    <!-- AdSense -->
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+      (adsbygoogle = window.adsbygoogle || []).push({
+        google_ad_client: "ca-pub-3974487870273550",
+        enable_page_level_ads: true
+      });
+    </script>
+</head>
+
+<body>
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fa fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fa fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Blog</a></li>
+         
+          <li><a href="/articles/">Articles</a></li>
+         
+          <li><a href="/imprint/">Imprint</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" href="/cartpole-with-a-deep-q-network.html"><i class="fa fa-chevron-right" aria-hidden="true" onmouseover='$("#i-next").toggle();' onmouseout='$("#i-next").toggle();'></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa fa-chevron-up" aria-hidden="true" onmouseover='$("#i-top").toggle();' onmouseout='$("#i-top").toggle();'></i></a></li>
+        <li><a class="icon" href="#"><i class="fa fa-share-alt" aria-hidden="true" onmouseover='$("#i-share").toggle();' onmouseout='$("#i-share").toggle();' onclick='$("#share").toggle();return false;'></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://ferdinand-muetsch.de/halite-a-rule-based-ai-bot.html"><i class="fa fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://ferdinand-muetsch.de/halite-a-rule-based-ai-bot.html&text=Halite - A rule-based AI bot"><i class="fa fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://ferdinand-muetsch.de/halite-a-rule-based-ai-bot.html&title=Halite - A rule-based AI bot"><i class="fa fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://ferdinand-muetsch.de/halite-a-rule-based-ai-bot.html&is_video=false&description=Halite - A rule-based AI bot"><i class="fa fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Halite - A rule-based AI bot&body=Check out this article: https://ferdinand-muetsch.de/halite-a-rule-based-ai-bot.html"><i class="fa fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://ferdinand-muetsch.de/halite-a-rule-based-ai-bot.html&title=Halite - A rule-based AI bot"><i class="fa fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://ferdinand-muetsch.de/halite-a-rule-based-ai-bot.html&title=Halite - A rule-based AI bot"><i class="fa fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://ferdinand-muetsch.de/halite-a-rule-based-ai-bot.html&title=Halite - A rule-based AI bot"><i class="fa fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://ferdinand-muetsch.de/halite-a-rule-based-ai-bot.html&title=Halite - A rule-based AI bot"><i class="fa fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://ferdinand-muetsch.de/halite-a-rule-based-ai-bot.html&name=Halite - A rule-based AI bot&description="><i class="fa fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#The-Game"><span class="toc-number">1.</span> <span class="toc-text">The Game</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#My-bot"><span class="toc-number">2.</span> <span class="toc-text">My bot</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Strategies"><span class="toc-number">3.</span> <span class="toc-text">Strategies</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Results"><span class="toc-number">4.</span> <span class="toc-text">Results</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index width mx-auto px2 my4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        Halite - A rule-based AI bot
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">Ferdinand Mütsch</span>
+      </span>
+      
+    <div class="postdate">
+        <time datetime="2018-01-03T07:04:08.000Z" itemprop="datePublished">2018-01-03</time>
+    </div>
+
+
+      
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p>After having spent a considerable amount of time with it the last weekend, I wanted to make a short comment on <a href="https://halite.io" target="_blank" rel="external">Halite.io</a>. Halite is a programming- and AI competition where people can write programs or train algorithms to control a bot that plays in a virtual 2D game environment. There is a leaderboard to track how your bot competes with other players’ bots and you can watch a replay of every game your bot has played, which helps <em>debugging</em> your bot as well as figuring out other people’s strategies. Originally, I got aware of this challenge through a video by <a href="https://www.youtube.com/channel/UCfzlCWGWYyIQ0aLC5w48gBQ" target="_blank" rel="external">one of my favorite</a> YouTube channels and became slightly addicted from that moment on. </p>
+<h2 id="The-Game"><a href="#The-Game" class="headerlink" title="The Game"></a>The Game</h2><p><img src="images/halite_game.png" alt=""></p>
+<p>While the complete rule set of Halite can be viewed in <a href="https://halite.io/learn-programming-challenge/" target="_blank" rel="external">their documentation</a>, I only want to explain very basics here. In Halite you play in a space scenario comprising <em>ships</em> and <em>planets</em>, while you (= your bot) controls your ships. A ship can do three actions: <em>move</em>, <em>dock</em> to or <em>undock</em> from a planet. The more ships you have docked at a planet, the faster you are <em>mining</em> the planet, which means to produce new ships. When two ships get close enough, they can fight and only the winner’s ship survives. The game is turn-based, so each of the up to four players’ programs are queried (by the game environment) for a list of moves for each of their ships in every turn. Input is the current game state (player- &amp; planet positions, ships’ health, ships’ current status, …) and output is a move for each ship. The final goal is to either completely dominate (= destroy every other players’ ships) or own the strongest ship fleet and the most planets after 300 turns. </p>
+<p>At the time of writing this article, the leaderboard comprises <strong>~ 4700 players</strong> from <strong>98 countries</strong>. Most of them are either university students or professionals, who have, in total, played <strong>10.9 million</strong> games. More interesting statistics can be found at the <a href="http://stats.halite.io:3000/public/dashboard/545ebc3c-4cdb-4940-acf1-e4d1332defac" target="_blank" rel="external">stats</a> page. </p>
+<h2 id="My-bot"><a href="#My-bot" class="headerlink" title="My bot"></a>My bot</h2><p>First of all, what I found especially cool is the fact that players are completely free in their choice of how to realize their bot (hard-coding, machine learning, …) and what programming language to use. Halite offers community-created starter templates for C++, C#, Dart, Elixir, Go, Haskell, JavaScript, Julia, Kotlin, PHP, Ruby, Rust, Scala, Swift and more. You can choose whatever language you like - which was <strong>Java</strong> for me - and eventually submit a ZIP file with your code or binary, as well as a script for executing it, to their website. The interface between your program and the game environment is <em>stdin</em> / <em>stdout</em>. </p>
+<p><img src="images/halite_langs.png" alt=""></p>
+<p>I decided to build my bot based on rather simple rules first, which I figured out by watching some other players’ replays. Probably applying machine learning to solve Halite would be even more challenging, but at the time I got aware of this competition, it was about to last only three more weeks (until January, 22nd), so I picked up on a rather simple approach.</p>
+<h2 id="Strategies"><a href="#Strategies" class="headerlink" title="Strategies"></a>Strategies</h2><p>I developed three different strategies for playing Halite, while my bot could dynamically switch between them during the game. The first one is called the <strong>BalancedStrategy</strong>. It’s a fair mixture of conquering new planets, raising ship production and destroying enemy ships. In this strategy, a ship’s most preferable goal is to take empty planets. However, if the next empty planet is unavailable ot too far away, it may also dock at a planet my bot already owns in order to increase production. However, no more than three of my own ships will ever dock at the same planet. If both the next empty planet as well as the next own planet are unavailable or too far away, the ship starts chasing the nearest enemy ship. </p>
+<p>In addition to this compromise-like strategy, I found that more extreme ones can be successful, too. For instance, in a 1 vs. 1 match, my opponents usually won because they almost instantly destroyed all of my ships in the very beginning. So I decided to further introduce the <strong>AggressiveStrategy</strong>, which is only applied in matched of two players. Following this strategy, all of my three initial ships immediately start chasing the enemy’s three ships. If they’re successful, the game is usually over after only a few turns. </p>
+<p>Finally I built the <strong>MiningStrategy</strong>. Goal is to maxmimize mining rate right in the beginning. My three ships are immediately docking at the nearest and largest (in terms of how many ships can dock at it) free planet and dock at it. New ships will dock at the same planet until it’s full. Doing so, I can quickly produce new ships which then, after the first planet is full, switch over to applying the <strong>BalancedStrategy</strong>. </p>
+<h2 id="Results"><a href="#Results" class="headerlink" title="Results"></a>Results</h2><p>Using the bot described above, the best rank I achieved in the leaderboard was <strong>250 of ~ 4500</strong> (top 6 %) and I’m still ambitious to get even better 😃.</p>
+<p>>&gt; <a href="https://github.com/n1try/halite-bot-java" target="_blank" rel="external">Source code on GitHub</a>. </p>
+
+  </div>
+</article>
+<a href="https://saythanks.io/to/n1try" style="background-image: none;" target="_blank"><img src="https://img.shields.io/badge/say-thanks-ff69b4.svg"></a>
+
+
+
+    </div>
+    
+      <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Blog</a></li>
+         
+          <li><a href="/articles/">Articles</a></li>
+         
+          <li><a href="/imprint/">Imprint</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#The-Game"><span class="toc-number">1.</span> <span class="toc-text">The Game</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#My-bot"><span class="toc-number">2.</span> <span class="toc-text">My bot</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Strategies"><span class="toc-number">3.</span> <span class="toc-text">Strategies</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Results"><span class="toc-number">4.</span> <span class="toc-text">Results</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://ferdinand-muetsch.de/halite-a-rule-based-ai-bot.html"><i class="fa fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://ferdinand-muetsch.de/halite-a-rule-based-ai-bot.html&text=Halite - A rule-based AI bot"><i class="fa fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://ferdinand-muetsch.de/halite-a-rule-based-ai-bot.html&title=Halite - A rule-based AI bot"><i class="fa fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://ferdinand-muetsch.de/halite-a-rule-based-ai-bot.html&is_video=false&description=Halite - A rule-based AI bot"><i class="fa fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Halite - A rule-based AI bot&body=Check out this article: https://ferdinand-muetsch.de/halite-a-rule-based-ai-bot.html"><i class="fa fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://ferdinand-muetsch.de/halite-a-rule-based-ai-bot.html&title=Halite - A rule-based AI bot"><i class="fa fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://ferdinand-muetsch.de/halite-a-rule-based-ai-bot.html&title=Halite - A rule-based AI bot"><i class="fa fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://ferdinand-muetsch.de/halite-a-rule-based-ai-bot.html&title=Halite - A rule-based AI bot"><i class="fa fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://ferdinand-muetsch.de/halite-a-rule-based-ai-bot.html&title=Halite - A rule-based AI bot"><i class="fa fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://ferdinand-muetsch.de/halite-a-rule-based-ai-bot.html&name=Halite - A rule-based AI bot&description="><i class="fa fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+      <ul>
+        <li id="toc"><a class="icon" href="#" onclick='$("#toc-footer").toggle();return false;'><i class="fa fa-list fa-lg" aria-hidden="true"></i> TOC</a></li>
+        <li id="share"><a class="icon" href="#" onclick='$("#share-footer").toggle();return false;'><i class="fa fa-share-alt fa-lg" aria-hidden="true"></i> Share</a></li>
+        <li id="top" style="display:none"><a class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a></li>
+        <li id="menu"><a class="icon" href="#" onclick='$("#nav-footer").toggle();return false;'><i class="fa fa-bars fa-lg" aria-hidden="true"></i> Menu</a></li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+    
+    <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2018 Ferdinand Mütsch
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Blog</a></li>
+         
+          <li><a href="/articles/">Articles</a></li>
+         
+          <li><a href="/imprint/">Imprint</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+</body>
+</html>
+<!-- styles -->
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+<link rel="stylesheet" href="/lib/meslo-LG/styles.css">
+<link rel="stylesheet" href="/lib/justified-gallery/justifiedGallery.min.css">
+
+
+<!-- jquery -->
+<script src="/lib/jquery/jquery.min.js"></script>
+<script src="/lib/justified-gallery/jquery.justifiedGallery.min.js"></script>
+<script src="/js/main.js"></script>
+<!-- Google Analytics -->
+
+    <script type="text/javascript">
+        (function(i,s,o,g,r,a,m) {i['GoogleAnalyticsObject']=r;i[r]=i[r]||function() {
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+        ga('create', 'UA-3922933-8', 'auto');
+        ga('send', 'pageview');
+    </script>
+
+<!-- Disqus Comments -->
+
+
