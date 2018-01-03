@@ -6,18 +6,18 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="HandheldFriendly" content="True">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <meta name="description" content="After having spent a considerable amount of time with it the last weekend, I wanted to make a short comment on Halite.io. Halite is a programming- and AI competition where people can write programs or">
+    <meta name="description" content="After having spent a considerable amount of time with it last weekend, I wanted to make a short comment on Halite.io. Halite is a programming- and AI competition where people can write programs or tra">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Halite - A rule-based AI bot">
 <meta property="og:url" content="https://ferdinand-muetsch.de/halite-a-rule-based-ai-bot.html">
 <meta property="og:site_name" content="Ferdinand Mütsch">
-<meta property="og:description" content="After having spent a considerable amount of time with it the last weekend, I wanted to make a short comment on Halite.io. Halite is a programming- and AI competition where people can write programs or">
+<meta property="og:description" content="After having spent a considerable amount of time with it last weekend, I wanted to make a short comment on Halite.io. Halite is a programming- and AI competition where people can write programs or tra">
 <meta property="og:image" content="https://ferdinand-muetsch.de/images/halite_game.png">
 <meta property="og:image" content="https://ferdinand-muetsch.de/images/halite_langs.png">
-<meta property="og:updated_time" content="2018-01-03T07:52:12.340Z">
+<meta property="og:updated_time" content="2018-01-03T08:06:58.753Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Halite - A rule-based AI bot">
-<meta name="twitter:description" content="After having spent a considerable amount of time with it the last weekend, I wanted to make a short comment on Halite.io. Halite is a programming- and AI competition where people can write programs or">
+<meta name="twitter:description" content="After having spent a considerable amount of time with it last weekend, I wanted to make a short comment on Halite.io. Halite is a programming- and AI competition where people can write programs or tra">
 <meta name="twitter:image" content="https://ferdinand-muetsch.de/images/halite_game.png">
     
     
@@ -139,7 +139,7 @@
   
 
   <div class="content" itemprop="articleBody">
-    <p>After having spent a considerable amount of time with it the last weekend, I wanted to make a short comment on <a href="https://halite.io" target="_blank" rel="external">Halite.io</a>. Halite is a programming- and AI competition where people can write programs or train algorithms to control a bot that plays in a virtual 2D game environment. There is a leaderboard to track how your bot competes with other players’ bots and you can watch a replay of every game your bot has played, which helps <em>debugging</em> your bot as well as figuring out other people’s strategies. Originally, I got aware of this challenge through a video by <a href="https://www.youtube.com/channel/UCfzlCWGWYyIQ0aLC5w48gBQ" target="_blank" rel="external">one of my favorite</a> YouTube channels and became slightly addicted from that moment on. </p>
+    <p>After having spent a considerable amount of time with it last weekend, I wanted to make a short comment on <a href="https://halite.io" target="_blank" rel="external">Halite.io</a>. Halite is a programming- and AI competition where people can write programs or train algorithms to control a bot that plays in a virtual 2D game environment. There is a leaderboard to track how your bot competes with other players’ bots and you can watch a replay of every game your bot has played, which helps <em>debugging</em> your bot as well as figuring out other people’s strategies. Originally, I got aware of this challenge through a video by <a href="https://www.youtube.com/channel/UCfzlCWGWYyIQ0aLC5w48gBQ" target="_blank" rel="external">one of my favorite</a> YouTube channels and became slightly addicted from that moment on. </p>
 <h2 id="The-Game"><a href="#The-Game" class="headerlink" title="The Game"></a>The Game</h2><p><img src="images/halite_game.png" alt=""></p>
 <p>While the complete rule set of Halite can be viewed in <a href="https://halite.io/learn-programming-challenge/" target="_blank" rel="external">their documentation</a>, I only want to explain very basics here. In Halite you play in a space scenario comprising <em>ships</em> and <em>planets</em>, while you (= your bot) controls your ships. A ship can do three actions: <em>move</em>, <em>dock</em> to or <em>undock</em> from a planet. The more ships you have docked at a planet, the faster you are <em>mining</em> the planet, which means to produce new ships. When two ships get close enough, they can fight and only the winner’s ship survives. The game is turn-based, so each of the up to four players’ programs are queried (by the game environment) for a list of moves for each of their ships in every turn. Input is the current game state (player- &amp; planet positions, ships’ health, ships’ current status, …) and output is a move for each ship. The final goal is to either completely dominate (= destroy every other players’ ships) or own the strongest ship fleet and the most planets after 300 turns. </p>
 <p>At the time of writing this article, the leaderboard comprises <strong>~ 4700 players</strong> from <strong>98 countries</strong>. Most of them are either university students or professionals, who have, in total, played <strong>10.9 million</strong> games. More interesting statistics can be found at the <a href="http://stats.halite.io:3000/public/dashboard/545ebc3c-4cdb-4940-acf1-e4d1332defac" target="_blank" rel="external">stats</a> page. </p>
