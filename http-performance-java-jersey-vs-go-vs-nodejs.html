@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="referrer" content="no-referrer">
+    <meta name="description" content="I developed a very basic benchmark suite to compare different HTTP server’s performance. It is inspired by arcadius&#x2F;java-rest-api-web-container-benchmark, but uses h2load instead of ab. I implemented">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Http performance Java (Jersey) vs. Go vs. NodeJS">
+<meta property="og:url" content="https://muetsch.io/http-performance-java-jersey-vs-go-vs-nodejs.html">
+<meta property="og:site_name" content="Ferdinand Mütsch">
+<meta property="og:description" content="I developed a very basic benchmark suite to compare different HTTP server’s performance. It is inspired by arcadius&#x2F;java-rest-api-web-container-benchmark, but uses h2load instead of ab. I implemented">
+<meta property="og:locale">
+<meta property="og:image" content="https://muetsch.io/images/benchmarks.svg">
+<meta property="og:image" content="https://muetsch.io/images/benchmarks2.svg">
+<meta property="article:published_time" content="2016-11-19T22:06:49.000Z">
+<meta property="article:modified_time" content="2020-10-30T20:05:40.287Z">
+<meta property="article:author" content="Ferdinand Mütsch">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://muetsch.io/images/benchmarks.svg">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/favicon.ico" sizes="192x192">
+          
+        
+        
+    
+    <!-- title -->
+    <title>Http performance Java (Jersey) vs. Go vs. NodeJS</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- rss -->
+    
+    
+
+    <!-- rel-me links -->
+    
+      
+        <link href="http://github.com/muety" rel="me">
+      
+        <link href="https://twitter.com/n2try" rel="me">
+      
+        <link href="mailto:ferdinand@muetsch.io" rel="me">
+      
+    
+
+    <!-- Webmention link -->
+    
+      <link href="https://webmention.io/muetsch.io/webmention" rel="webmention">
+    
+
+    
+      <link href="https://webmention.io/muetsch.io/xmlrpc" rel="pingback">
+    
+<meta name="generator" content="Hexo 5.2.0"><link rel="alternate" href="/rss2.xml" title="Ferdinand Mütsch" type="application/rss+xml">
+</head>
+
+<body>
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fa fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fa fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="window.scrollTo(0, 0)" style="display:none;"><i class="fa fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Blog</a></li>
+         
+          <li><a href="/imprint/">Imprint</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/caddy-a-modern-web-server-vs-nginx.html"><i class="fa fa-chevron-left" aria-hidden="true" onmouseover='toggleById("i-prev");' onmouseout='toggleById("i-prev");'></i></a></li>
+        
+        
+        <li><a class="icon" href="/http20-server-push-proxy.html"><i class="fa fa-chevron-right" aria-hidden="true" onmouseover='toggleById("i-next").toggleById();' onmouseout='toggleById("i-next");'></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="window.scrollTo(0,0)"><i class="fa fa-chevron-up" aria-hidden="true" onmouseover='toggleById("i-top");' onmouseout='toggleById("i-top");'></i></a></li>
+        <li><a class="icon" href="#"><i class="fa fa-share-alt" aria-hidden="true" onmouseover='toggleById("i-share");' onmouseout='toggleById("i-share");' onclick='toggleById("share");return false;'></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://muetsch.io/http-performance-java-jersey-vs-go-vs-nodejs.html"><i class="fa fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://muetsch.io/http-performance-java-jersey-vs-go-vs-nodejs.html&text=Http performance Java (Jersey) vs. Go vs. NodeJS"><i class="fa fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://muetsch.io/http-performance-java-jersey-vs-go-vs-nodejs.html&title=Http performance Java (Jersey) vs. Go vs. NodeJS"><i class="fa fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://muetsch.io/http-performance-java-jersey-vs-go-vs-nodejs.html&is_video=false&description=Http performance Java (Jersey) vs. Go vs. NodeJS"><i class="fa fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Http performance Java (Jersey) vs. Go vs. NodeJS&body=Check out this article: https://muetsch.io/http-performance-java-jersey-vs-go-vs-nodejs.html"><i class="fa fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://muetsch.io/http-performance-java-jersey-vs-go-vs-nodejs.html&title=Http performance Java (Jersey) vs. Go vs. NodeJS"><i class="fa fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://muetsch.io/http-performance-java-jersey-vs-go-vs-nodejs.html&title=Http performance Java (Jersey) vs. Go vs. NodeJS"><i class="fa fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://muetsch.io/http-performance-java-jersey-vs-go-vs-nodejs.html&title=Http performance Java (Jersey) vs. Go vs. NodeJS"><i class="fa fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://muetsch.io/http-performance-java-jersey-vs-go-vs-nodejs.html&title=Http performance Java (Jersey) vs. Go vs. NodeJS"><i class="fa fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://muetsch.io/http-performance-java-jersey-vs-go-vs-nodejs.html&name=Http performance Java (Jersey) vs. Go vs. NodeJS&description="><i class="fa fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Server-Implementations"><span class="toc-number">1.</span> <span class="toc-text">Server Implementations</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Setup"><span class="toc-number">2.</span> <span class="toc-text">Setup</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Test-parameters"><span class="toc-number">3.</span> <span class="toc-text">Test parameters</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Results"><span class="toc-number">4.</span> <span class="toc-text">Results</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Discussion"><span class="toc-number">5.</span> <span class="toc-text">Discussion</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#EDIT"><span class="toc-number">6.</span> <span class="toc-text">EDIT</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index width mx-auto px2 my4">
+        
+        <article class="h-entry post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <a href="https://muetsch.io/http-performance-java-jersey-vs-go-vs-nodejs.html" class="u-url">
+        <h1 class="posttitle p-name" itemprop="name headline" property="headline">
+            Http performance Java (Jersey) vs. Go vs. NodeJS
+        </h1>
+    </a>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" property="author" itemscope itemtype="http://schema.org/Person" vocab="http://schema.org/" typeof="Person">
+        <span itemprop="name" property="name" class="p-author h-card">Ferdinand Mütsch</span>
+      </span>
+      
+    <div class="postdate">
+        <time datetime="2016-11-19T22:06:49.000Z" class="dt-published" itemprop="datePublished" property="datePublished">2016-11-19</time>
+    </div>
+
+
+      
+
+
+      <!--
+      <div style="margin-top: 30px">
+        <a href="https://liberapay.com/muety/" target="_blank"
+          style="background-image: none; text-decoration: none;"><img
+            src="https://badges.fw-web.space/liberapay/receives/muety.svg?logo=liberapay&style=flat-square" alt="Liberapay"
+            style="height: auto !important;width: auto !important;"></a>
+      </div>
+      -->
+    </div>
+  </header>
+  
+  <div class="content e-content" itemprop="articleBody" property="articleBody">
+    <p>I developed a very basic benchmark suite to compare different HTTP server’s performance. It is inspired by <a target="_blank" rel="noopener" href="https://github.com/arcadius/java-rest-api-web-container-benchmark">arcadius/java-rest-api-web-container-benchmark</a>, but uses <a target="_blank" rel="noopener" href="https://github.com/nghttp2/nghttp2#benchmarking-tool">h2load</a> instead of <a target="_blank" rel="noopener" href="http://httpd.apache.org/docs/2.4/programs/ab.html">ab</a>.</p>
+<p>I implemented four very basic REST APIs with exactly one route each, which exposes a small, static todo list as JSON.</p>
+<h2 id="Server-Implementations"><a href="#Server-Implementations" class="headerlink" title="Server Implementations"></a>Server Implementations</h2><ul>
+<li><strong>Java:</strong> <a target="_blank" rel="noopener" href="http://jersey.java.net/">Jersey</a> with embedded <a target="_blank" rel="noopener" href="https://grizzly.java.net/">Grizzly</a></li>
+<li><strong>Go:</strong> Using plain <code>net/http</code> package</li>
+<li><strong>NodeJS:</strong> Using plain <code>http</code> package</li>
+<li><strong>NodeJS:</strong> Using de-facto standard <a target="_blank" rel="noopener" href="http://expressjs.com/">Express 4</a> framework</li>
+</ul>
+<h2 id="Setup"><a href="#Setup" class="headerlink" title="Setup"></a>Setup</h2><p>My machine, where the benchmark suite was executed on, has the following specifications.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">&#x3D;&#x3D;&#x3D;CPU:</span><br><span class="line">model name	: Intel(R) Core(TM) i5-3317U CPU @ 1.70GHz</span><br><span class="line">cpu cores	: 2</span><br><span class="line">model name	: Intel(R) Core(TM) i5-3317U CPU @ 1.70GHz</span><br><span class="line">cpu cores	: 2</span><br><span class="line">model name	: Intel(R) Core(TM) i5-3317U CPU @ 1.70GHz</span><br><span class="line">cpu cores	: 2</span><br><span class="line">model name	: Intel(R) Core(TM) i5-3317U CPU @ 1.70GHz</span><br><span class="line">cpu cores	: 2</span><br><span class="line"> </span><br><span class="line">&#x3D;&#x3D;&#x3D;RAM: </span><br><span class="line">             total       used       free     shared    buffers     cached</span><br><span class="line">Mem:          7.7G       6.3G       1.4G       412M       527M       2.4G</span><br><span class="line">-&#x2F;+ buffers&#x2F;cache:       3.3G       4.3G</span><br><span class="line">Swap:         5.6G         0B       5.6G</span><br><span class="line"></span><br><span class="line">&#x3D;&#x3D;&#x3D;Java version: </span><br><span class="line">java version &quot;1.8.0_101&quot;</span><br><span class="line">Java(TM) SE Runtime Environment (build 1.8.0_101-b13)</span><br><span class="line">Java HotSpot(TM) 64-Bit Server VM (build 25.101-b13, mixed mode)</span><br><span class="line"> </span><br><span class="line">&#x3D;&#x3D;&#x3D;OS: </span><br><span class="line">Linux ferdinand-notebook 3.16.0-4-amd64 #1 SMP Debian 3.16.36-1+deb8u2 (2016-10-19) x86_64 GNU&#x2F;Linux</span><br><span class="line"></span><br><span class="line">&#x3D;&#x3D;&#x3D;Node: </span><br><span class="line">v6.5.0</span><br><span class="line"></span><br><span class="line">&#x3D;&#x3D;&#x3D; Go:</span><br><span class="line">go version go1.7.3 linux&#x2F;amd64</span><br></pre></td></tr></table></figure>
+
+<h2 id="Test-parameters"><a href="#Test-parameters" class="headerlink" title="Test parameters"></a>Test parameters</h2><p>Basically there are three parameters to be varied for the benchmark.</p>
+<ul>
+<li>The <strong>number of total reqests</strong> to be performed against the API. I chose to set this to <strong>100,000</strong></li>
+<li>The <strong>number of concurrent</strong> client to make those requests. I chose to have <strong>32</strong> concurrent clients, each of them making 3,125 requests.</li>
+<li>The <strong>number of threads</strong> to be used by <em>h2load</em>. I set this parameter to four, corresponding to the number of logical CPU cores of my machine.</li>
+</ul>
+<h2 id="Results"><a href="#Results" class="headerlink" title="Results"></a>Results</h2><p>Running my <a target="_blank" rel="noopener" href="https://github.com/muety/http-server-benchmarks/blob/master/run-load.sh">benchmark script</a> delivered the following results.</p>
+<p><img src="images/benchmarks.svg"></p>
+<h2 id="Discussion"><a href="#Discussion" class="headerlink" title="Discussion"></a>Discussion</h2><p>First of all, please notice that this is definitely not a 100 % correct, scientifical evaluation. Rather it should give basic insights on the order of magnitute of the performance differences between different language’s HTTP servers.<br>As we can clearly see, Go is the fastest candidate among my test subjects. However, my implementation only utilized the plain, built-in http package without any custom ServeMux or any router or middleware on top of it. In a real-world application, one would most likely not operate on such a low level, but use frameworks like <a target="_blank" rel="noopener" href="http://iris-go.com/">Iris</a> on top, which add additional overhead.</p>
+<p>Second place is Java using Grizzly as an embedded server inside a Jersey application. The reason for me picking Grizzly was that it pointed out to be the fastest among the common servers in <a target="_blank" rel="noopener" href="http://menelic.com/2016/01/06/java-rest-api-benchmark-tomcat-vs-jetty-vs-grizzly-vs-undertow/">this benchmark</a>.</p>
+<p>Both of my Node implementations perform worst in this benchmark, whereas Express is even only as half as good as the plain http package. Evidently, it introduces quite an amount of overhead. However, one would most likely not implement an actual REST API without a higher-level framework like Express. Consequently, the Express benchmark is probably more representative. </p>
+<p>Conclusing I can say that I was pretty surprised about how large the differences between various servers are. Go is almost six times as fast as Node with Express, even though <a target="_blank" rel="noopener" href="https://raygun.com/blog/2016/06/node-performance/">Express still has a very great performance</a>.</p>
+<p>The full benchmark results as well as the suite’s source code can be found at my <a target="_blank" rel="noopener" href="https://github.com/muety/http-server-benchmarks">GitHub project</a>.</p>
+<h2 id="EDIT"><a href="#EDIT" class="headerlink" title="EDIT"></a>EDIT</h2><p>At January 1st 2017 I did some minor adjustments to my benchmark suite. A thoughtful reader has drawn my attention to the fact that my comparison was a little unfair in the way that Go’s net/http as well as Grizzly use as many threads as the host system provides CPU core by default, while Node doesn’t. Using Node’s <code>cluster</code> module I made both Node-based webservers use four listener threads, too and actually the results have improved by around 45 %. Furthermore I did an adjustment to the Jersey + Grizzly server by changing the <code>IOStrategy</code> from the default <code>WorkerThreadIOStrategy</code> to <code>SameThreadIOStrategy</code>, which brought around 10 % in this specific case, where we don’t have any blocking computations but only spit out static JSON. If you’re interested in leaarning more about different io strategies, refer to <a target="_blank" rel="noopener" href="https://grizzly.java.net/iostrategies.html">this official documentation page</a>. Here is my updated benchmark chart.</p>
+<p><img src="images/benchmarks2.svg"></p>
+
+  </div>
+</article>
+
+
+
+    </div>
+    
+      <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Blog</a></li>
+         
+          <li><a href="/imprint/">Imprint</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Server-Implementations"><span class="toc-number">1.</span> <span class="toc-text">Server Implementations</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Setup"><span class="toc-number">2.</span> <span class="toc-text">Setup</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Test-parameters"><span class="toc-number">3.</span> <span class="toc-text">Test parameters</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Results"><span class="toc-number">4.</span> <span class="toc-text">Results</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Discussion"><span class="toc-number">5.</span> <span class="toc-text">Discussion</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#EDIT"><span class="toc-number">6.</span> <span class="toc-text">EDIT</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://muetsch.io/http-performance-java-jersey-vs-go-vs-nodejs.html"><i class="fa fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://muetsch.io/http-performance-java-jersey-vs-go-vs-nodejs.html&text=Http performance Java (Jersey) vs. Go vs. NodeJS"><i class="fa fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://muetsch.io/http-performance-java-jersey-vs-go-vs-nodejs.html&title=Http performance Java (Jersey) vs. Go vs. NodeJS"><i class="fa fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://muetsch.io/http-performance-java-jersey-vs-go-vs-nodejs.html&is_video=false&description=Http performance Java (Jersey) vs. Go vs. NodeJS"><i class="fa fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Http performance Java (Jersey) vs. Go vs. NodeJS&body=Check out this article: https://muetsch.io/http-performance-java-jersey-vs-go-vs-nodejs.html"><i class="fa fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://muetsch.io/http-performance-java-jersey-vs-go-vs-nodejs.html&title=Http performance Java (Jersey) vs. Go vs. NodeJS"><i class="fa fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://muetsch.io/http-performance-java-jersey-vs-go-vs-nodejs.html&title=Http performance Java (Jersey) vs. Go vs. NodeJS"><i class="fa fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://muetsch.io/http-performance-java-jersey-vs-go-vs-nodejs.html&title=Http performance Java (Jersey) vs. Go vs. NodeJS"><i class="fa fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://muetsch.io/http-performance-java-jersey-vs-go-vs-nodejs.html&title=Http performance Java (Jersey) vs. Go vs. NodeJS"><i class="fa fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://muetsch.io/http-performance-java-jersey-vs-go-vs-nodejs.html&name=Http performance Java (Jersey) vs. Go vs. NodeJS&description="><i class="fa fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+      <ul>
+        <li id="toc"><a class="icon" href="#" onclick='toggleById("toc-footer")'><i class="fa fa-list fa-lg" aria-hidden="true"></i> TOC</a></li>
+        <li id="share"><a class="icon" href="#" onclick='toggleById("share-footer")'><i class="fa fa-share-alt fa-lg" aria-hidden="true"></i> Share</a></li>
+        <li id="top" style="display:none"><a class="icon" href="#" onclick="window.scrollTo(0,0)"><i class="fa fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a></li>
+        <li id="menu"><a class="icon" href="#" onclick='toggleById("nav-footer")'><i class="fa fa-bars fa-lg" aria-hidden="true"></i> Menu</a></li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+    
+    <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2021 Ferdinand Mütsch
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Blog</a></li>
+         
+          <li><a href="/imprint/">Imprint</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+</body>
+</html>
+<!-- styles -->
+
+<link rel="stylesheet" href="/lib/roboto/css/roboto.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+
+
+<script src="/js/main.js"></script>
+
+<!-- Google Analytics -->
+
+<!-- Disqus Comments -->
+
+

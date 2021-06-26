@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="referrer" content="no-referrer">
+    <meta name="description" content="Brief description of my setup to watch stock watch stock prices using Node-RED and Telegram">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Watching stock prices with Node-RED and Webhook2Telegram">
+<meta property="og:url" content="https://muetsch.io/watching-stock-prices-with-node-red-and-webhook2telegram.html">
+<meta property="og:site_name" content="Ferdinand Mütsch">
+<meta property="og:description" content="Brief description of my setup to watch stock watch stock prices using Node-RED and Telegram">
+<meta property="og:locale">
+<meta property="og:image" content="https://apps.muetsch.io/images/o:auto/rs,s:640?image=https://muetsch.io/images/nodered-flow.png">
+<meta property="og:image" content="https://apps.muetsch.io/images/o:auto?image=https://muetsch.io/images/nodered-flow2.png">
+<meta property="article:published_time" content="2020-11-30T20:08:47.000Z">
+<meta property="article:modified_time" content="2020-11-30T21:04:39.835Z">
+<meta property="article:author" content="Ferdinand Mütsch">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://apps.muetsch.io/images/o:auto/rs,s:640?image=https://muetsch.io/images/nodered-flow.png">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/favicon.ico" sizes="192x192">
+          
+        
+        
+    
+    <!-- title -->
+    <title>Watching stock prices with Node-RED and Webhook2Telegram</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- rss -->
+    
+    
+
+    <!-- rel-me links -->
+    
+      
+        <link href="http://github.com/muety" rel="me">
+      
+        <link href="https://twitter.com/n2try" rel="me">
+      
+        <link href="mailto:ferdinand@muetsch.io" rel="me">
+      
+    
+
+    <!-- Webmention link -->
+    
+      <link href="https://webmention.io/muetsch.io/webmention" rel="webmention">
+    
+
+    
+      <link href="https://webmention.io/muetsch.io/xmlrpc" rel="pingback">
+    
+<meta name="generator" content="Hexo 5.2.0"><link rel="alternate" href="/rss2.xml" title="Ferdinand Mütsch" type="application/rss+xml">
+</head>
+
+<body>
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fa fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fa fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="window.scrollTo(0, 0)" style="display:none;"><i class="fa fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Blog</a></li>
+         
+          <li><a href="/imprint/">Imprint</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/donating-for-a-good-cause.html"><i class="fa fa-chevron-left" aria-hidden="true" onmouseover='toggleById("i-prev");' onmouseout='toggleById("i-prev");'></i></a></li>
+        
+        
+        <li><a class="icon" href="/mastering-software-versioning-in-javascript-projects.html"><i class="fa fa-chevron-right" aria-hidden="true" onmouseover='toggleById("i-next").toggleById();' onmouseout='toggleById("i-next");'></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="window.scrollTo(0,0)"><i class="fa fa-chevron-up" aria-hidden="true" onmouseover='toggleById("i-top");' onmouseout='toggleById("i-top");'></i></a></li>
+        <li><a class="icon" href="#"><i class="fa fa-share-alt" aria-hidden="true" onmouseover='toggleById("i-share");' onmouseout='toggleById("i-share");' onclick='toggleById("share");return false;'></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://muetsch.io/watching-stock-prices-with-node-red-and-webhook2telegram.html"><i class="fa fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://muetsch.io/watching-stock-prices-with-node-red-and-webhook2telegram.html&text=Watching stock prices with Node-RED and Webhook2Telegram"><i class="fa fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://muetsch.io/watching-stock-prices-with-node-red-and-webhook2telegram.html&title=Watching stock prices with Node-RED and Webhook2Telegram"><i class="fa fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://muetsch.io/watching-stock-prices-with-node-red-and-webhook2telegram.html&is_video=false&description=Watching stock prices with Node-RED and Webhook2Telegram"><i class="fa fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Watching stock prices with Node-RED and Webhook2Telegram&body=Check out this article: https://muetsch.io/watching-stock-prices-with-node-red-and-webhook2telegram.html"><i class="fa fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://muetsch.io/watching-stock-prices-with-node-red-and-webhook2telegram.html&title=Watching stock prices with Node-RED and Webhook2Telegram"><i class="fa fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://muetsch.io/watching-stock-prices-with-node-red-and-webhook2telegram.html&title=Watching stock prices with Node-RED and Webhook2Telegram"><i class="fa fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://muetsch.io/watching-stock-prices-with-node-red-and-webhook2telegram.html&title=Watching stock prices with Node-RED and Webhook2Telegram"><i class="fa fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://muetsch.io/watching-stock-prices-with-node-red-and-webhook2telegram.html&title=Watching stock prices with Node-RED and Webhook2Telegram"><i class="fa fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://muetsch.io/watching-stock-prices-with-node-red-and-webhook2telegram.html&name=Watching stock prices with Node-RED and Webhook2Telegram&description="><i class="fa fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Motivation"><span class="toc-number">1.</span> <span class="toc-text">Motivation</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Flow"><span class="toc-number">2.</span> <span class="toc-text">Flow</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index width mx-auto px2 my4">
+        
+        <article class="h-entry post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <a href="https://muetsch.io/watching-stock-prices-with-node-red-and-webhook2telegram.html" class="u-url">
+        <h1 class="posttitle p-name" itemprop="name headline" property="headline">
+            Watching stock prices with Node-RED and Webhook2Telegram
+        </h1>
+    </a>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" property="author" itemscope itemtype="http://schema.org/Person" vocab="http://schema.org/" typeof="Person">
+        <span itemprop="name" property="name" class="p-author h-card">Ferdinand Mütsch</span>
+      </span>
+      
+    <div class="postdate">
+        <time datetime="2020-11-30T20:08:47.000Z" class="dt-published" itemprop="datePublished" property="datePublished">2020-11-30</time>
+    </div>
+
+
+      
+
+
+      <!--
+      <div style="margin-top: 30px">
+        <a href="https://liberapay.com/muety/" target="_blank"
+          style="background-image: none; text-decoration: none;"><img
+            src="https://badges.fw-web.space/liberapay/receives/muety.svg?logo=liberapay&style=flat-square" alt="Liberapay"
+            style="height: auto !important;width: auto !important;"></a>
+      </div>
+      -->
+    </div>
+  </header>
+  
+  <div class="content e-content" itemprop="articleBody" property="articleBody">
+    <h1 id="Motivation"><a href="#Motivation" class="headerlink" title="Motivation"></a>Motivation</h1><p>I hold a few stocks and I want to stay up-to-date about their quotations. However, I found it a bit tedious to actively log in to my portfolio every day to see what has changed. So I decided that I needed a notification system that <strong>automatically informs me about the relative price changes</strong> for all of my stocks once a day. Since I get all kinds of notifications – including security alerts from my server, updates in my GitHub feed, and more – via <a target="_blank" rel="noopener" href="https://telegram.org/">Telegram</a>, the choice to use that messenger for stock price notifications as well was quite obvious. Another obvious decision what have been to write a small Python script, that gets executed once a day via CRON. However, this time, <strong>I didn’t want to write any code</strong>, but instead try the flow-based visual programming tool Node-RED.</p>
+<p><a target="_blank" rel="noopener" href="https://nodered.org/">Node-RED</a> is a JavaScript-based platform to compose logical workflows through combining small, elementary building blocks together. Such building block, called nodes, include functionality to ingest data (e.g. via HTTP calls, MQTT subscriptions or reading a file), process it (e.g. string replacements, logical condition checks, aggregations, etc.) and output it in some way again (again, via HTTP, MQTT, files, etc.). Without writing any code, but only through configuring these elementary operations, whole programs can be built. While Node-RED is primarily used in IoT contexts, it basically serves any purpose. An even more comprehensive and “mature” alternative is, to some extent, <a target="_blank" rel="noopener" href="http://nifi.apache.org/">Apache NiFi</a>. However, while Node-RED is perfect for tinkering and small projects, NiFi focuses on scalability and Big-Data-like workloads.</p>
+<h1 id="Flow"><a href="#Flow" class="headerlink" title="Flow"></a>Flow</h1><p>The resulting flow, that fulfills the above mentioned purpose looks like this.</p>
+<p><a target="_blank" rel="noopener" href="https://apps.muetsch.io/images/o:auto?image=https://muetsch.io/images/nodered-flow.png"><img src="https://apps.muetsch.io/images/o:auto/rs,s:640?image=https://muetsch.io/images/nodered-flow.png"></a></p>
+<p>The flow’s entry node is an <code>inject</code> node, that holds a JSON array of all my stocks’ symbols (e.g. <code>QCOM</code>) and is automatically executed once every afternoon. The message is then split into multiple, individual messages, namely, one for every stock symbol. A <code>http request</code> node then calls the <a target="_blank" rel="noopener" href="https://www.alphavantage.co/">Alphavantage API</a> once for every message to fetch the intra-day price changes. Subsequently, the response is parsed, post-processed and formatted as Markdown. Eventually all individual messages are combined into one again before my <a target="_blank" rel="noopener" href="https://github.com/muety/webhook2telegram">Webhook2Telegram</a> bot is requested to send me the message as a last step.</p>
+<p><img src="https://apps.muetsch.io/images/o:auto?image=https://muetsch.io/images/nodered-flow2.png"></p>
+
+  </div>
+</article>
+
+
+
+    </div>
+    
+      <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Blog</a></li>
+         
+          <li><a href="/imprint/">Imprint</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Motivation"><span class="toc-number">1.</span> <span class="toc-text">Motivation</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Flow"><span class="toc-number">2.</span> <span class="toc-text">Flow</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://muetsch.io/watching-stock-prices-with-node-red-and-webhook2telegram.html"><i class="fa fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://muetsch.io/watching-stock-prices-with-node-red-and-webhook2telegram.html&text=Watching stock prices with Node-RED and Webhook2Telegram"><i class="fa fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://muetsch.io/watching-stock-prices-with-node-red-and-webhook2telegram.html&title=Watching stock prices with Node-RED and Webhook2Telegram"><i class="fa fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://muetsch.io/watching-stock-prices-with-node-red-and-webhook2telegram.html&is_video=false&description=Watching stock prices with Node-RED and Webhook2Telegram"><i class="fa fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Watching stock prices with Node-RED and Webhook2Telegram&body=Check out this article: https://muetsch.io/watching-stock-prices-with-node-red-and-webhook2telegram.html"><i class="fa fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://muetsch.io/watching-stock-prices-with-node-red-and-webhook2telegram.html&title=Watching stock prices with Node-RED and Webhook2Telegram"><i class="fa fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://muetsch.io/watching-stock-prices-with-node-red-and-webhook2telegram.html&title=Watching stock prices with Node-RED and Webhook2Telegram"><i class="fa fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://muetsch.io/watching-stock-prices-with-node-red-and-webhook2telegram.html&title=Watching stock prices with Node-RED and Webhook2Telegram"><i class="fa fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://muetsch.io/watching-stock-prices-with-node-red-and-webhook2telegram.html&title=Watching stock prices with Node-RED and Webhook2Telegram"><i class="fa fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://muetsch.io/watching-stock-prices-with-node-red-and-webhook2telegram.html&name=Watching stock prices with Node-RED and Webhook2Telegram&description="><i class="fa fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+      <ul>
+        <li id="toc"><a class="icon" href="#" onclick='toggleById("toc-footer")'><i class="fa fa-list fa-lg" aria-hidden="true"></i> TOC</a></li>
+        <li id="share"><a class="icon" href="#" onclick='toggleById("share-footer")'><i class="fa fa-share-alt fa-lg" aria-hidden="true"></i> Share</a></li>
+        <li id="top" style="display:none"><a class="icon" href="#" onclick="window.scrollTo(0,0)"><i class="fa fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a></li>
+        <li id="menu"><a class="icon" href="#" onclick='toggleById("nav-footer")'><i class="fa fa-bars fa-lg" aria-hidden="true"></i> Menu</a></li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+    
+    <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2021 Ferdinand Mütsch
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Blog</a></li>
+         
+          <li><a href="/imprint/">Imprint</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+</body>
+</html>
+<!-- styles -->
+
+<link rel="stylesheet" href="/lib/roboto/css/roboto.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+
+
+<script src="/js/main.js"></script>
+
+<!-- Google Analytics -->
+
+<!-- Disqus Comments -->
+
+

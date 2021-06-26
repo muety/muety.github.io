@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="referrer" content="no-referrer">
+    <meta name="description" content="As the topic of my bachelor’s thesis at the TECO and part of the ScaleIT research project I’ve designed and developed an IoT software platform with focus on uniformity, openess and ease of adoption to">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Design of a Linked Data-enabled Microservice Platform for the Industrial Internet of Things">
+<meta property="og:url" content="https://muetsch.io/design-of-a-linked-dataenabled-microservice-platform-for-the-industrial-internet-of-things.html">
+<meta property="og:site_name" content="Ferdinand Mütsch">
+<meta property="og:description" content="As the topic of my bachelor’s thesis at the TECO and part of the ScaleIT research project I’ve designed and developed an IoT software platform with focus on uniformity, openess and ease of adoption to">
+<meta property="og:locale">
+<meta property="og:image" content="https://apps.muetsch.io/images/o:auto?image=https://muetsch.io/images/thesis_mockup.png">
+<meta property="og:image" content="https://apps.muetsch.io/images/o:auto?image=https://muetsch.io/images/thesis_stack.png">
+<meta property="article:published_time" content="2016-10-19T21:03:07.000Z">
+<meta property="article:modified_time" content="2020-10-30T20:05:40.281Z">
+<meta property="article:author" content="Ferdinand Mütsch">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://apps.muetsch.io/images/o:auto?image=https://muetsch.io/images/thesis_mockup.png">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/favicon.ico" sizes="192x192">
+          
+        
+        
+    
+    <!-- title -->
+    <title>Design of a Linked Data-enabled Microservice Platform for the Industrial Internet of Things</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- rss -->
+    
+    
+
+    <!-- rel-me links -->
+    
+      
+        <link href="http://github.com/muety" rel="me">
+      
+        <link href="https://twitter.com/n2try" rel="me">
+      
+        <link href="mailto:ferdinand@muetsch.io" rel="me">
+      
+    
+
+    <!-- Webmention link -->
+    
+      <link href="https://webmention.io/muetsch.io/webmention" rel="webmention">
+    
+
+    
+      <link href="https://webmention.io/muetsch.io/xmlrpc" rel="pingback">
+    
+<meta name="generator" content="Hexo 5.2.0"><link rel="alternate" href="/rss2.xml" title="Ferdinand Mütsch" type="application/rss+xml">
+</head>
+
+<body>
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fa fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fa fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="window.scrollTo(0, 0)" style="display:none;"><i class="fa fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Blog</a></li>
+         
+          <li><a href="/imprint/">Imprint</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/how-to-load-yago-into-apache-jena-fuseki.html"><i class="fa fa-chevron-left" aria-hidden="true" onmouseover='toggleById("i-prev");' onmouseout='toggleById("i-prev");'></i></a></li>
+        
+        
+        <li><a class="icon" href="/webdevlistnet-the-developers-resource-collection.html"><i class="fa fa-chevron-right" aria-hidden="true" onmouseover='toggleById("i-next").toggleById();' onmouseout='toggleById("i-next");'></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="window.scrollTo(0,0)"><i class="fa fa-chevron-up" aria-hidden="true" onmouseover='toggleById("i-top");' onmouseout='toggleById("i-top");'></i></a></li>
+        <li><a class="icon" href="#"><i class="fa fa-share-alt" aria-hidden="true" onmouseover='toggleById("i-share");' onmouseout='toggleById("i-share");' onclick='toggleById("share");return false;'></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://muetsch.io/design-of-a-linked-dataenabled-microservice-platform-for-the-industrial-internet-of-things.html"><i class="fa fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://muetsch.io/design-of-a-linked-dataenabled-microservice-platform-for-the-industrial-internet-of-things.html&text=Design of a Linked Data-enabled Microservice Platform for the Industrial Internet of Things"><i class="fa fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://muetsch.io/design-of-a-linked-dataenabled-microservice-platform-for-the-industrial-internet-of-things.html&title=Design of a Linked Data-enabled Microservice Platform for the Industrial Internet of Things"><i class="fa fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://muetsch.io/design-of-a-linked-dataenabled-microservice-platform-for-the-industrial-internet-of-things.html&is_video=false&description=Design of a Linked Data-enabled Microservice Platform for the Industrial Internet of Things"><i class="fa fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Design of a Linked Data-enabled Microservice Platform for the Industrial Internet of Things&body=Check out this article: https://muetsch.io/design-of-a-linked-dataenabled-microservice-platform-for-the-industrial-internet-of-things.html"><i class="fa fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://muetsch.io/design-of-a-linked-dataenabled-microservice-platform-for-the-industrial-internet-of-things.html&title=Design of a Linked Data-enabled Microservice Platform for the Industrial Internet of Things"><i class="fa fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://muetsch.io/design-of-a-linked-dataenabled-microservice-platform-for-the-industrial-internet-of-things.html&title=Design of a Linked Data-enabled Microservice Platform for the Industrial Internet of Things"><i class="fa fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://muetsch.io/design-of-a-linked-dataenabled-microservice-platform-for-the-industrial-internet-of-things.html&title=Design of a Linked Data-enabled Microservice Platform for the Industrial Internet of Things"><i class="fa fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://muetsch.io/design-of-a-linked-dataenabled-microservice-platform-for-the-industrial-internet-of-things.html&title=Design of a Linked Data-enabled Microservice Platform for the Industrial Internet of Things"><i class="fa fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://muetsch.io/design-of-a-linked-dataenabled-microservice-platform-for-the-industrial-internet-of-things.html&name=Design of a Linked Data-enabled Microservice Platform for the Industrial Internet of Things&description="><i class="fa fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Abstract"><span class="toc-number">1.</span> <span class="toc-text">Abstract</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Tech-stack"><span class="toc-number">2.</span> <span class="toc-text">Tech stack</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index width mx-auto px2 my4">
+        
+        <article class="h-entry post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <a href="https://muetsch.io/design-of-a-linked-dataenabled-microservice-platform-for-the-industrial-internet-of-things.html" class="u-url">
+        <h1 class="posttitle p-name" itemprop="name headline" property="headline">
+            Design of a Linked Data-enabled Microservice Platform for the Industrial Internet of Things
+        </h1>
+    </a>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" property="author" itemscope itemtype="http://schema.org/Person" vocab="http://schema.org/" typeof="Person">
+        <span itemprop="name" property="name" class="p-author h-card">Ferdinand Mütsch</span>
+      </span>
+      
+    <div class="postdate">
+        <time datetime="2016-10-19T21:03:07.000Z" class="dt-published" itemprop="datePublished" property="datePublished">2016-10-19</time>
+    </div>
+
+
+      
+
+
+      <!--
+      <div style="margin-top: 30px">
+        <a href="https://liberapay.com/muety/" target="_blank"
+          style="background-image: none; text-decoration: none;"><img
+            src="https://badges.fw-web.space/liberapay/receives/muety.svg?logo=liberapay&style=flat-square" alt="Liberapay"
+            style="height: auto !important;width: auto !important;"></a>
+      </div>
+      -->
+    </div>
+  </header>
+  
+  <div class="content e-content" itemprop="articleBody" property="articleBody">
+    <p>As the topic of my bachelor’s thesis at the <a target="_blank" rel="noopener" href="http://teco.edu/">TECO</a> and part of the <a target="_blank" rel="noopener" href="https://scale-it.org/">ScaleIT</a> research project I’ve designed and developed an IoT software platform with focus on uniformity, openess and ease of adoption to tackle to problem of bringing flexible IT infrastructures to the industrial shopfloor.<br>Here’s my thesis’ abstract to get an idea of the topic.</p>
+<p><img src="https://apps.muetsch.io/images/o:auto?image=https://muetsch.io/images/thesis_mockup.png"></p>
+<h3 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h3><p>While recent trends towards highly digitized, smart factories entail substantial chances for manufacturing companies to boost their performance, flexibility and productivity, the industry commonly struggles to adopt suitable technology. One major problem is a lack of uniform, standardized solutions, which could be integrated to the shopfloor without the necessity of highly specialized technical expert knowledge and a large amount of planning and restructuring.\par<br>Addressing that problem, this work proposes an architecture design as well as a concrete implementation of a Internet Of Things software platform, which mainly focuses on technological uniformity and ease of adoption and usage. As a guideline, a real-world use case elaborated in cooperation with industry partners is presented. Further on, it is shown, how general purpose web technology can be combined advantageously with recent architectural-, operational- and cultural trends in software design, powerful machine-to-machine interaction techniques and common user experience concepts. In-depth thoughts on software structure, real-time communication, machine-to-machine interaction, uniform data integration and user experience are conducted to finally obtain a working proof-of-concept software alongside recommendations and best practices for adopting smart technology on the shopfloor. An eventual evaluation investigates the designed platform regarding both performance and suitability for particular real-world scenarios and recommends further endeavor to be conducted towards achieving an actual product. </p>
+<h3 id="Tech-stack"><a href="#Tech-stack" class="headerlink" title="Tech stack"></a>Tech stack</h3><p>We’ve used general-purpose web technology, Linked Data techniques, semantic hypermedia APIs with Hydra and state-of-the-art software development practices and cloud technology to fulfil our goal. We also picked up on the commonly understood UX concept of apps to abstract underlying technical details away from the end-user and created kind of an app store for on-shoploor purposes. </p>
+<p><img src="https://apps.muetsch.io/images/o:auto?image=https://muetsch.io/images/thesis_stack.png"></p>
+<p>My work is published at the <a target="_blank" rel="noopener" href="https://publikationen.bibliothek.kit.edu/1000061764">KITopen repository</a>.<br>If you got curious and are interested in more details or in case you have questions or criticism, please feel free to contact me!</p>
+
+  </div>
+</article>
+
+
+
+    </div>
+    
+      <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Blog</a></li>
+         
+          <li><a href="/imprint/">Imprint</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Abstract"><span class="toc-number">1.</span> <span class="toc-text">Abstract</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Tech-stack"><span class="toc-number">2.</span> <span class="toc-text">Tech stack</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://muetsch.io/design-of-a-linked-dataenabled-microservice-platform-for-the-industrial-internet-of-things.html"><i class="fa fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://muetsch.io/design-of-a-linked-dataenabled-microservice-platform-for-the-industrial-internet-of-things.html&text=Design of a Linked Data-enabled Microservice Platform for the Industrial Internet of Things"><i class="fa fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://muetsch.io/design-of-a-linked-dataenabled-microservice-platform-for-the-industrial-internet-of-things.html&title=Design of a Linked Data-enabled Microservice Platform for the Industrial Internet of Things"><i class="fa fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://muetsch.io/design-of-a-linked-dataenabled-microservice-platform-for-the-industrial-internet-of-things.html&is_video=false&description=Design of a Linked Data-enabled Microservice Platform for the Industrial Internet of Things"><i class="fa fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Design of a Linked Data-enabled Microservice Platform for the Industrial Internet of Things&body=Check out this article: https://muetsch.io/design-of-a-linked-dataenabled-microservice-platform-for-the-industrial-internet-of-things.html"><i class="fa fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://muetsch.io/design-of-a-linked-dataenabled-microservice-platform-for-the-industrial-internet-of-things.html&title=Design of a Linked Data-enabled Microservice Platform for the Industrial Internet of Things"><i class="fa fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://muetsch.io/design-of-a-linked-dataenabled-microservice-platform-for-the-industrial-internet-of-things.html&title=Design of a Linked Data-enabled Microservice Platform for the Industrial Internet of Things"><i class="fa fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://muetsch.io/design-of-a-linked-dataenabled-microservice-platform-for-the-industrial-internet-of-things.html&title=Design of a Linked Data-enabled Microservice Platform for the Industrial Internet of Things"><i class="fa fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://muetsch.io/design-of-a-linked-dataenabled-microservice-platform-for-the-industrial-internet-of-things.html&title=Design of a Linked Data-enabled Microservice Platform for the Industrial Internet of Things"><i class="fa fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://muetsch.io/design-of-a-linked-dataenabled-microservice-platform-for-the-industrial-internet-of-things.html&name=Design of a Linked Data-enabled Microservice Platform for the Industrial Internet of Things&description="><i class="fa fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+      <ul>
+        <li id="toc"><a class="icon" href="#" onclick='toggleById("toc-footer")'><i class="fa fa-list fa-lg" aria-hidden="true"></i> TOC</a></li>
+        <li id="share"><a class="icon" href="#" onclick='toggleById("share-footer")'><i class="fa fa-share-alt fa-lg" aria-hidden="true"></i> Share</a></li>
+        <li id="top" style="display:none"><a class="icon" href="#" onclick="window.scrollTo(0,0)"><i class="fa fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a></li>
+        <li id="menu"><a class="icon" href="#" onclick='toggleById("nav-footer")'><i class="fa fa-bars fa-lg" aria-hidden="true"></i> Menu</a></li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+    
+    <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2021 Ferdinand Mütsch
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Blog</a></li>
+         
+          <li><a href="/imprint/">Imprint</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+</body>
+</html>
+<!-- styles -->
+
+<link rel="stylesheet" href="/lib/roboto/css/roboto.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+
+
+<script src="/js/main.js"></script>
+
+<!-- Google Analytics -->
+
+<!-- Disqus Comments -->
+
+

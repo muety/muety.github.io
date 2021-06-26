@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="referrer" content="no-referrer">
+    <meta name="description" content="After hearing about Flutter by Matt Carroll and Abraham Williams at the SFHTML5 Meetup hosted by Google in San Francisco a few weeks ago, I decided to give it a try. I developed a small bookmark manag">
+<meta property="og:type" content="article">
+<meta property="og:title" content="What I like about developing apps with Flutter">
+<meta property="og:url" content="https://muetsch.io/what-i-like-about-developing-apps-with-flutter.html">
+<meta property="og:site_name" content="Ferdinand Mütsch">
+<meta property="og:description" content="After hearing about Flutter by Matt Carroll and Abraham Williams at the SFHTML5 Meetup hosted by Google in San Francisco a few weeks ago, I decided to give it a try. I developed a small bookmark manag">
+<meta property="og:locale">
+<meta property="article:published_time" content="2019-03-11T07:45:20.000Z">
+<meta property="article:modified_time" content="2020-10-30T20:05:40.290Z">
+<meta property="article:author" content="Ferdinand Mütsch">
+<meta name="twitter:card" content="summary">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/favicon.ico" sizes="192x192">
+          
+        
+        
+    
+    <!-- title -->
+    <title>What I like about developing apps with Flutter</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- rss -->
+    
+    
+
+    <!-- rel-me links -->
+    
+      
+        <link href="http://github.com/muety" rel="me">
+      
+        <link href="https://twitter.com/n2try" rel="me">
+      
+        <link href="mailto:ferdinand@muetsch.io" rel="me">
+      
+    
+
+    <!-- Webmention link -->
+    
+      <link href="https://webmention.io/muetsch.io/webmention" rel="webmention">
+    
+
+    
+      <link href="https://webmention.io/muetsch.io/xmlrpc" rel="pingback">
+    
+<meta name="generator" content="Hexo 5.2.0"><link rel="alternate" href="/rss2.xml" title="Ferdinand Mütsch" type="application/rss+xml">
+</head>
+
+<body>
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fa fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fa fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="window.scrollTo(0, 0)" style="display:none;"><i class="fa fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Blog</a></li>
+         
+          <li><a href="/imprint/">Imprint</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/exploratory-analysis-on-github-data.html"><i class="fa fa-chevron-left" aria-hidden="true" onmouseover='toggleById("i-prev");' onmouseout='toggleById("i-prev");'></i></a></li>
+        
+        
+        <li><a class="icon" href="/how-to-receive-sharing-intents-in-flutter.html"><i class="fa fa-chevron-right" aria-hidden="true" onmouseover='toggleById("i-next").toggleById();' onmouseout='toggleById("i-next");'></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="window.scrollTo(0,0)"><i class="fa fa-chevron-up" aria-hidden="true" onmouseover='toggleById("i-top");' onmouseout='toggleById("i-top");'></i></a></li>
+        <li><a class="icon" href="#"><i class="fa fa-share-alt" aria-hidden="true" onmouseover='toggleById("i-share");' onmouseout='toggleById("i-share");' onclick='toggleById("share");return false;'></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://muetsch.io/what-i-like-about-developing-apps-with-flutter.html"><i class="fa fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://muetsch.io/what-i-like-about-developing-apps-with-flutter.html&text=What I like about developing apps with Flutter"><i class="fa fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://muetsch.io/what-i-like-about-developing-apps-with-flutter.html&title=What I like about developing apps with Flutter"><i class="fa fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://muetsch.io/what-i-like-about-developing-apps-with-flutter.html&is_video=false&description=What I like about developing apps with Flutter"><i class="fa fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=What I like about developing apps with Flutter&body=Check out this article: https://muetsch.io/what-i-like-about-developing-apps-with-flutter.html"><i class="fa fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://muetsch.io/what-i-like-about-developing-apps-with-flutter.html&title=What I like about developing apps with Flutter"><i class="fa fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://muetsch.io/what-i-like-about-developing-apps-with-flutter.html&title=What I like about developing apps with Flutter"><i class="fa fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://muetsch.io/what-i-like-about-developing-apps-with-flutter.html&title=What I like about developing apps with Flutter"><i class="fa fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://muetsch.io/what-i-like-about-developing-apps-with-flutter.html&title=What I like about developing apps with Flutter"><i class="fa fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://muetsch.io/what-i-like-about-developing-apps-with-flutter.html&name=What I like about developing apps with Flutter&description="><i class="fa fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#What-is-Flutter"><span class="toc-number">1.</span> <span class="toc-text">What is Flutter?</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Pros"><span class="toc-number">2.</span> <span class="toc-text">Pros</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#What-I-DO-like-about-Dart"><span class="toc-number">2.1.</span> <span class="toc-text">What I DO like about Dart</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#What-I-DO-like-about-Flutter"><span class="toc-number">2.2.</span> <span class="toc-text">What I DO like about Flutter</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Cons"><span class="toc-number">3.</span> <span class="toc-text">Cons</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#What-I-DO-NOT-like-about-Dart"><span class="toc-number">3.1.</span> <span class="toc-text">What I DO NOT like about Dart</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#What-I-DO-NOT-like-about-Flutter"><span class="toc-number">3.2.</span> <span class="toc-text">What I DO NOT like about Flutter</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Where-to-get-started"><span class="toc-number">4.</span> <span class="toc-text">Where to get started?</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index width mx-auto px2 my4">
+        
+        <article class="h-entry post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <a href="https://muetsch.io/what-i-like-about-developing-apps-with-flutter.html" class="u-url">
+        <h1 class="posttitle p-name" itemprop="name headline" property="headline">
+            What I like about developing apps with Flutter
+        </h1>
+    </a>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" property="author" itemscope itemtype="http://schema.org/Person" vocab="http://schema.org/" typeof="Person">
+        <span itemprop="name" property="name" class="p-author h-card">Ferdinand Mütsch</span>
+      </span>
+      
+    <div class="postdate">
+        <time datetime="2019-03-11T07:45:20.000Z" class="dt-published" itemprop="datePublished" property="datePublished">2019-03-11</time>
+    </div>
+
+
+      
+
+
+      <!--
+      <div style="margin-top: 30px">
+        <a href="https://liberapay.com/muety/" target="_blank"
+          style="background-image: none; text-decoration: none;"><img
+            src="https://badges.fw-web.space/liberapay/receives/muety.svg?logo=liberapay&style=flat-square" alt="Liberapay"
+            style="height: auto !important;width: auto !important;"></a>
+      </div>
+      -->
+    </div>
+  </header>
+  
+  <div class="content e-content" itemprop="articleBody" property="articleBody">
+    <p>After hearing about <a target="_blank" rel="noopener" href="https://flutter.dev/">Flutter</a> by <a target="_blank" rel="noopener" href="https://twitter.com/@flttry">Matt Carroll</a> and <a target="_blank" rel="noopener" href="https://twitter.com/abraham">Abraham Williams</a> at the <a target="_blank" rel="noopener" href="https://www.meetup.com/de-DE/sfhtml5/events/256523273/">SFHTML5 Meetup</a> hosted by Google in San Francisco a few weeks ago, I decided to give it a try. I developed a small <a target="_blank" rel="noopener" href="https://github.com/muety/anchr-android">bookmark manager</a> app for Android while attempting to learn Flutter.</p>
+<h1 id="What-is-Flutter"><a href="#What-is-Flutter" class="headerlink" title="What is Flutter?"></a>What is Flutter?</h1><p>Flutter is an open-source framework for developing cross-platform mobile apps. Or in their own words it …</p>
+<blockquote>
+<p>[…] allows you to build beautiful native apps on iOS and Android from a single codebase. </p>
+</blockquote>
+<p>“Cross-platform” means that you develop an app that can run on multiple platforms, in this case, Android, iOS and (in the future) also <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Google_Fuchsia">Fuchsia</a>. Traditionally, you would have to write the same app multiple times, e.g. once in Java for Android and a second time in Swift for iOS. This is a pain for developers, obviously, and Flutter tries to overcome it. </p>
+<p>There are already several approaches out there, trying to solve cross-platform mobile development. They include <strong>hybrid</strong> app frameworks like <a target="_blank" rel="noopener" href="https://ionicframework.com/">Ionic</a> and <a target="_blank" rel="noopener" href="https://cordova.apache.org/">Cordova</a> as well as <strong>native cross-platform</strong> frameworks like <a target="_blank" rel="noopener" href="https://facebook.github.io/react-native/">React Native</a>, <a target="_blank" rel="noopener" href="https://www.nativescript.org/">NativeScript</a> and <a target="_blank" rel="noopener" href="https://visualstudio.microsoft.com/xamarin/">Xamarin</a>.</p>
+<p>By the way, there is is a very interesting comparison of <a target="_blank" rel="noopener" href="https://www.codementor.io/fmcorz/react-native-vs-ionic-du1087rsw">Ionic vs. React Native</a>. </p>
+<p>While hybrid frameworks basically render a website to the device’s screen and native frameworks translate TypeScript (or C#) code into native iOS / Android components, Flutter <a target="_blank" rel="noopener" href="https://buildflutter.com/how-flutter-works/">“works more like a game engine”</a>. It has an extremely efficient engine that layouts widgets and renders them to a canvas. Therefore it usually a lot faster and less laggy than hybrid frameworks. </p>
+<p>Unlike most other cross-platform frameworks, where you usually program in JavaScript (or C# in the case of Xamarin), Flutter relies on <a target="_blank" rel="noopener" href="https://dartlang.org/">Dart</a>, created by Google. Consequently, in order to learn Flutter, you would usually not only have to learn the framework itself, but also a new programming language. This may seem like a high entry barrier, but it actually is not.</p>
+<h1 id="Pros"><a href="#Pros" class="headerlink" title="Pros"></a>Pros</h1><h2 id="What-I-DO-like-about-Dart"><a href="#What-I-DO-like-about-Dart" class="headerlink" title="What I DO like about Dart"></a>What I <strong>DO</strong> like about Dart</h2><ol>
+<li><strong>It looks familiar.</strong> Dart really just feels like Java and JavaScript having a baby. It does not follow any exotic paradigms. Instead, if you know Java and JavaScript, learning Dart is quite easy since there are only very few new concepts and syntaxes.<br>For instance, it is <strong>object-oriented</strong> and has a proper inheritance system, similar to Java. In addition, it has a <strong>static typing system</strong>, including generics, but with <strong>optional type declarations</strong>, similar to Scala.<br>JavaScript people will find well-known concepts as well, such as <strong>futures, generators and <code>async / await</code></strong>.<br>Similar to Scala’s <em>traits</em>, Dart even supports a kind of <strong>multiple class inheritance</strong> using <em>mixins</em>, which is quite handy once you get used to it. Having a Java background another cool new thing in Dart is <strong>factory constructors</strong>.</li>
+<li><strong>It feels consistent.</strong> What I did not like about TypeScript is that sometimes it just feels a bit hacky, e.g. when third-party typings for a certain library are buggy or even missing. In my opinion, this originates in TypeScript’s approach of trying to extend an existing programming language with whole new functionality. While TypeScripts is still a great language, Dart just feels more consistent in its whole. It was designed completely from scratch with all the above concepts in mind and since it is quite young, it still feels clean and minimalistic. However, since it is not that widely used, yet, the ecosystem (including tooling, libraries, …) is way smaller compared to JavaScript or native Android / iOS.</li>
+<li><strong>It is multi-purpose.</strong> Dart can not only be used for mobile development but is quite generic. You can use it to write your backend and there are transpilers to use it in the browser as well. Since frameworks like Angular start to have Dart support (see <a target="_blank" rel="noopener" href="https://webdev.dartlang.org/angular/">AngularDart</a>), I feel like it could <a target="_blank" rel="noopener" href="https://medium.com/@mswehli/why-dart-is-the-language-to-learn-of-2018-e5fa12adb6c1">gain popularity</a> in the next years. </li>
+<li><strong>It has named parameters 😃.</strong> They exist in many programming languages, including Python and Scala and I really got used to them. In my opinion, code gets a lot cleaner with named parameters. </li>
+</ol>
+<h2 id="What-I-DO-like-about-Flutter"><a href="#What-I-DO-like-about-Flutter" class="headerlink" title="What I DO like about Flutter"></a>What I <strong>DO</strong> like about Flutter</h2><ol>
+<li><strong>Easy layouting.</strong> Dart follows the paradigm that <em>“everything is a widget”</em>. So instead of defining layouts with XML (like in Android) or with HTML + CSS (like in the web), everything is done programmatically. The way you build components is by recursively nesting widgets into other widgets. Such might include UI components like a <code>TextView</code> and <code>FloatingActionButton</code> or more abstract things like a <code>GestureDetector</code> or <code>Padding</code>. The structure is always the same and that makes UI composition easy to me.</li>
+<li><strong>Tons of built-in components.</strong> Flutter comes with a giant <a target="_blank" rel="noopener" href="https://flutter.dev/docs/development/ui/widgets">catalog of widgets</a> for layouting, styling, animations and UI components (all of which perfectly follow Material design). So far I could find everything I needed in the widget catalog without having to use any poorly-maintained third-party libs.</li>
+<li><strong>It feels so real.</strong> Often times, hybrid apps still do not completely feel like a real app, even if they are using Material design libraries etc. Maybe the navigation drawer’s sliding animation is too rough, a page transition is slightly laggy or the text style just does not look quite right. At least this is what I experienced with Ionic. With Flutter, however, I could not tell the difference compared to a truly native app. Everything is super fast, smooth and pixel-perfect. </li>
+<li><strong>It is future-proof.</strong> Google is pushing Flutter really hard as they keep posting blog articles and developer videos about it. I feel like they really want people to adopt it, which might relate to their development on Fuchsia. No matter whether or not they are planning to <a target="_blank" rel="noopener" href="https://www.reddit.com/r/androiddev/comments/6aga8e/in_your_opinion_will_google_fuchsia_replace/">replace Android with Fuchsia</a> some day, Flutter is definitely a good thing to know.</li>
+<li><strong>Good tooling.</strong> Although the ecosystem around Flutter is not that big, yet, the built-in tooling is great. Flutter comes with an intuitive <strong>CLI</strong> and is well integrated with my favorite editors IntelliJ (<strong>Android Studio</strong>) and <strong>Visual Studio Code</strong>. </li>
+<li><strong>Open-Source.</strong> I love open-source, so I am glad that Flutter is completely open to the community and available on <a target="_blank" rel="noopener" href="https://github.com/flutter/flutter">GitHub</a>. </li>
+</ol>
+<h1 id="Cons"><a href="#Cons" class="headerlink" title="Cons"></a>Cons</h1><h2 id="What-I-DO-NOT-like-about-Dart"><a href="#What-I-DO-NOT-like-about-Dart" class="headerlink" title="What I DO NOT like about Dart"></a>What I <strong>DO NOT</strong> like about Dart</h2><ol>
+<li><strong>No functional APIs.</strong> I do not expect a functional programming language like Scala, but since I really got used to Java 8’s stream API, I am a bit sad that Dart has almost no functional APIs. In my opinion, code gets a lot cleaner with such.</li>
+</ol>
+<h2 id="What-I-DO-NOT-like-about-Flutter"><a href="#What-I-DO-NOT-like-about-Flutter" class="headerlink" title="What I DO NOT like about Flutter"></a>What I <strong>DO NOT</strong> like about Flutter</h2><ol>
+<li><strong>Is it truly cross-platform?</strong> This is rather a question than something I strictly do not like. So far, I only developed an Android app with Flutter and I wonder whether it is actually possible to use the exact same code for iOS. Sometimes you will still need to access native APIs, e.g. when attempting to <a href="https://muetsch.io/how-to-receive-sharing-intents-in-flutter.html">receive a sharing intent</a>, or have varying design elements. So although I am not totally sure about this, I would assume that for large projects you would still need to write two separate Flutter apps for Android and iOS, but have the ability to reuse large parts of the code in form of a shared library. </li>
+<li>*<em>Apps are large * .*</em> Maybe this will be improved in the future, but right now Flutter apps are pretty large. My <a target="_blank" rel="noopener" href="https://github.com/muety/anchr-android">simple bookmark manager</a> is 46 MB in size when installed.</li>
+</ol>
+<h1 id="Where-to-get-started"><a href="#Where-to-get-started" class="headerlink" title="Where to get started?"></a>Where to get started?</h1><p>If you want to start learning Flutter, I would recommend the following. </p>
+<ol>
+<li>Take the <a target="_blank" rel="noopener" href="https://www.dartlang.org/guides/language/language-tour">Tour of Dart</a> and get familiar with Dart’s syntax and concepts.</li>
+<li>Walk through <a target="_blank" rel="noopener" href="https://bendyworks.com/blog/a-month-of-flutter">A month of Flutter</a> to start building a real-world Flutter app step-by-step.</li>
+</ol>
+<p>Have fun and happy coding! 🤓</p>
+<p>***** As it turned out, this is actually not a valid point of criticism, since I had generated the app in debug mode. When building a release, the total size is only 6.4 MB.</p>
+
+  </div>
+</article>
+
+
+
+    </div>
+    
+      <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Blog</a></li>
+         
+          <li><a href="/imprint/">Imprint</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#What-is-Flutter"><span class="toc-number">1.</span> <span class="toc-text">What is Flutter?</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Pros"><span class="toc-number">2.</span> <span class="toc-text">Pros</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#What-I-DO-like-about-Dart"><span class="toc-number">2.1.</span> <span class="toc-text">What I DO like about Dart</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#What-I-DO-like-about-Flutter"><span class="toc-number">2.2.</span> <span class="toc-text">What I DO like about Flutter</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Cons"><span class="toc-number">3.</span> <span class="toc-text">Cons</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#What-I-DO-NOT-like-about-Dart"><span class="toc-number">3.1.</span> <span class="toc-text">What I DO NOT like about Dart</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#What-I-DO-NOT-like-about-Flutter"><span class="toc-number">3.2.</span> <span class="toc-text">What I DO NOT like about Flutter</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Where-to-get-started"><span class="toc-number">4.</span> <span class="toc-text">Where to get started?</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://muetsch.io/what-i-like-about-developing-apps-with-flutter.html"><i class="fa fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://muetsch.io/what-i-like-about-developing-apps-with-flutter.html&text=What I like about developing apps with Flutter"><i class="fa fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://muetsch.io/what-i-like-about-developing-apps-with-flutter.html&title=What I like about developing apps with Flutter"><i class="fa fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://muetsch.io/what-i-like-about-developing-apps-with-flutter.html&is_video=false&description=What I like about developing apps with Flutter"><i class="fa fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=What I like about developing apps with Flutter&body=Check out this article: https://muetsch.io/what-i-like-about-developing-apps-with-flutter.html"><i class="fa fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://muetsch.io/what-i-like-about-developing-apps-with-flutter.html&title=What I like about developing apps with Flutter"><i class="fa fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://muetsch.io/what-i-like-about-developing-apps-with-flutter.html&title=What I like about developing apps with Flutter"><i class="fa fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://muetsch.io/what-i-like-about-developing-apps-with-flutter.html&title=What I like about developing apps with Flutter"><i class="fa fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://muetsch.io/what-i-like-about-developing-apps-with-flutter.html&title=What I like about developing apps with Flutter"><i class="fa fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://muetsch.io/what-i-like-about-developing-apps-with-flutter.html&name=What I like about developing apps with Flutter&description="><i class="fa fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+      <ul>
+        <li id="toc"><a class="icon" href="#" onclick='toggleById("toc-footer")'><i class="fa fa-list fa-lg" aria-hidden="true"></i> TOC</a></li>
+        <li id="share"><a class="icon" href="#" onclick='toggleById("share-footer")'><i class="fa fa-share-alt fa-lg" aria-hidden="true"></i> Share</a></li>
+        <li id="top" style="display:none"><a class="icon" href="#" onclick="window.scrollTo(0,0)"><i class="fa fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a></li>
+        <li id="menu"><a class="icon" href="#" onclick='toggleById("nav-footer")'><i class="fa fa-bars fa-lg" aria-hidden="true"></i> Menu</a></li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+    
+    <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2021 Ferdinand Mütsch
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Blog</a></li>
+         
+          <li><a href="/imprint/">Imprint</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+</body>
+</html>
+<!-- styles -->
+
+<link rel="stylesheet" href="/lib/roboto/css/roboto.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+
+
+<script src="/js/main.js"></script>
+
+<!-- Google Analytics -->
+
+<!-- Disqus Comments -->
+
+

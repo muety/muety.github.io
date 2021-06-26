@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="referrer" content="no-referrer">
+    <meta name="description" content="IntroductionThis is a short, summarizing write-up about the topics of my Master’s thesis, published in February 2020 in cooperation with Prof. Dr. Sax, M.Sc. Martin Sommer and M.Sc. Marco Stang at th">
+<meta property="og:type" content="article">
+<meta property="og:title" content="TalkyCars: A Distributed Software Platform for Cooperative Perception">
+<meta property="og:url" content="https://muetsch.io/talkycars-a-distributed-software-platform-for-cooperative-perception.html">
+<meta property="og:site_name" content="Ferdinand Mütsch">
+<meta property="og:description" content="IntroductionThis is a short, summarizing write-up about the topics of my Master’s thesis, published in February 2020 in cooperation with Prof. Dr. Sax, M.Sc. Martin Sommer and M.Sc. Marco Stang at th">
+<meta property="og:locale">
+<meta property="og:image" content="https://apps.muetsch.io/images/o:auto?image=https://muetsch.io/images/talkycars9.png">
+<meta property="og:image" content="https://apps.muetsch.io/images/o:auto?image=https://muetsch.io/images/nloss_2.png">
+<meta property="og:image" content="https://apps.muetsch.io/images/o:auto?image=https://muetsch.io/images/nloss_3.png">
+<meta property="og:image" content="https://apps.muetsch.io/images/o:auto?image=https://muetsch.io/images/talkycars2.png">
+<meta property="og:image" content="https://apps.muetsch.io/images/o:auto?image=https://muetsch.io/images/quadkeys.jpg">
+<meta property="og:image" content="https://apps.muetsch.io/images/o:auto?image=https://muetsch.io/images/talkycars3.png">
+<meta property="og:image" content="https://apps.muetsch.io/images/o:auto?image=https://muetsch.io/images/talkycars4.png">
+<meta property="og:image" content="https://apps.muetsch.io/images/o:auto?image=https://muetsch.io/images/talkycars5.png">
+<meta property="og:image" content="https://apps.muetsch.io/images/o:auto/rs,s:400?image=https://muetsch.io/images/talkycars6.png">
+<meta property="og:image" content="https://apps.muetsch.io/images/o:auto?image=https://muetsch.io/images/talkycars7.png">
+<meta property="og:image" content="https://apps.muetsch.io/images/o:auto?image=https://muetsch.io/images/talkycars8.png">
+<meta property="article:published_time" content="2020-09-11T07:24:31.000Z">
+<meta property="article:modified_time" content="2020-10-30T20:05:40.285Z">
+<meta property="article:author" content="Ferdinand Mütsch">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://apps.muetsch.io/images/o:auto?image=https://muetsch.io/images/talkycars9.png">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/favicon.ico" sizes="192x192">
+          
+        
+        
+    
+    <!-- title -->
+    <title>TalkyCars: A Distributed Software Platform for Cooperative Perception</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- rss -->
+    
+    
+
+    <!-- rel-me links -->
+    
+      
+        <link href="http://github.com/muety" rel="me">
+      
+        <link href="https://twitter.com/n2try" rel="me">
+      
+        <link href="mailto:ferdinand@muetsch.io" rel="me">
+      
+    
+
+    <!-- Webmention link -->
+    
+      <link href="https://webmention.io/muetsch.io/webmention" rel="webmention">
+    
+
+    
+      <link href="https://webmention.io/muetsch.io/xmlrpc" rel="pingback">
+    
+<meta name="generator" content="Hexo 5.2.0"><link rel="alternate" href="/rss2.xml" title="Ferdinand Mütsch" type="application/rss+xml">
+</head>
+
+<body>
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fa fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fa fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="window.scrollTo(0, 0)" style="display:none;"><i class="fa fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Blog</a></li>
+         
+          <li><a href="/imprint/">Imprint</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/pgp-encrypted-personal-e-mail-inbox.html"><i class="fa fa-chevron-left" aria-hidden="true" onmouseover='toggleById("i-prev");' onmouseout='toggleById("i-prev");'></i></a></li>
+        
+        
+        <li><a class="icon" href="/modern-reactive-web-apis-with-graphql-go-and-server-sent-events-part-2.html"><i class="fa fa-chevron-right" aria-hidden="true" onmouseover='toggleById("i-next").toggleById();' onmouseout='toggleById("i-next");'></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="window.scrollTo(0,0)"><i class="fa fa-chevron-up" aria-hidden="true" onmouseover='toggleById("i-top");' onmouseout='toggleById("i-top");'></i></a></li>
+        <li><a class="icon" href="#"><i class="fa fa-share-alt" aria-hidden="true" onmouseover='toggleById("i-share");' onmouseout='toggleById("i-share");' onclick='toggleById("share");return false;'></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://muetsch.io/talkycars-a-distributed-software-platform-for-cooperative-perception.html"><i class="fa fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://muetsch.io/talkycars-a-distributed-software-platform-for-cooperative-perception.html&text=TalkyCars: A Distributed Software Platform for Cooperative Perception"><i class="fa fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://muetsch.io/talkycars-a-distributed-software-platform-for-cooperative-perception.html&title=TalkyCars: A Distributed Software Platform for Cooperative Perception"><i class="fa fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://muetsch.io/talkycars-a-distributed-software-platform-for-cooperative-perception.html&is_video=false&description=TalkyCars: A Distributed Software Platform for Cooperative Perception"><i class="fa fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=TalkyCars: A Distributed Software Platform for Cooperative Perception&body=Check out this article: https://muetsch.io/talkycars-a-distributed-software-platform-for-cooperative-perception.html"><i class="fa fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://muetsch.io/talkycars-a-distributed-software-platform-for-cooperative-perception.html&title=TalkyCars: A Distributed Software Platform for Cooperative Perception"><i class="fa fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://muetsch.io/talkycars-a-distributed-software-platform-for-cooperative-perception.html&title=TalkyCars: A Distributed Software Platform for Cooperative Perception"><i class="fa fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://muetsch.io/talkycars-a-distributed-software-platform-for-cooperative-perception.html&title=TalkyCars: A Distributed Software Platform for Cooperative Perception"><i class="fa fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://muetsch.io/talkycars-a-distributed-software-platform-for-cooperative-perception.html&title=TalkyCars: A Distributed Software Platform for Cooperative Perception"><i class="fa fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://muetsch.io/talkycars-a-distributed-software-platform-for-cooperative-perception.html&name=TalkyCars: A Distributed Software Platform for Cooperative Perception&description="><i class="fa fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Introduction"><span class="toc-number">1.</span> <span class="toc-text">Introduction</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Citation-BibTeX"><span class="toc-number">2.</span> <span class="toc-text">Citation (BibTeX)</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Motivation"><span class="toc-number">3.</span> <span class="toc-text">Motivation</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Cooperative-Perception"><span class="toc-number">4.</span> <span class="toc-text">Cooperative Perception</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Approach"><span class="toc-number">5.</span> <span class="toc-text">Approach</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Environment-Modeling"><span class="toc-number">5.1.</span> <span class="toc-text">Environment Modeling</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#System-Architecture"><span class="toc-number">5.2.</span> <span class="toc-text">System Architecture</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Evaluation"><span class="toc-number">6.</span> <span class="toc-text">Evaluation</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Software-Performance"><span class="toc-number">6.1.</span> <span class="toc-text">Software Performance</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#End-to-End-Perception-Quality"><span class="toc-number">6.2.</span> <span class="toc-text">End-to-End Perception Quality</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Conclusion"><span class="toc-number">7.</span> <span class="toc-text">Conclusion</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#References"><span class="toc-number">8.</span> <span class="toc-text">References</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index width mx-auto px2 my4">
+        
+        <article class="h-entry post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <a href="https://muetsch.io/talkycars-a-distributed-software-platform-for-cooperative-perception.html" class="u-url">
+        <h1 class="posttitle p-name" itemprop="name headline" property="headline">
+            TalkyCars: A Distributed Software Platform for Cooperative Perception
+        </h1>
+    </a>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" property="author" itemscope itemtype="http://schema.org/Person" vocab="http://schema.org/" typeof="Person">
+        <span itemprop="name" property="name" class="p-author h-card">Ferdinand Mütsch</span>
+      </span>
+      
+    <div class="postdate">
+        <time datetime="2020-09-11T07:24:31.000Z" class="dt-published" itemprop="datePublished" property="datePublished">2020-09-11</time>
+    </div>
+
+
+      
+
+
+      <!--
+      <div style="margin-top: 30px">
+        <a href="https://liberapay.com/muety/" target="_blank"
+          style="background-image: none; text-decoration: none;"><img
+            src="https://badges.fw-web.space/liberapay/receives/muety.svg?logo=liberapay&style=flat-square" alt="Liberapay"
+            style="height: auto !important;width: auto !important;"></a>
+      </div>
+      -->
+    </div>
+  </header>
+  
+  <div class="content e-content" itemprop="articleBody" property="articleBody">
+    <p><img src="https://apps.muetsch.io/images/o:auto?image=https://muetsch.io/images/talkycars9.png"></p>
+<h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1><p>This is a short, summarizing write-up about the topics of my Master’s thesis, published in February 2020 in cooperation with <a target="_blank" rel="noopener" href="https://www.itiv.kit.edu/21_3940.php">Prof. Dr. Sax</a>, <a target="_blank" rel="noopener" href="https://www.itiv.kit.edu/21_6289.php">M.Sc. Martin Sommer</a> and <a target="_blank" rel="noopener" href="https://www.itiv.kit.edu/21_5341.php">M.Sc. Marco Stang</a> at the <a target="_blank" rel="noopener" href="https://itiv.kit.edu/">KIT Institute for Information Processing Technologies</a>.</p>
+<h1 id="Citation-BibTeX"><a href="#Citation-BibTeX" class="headerlink" title="Citation (BibTeX)"></a>Citation (BibTeX)</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">@mastersthesis&#123;Mutsch2020,</span><br><span class="line">    author &#x3D; &#123;Mütsch, Ferdinand&#125;,</span><br><span class="line">    school &#x3D; &#123;Karlsruhe Institute of Technology&#125;,</span><br><span class="line">    title &#x3D; &#123;&#123;TalkyCars: A Distributed Software Platform for Cooperative Perception among Connected Autonomous Vehicles based on Cellular-V2X Communication&#125;&#125;,</span><br><span class="line">    year &#x3D; &#123;2020&#125;,</span><br><span class="line">    doi &#x3D; &#123;10.5445&#x2F;IR&#x2F;1000118118&#125;,</span><br><span class="line">    URL &#x3D; &#123;http:&#x2F;&#x2F;dx.doi.org&#x2F;10.5445&#x2F;IR&#x2F;1000118118&#125;,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="Motivation"><a href="#Motivation" class="headerlink" title="Motivation"></a>Motivation</h1><p>Our work is in the field of autonomous driving, more specifically: cooperative perception. While the topic itself is very diverse, we attempted to approach cooperative perception mainly from a software architecture point of view.</p>
+<p>Let us first have a quick outlook. Nowadays, automated driving is still quite rare. However, although forecasts on its future development vary greatly, many researchers predict that level 4 automated vehicles may be around quite soon and level 5 cars may be production-ready already by 2030 <a href="#refs">[1]</a>, <a href="#refs">[2]</a>, <a href="#refs">[3]</a>. However, in the beginning, self-driving cars will find themselves having to operate among highly mixed traffic. That is, traffic with still a high percentage of manully controlled cars. Therefore, a tremendously high level of safety is required.</p>
+<h1 id="Cooperative-Perception"><a href="#Cooperative-Perception" class="headerlink" title="Cooperative Perception"></a>Cooperative Perception</h1><p>One approach to increase reliability and safety of automated vehicles is the concept of cooperative perception. In essence, the idea is to have the cars not only rely on their own sensory, but communicate with surrounding vehicles to mutually exchange information about their environment. In that sense, cooperative perception is a use case of vehicle-to-vehicle – or more broadly – vehicle-to-everything communication. It enables cars to virtually extend their field of view and, for instance, be able to look around corners.</p>
+<p><img src="https://apps.muetsch.io/images/o:auto?image=https://muetsch.io/images/nloss_2.png"><br><img src="https://apps.muetsch.io/images/o:auto?image=https://muetsch.io/images/nloss_3.png"><br>(Source: <a href="#refs">[4]</a>)</p>
+<p>Cooperative perception is a topic of research for years already. Most present approaches rely on so called vehicular ad-hoc networks among participants using dedicated short-range communication. That is, cars within range of each other form pair-wise temporary connections using a technology similar to WiFi. Not uncommonly, they exchange low-level sensor data, for instance LiDAR point cloud, camera images, etc.</p>
+<p>There is research which shows that these approaches face some limitations, mainly in terms of latency and data throughput. Consequently, our work assumes a different technological basis. We require that information is exchanged not in form of ad-hoc mesh networks, but through on or more central nodes using cellular communication. Moreover, we do not want to share raw senor data, which can become quite large, but higher-level information that corresponds to a common, shared environment model.</p>
+<p><img src="https://apps.muetsch.io/images/o:auto?image=https://muetsch.io/images/talkycars2.png"><br>(Source: <a href="#refs">[4]</a>)</p>
+<h1 id="Approach"><a href="#Approach" class="headerlink" title="Approach"></a>Approach</h1><p>Essentially, there are two major areas to cover in order to develop an end-to-end cooperative perception system prototype. First, we need to define a common language or <strong>model</strong> that all traffic participants use to describe themselves and their environment. Second, a software- and communications <strong>architecture</strong> needs to be designed, as we need a system that enables efficient, scalable and low-latency communications among network participants.</p>
+<h2 id="Environment-Modeling"><a href="#Environment-Modeling" class="headerlink" title="Environment Modeling"></a>Environment Modeling</h2><p>Let us focus on the modeling aspect first. There already exist elaborate approaches for modeling and state representation for cooperative perception. Most famously, there are cooperative awareness- and cooperative perception messages <a href="#refs">[5]</a>, <a href="#refs">[6]</a>. In addition, Kohlhaas et al. <a href="#refs">[7]</a> suggested to combine low-level, primitive attributes – like position and velocity – with higher-level, semantic knowledge. More specifically, they propose a modeling approach that also incorporates relationships among different entities and traffic participants within a traffic scene. In 2018, another research group first proposed the use of so called probabilistic entity relationship models for traffic scene representation <a href="#refs">[8]</a>. </p>
+<p>For our environment model, we combine these aapproches with the concept of geo tiling using so called QuadKeys (<a href="#refs">[10]</a>). In essence, geo tiling means to recursively divide the world map into four squares up to almost arbitrarily high precision. Each square is then uniquely identifiable through a key. Using these QuadKeys, we have a simple, commonly-understood and unique way of referencing geographical locations. Especially, it prevents from having to translate between different local- and global coordinate systems.</p>
+<p><img src="https://apps.muetsch.io/images/o:auto?image=https://muetsch.io/images/quadkeys.jpg"><br>(Source: <a href="#refs">[9]</a>)</p>
+<p>Moreover, we can utilize geo tiles as a basis for our environment model. We propose a model that represents an occupancy grid at its core, whereas each cell corresponds to a tile of a certain, fixed precision level. For instance, with a QuadKey precision level of 25, we would require our intelligent vehicles to represent and share their perceived environment state as an occupancy grid with cells of approx. 1.1 by 1.1 meters in size. </p>
+<p><img src="https://apps.muetsch.io/images/o:auto?image=https://muetsch.io/images/talkycars3.png"></p>
+<p>Naturally, a cell’s occupancy state alone, that is “occupied” or “not occupied”, is not sufficient to comprehensively model a traffic scene. Therefore, we allow each cell to contain additional state information following a comprehensive meta model. For instance, the type of traffic participant, that currently occupies a cell, alongside all of its respective static and dynamic properties might be included as well.</p>
+<p>Moreover, there is an other interesting aspect to our proposed modeling approach. Because all facts of a vehicle’s environment are derived from imperfect sensory, they’re inevitably accompanied by uncertainty. Moreover, the fact that the description of a traffic scene is only valid for a very short temporal horizon even adds to this uncertainty. This leads to the requirement to use a modeling approach capable of coping with such uncertainty. As a consequence, we decided to pick up on the concept of probabilistic entity-relationship model and represent every fact as a quadruple of subject, predicate, object and confidence. The confidence component corresponds to the likelihood of this fact being true.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">Graph consisting of 4-tuples:</span><br><span class="line">------</span><br><span class="line">(subject, predicate, object, confidence)</span><br><span class="line"></span><br><span class="line">Example:</span><br><span class="line">------</span><br><span class="line">(obstacle_5, isOfType, pedestrian, 0.921)</span><br><span class="line">(obstacle_5, hasPosition, 310112030021333, 0.448)</span><br><span class="line">(obstacle_5, isStoppedAt, traffic_light_189, 0.995)</span><br></pre></td></tr></table></figure>
+
+<h2 id="System-Architecture"><a href="#System-Architecture" class="headerlink" title="System Architecture"></a>System Architecture</h2><p>Let us now focus on the second major aspect: the architecture of a software system that enables for cooperative perception.</p>
+<p>Naturally, one essential requirement is good performance. That is, information from different vehicles shall be transmitted and aggregated as fast as possible. As mentioned earlier, many approaches relying on decentralized DSRC communication are potentially limited in latency and throughput. This is why we want to take the approach to rely on cellular communication, preferably using 5G networks. Also, to reduce communication complexity, our approach relies on centralized compute nodes that receive, transform, fuse and re-distribute information from many network participants. Of course, this introduces new challenges. First and foremost there is the requirement of high scalability, as these compute nodes have to handle large amount of data.</p>
+<p><img src="https://apps.muetsch.io/images/o:auto?image=https://muetsch.io/images/talkycars4.png"></p>
+<p>To address this challenge, we once again utilize geo tiling with QuadKeys. In our approach, the environment is split into QuadTiles of a certain size, for instance 5 by 5 km, and a data fusion node is not deployed globally, but once per every tile. Vehicles within such a tile exchange their data through the tile’s responsible node. This way, the node only has to cope with a certain, limited amount of senders and receivers.</p>
+<p>In summary, the proposed system consists of three core components. On the client-side, that is, the vehicle side, an application is responsible for generating, sending and receiving instances of the previously mentioned environment model. Second, a message broker is deployed once per tile to consolidate incoming data messages. Third, the previously mentioned fusion node is responsible for aggregating these information packets to a single, globally valid model instance and sending it back to the cars.</p>
+<p><img src="https://apps.muetsch.io/images/o:auto?image=https://muetsch.io/images/talkycars5.png"></p>
+<h1 id="Evaluation"><a href="#Evaluation" class="headerlink" title="Evaluation"></a>Evaluation</h1><p>For evaluation purposes, we implemented all parts of our system and integrated it with the CARLA simulation environment. We conducted two different experiments to evaluate the proposed system with respect to performance and quality.</p>
+<h2 id="Software-Performance"><a href="#Software-Performance" class="headerlink" title="Software Performance"></a>Software Performance</h2><p>In the first part of the evaluation, we attempted to answer the question of how many concurrent vehicles the central data broker or fusion node is able to handle at a time. In our experiment setup, we deployed one instance of the fusion node as well as a distributed data generator that simulates an increasing amount of vehicles sending their environment models. We required that observations must be fused at a fixed rate, for instance, 10 times per second. Then we measured the actual rate at which the fusion node is able to process incoming observations as the number of sender vehicles increased. Eventually, we found that the possible fusion rate heavily depends on the size of the underlying occupancy grid and that our very little optimized implementation is able to maintain a fusion rate of 10 Hz with up to 220 concurrent vehicles at a grid size of approx. 50 meters and 100 concurrent vehicles at a grid size of approx. 100 meters. </p>
+<p><img src="https://apps.muetsch.io/images/o:auto/rs,s:400?image=https://muetsch.io/images/talkycars6.png"></p>
+<h2 id="End-to-End-Perception-Quality"><a href="#End-to-End-Perception-Quality" class="headerlink" title="End-to-End Perception Quality"></a>End-to-End Perception Quality</h2><p>The second part of the evaluation aimed to assess whether a vehicle’s overall perception quality can be improved through the use of our system in general.</p>
+<p>Therefore, we utilized the CARLA simulation environment and repeatedly generated different urban traffic scenes with a fixed amount of connected, intelligent vehicles, each of which runs our proposed software system. Every vehicle was tasked to traverse the environment from a random start point to a random destination. While driving, every vehicle recorded its own local perception, derived from its sensors, including all perceived obstacles. Later, these perceived environment states are compared to the true state of the environment provided by the simulator. Accordingly, an error measure can be derived. To asses whether or not our proposed system is beneficial to a self-driving car’s perception quality, every instance of the experiment is run twice: once with and once without cooperative perception. Eventually the respective error measures can be compared.</p>
+<p><img src="https://apps.muetsch.io/images/o:auto?image=https://muetsch.io/images/talkycars7.png"></p>
+<p>Doing so, we found that the average perception quality, that is, the accuracy of detecting obstacles in the simulation, could be improved significantly in our test scenarios.</p>
+<p><img src="https://apps.muetsch.io/images/o:auto?image=https://muetsch.io/images/talkycars8.png"><br>(Image: Recall (“hit rate”) for occupied cells with / without CP)</p>
+<h1 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h1><p>With our work, we contributed a proof-of-concept for a novel approach to cooperative perception, utilizing centralized, cellular communication and involving a comprehensive meta model for traffic scene representation. Both our reference implementation as well as the concept itself still demands for optimizations in order to be advanced to a real-world applicable system. However, it can serve as a basis for future research. </p>
+<p>The entire project is <a target="_blank" rel="noopener" href="https://github.com/muety/talkycars-thesis">open-source</a>.</p>
+<h1 id="References"><a href="#References" class="headerlink" title="References"></a>References</h1><p><a name="refs"></a></p>
+<ol>
+<li>McKinsey Center for Future Mobility. (2019). Autonomous Driving | MCFM | McKinsey. Retrieved November 25, 2019, from <a target="_blank" rel="noopener" href="https://www.mckinsey.com/features/mckinsey-center-for-future-mobility/overview/autonomous-driving">Link</a></li>
+<li>Thomson, C. (2017). Elon Musk has a stunning prediction for what cars will be like 10 years from now. Retrieved from <a target="_blank" rel="noopener" href="https://www.businessinsider.com/elon-musk-predicts-most-cars-will-be-driverless-in-10-years-2017-2?r=DE&IR=T">Link</a></li>
+<li>BMW Group. (2019). Contract signed: BMW Group and Daimler AG launch long-term development cooperation for automated driving. Retrieved from <a target="_blank" rel="noopener" href="https://www.press.bmwgroup.com/global/article/detail/T0298266EN/">Link</a>contract-signed:-bmw-group-and-daimler-ag-launch-long-term-development-cooperation-for-automated-driving</li>
+<li><a target="_blank" rel="noopener" href="https://www.qualcomm.com/media/documents/files/accelerating-c-v2x-commercialization.pdf">Link</a></li>
+<li>European Telecommunications Standards Institute (ETSI), “ETSI TR 103 562,” Sophia Antipolis, 2019.</li>
+<li>A. Rauch, F. Klanner, and K. Dietmayer, “Analysis of V2X communication parameters for the development of a fusion architecture for cooperative perception systems,” in 2011 IEEE Intelligent Vehicles Symposium (IV), 2011, pp. 685–690.</li>
+<li>R. Kohlhaas, T. Bittner, T. Schamm, and J. M. Zollner, “Semantic state space for high-level maneuver planning in structured traffic scenes,” in 17th International IEEE Conference on Intelligent Transportation Systems (ITSC), 2014, pp. 1060–1065.</li>
+<li>D. Petrich, D. Azarfar, F. Kuhnt, and J. M. Zollner, “The Fingerprint of a Traffic Situation: A Semantic Relationship Tensor for Situation Description and Awareness,” in 2018 21st International Conference on Intelligent Transportation Systems (ITSC), 2018, pp. 429–435.</li>
+<li><a target="_blank" rel="noopener" href="https://docs.microsoft.com/en-us/bingmaps/articles/bing-maps-tile-system">Link</a></li>
+<li>Schwartz, J. (2018). Bing Maps Tile System - Bing Maps | Microsoft Docs. Retrieved November 26, 2019, from <a target="_blank" rel="noopener" href="https://docs.microsoft.com/en-us/bingmaps/articles/bing-maps-tile-system">Link</a></li>
+</ol>
+
+  </div>
+</article>
+
+
+
+    </div>
+    
+      <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Blog</a></li>
+         
+          <li><a href="/imprint/">Imprint</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Introduction"><span class="toc-number">1.</span> <span class="toc-text">Introduction</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Citation-BibTeX"><span class="toc-number">2.</span> <span class="toc-text">Citation (BibTeX)</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Motivation"><span class="toc-number">3.</span> <span class="toc-text">Motivation</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Cooperative-Perception"><span class="toc-number">4.</span> <span class="toc-text">Cooperative Perception</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Approach"><span class="toc-number">5.</span> <span class="toc-text">Approach</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Environment-Modeling"><span class="toc-number">5.1.</span> <span class="toc-text">Environment Modeling</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#System-Architecture"><span class="toc-number">5.2.</span> <span class="toc-text">System Architecture</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Evaluation"><span class="toc-number">6.</span> <span class="toc-text">Evaluation</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Software-Performance"><span class="toc-number">6.1.</span> <span class="toc-text">Software Performance</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#End-to-End-Perception-Quality"><span class="toc-number">6.2.</span> <span class="toc-text">End-to-End Perception Quality</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Conclusion"><span class="toc-number">7.</span> <span class="toc-text">Conclusion</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#References"><span class="toc-number">8.</span> <span class="toc-text">References</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://muetsch.io/talkycars-a-distributed-software-platform-for-cooperative-perception.html"><i class="fa fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://muetsch.io/talkycars-a-distributed-software-platform-for-cooperative-perception.html&text=TalkyCars: A Distributed Software Platform for Cooperative Perception"><i class="fa fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://muetsch.io/talkycars-a-distributed-software-platform-for-cooperative-perception.html&title=TalkyCars: A Distributed Software Platform for Cooperative Perception"><i class="fa fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://muetsch.io/talkycars-a-distributed-software-platform-for-cooperative-perception.html&is_video=false&description=TalkyCars: A Distributed Software Platform for Cooperative Perception"><i class="fa fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=TalkyCars: A Distributed Software Platform for Cooperative Perception&body=Check out this article: https://muetsch.io/talkycars-a-distributed-software-platform-for-cooperative-perception.html"><i class="fa fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://muetsch.io/talkycars-a-distributed-software-platform-for-cooperative-perception.html&title=TalkyCars: A Distributed Software Platform for Cooperative Perception"><i class="fa fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://muetsch.io/talkycars-a-distributed-software-platform-for-cooperative-perception.html&title=TalkyCars: A Distributed Software Platform for Cooperative Perception"><i class="fa fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://muetsch.io/talkycars-a-distributed-software-platform-for-cooperative-perception.html&title=TalkyCars: A Distributed Software Platform for Cooperative Perception"><i class="fa fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://muetsch.io/talkycars-a-distributed-software-platform-for-cooperative-perception.html&title=TalkyCars: A Distributed Software Platform for Cooperative Perception"><i class="fa fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://muetsch.io/talkycars-a-distributed-software-platform-for-cooperative-perception.html&name=TalkyCars: A Distributed Software Platform for Cooperative Perception&description="><i class="fa fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+      <ul>
+        <li id="toc"><a class="icon" href="#" onclick='toggleById("toc-footer")'><i class="fa fa-list fa-lg" aria-hidden="true"></i> TOC</a></li>
+        <li id="share"><a class="icon" href="#" onclick='toggleById("share-footer")'><i class="fa fa-share-alt fa-lg" aria-hidden="true"></i> Share</a></li>
+        <li id="top" style="display:none"><a class="icon" href="#" onclick="window.scrollTo(0,0)"><i class="fa fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a></li>
+        <li id="menu"><a class="icon" href="#" onclick='toggleById("nav-footer")'><i class="fa fa-bars fa-lg" aria-hidden="true"></i> Menu</a></li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+    
+    <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2021 Ferdinand Mütsch
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Blog</a></li>
+         
+          <li><a href="/imprint/">Imprint</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+</body>
+</html>
+<!-- styles -->
+
+<link rel="stylesheet" href="/lib/roboto/css/roboto.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+
+
+<script src="/js/main.js"></script>
+
+<!-- Google Analytics -->
+
+<!-- Disqus Comments -->
+
+

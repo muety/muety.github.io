@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="referrer" content="no-referrer">
+    <meta name="description" content="Use CaseA common use case when building an Android app is to have it handle data shared from other apps. All Android users know this little dialog that pops up when you hit the “Share” button in any a">
+<meta property="og:type" content="article">
+<meta property="og:title" content="How to receive sharing intents in Flutter?">
+<meta property="og:url" content="https://muetsch.io/how-to-receive-sharing-intents-in-flutter.html">
+<meta property="og:site_name" content="Ferdinand Mütsch">
+<meta property="og:description" content="Use CaseA common use case when building an Android app is to have it handle data shared from other apps. All Android users know this little dialog that pops up when you hit the “Share” button in any a">
+<meta property="og:locale">
+<meta property="og:image" content="https://cketti.de/img/share-url-to-clipboard/screenshot_share.png">
+<meta property="article:published_time" content="2019-03-11T05:56:28.000Z">
+<meta property="article:modified_time" content="2020-10-30T20:05:40.290Z">
+<meta property="article:author" content="Ferdinand Mütsch">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cketti.de/img/share-url-to-clipboard/screenshot_share.png">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/favicon.ico" sizes="192x192">
+          
+        
+        
+    
+    <!-- title -->
+    <title>How to receive sharing intents in Flutter?</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- rss -->
+    
+    
+
+    <!-- rel-me links -->
+    
+      
+        <link href="http://github.com/muety" rel="me">
+      
+        <link href="https://twitter.com/n2try" rel="me">
+      
+        <link href="mailto:ferdinand@muetsch.io" rel="me">
+      
+    
+
+    <!-- Webmention link -->
+    
+      <link href="https://webmention.io/muetsch.io/webmention" rel="webmention">
+    
+
+    
+      <link href="https://webmention.io/muetsch.io/xmlrpc" rel="pingback">
+    
+<meta name="generator" content="Hexo 5.2.0"><link rel="alternate" href="/rss2.xml" title="Ferdinand Mütsch" type="application/rss+xml">
+</head>
+
+<body>
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fa fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fa fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="window.scrollTo(0, 0)" style="display:none;"><i class="fa fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Blog</a></li>
+         
+          <li><a href="/imprint/">Imprint</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/what-i-like-about-developing-apps-with-flutter.html"><i class="fa fa-chevron-left" aria-hidden="true" onmouseover='toggleById("i-prev");' onmouseout='toggleById("i-prev");'></i></a></li>
+        
+        
+        <li><a class="icon" href="/quiznerd-my-experiences-with-the-android-developer-nanodegree.html"><i class="fa fa-chevron-right" aria-hidden="true" onmouseover='toggleById("i-next").toggleById();' onmouseout='toggleById("i-next");'></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="window.scrollTo(0,0)"><i class="fa fa-chevron-up" aria-hidden="true" onmouseover='toggleById("i-top");' onmouseout='toggleById("i-top");'></i></a></li>
+        <li><a class="icon" href="#"><i class="fa fa-share-alt" aria-hidden="true" onmouseover='toggleById("i-share");' onmouseout='toggleById("i-share");' onclick='toggleById("share");return false;'></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://muetsch.io/how-to-receive-sharing-intents-in-flutter.html"><i class="fa fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://muetsch.io/how-to-receive-sharing-intents-in-flutter.html&text=How to receive sharing intents in Flutter?"><i class="fa fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://muetsch.io/how-to-receive-sharing-intents-in-flutter.html&title=How to receive sharing intents in Flutter?"><i class="fa fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://muetsch.io/how-to-receive-sharing-intents-in-flutter.html&is_video=false&description=How to receive sharing intents in Flutter?"><i class="fa fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=How to receive sharing intents in Flutter?&body=Check out this article: https://muetsch.io/how-to-receive-sharing-intents-in-flutter.html"><i class="fa fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://muetsch.io/how-to-receive-sharing-intents-in-flutter.html&title=How to receive sharing intents in Flutter?"><i class="fa fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://muetsch.io/how-to-receive-sharing-intents-in-flutter.html&title=How to receive sharing intents in Flutter?"><i class="fa fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://muetsch.io/how-to-receive-sharing-intents-in-flutter.html&title=How to receive sharing intents in Flutter?"><i class="fa fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://muetsch.io/how-to-receive-sharing-intents-in-flutter.html&title=How to receive sharing intents in Flutter?"><i class="fa fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://muetsch.io/how-to-receive-sharing-intents-in-flutter.html&name=How to receive sharing intents in Flutter?&description="><i class="fa fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Use-Case"><span class="toc-number">1.</span> <span class="toc-text">Use Case</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Background"><span class="toc-number">2.</span> <span class="toc-text">Background</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Code"><span class="toc-number">3.</span> <span class="toc-text">Code</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#AndroidManifest-xml"><span class="toc-number">3.1.</span> <span class="toc-text">AndroidManifest.xml</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#MainActivity-java"><span class="toc-number">3.2.</span> <span class="toc-text">MainActivity.java</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Your-Flutter-app"><span class="toc-number">3.3.</span> <span class="toc-text">Your Flutter app</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Conclusion"><span class="toc-number">4.</span> <span class="toc-text">Conclusion</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index width mx-auto px2 my4">
+        
+        <article class="h-entry post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <a href="https://muetsch.io/how-to-receive-sharing-intents-in-flutter.html" class="u-url">
+        <h1 class="posttitle p-name" itemprop="name headline" property="headline">
+            How to receive sharing intents in Flutter?
+        </h1>
+    </a>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" property="author" itemscope itemtype="http://schema.org/Person" vocab="http://schema.org/" typeof="Person">
+        <span itemprop="name" property="name" class="p-author h-card">Ferdinand Mütsch</span>
+      </span>
+      
+    <div class="postdate">
+        <time datetime="2019-03-11T05:56:28.000Z" class="dt-published" itemprop="datePublished" property="datePublished">2019-03-11</time>
+    </div>
+
+
+      
+
+
+      <!--
+      <div style="margin-top: 30px">
+        <a href="https://liberapay.com/muety/" target="_blank"
+          style="background-image: none; text-decoration: none;"><img
+            src="https://badges.fw-web.space/liberapay/receives/muety.svg?logo=liberapay&style=flat-square" alt="Liberapay"
+            style="height: auto !important;width: auto !important;"></a>
+      </div>
+      -->
+    </div>
+  </header>
+  
+  <div class="content e-content" itemprop="articleBody" property="articleBody">
+    <h1 id="Use-Case"><a href="#Use-Case" class="headerlink" title="Use Case"></a>Use Case</h1><p>A common use case when building an Android app is to have it handle data shared from other apps. All Android users know this little dialog that pops up when you hit the <em>“Share”</em> button in any app. It displays a list of applications, which are registered for receiving shared data. The user has to choose one, which is then opened up to handle the shared text, URL or whatever it is. On iOS, a similar concept exists. However, this article focused on <strong>Android only</strong>. </p>
+<p><img src="https://cketti.de/img/share-url-to-clipboard/screenshot_share.png"><br><em>(Source: <a target="_blank" rel="noopener" href="https://cketti.de/">https://cketti.de/</a>)</em></p>
+<p>As an example, let’s imagine having a bookmark-manager written in Flutter. It is supposed to save <strong>URLs</strong> with their accompanying <strong>titles</strong>, shared from the smartphone’s browser to the app, to one of your bookmark collection. This is exactly <a target="_blank" rel="noopener" href="https://github.com/muety/anchr-android">what I just build</a>.</p>
+<h1 id="Background"><a href="#Background" class="headerlink" title="Background"></a>Background</h1><p>The official Flutter docs already give <a target="_blank" rel="noopener" href="https://flutter.dev/docs/get-started/flutter-for/android-devs#how-do-i-handle-incoming-intents-from-external-applications-in-flutter">a good example</a> on how to achieve that functionality. However, I found that their piece of code only works, if you share data to an app that <strong>is still closed</strong>. If you had opened your app before and it idles in the background, it won’t receive the <a target="_blank" rel="noopener" href="https://www.androidcode.ninja/android-share-intent-example/">sharing intent</a> when it is <a target="_blank" rel="noopener" href="https://developer.android.com/guide/components/activities/activity-lifecycle#onresume">resumed</a>. Therefore, I extended the example. </p>
+<h1 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h1><h2 id="AndroidManifest-xml"><a href="#AndroidManifest-xml" class="headerlink" title="AndroidManifest.xml"></a>AndroidManifest.xml</h2><p>First, you have to add an <code>intent-filter</code> to your <code>AndroidManifest.xml</code> in the <code>android/</code> directory to register your app as a sharing target.</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line"><span class="tag">&lt;<span class="name">intent-filter</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">action</span> <span class="attr">android:name</span>=<span class="string">&quot;android.intent.action.SEND&quot;</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">category</span> <span class="attr">android:name</span>=<span class="string">&quot;android.intent.category.DEFAULT&quot;</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">data</span> <span class="attr">android:mimeType</span>=<span class="string">&quot;text/plain&quot;</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">intent-filter</span>&gt;</span></span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+
+<h2 id="MainActivity-java"><a href="#MainActivity-java" class="headerlink" title="MainActivity.java"></a>MainActivity.java</h2><p>Secondly, you will need to add some code to <code>MainActivity.java</code> (analogously for Kotlin projects). In the <code>onCreate()</code> lifecycle hook, you have to register a <code>MethodCallHandler()</code> to act as an interface between the underlying Android app and your flutter code. In addition, you have to override the <code>onNewIntent()</code> callback, which is triggered when a new sharing intent (<code>Intent.ACTION_SEND</code>) causes your app to change its lifecycle state. Lastly, you need a method to handle the actual content shared from the external app. It consists of two fields, a URL and a title, both represented as strings in a Map. In the end, your <code>MainActivity</code> looks like something like this.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> Map&lt;String, String&gt; sharedData = <span class="keyword">new</span> HashMap();</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState);</span><br><span class="line">        GeneratedPluginRegistrant.registerWith(<span class="keyword">this</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// Handle intent when app is initially opened</span></span><br><span class="line">        handleSendIntent(getIntent());</span><br><span class="line"></span><br><span class="line">        <span class="keyword">new</span> MethodChannel(getFlutterView(), <span class="string">&quot;app.channel.shared.data&quot;</span>).setMethodCallHandler(</span><br><span class="line">            <span class="keyword">new</span> MethodCallHandler() &#123;</span><br><span class="line">                <span class="meta">@Override</span></span><br><span class="line">                <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onMethodCall</span><span class="params">(MethodCall call, MethodChannel.Result result)</span> </span>&#123;</span><br><span class="line">                    <span class="keyword">if</span> (call.method.contentEquals(<span class="string">&quot;getSharedData&quot;</span>)) &#123;</span><br><span class="line">                        result.success(sharedData);</span><br><span class="line">                        sharedData.clear();</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        );</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onNewIntent</span><span class="params">(Intent intent)</span> </span>&#123;</span><br><span class="line">        <span class="comment">// Handle intent when app is resumed</span></span><br><span class="line">        <span class="keyword">super</span>.onNewIntent(intent);</span><br><span class="line">        handleSendIntent(intent);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">handleSendIntent</span><span class="params">(Intent intent)</span> </span>&#123;</span><br><span class="line">        String action = intent.getAction();</span><br><span class="line">        String type = intent.getType();</span><br><span class="line"></span><br><span class="line">        <span class="comment">// We only care about sharing intent that contain plain text</span></span><br><span class="line">        <span class="keyword">if</span> (Intent.ACTION_SEND.equals(action) &amp;&amp; type != <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">if</span> (<span class="string">&quot;text/plain&quot;</span>.equals(type)) &#123;</span><br><span class="line">                sharedData.put(<span class="string">&quot;subject&quot;</span>, intent.getStringExtra(Intent.EXTRA_SUBJECT));</span><br><span class="line">                sharedData.put(<span class="string">&quot;text&quot;</span>, intent.getStringExtra(Intent.EXTRA_TEXT));</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Note that the shared data is “cached” on the Java side of your app until is it picked up by your Flutter code.</p>
+<h2 id="Your-Flutter-app"><a href="#Your-Flutter-app" class="headerlink" title="Your Flutter app"></a>Your Flutter app</h2><p>Eventually, you need to add a method to your Flutter code to interact with the native-Android <code>MethodHandler</code>. It will be called once during state initialization and – with the help of a listener – every time the underlying Android activity is resumed. </p>
+<figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">SampleAppPage</span> <span class="keyword">extends</span> <span class="title">StatefulWidget</span> </span>&#123;</span><br><span class="line">  SampleAppPage(&#123;Key key&#125;) : <span class="keyword">super</span>(key: key);</span><br><span class="line"></span><br><span class="line">  <span class="meta">@override</span></span><br><span class="line">  _SampleAppPageState createState() =&gt; _SampleAppPageState();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">_SampleAppPageState</span> <span class="keyword">extends</span> <span class="title">State</span>&lt;<span class="title">SampleAppPage</span>&gt; </span>&#123;</span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">const</span> platform = <span class="keyword">const</span> MethodChannel(<span class="string">&#x27;app.channel.shared.data&#x27;</span>);</span><br><span class="line">    <span class="built_in">Map</span>&lt;<span class="built_in">dynamic</span>, <span class="built_in">dynamic</span>&gt; sharedData = <span class="built_in">Map</span>();</span><br><span class="line"></span><br><span class="line">    <span class="meta">@override</span></span><br><span class="line">    <span class="keyword">void</span> initState() &#123;</span><br><span class="line">        <span class="keyword">super</span>.initState();</span><br><span class="line">        _init();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    _init() <span class="keyword">async</span> &#123;</span><br><span class="line">        <span class="comment">// Case 1: App is already running in background:</span></span><br><span class="line">        <span class="comment">// Listen to lifecycle changes to subsequently call Java MethodHandler to check for shared data</span></span><br><span class="line">        SystemChannels.lifecycle.setMessageHandler((msg) &#123;</span><br><span class="line">            <span class="keyword">if</span> (msg.contains(<span class="string">&#x27;resumed&#x27;</span>)) &#123;</span><br><span class="line">                _getSharedData().then((d) &#123;</span><br><span class="line">                    <span class="keyword">if</span> (d.isEmpty) <span class="keyword">return</span>;</span><br><span class="line">                    <span class="comment">// Your logic here</span></span><br><span class="line">                    <span class="comment">// E.g. at this place you might want to use Navigator to launch a new page and pass the shared data</span></span><br><span class="line">                &#125;);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// Case 2: App is started by the intent:</span></span><br><span class="line">        <span class="comment">// Call Java MethodHandler on application start up to check for shared data</span></span><br><span class="line">        <span class="keyword">var</span> data = <span class="keyword">await</span> _getSharedData();</span><br><span class="line">        setState(() =&gt; sharedData = data);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// You can use sharedData in your build() method now</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    Future&lt;<span class="built_in">Map</span>&gt; _getSharedData() <span class="keyword">async</span> =&gt; <span class="keyword">await</span> platform.invokeMethod(<span class="string">&#x27;getSharedData&#x27;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Now you’re good to go! Once you extracted the sharing intent’s contents, you can, for instance, show a pre-filled dialog to add the new link to one of your bookmark collections, just as <a target="_blank" rel="noopener" href="https://github.com/muety/anchr-android/blob/897395528532a03ce4e1bdba00fe4b3b35f5fe43/lib/app.dart#L39">I did here</a>.</p>
+<h1 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h1><p>This approach might seem a little complicated, but in fact, it is the only working solution I could find. There is a plugin called <a target="_blank" rel="noopener" href="https://github.com/d-silveira/flutter-share">flutter-share</a>, but unfortunately it did not work for me. Happy coding 😉!</p>
+
+  </div>
+</article>
+
+
+
+    </div>
+    
+      <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Blog</a></li>
+         
+          <li><a href="/imprint/">Imprint</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Use-Case"><span class="toc-number">1.</span> <span class="toc-text">Use Case</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Background"><span class="toc-number">2.</span> <span class="toc-text">Background</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Code"><span class="toc-number">3.</span> <span class="toc-text">Code</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#AndroidManifest-xml"><span class="toc-number">3.1.</span> <span class="toc-text">AndroidManifest.xml</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#MainActivity-java"><span class="toc-number">3.2.</span> <span class="toc-text">MainActivity.java</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Your-Flutter-app"><span class="toc-number">3.3.</span> <span class="toc-text">Your Flutter app</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Conclusion"><span class="toc-number">4.</span> <span class="toc-text">Conclusion</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://muetsch.io/how-to-receive-sharing-intents-in-flutter.html"><i class="fa fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://muetsch.io/how-to-receive-sharing-intents-in-flutter.html&text=How to receive sharing intents in Flutter?"><i class="fa fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://muetsch.io/how-to-receive-sharing-intents-in-flutter.html&title=How to receive sharing intents in Flutter?"><i class="fa fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://muetsch.io/how-to-receive-sharing-intents-in-flutter.html&is_video=false&description=How to receive sharing intents in Flutter?"><i class="fa fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=How to receive sharing intents in Flutter?&body=Check out this article: https://muetsch.io/how-to-receive-sharing-intents-in-flutter.html"><i class="fa fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://muetsch.io/how-to-receive-sharing-intents-in-flutter.html&title=How to receive sharing intents in Flutter?"><i class="fa fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://muetsch.io/how-to-receive-sharing-intents-in-flutter.html&title=How to receive sharing intents in Flutter?"><i class="fa fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://muetsch.io/how-to-receive-sharing-intents-in-flutter.html&title=How to receive sharing intents in Flutter?"><i class="fa fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://muetsch.io/how-to-receive-sharing-intents-in-flutter.html&title=How to receive sharing intents in Flutter?"><i class="fa fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://muetsch.io/how-to-receive-sharing-intents-in-flutter.html&name=How to receive sharing intents in Flutter?&description="><i class="fa fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+      <ul>
+        <li id="toc"><a class="icon" href="#" onclick='toggleById("toc-footer")'><i class="fa fa-list fa-lg" aria-hidden="true"></i> TOC</a></li>
+        <li id="share"><a class="icon" href="#" onclick='toggleById("share-footer")'><i class="fa fa-share-alt fa-lg" aria-hidden="true"></i> Share</a></li>
+        <li id="top" style="display:none"><a class="icon" href="#" onclick="window.scrollTo(0,0)"><i class="fa fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a></li>
+        <li id="menu"><a class="icon" href="#" onclick='toggleById("nav-footer")'><i class="fa fa-bars fa-lg" aria-hidden="true"></i> Menu</a></li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+    
+    <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2021 Ferdinand Mütsch
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Blog</a></li>
+         
+          <li><a href="/imprint/">Imprint</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+</body>
+</html>
+<!-- styles -->
+
+<link rel="stylesheet" href="/lib/roboto/css/roboto.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+
+
+<script src="/js/main.js"></script>
+
+<!-- Google Analytics -->
+
+<!-- Disqus Comments -->
+
+

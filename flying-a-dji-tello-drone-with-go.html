@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="referrer" content="no-referrer">
+    <meta name="description" content="In this post, we program a DJI Tello drone using Go and control it from the command line.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Flying a DJI Tello Drone with Go">
+<meta property="og:url" content="https://muetsch.io/flying-a-dji-tello-drone-with-go.html">
+<meta property="og:site_name" content="Ferdinand Mütsch">
+<meta property="og:description" content="In this post, we program a DJI Tello drone using Go and control it from the command line.">
+<meta property="og:locale">
+<meta property="og:image" content="https://apps.muetsch.io/images/o:auto?image=https://muetsch.io/images/tello1.jpg">
+<meta property="og:image" content="https://apps.muetsch.io/images/o:auto?image=https://muetsch.io/images/tello2.png">
+<meta property="article:published_time" content="2019-10-01T12:21:53.000Z">
+<meta property="article:modified_time" content="2020-10-30T20:05:40.282Z">
+<meta property="article:author" content="Ferdinand Mütsch">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://apps.muetsch.io/images/o:auto?image=https://muetsch.io/images/tello1.jpg">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/favicon.ico" sizes="192x192">
+          
+        
+        
+    
+    <!-- title -->
+    <title>Flying a DJI Tello Drone with Go</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- rss -->
+    
+    
+
+    <!-- rel-me links -->
+    
+      
+        <link href="http://github.com/muety" rel="me">
+      
+        <link href="https://twitter.com/n2try" rel="me">
+      
+        <link href="mailto:ferdinand@muetsch.io" rel="me">
+      
+    
+
+    <!-- Webmention link -->
+    
+      <link href="https://webmention.io/muetsch.io/webmention" rel="webmention">
+    
+
+    
+      <link href="https://webmention.io/muetsch.io/xmlrpc" rel="pingback">
+    
+<meta name="generator" content="Hexo 5.2.0"><link rel="alternate" href="/rss2.xml" title="Ferdinand Mütsch" type="application/rss+xml">
+</head>
+
+<body>
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fa fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fa fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="window.scrollTo(0, 0)" style="display:none;"><i class="fa fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Blog</a></li>
+         
+          <li><a href="/imprint/">Imprint</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/how-to-enable-dns-over-tls-on-ubuntu-using-coredns.html"><i class="fa fa-chevron-left" aria-hidden="true" onmouseover='toggleById("i-prev");' onmouseout='toggleById("i-prev");'></i></a></li>
+        
+        
+        <li><a class="icon" href="/transfer-learning-for-multi-digit-recognition-using-tensorflow-object-detection-and-svhn-classifier.html"><i class="fa fa-chevron-right" aria-hidden="true" onmouseover='toggleById("i-next").toggleById();' onmouseout='toggleById("i-next");'></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="window.scrollTo(0,0)"><i class="fa fa-chevron-up" aria-hidden="true" onmouseover='toggleById("i-top");' onmouseout='toggleById("i-top");'></i></a></li>
+        <li><a class="icon" href="#"><i class="fa fa-share-alt" aria-hidden="true" onmouseover='toggleById("i-share");' onmouseout='toggleById("i-share");' onclick='toggleById("share");return false;'></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://muetsch.io/flying-a-dji-tello-drone-with-go.html"><i class="fa fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://muetsch.io/flying-a-dji-tello-drone-with-go.html&text=Flying a DJI Tello Drone with Go"><i class="fa fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://muetsch.io/flying-a-dji-tello-drone-with-go.html&title=Flying a DJI Tello Drone with Go"><i class="fa fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://muetsch.io/flying-a-dji-tello-drone-with-go.html&is_video=false&description=Flying a DJI Tello Drone with Go"><i class="fa fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Flying a DJI Tello Drone with Go&body=Check out this article: https://muetsch.io/flying-a-dji-tello-drone-with-go.html"><i class="fa fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://muetsch.io/flying-a-dji-tello-drone-with-go.html&title=Flying a DJI Tello Drone with Go"><i class="fa fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://muetsch.io/flying-a-dji-tello-drone-with-go.html&title=Flying a DJI Tello Drone with Go"><i class="fa fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://muetsch.io/flying-a-dji-tello-drone-with-go.html&title=Flying a DJI Tello Drone with Go"><i class="fa fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://muetsch.io/flying-a-dji-tello-drone-with-go.html&title=Flying a DJI Tello Drone with Go"><i class="fa fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://muetsch.io/flying-a-dji-tello-drone-with-go.html&name=Flying a DJI Tello Drone with Go&description="><i class="fa fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#The-Idea"><span class="toc-number">1.</span> <span class="toc-text">The Idea</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Using-Gobot-SDK"><span class="toc-number">2.</span> <span class="toc-text">Using Gobot SDK</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#First-Prototype"><span class="toc-number">3.</span> <span class="toc-text">First Prototype</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Challenges"><span class="toc-number">4.</span> <span class="toc-text">Challenges</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Future-Plans"><span class="toc-number">5.</span> <span class="toc-text">Future Plans</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index width mx-auto px2 my4">
+        
+        <article class="h-entry post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <a href="https://muetsch.io/flying-a-dji-tello-drone-with-go.html" class="u-url">
+        <h1 class="posttitle p-name" itemprop="name headline" property="headline">
+            Flying a DJI Tello Drone with Go
+        </h1>
+    </a>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" property="author" itemscope itemtype="http://schema.org/Person" vocab="http://schema.org/" typeof="Person">
+        <span itemprop="name" property="name" class="p-author h-card">Ferdinand Mütsch</span>
+      </span>
+      
+    <div class="postdate">
+        <time datetime="2019-10-01T12:21:53.000Z" class="dt-published" itemprop="datePublished" property="datePublished">2019-10-01</time>
+    </div>
+
+
+      
+
+
+      <!--
+      <div style="margin-top: 30px">
+        <a href="https://liberapay.com/muety/" target="_blank"
+          style="background-image: none; text-decoration: none;"><img
+            src="https://badges.fw-web.space/liberapay/receives/muety.svg?logo=liberapay&style=flat-square" alt="Liberapay"
+            style="height: auto !important;width: auto !important;"></a>
+      </div>
+      -->
+    </div>
+  </header>
+  
+  <div class="content e-content" itemprop="articleBody" property="articleBody">
+    <h1 id="The-Idea"><a href="#The-Idea" class="headerlink" title="The Idea"></a>The Idea</h1><p>A few months ago, I bought a <a target="_blank" rel="noopener" href="https://amzn.to/2neAwVr">DJI Tello</a> (affiliate link) drone on Amazon for ~ 80 €, which is quite an impressive price, considering that you can also pay several hundred or even thousand Euro for a DJI drone. Of course, this one is only meant for fun and tinkering, not for professional photography or so.<br>Even though I was amazed by how easy it is to control the drone from your smartphone – even with windy weather conditions - the Tello started to bore me after a few weeks. I wanted to do something more interesting with the drone – I wanted to <strong>program it</strong>!</p>
+<p><img src="https://apps.muetsch.io/images/o:auto?image=https://muetsch.io/images/tello1.jpg"></p>
+<h1 id="Using-Gobot-SDK"><a href="#Using-Gobot-SDK" class="headerlink" title="Using Gobot SDK"></a>Using Gobot SDK</h1><p>During my research on how to program drones - specifically the Tello – I found an article called <a target="_blank" rel="noopener" href="https://gobot.io/blog/2018/04/20/hello-tello-hacking-drones-with-go/">“Hello, Tello - Hacking Drones With Go”</a>, which referenced the documentation of a robot programming toolkit called <a target="_blank" rel="noopener" href="https://gobot.io/">Gobot</a>. As it turned out, Gobot is a Go SDK to control several different micro-robots like <a target="_blank" rel="noopener" href="https://gobot.io/documentation/platforms/gopigo3/">GoPiGo3</a>, the <a target="_blank" rel="noopener" href="https://gobot.io/documentation/platforms/ardrone/">Parrot Ardrone</a>, any drone using the <a target="_blank" rel="noopener" href="https://mavlink.io/en/">MAVLink protocol</a>, <a target="_blank" rel="noopener" href="https://gobot.io/documentation/platforms/pebble/">Pebble smartwatches</a> and many more. It also has support for different microcontrollers, including Arduino, RaspberryPi and Intel Edison as well as communication protocols like MQTT or <a target="_blank" rel="noopener" href="https://nats.io/">NATS</a>. Gobot’s API to interface with any of the supported platforms appeared to be quite straightforward and easy to understand, so I decided to give it a try.</p>
+<p>My first goal was to just have a little program that allows me to <strong>control the drone from my PC</strong> instead of the <a target="_blank" rel="noopener" href="https://play.google.com/store/apps/details?id=com.ryzerobotics.tello">official Tello app</a>. Luckily, Gobot also provides a <a target="_blank" rel="noopener" href="https://godoc.org/gobot.io/x/gobot/platforms/keyboard">keyboard driver</a> (there’s also an Xbox360 gamepad driver) that can be used to subscribe to certain key events, etc.</p>
+<h1 id="First-Prototype"><a href="#First-Prototype" class="headerlink" title="First Prototype"></a>First Prototype</h1><p><img src="https://apps.muetsch.io/images/o:auto?image=https://muetsch.io/images/tello2.png"></p>
+<p>After tinkering for two hours (and having my poor drone hit the wall several times), I got a basic program that:</p>
+<ul>
+<li><strong>connects</strong> to the drone</li>
+<li>prints incoming <strong>status information</strong> (like battery state) to the console</li>
+<li>handles <strong>keyboard events</strong> (↑↓←→ for lateral and longitudinal navigation, WASD for rotation and altitude control, spacebar to start and land)</li>
+<li>runs something like a <strong>“game loop”</strong> with a tick rate of 10 FPS to sync the latest user commands with the drone</li>
+<li>renders the drone’s <strong>video stream</strong> to an <a target="_blank" rel="noopener" href="https://wiki.debian.org/MPlayer">MPlayer</a> window with 10 FPS</li>
+</ul>
+<p>The program’s main method is as simple as this:</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// tello.go</span></span><br><span class="line"><span class="comment">// [...]</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</span><br><span class="line">	<span class="comment">// Init Gobot drivers</span></span><br><span class="line">	keys := keyboard.NewDriver()</span><br><span class="line">	drone := tello.NewDriver(<span class="string">&quot;8890&quot;</span>)</span><br><span class="line"></span><br><span class="line">	work := <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123;</span><br><span class="line">		<span class="comment">// Handle keyboard inputs</span></span><br><span class="line">		keys.On(keyboard.Key, handleKeyboardInput(drone))</span><br><span class="line"></span><br><span class="line">		<span class="comment">// Handle drone events</span></span><br><span class="line">		drone.On(tello.FlightDataEvent, handleFlightData(drone))</span><br><span class="line">		drone.On(tello.ConnectedEvent, handleConnected(drone))</span><br><span class="line">		drone.On(tello.LandingEvent, handleLanding(drone))</span><br><span class="line">		drone.On(tello.VideoFrameEvent, handleVideo(drone))</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	robot := gobot.NewRobot(</span><br><span class="line">		<span class="string">&quot;tello&quot;</span>,</span><br><span class="line">		[]gobot.Connection&#123;&#125;,</span><br><span class="line">		[]gobot.Device&#123;keys, drone&#125;,</span><br><span class="line">		work,</span><br><span class="line">	)</span><br><span class="line"></span><br><span class="line">	robot.Start()</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// [...]</span></span><br></pre></td></tr></table></figure>
+
+<p>In addition, here’s a little excerpt from the <code>tick()</code> method, that checks for the latest key input and calls the corresponding control methods.</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// tello.go</span></span><br><span class="line"><span class="comment">// [...]</span></span><br><span class="line"><span class="keyword">if</span> currentControl == keyboard.A &#123;</span><br><span class="line">    fmt.Println(<span class="string">&quot;Going left.&quot;</span>)</span><br><span class="line">    <span class="keyword">if</span> !dry &#123;</span><br><span class="line">        drone.Left(intensity)</span><br><span class="line">    &#125;</span><br><span class="line"><span class="comment">// [...]</span></span><br><span class="line">&#125; <span class="keyword">else</span> <span class="keyword">if</span> currentControl == keyboard.ArrowRight &#123;</span><br><span class="line">    fmt.Println(<span class="string">&quot;Rotating clockwise.&quot;</span>)</span><br><span class="line">    <span class="keyword">if</span> !dry &#123;</span><br><span class="line">        drone.Clockwise(intensity)</span><br><span class="line">    &#125;</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    fmt.Println(<span class="string">&quot;Resetting steering.&quot;</span>)</span><br><span class="line">    resetSteering(drone)</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// [...]</span></span><br></pre></td></tr></table></figure>
+
+<p>The entire code is <strong>available on GitHub</strong> at <a target="_blank" rel="noopener" href="https://github.com/muety/tello">muety/tello</a>.</p>
+<h1 id="Challenges"><a href="#Challenges" class="headerlink" title="Challenges"></a>Challenges</h1><p>One thing that made me stuck for a while was the way API commands like <code>drone.Left(100)</code> (where the integer parameter represents the movement’s “intensity” or speed) work. Once called, they are being applied continuously until manually stopped. In this case, the drone would go left with max speed until you explicitly send <code>drone.Left(0)</code>. This behavior combined with the fact that Gobot’s keyboard driver only supports to communicate when a key <strong>is pressed</strong>, but <strong>not when it’s released</strong> again, made it a little difficult to smoothly control the drone. To cope with that, I introduced a <strong>debouncing logic</strong>. When a key is pressed (e.g. ←), a flag for that key is toggled on for 250 ms before it’s automatically reset again, if the key was released in the meantime. Within the <code>tick()</code> method, the only thing done is to translate the binary key states to API commands and sync them to the device. </p>
+<h1 id="Future-Plans"><a href="#Future-Plans" class="headerlink" title="Future Plans"></a>Future Plans</h1><p>In case I have some time to further work in this little project, I would love to add basic <strong>“self-flying” capabilities</strong>. How cool would it be to have the ability to set a marker on a map and have the Tello fly there autonomously, while automatically avoiding obstacles in its way? A good starting point for this might be to take a look into <a target="_blank" rel="noopener" href="https://gocv.io/">GoCV</a>, which is a Go interface to OpenCV. Alternatively, Microsoft’s <a target="_blank" rel="noopener" href="https://github.com/Microsoft/AirSim">AirSim</a> simulator provides explicit support for training machine learning models for self-flying drones. Very cool!</p>
+
+  </div>
+</article>
+
+
+
+    </div>
+    
+      <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Blog</a></li>
+         
+          <li><a href="/imprint/">Imprint</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#The-Idea"><span class="toc-number">1.</span> <span class="toc-text">The Idea</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Using-Gobot-SDK"><span class="toc-number">2.</span> <span class="toc-text">Using Gobot SDK</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#First-Prototype"><span class="toc-number">3.</span> <span class="toc-text">First Prototype</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Challenges"><span class="toc-number">4.</span> <span class="toc-text">Challenges</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Future-Plans"><span class="toc-number">5.</span> <span class="toc-text">Future Plans</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://muetsch.io/flying-a-dji-tello-drone-with-go.html"><i class="fa fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://muetsch.io/flying-a-dji-tello-drone-with-go.html&text=Flying a DJI Tello Drone with Go"><i class="fa fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://muetsch.io/flying-a-dji-tello-drone-with-go.html&title=Flying a DJI Tello Drone with Go"><i class="fa fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://muetsch.io/flying-a-dji-tello-drone-with-go.html&is_video=false&description=Flying a DJI Tello Drone with Go"><i class="fa fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Flying a DJI Tello Drone with Go&body=Check out this article: https://muetsch.io/flying-a-dji-tello-drone-with-go.html"><i class="fa fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://muetsch.io/flying-a-dji-tello-drone-with-go.html&title=Flying a DJI Tello Drone with Go"><i class="fa fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://muetsch.io/flying-a-dji-tello-drone-with-go.html&title=Flying a DJI Tello Drone with Go"><i class="fa fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://muetsch.io/flying-a-dji-tello-drone-with-go.html&title=Flying a DJI Tello Drone with Go"><i class="fa fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://muetsch.io/flying-a-dji-tello-drone-with-go.html&title=Flying a DJI Tello Drone with Go"><i class="fa fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://muetsch.io/flying-a-dji-tello-drone-with-go.html&name=Flying a DJI Tello Drone with Go&description="><i class="fa fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+      <ul>
+        <li id="toc"><a class="icon" href="#" onclick='toggleById("toc-footer")'><i class="fa fa-list fa-lg" aria-hidden="true"></i> TOC</a></li>
+        <li id="share"><a class="icon" href="#" onclick='toggleById("share-footer")'><i class="fa fa-share-alt fa-lg" aria-hidden="true"></i> Share</a></li>
+        <li id="top" style="display:none"><a class="icon" href="#" onclick="window.scrollTo(0,0)"><i class="fa fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a></li>
+        <li id="menu"><a class="icon" href="#" onclick='toggleById("nav-footer")'><i class="fa fa-bars fa-lg" aria-hidden="true"></i> Menu</a></li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+    
+    <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2021 Ferdinand Mütsch
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Blog</a></li>
+         
+          <li><a href="/imprint/">Imprint</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+</body>
+</html>
+<!-- styles -->
+
+<link rel="stylesheet" href="/lib/roboto/css/roboto.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+
+
+<script src="/js/main.js"></script>
+
+<!-- Google Analytics -->
+
+<!-- Disqus Comments -->
+
+

@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="referrer" content="no-referrer">
+    <meta name="description" content="In the context of my Master’s thesis I conducted a very basic performance comparison of several different MQTT brokers and quickly wanted to share my insights. Please note that these benchmarks are qu">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Basic benchmarks of 5 different MQTT brokers">
+<meta property="og:url" content="https://muetsch.io/basic-benchmarks-of-5-different-mqtt-brokers.html">
+<meta property="og:site_name" content="Ferdinand Mütsch">
+<meta property="og:description" content="In the context of my Master’s thesis I conducted a very basic performance comparison of several different MQTT brokers and quickly wanted to share my insights. Please note that these benchmarks are qu">
+<meta property="og:locale">
+<meta property="og:image" content="https://apps.muetsch.io/images/o:auto?image=https://muetsch.io/images/mqtt_bench_2.png">
+<meta property="article:published_time" content="2019-07-17T20:16:53.000Z">
+<meta property="article:modified_time" content="2020-10-30T20:05:40.280Z">
+<meta property="article:author" content="Ferdinand Mütsch">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://apps.muetsch.io/images/o:auto?image=https://muetsch.io/images/mqtt_bench_2.png">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/favicon.ico" sizes="192x192">
+          
+        
+        
+    
+    <!-- title -->
+    <title>Basic benchmarks of 5 different MQTT brokers</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- rss -->
+    
+    
+
+    <!-- rel-me links -->
+    
+      
+        <link href="http://github.com/muety" rel="me">
+      
+        <link href="https://twitter.com/n2try" rel="me">
+      
+        <link href="mailto:ferdinand@muetsch.io" rel="me">
+      
+    
+
+    <!-- Webmention link -->
+    
+      <link href="https://webmention.io/muetsch.io/webmention" rel="webmention">
+    
+
+    
+      <link href="https://webmention.io/muetsch.io/xmlrpc" rel="pingback">
+    
+<meta name="generator" content="Hexo 5.2.0"><link rel="alternate" href="/rss2.xml" title="Ferdinand Mütsch" type="application/rss+xml">
+</head>
+
+<body>
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fa fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fa fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="window.scrollTo(0, 0)" style="display:none;"><i class="fa fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Blog</a></li>
+         
+          <li><a href="/imprint/">Imprint</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/transfer-learning-for-multi-digit-recognition-using-tensorflow-object-detection-and-svhn-classifier.html"><i class="fa fa-chevron-left" aria-hidden="true" onmouseover='toggleById("i-prev");' onmouseout='toggleById("i-prev");'></i></a></li>
+        
+        
+        <li><a class="icon" href="/exploratory-analysis-on-github-data.html"><i class="fa fa-chevron-right" aria-hidden="true" onmouseover='toggleById("i-next").toggleById();' onmouseout='toggleById("i-next");'></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="window.scrollTo(0,0)"><i class="fa fa-chevron-up" aria-hidden="true" onmouseover='toggleById("i-top");' onmouseout='toggleById("i-top");'></i></a></li>
+        <li><a class="icon" href="#"><i class="fa fa-share-alt" aria-hidden="true" onmouseover='toggleById("i-share");' onmouseout='toggleById("i-share");' onclick='toggleById("share");return false;'></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://muetsch.io/basic-benchmarks-of-5-different-mqtt-brokers.html"><i class="fa fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://muetsch.io/basic-benchmarks-of-5-different-mqtt-brokers.html&text=Basic benchmarks of 5 different MQTT brokers"><i class="fa fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://muetsch.io/basic-benchmarks-of-5-different-mqtt-brokers.html&title=Basic benchmarks of 5 different MQTT brokers"><i class="fa fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://muetsch.io/basic-benchmarks-of-5-different-mqtt-brokers.html&is_video=false&description=Basic benchmarks of 5 different MQTT brokers"><i class="fa fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Basic benchmarks of 5 different MQTT brokers&body=Check out this article: https://muetsch.io/basic-benchmarks-of-5-different-mqtt-brokers.html"><i class="fa fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://muetsch.io/basic-benchmarks-of-5-different-mqtt-brokers.html&title=Basic benchmarks of 5 different MQTT brokers"><i class="fa fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://muetsch.io/basic-benchmarks-of-5-different-mqtt-brokers.html&title=Basic benchmarks of 5 different MQTT brokers"><i class="fa fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://muetsch.io/basic-benchmarks-of-5-different-mqtt-brokers.html&title=Basic benchmarks of 5 different MQTT brokers"><i class="fa fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://muetsch.io/basic-benchmarks-of-5-different-mqtt-brokers.html&title=Basic benchmarks of 5 different MQTT brokers"><i class="fa fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://muetsch.io/basic-benchmarks-of-5-different-mqtt-brokers.html&name=Basic benchmarks of 5 different MQTT brokers&description="><i class="fa fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Setup"><span class="toc-number">1.</span> <span class="toc-text">Setup</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Brokers"><span class="toc-number">2.</span> <span class="toc-text">Brokers</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Results"><span class="toc-number">3.</span> <span class="toc-text">Results</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index width mx-auto px2 my4">
+        
+        <article class="h-entry post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <a href="https://muetsch.io/basic-benchmarks-of-5-different-mqtt-brokers.html" class="u-url">
+        <h1 class="posttitle p-name" itemprop="name headline" property="headline">
+            Basic benchmarks of 5 different MQTT brokers
+        </h1>
+    </a>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" property="author" itemscope itemtype="http://schema.org/Person" vocab="http://schema.org/" typeof="Person">
+        <span itemprop="name" property="name" class="p-author h-card">Ferdinand Mütsch</span>
+      </span>
+      
+    <div class="postdate">
+        <time datetime="2019-07-17T20:16:53.000Z" class="dt-published" itemprop="datePublished" property="datePublished">2019-07-17</time>
+    </div>
+
+
+      
+
+
+      <!--
+      <div style="margin-top: 30px">
+        <a href="https://liberapay.com/muety/" target="_blank"
+          style="background-image: none; text-decoration: none;"><img
+            src="https://badges.fw-web.space/liberapay/receives/muety.svg?logo=liberapay&style=flat-square" alt="Liberapay"
+            style="height: auto !important;width: auto !important;"></a>
+      </div>
+      -->
+    </div>
+  </header>
+  
+  <div class="content e-content" itemprop="articleBody" property="articleBody">
+    <p>In the context of my Master’s thesis I conducted a very basic performance comparison of several different MQTT brokers and quickly wanted to share my insights. Please note that these benchmarks are quite superficial only. I did not aim to perform an in-depth evaluation, but rather get a basic idea of their performance in general. </p>
+<h2 id="Setup"><a href="#Setup" class="headerlink" title="Setup"></a>Setup</h2><ul>
+<li>To perform load tests in a <em>publish</em> scenario, I used <a target="_blank" rel="noopener" href="https://github.com/takanorig/mqtt-bench">takanorig/mqtt-bench</a>, an MQTT benchmarking tool written in Go.</li>
+<li>All tests were run with the options <code>-count 10000</code>, <code>-clients 25</code> and <code>-size 4096</code>, which means to simulate 25 concurrent MQTT clients, each sending 10,000 messages of 4 KBytes size each.</li>
+<li>Both load testing tool as well as the respective broker were run locally on a 6-core, 12-thread, 3.6 Ghz machine with Ubuntu 18.04.</li>
+<li>Unless otherwise stated, the brokers were started with default configuration.</li>
+</ul>
+<h2 id="Brokers"><a href="#Brokers" class="headerlink" title="Brokers"></a>Brokers</h2><p>The following brokers were tested.</p>
+<table>
+<thead>
+<tr>
+<th>Broker</th>
+<th>Written In</th>
+<th>Version</th>
+<th>Runtime</th>
+<th>Additional Info</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>hbmqtt</td>
+<td>Python</td>
+<td>0.8</td>
+<td>CPython 3.6</td>
+<td>–</td>
+</tr>
+<tr>
+<td>hbmqtt (PyPy)</td>
+<td>Python</td>
+<td>0.8</td>
+<td>PyPy 3.6 v7.1.1</td>
+<td>–</td>
+</tr>
+<tr>
+<td>HiveMQ CE</td>
+<td>Java</td>
+<td>2019.1</td>
+<td>Oracle JDK 12</td>
+<td>–</td>
+</tr>
+<tr>
+<td>Mosca</td>
+<td>JavaScript</td>
+<td>2.8.1</td>
+<td>Node 4.8.0</td>
+<td>–</td>
+</tr>
+<tr>
+<td>Mosquitto</td>
+<td>C</td>
+<td>1.6.3</td>
+<td>–</td>
+<td>–</td>
+</tr>
+<tr>
+<td>RabbitMQ</td>
+<td>Erlang</td>
+<td>3.7.4</td>
+<td>–</td>
+<td>enabled_plugins=[rabbitmq_management, rabbitmq_management_agent, rabbitmq_management_visualiser, rabbitmq_shovel_management, rabbitmq_stomp, rabbitmq_mqtt,rabbitmq_web_stomp, rabbitmq_web_mqtt]</td>
+</tr>
+</tbody></table>
+<h2 id="Results"><a href="#Results" class="headerlink" title="Results"></a>Results</h2><p>These are the results that I obtained. Higher is better.</p>
+<p><img src="https://apps.muetsch.io/images/o:auto?image=https://muetsch.io/images/mqtt_bench_2.png" alt="MQTT benchmark results"></p>
+
+  </div>
+</article>
+
+
+
+    </div>
+    
+      <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Blog</a></li>
+         
+          <li><a href="/imprint/">Imprint</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Setup"><span class="toc-number">1.</span> <span class="toc-text">Setup</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Brokers"><span class="toc-number">2.</span> <span class="toc-text">Brokers</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Results"><span class="toc-number">3.</span> <span class="toc-text">Results</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://muetsch.io/basic-benchmarks-of-5-different-mqtt-brokers.html"><i class="fa fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://muetsch.io/basic-benchmarks-of-5-different-mqtt-brokers.html&text=Basic benchmarks of 5 different MQTT brokers"><i class="fa fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://muetsch.io/basic-benchmarks-of-5-different-mqtt-brokers.html&title=Basic benchmarks of 5 different MQTT brokers"><i class="fa fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://muetsch.io/basic-benchmarks-of-5-different-mqtt-brokers.html&is_video=false&description=Basic benchmarks of 5 different MQTT brokers"><i class="fa fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Basic benchmarks of 5 different MQTT brokers&body=Check out this article: https://muetsch.io/basic-benchmarks-of-5-different-mqtt-brokers.html"><i class="fa fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://muetsch.io/basic-benchmarks-of-5-different-mqtt-brokers.html&title=Basic benchmarks of 5 different MQTT brokers"><i class="fa fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://muetsch.io/basic-benchmarks-of-5-different-mqtt-brokers.html&title=Basic benchmarks of 5 different MQTT brokers"><i class="fa fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://muetsch.io/basic-benchmarks-of-5-different-mqtt-brokers.html&title=Basic benchmarks of 5 different MQTT brokers"><i class="fa fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://muetsch.io/basic-benchmarks-of-5-different-mqtt-brokers.html&title=Basic benchmarks of 5 different MQTT brokers"><i class="fa fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://muetsch.io/basic-benchmarks-of-5-different-mqtt-brokers.html&name=Basic benchmarks of 5 different MQTT brokers&description="><i class="fa fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+      <ul>
+        <li id="toc"><a class="icon" href="#" onclick='toggleById("toc-footer")'><i class="fa fa-list fa-lg" aria-hidden="true"></i> TOC</a></li>
+        <li id="share"><a class="icon" href="#" onclick='toggleById("share-footer")'><i class="fa fa-share-alt fa-lg" aria-hidden="true"></i> Share</a></li>
+        <li id="top" style="display:none"><a class="icon" href="#" onclick="window.scrollTo(0,0)"><i class="fa fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a></li>
+        <li id="menu"><a class="icon" href="#" onclick='toggleById("nav-footer")'><i class="fa fa-bars fa-lg" aria-hidden="true"></i> Menu</a></li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+    
+    <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2021 Ferdinand Mütsch
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Blog</a></li>
+         
+          <li><a href="/imprint/">Imprint</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+</body>
+</html>
+<!-- styles -->
+
+<link rel="stylesheet" href="/lib/roboto/css/roboto.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+
+
+<script src="/js/main.js"></script>
+
+<!-- Google Analytics -->
+
+<!-- Disqus Comments -->
+
+

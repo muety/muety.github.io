@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="referrer" content="no-referrer">
+    <meta name="description" content="This article presents how to use convolutional neural networks and TensorFlow object detection to localize and recognize multi-digit labels from pictures of runners at sports events.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Transfer Learning for Multi-Digit Recognition using TensorFlow Object Detection and SVHN Classifier">
+<meta property="og:url" content="https://muetsch.io/transfer-learning-for-multi-digit-recognition-using-tensorflow-object-detection-and-svhn-classifier.html">
+<meta property="og:site_name" content="Ferdinand Mütsch">
+<meta property="og:description" content="This article presents how to use convolutional neural networks and TensorFlow object detection to localize and recognize multi-digit labels from pictures of runners at sports events.">
+<meta property="og:locale">
+<meta property="og:image" content="https://miro.medium.com/max/1024/1*ZrlYBlKXiADNJC6OsOKTMg.jpeg">
+<meta property="og:image" content="https://apps.muetsch.io/images/o:auto?image=https://muetsch.io/images/svhn_steps.png">
+<meta property="og:image" content="https://apps.muetsch.io/images/o:auto?image=https://muetsch.io/images/svhn_labelimg.png">
+<meta property="og:image" content="https://apps.muetsch.io/images/o:auto?image=https://muetsch.io/images/svhn_cropped_images.png">
+<meta property="og:image" content="https://apps.muetsch.io/images/o:auto?image=https://muetsch.io/images/svhn_labels.png">
+<meta property="og:image" content="https://apps.muetsch.io/images/o:auto?image=https://muetsch.io/images/svhn_cropping.png">
+<meta property="article:published_time" content="2019-09-05T13:41:49.000Z">
+<meta property="article:modified_time" content="2020-10-30T20:05:40.285Z">
+<meta property="article:author" content="Ferdinand Mütsch">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://miro.medium.com/max/1024/1*ZrlYBlKXiADNJC6OsOKTMg.jpeg">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/favicon.ico" sizes="192x192">
+          
+        
+        
+    
+    <!-- title -->
+    <title>Transfer Learning for Multi-Digit Recognition using TensorFlow Object Detection and SVHN Classifier</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- rss -->
+    
+    
+
+    <!-- rel-me links -->
+    
+      
+        <link href="http://github.com/muety" rel="me">
+      
+        <link href="https://twitter.com/n2try" rel="me">
+      
+        <link href="mailto:ferdinand@muetsch.io" rel="me">
+      
+    
+
+    <!-- Webmention link -->
+    
+      <link href="https://webmention.io/muetsch.io/webmention" rel="webmention">
+    
+
+    
+      <link href="https://webmention.io/muetsch.io/xmlrpc" rel="pingback">
+    
+<meta name="generator" content="Hexo 5.2.0"><link rel="alternate" href="/rss2.xml" title="Ferdinand Mütsch" type="application/rss+xml">
+</head>
+
+<body>
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fa fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fa fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="window.scrollTo(0, 0)" style="display:none;"><i class="fa fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Blog</a></li>
+         
+          <li><a href="/imprint/">Imprint</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/flying-a-dji-tello-drone-with-go.html"><i class="fa fa-chevron-left" aria-hidden="true" onmouseover='toggleById("i-prev");' onmouseout='toggleById("i-prev");'></i></a></li>
+        
+        
+        <li><a class="icon" href="/basic-benchmarks-of-5-different-mqtt-brokers.html"><i class="fa fa-chevron-right" aria-hidden="true" onmouseover='toggleById("i-next").toggleById();' onmouseout='toggleById("i-next");'></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="window.scrollTo(0,0)"><i class="fa fa-chevron-up" aria-hidden="true" onmouseover='toggleById("i-top");' onmouseout='toggleById("i-top");'></i></a></li>
+        <li><a class="icon" href="#"><i class="fa fa-share-alt" aria-hidden="true" onmouseover='toggleById("i-share");' onmouseout='toggleById("i-share");' onclick='toggleById("share");return false;'></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://muetsch.io/transfer-learning-for-multi-digit-recognition-using-tensorflow-object-detection-and-svhn-classifier.html"><i class="fa fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://muetsch.io/transfer-learning-for-multi-digit-recognition-using-tensorflow-object-detection-and-svhn-classifier.html&text=Transfer Learning for Multi-Digit Recognition using TensorFlow Object Detection and SVHN Classifier"><i class="fa fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://muetsch.io/transfer-learning-for-multi-digit-recognition-using-tensorflow-object-detection-and-svhn-classifier.html&title=Transfer Learning for Multi-Digit Recognition using TensorFlow Object Detection and SVHN Classifier"><i class="fa fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://muetsch.io/transfer-learning-for-multi-digit-recognition-using-tensorflow-object-detection-and-svhn-classifier.html&is_video=false&description=Transfer Learning for Multi-Digit Recognition using TensorFlow Object Detection and SVHN Classifier"><i class="fa fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Transfer Learning for Multi-Digit Recognition using TensorFlow Object Detection and SVHN Classifier&body=Check out this article: https://muetsch.io/transfer-learning-for-multi-digit-recognition-using-tensorflow-object-detection-and-svhn-classifier.html"><i class="fa fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://muetsch.io/transfer-learning-for-multi-digit-recognition-using-tensorflow-object-detection-and-svhn-classifier.html&title=Transfer Learning for Multi-Digit Recognition using TensorFlow Object Detection and SVHN Classifier"><i class="fa fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://muetsch.io/transfer-learning-for-multi-digit-recognition-using-tensorflow-object-detection-and-svhn-classifier.html&title=Transfer Learning for Multi-Digit Recognition using TensorFlow Object Detection and SVHN Classifier"><i class="fa fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://muetsch.io/transfer-learning-for-multi-digit-recognition-using-tensorflow-object-detection-and-svhn-classifier.html&title=Transfer Learning for Multi-Digit Recognition using TensorFlow Object Detection and SVHN Classifier"><i class="fa fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://muetsch.io/transfer-learning-for-multi-digit-recognition-using-tensorflow-object-detection-and-svhn-classifier.html&title=Transfer Learning for Multi-Digit Recognition using TensorFlow Object Detection and SVHN Classifier"><i class="fa fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://muetsch.io/transfer-learning-for-multi-digit-recognition-using-tensorflow-object-detection-and-svhn-classifier.html&name=Transfer Learning for Multi-Digit Recognition using TensorFlow Object Detection and SVHN Classifier&description="><i class="fa fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Introduction"><span class="toc-number">1.</span> <span class="toc-text">Introduction</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Problem-Statement"><span class="toc-number">2.</span> <span class="toc-text">Problem Statement</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Approach"><span class="toc-number">3.</span> <span class="toc-text">Approach</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Multi-Digit-Recognition"><span class="toc-number">3.1.</span> <span class="toc-text">Multi-Digit Recognition</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Object-Detection-for-Localization"><span class="toc-number">3.2.</span> <span class="toc-text">Object Detection for Localization</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Outline"><span class="toc-number">3.3.</span> <span class="toc-text">Outline</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Data-Preparation"><span class="toc-number">4.</span> <span class="toc-text">Data Preparation</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Data-Acquisition-and-Labeling-for-Step-1"><span class="toc-number">4.1.</span> <span class="toc-text">Data Acquisition and Labeling for Step 1</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Training-the-Object-Detector"><span class="toc-number">4.2.</span> <span class="toc-text">Training the Object Detector</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Labeling-for-Step-2"><span class="toc-number">4.3.</span> <span class="toc-text">Labeling for Step 2</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Adding-Data-Augmentation"><span class="toc-number">4.4.</span> <span class="toc-text">Adding Data Augmentation</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Fine-Tuning-using-Transfer-Learning"><span class="toc-number">5.</span> <span class="toc-text">Fine-Tuning using Transfer Learning</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Results"><span class="toc-number">6.</span> <span class="toc-text">Results</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index width mx-auto px2 my4">
+        
+        <article class="h-entry post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <a href="https://muetsch.io/transfer-learning-for-multi-digit-recognition-using-tensorflow-object-detection-and-svhn-classifier.html" class="u-url">
+        <h1 class="posttitle p-name" itemprop="name headline" property="headline">
+            Transfer Learning for Multi-Digit Recognition using TensorFlow Object Detection and SVHN Classifier
+        </h1>
+    </a>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" property="author" itemscope itemtype="http://schema.org/Person" vocab="http://schema.org/" typeof="Person">
+        <span itemprop="name" property="name" class="p-author h-card">Ferdinand Mütsch</span>
+      </span>
+      
+    <div class="postdate">
+        <time datetime="2019-09-05T13:41:49.000Z" class="dt-published" itemprop="datePublished" property="datePublished">2019-09-05</time>
+    </div>
+
+
+      
+
+
+      <!--
+      <div style="margin-top: 30px">
+        <a href="https://liberapay.com/muety/" target="_blank"
+          style="background-image: none; text-decoration: none;"><img
+            src="https://badges.fw-web.space/liberapay/receives/muety.svg?logo=liberapay&style=flat-square" alt="Liberapay"
+            style="height: auto !important;width: auto !important;"></a>
+      </div>
+      -->
+    </div>
+  </header>
+  
+  <div class="content e-content" itemprop="articleBody" property="articleBody">
+    <p><img src="https://miro.medium.com/max/1024/1*ZrlYBlKXiADNJC6OsOKTMg.jpeg" alt="Dublin City Marathon 2016"><br>(Dublin City Marathon 2016, <a href="https://commons.wikimedia.org/wiki/File:Dublin_City_Marathon_2006_(283653500).jpg" title="Wikimedia Commons" target="">Source</a>)</p>
+<h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1><p>This summer I attended a run in my home town, where each of the 6,000 runners was assigned a certain bib number to wear on their shirt for time tracking. During the run, several photographers took pictures of each runner, which were made available online afterward. To find oneself among tens of thousands of pictures, the web portal offered an option to search by one’s bib number. However, the images are tagged manually by volunteer users, so only a very small fraction of all photos was actually searchable by number.</p>
+<p>I wondered if this might not be a perfectly suitable task for machine learning-based image processing and so I took it as a challenge to build a system that automatically tags pictures with the bib numbers they contain.</p>
+<h1 id="Problem-Statement"><a href="#Problem-Statement" class="headerlink" title="Problem Statement"></a>Problem Statement</h1><p>Given high-resolution RGB images like the above, which contain one to N persons, each of them wearing 0 to 1 numbers at the front of their bodies, I want to output each of these numbers in text form and associate them to the picture. I figured the numbers to be between 1 and 5 digits long.</p>
+<p>Before starting, I conducted some research and found that, surprisingly, the problem seems to be less trivial than it seemed. First, classical OCR methods didn’t seem to work at all, even if the image is precisely cropped only to the number. Second, while one-digit recognition with machine learning is trivial (MNIST, etc.), multi-digit is a much harder problem. Usually, it can’t just be solved as a simple classification, because there are not 10 possible output classes anymore, but several thousand. Some other solution was required.</p>
+<h1 id="Approach"><a href="#Approach" class="headerlink" title="Approach"></a>Approach</h1><h2 id="Multi-Digit-Recognition"><a href="#Multi-Digit-Recognition" class="headerlink" title="Multi-Digit Recognition"></a>Multi-Digit Recognition</h2><p>As a starting point, I discovered a paper called <a target="_blank" rel="noopener" href="http://arxiv.org/pdf/1312.6082.pdf">“Multi-digit Number Recognition from Street View Imagery using Deep Convolutional Neural Networks”</a>, which presents a multi-digit classifier for house numbers – using convolutional neural nets – that was trained on <a target="_blank" rel="noopener" href="http://ufldl.stanford.edu/housenumbers/">Stanford’s SVHN dataset</a>. Recognizing house numbers is a quite similar problem to recognizing bib numbers, so I decided to take this approach as a basis.<br>Luckily, I found an <a target="_blank" rel="noopener" href="https://github.com/potterhsu/SVHNClassifier-PyTorch">open-source PyTorch implementation</a> of the neural net on GitHub. I needed to do several tweaks and change some code to make it fit my needs, but it was a good start.</p>
+<p>Eventually, I hoped that I could take the pre-trained SVHN model and use transfer-learning to fit it to my problem. </p>
+<p>However, before I could get started with the actual classification, there was another problem to solve. The input for the digit classifier is, as one could expect, not a high-res image with a lot of noise and distraction in it, but rather only a very precise excerpt from that image, that exactly contains one single number and not much more. </p>
+<h2 id="Object-Detection-for-Localization"><a href="#Object-Detection-for-Localization" class="headerlink" title="Object Detection for Localization"></a>Object Detection for Localization</h2><p>I needed to find a way to localize the 2D-coordinates of all number signs within a picture. To solve that, I decided to utilize TensorFlow’s <a target="_blank" rel="noopener" href="https://github.com/tensorflow/models/tree/master/research/object_detection">object detection framework</a>, whose purpose is exactly that; recognizing certain objects in an image and outputting a 2-dimensional bounding box for it. </p>
+<h2 id="Outline"><a href="#Outline" class="headerlink" title="Outline"></a>Outline</h2><p>In summary, I planned to build a two-step classification system.</p>
+<p><img src="https://apps.muetsch.io/images/o:auto?image=https://muetsch.io/images/svhn_steps.png"></p>
+<p><strong>Step 1:</strong> Recognize bib numbers and crop them out<br><strong>Step 2:</strong> Use first step’s output as input for a fine-tuned SVHN classifier</p>
+<h1 id="Data-Preparation"><a href="#Data-Preparation" class="headerlink" title="Data Preparation"></a>Data Preparation</h1><h2 id="Data-Acquisition-and-Labeling-for-Step-1"><a href="#Data-Acquisition-and-Labeling-for-Step-1" class="headerlink" title="Data Acquisition and Labeling for Step 1"></a>Data Acquisition and Labeling for Step 1</h2><p>First, I started collecting 1,000 images from the web portal mentioned above. I manually labeled them for step 1 by drawing bounding boxes around each number, using <a target="_blank" rel="noopener" href="https://github.com/tzutalin/labelImg">labelImg</a> and wrote a short script to separate them into training, test and validation sets.</p>
+<p><img src="https://apps.muetsch.io/images/o:auto?image=https://muetsch.io/images/svhn_labelimg.png"></p>
+<p>The output of this step is an XML file for every image, containing information about the respective labels and their bounding boxes. Using a script called <a target="_blank" rel="noopener" href="https://github.com/datitran/raccoon_dataset/blob/master/generate_tfrecord.py"><code>generate_tfrecord.py</code></a>, those XML files can be combined together with their corresponding images into one big <em>TFRecord</em> file for each set (training, test, validation), that is the format required as input for TensorFlow object detection.</p>
+<h2 id="Training-the-Object-Detector"><a href="#Training-the-Object-Detector" class="headerlink" title="Training the Object Detector"></a>Training the Object Detector</h2><p>For training the object detection model to recognize bib numbers, I decided not to train it completely from scratch, but fine-tune the pre-trained <code>ssd_mobilenet_v1_pets</code> set to my needs. The TensorFlow object detection framework provides a quite convenient way to do so by simply adjusting a few config files. If you’re interested in more details about training a custom object detector, there’s a very interesting <a target="_blank" rel="noopener" href="https://pythonprogramming.net/introduction-use-tensorflow-object-detection-api-tutorial/">article on pythonprogramming.net</a> on this. </p>
+<p>After training for ~ 100,000 episodes, I ended up with a model – represented as a so-called <code>frozen_inference_graph.pb</code> binary file - that was able to find bib number signs in sports imagery. </p>
+<p>Letting the model run on my data yields quite reliable results of bounding boxes of bib numbers, which I could then use to crop the original images to smaller ones with another small script. </p>
+<p><img src="https://apps.muetsch.io/images/o:auto?image=https://muetsch.io/images/svhn_cropped_images.png"></p>
+<h2 id="Labeling-for-Step-2"><a href="#Labeling-for-Step-2" class="headerlink" title="Labeling for Step 2"></a>Labeling for Step 2</h2><p>To produce training data for the second step – digit recognition – I needed to do another round of labeling. This time, the little cropped images of numbers had to be assigned their actual numbers in text form. I did this manually and using a simple CSV table. </p>
+<p><img src="https://apps.muetsch.io/images/o:auto?image=https://muetsch.io/images/svhn_labels.png"> </p>
+<h2 id="Adding-Data-Augmentation"><a href="#Adding-Data-Augmentation" class="headerlink" title="Adding Data Augmentation"></a>Adding Data Augmentation</h2><p>To (1.) overcome my lack of training data and (2.) hopefully make the model generalize better, I considered it a good idea to introduce some image augmentation. I extended the given <a target="_blank" rel="noopener" href="https://github.com/potterhsu/SVHNClassifier-PyTorch/blob/master/dataset.py"><code>DataLoader</code></a> in a way that a specified fraction of the number of raw training images is artificially added to the data set in a slightly transformed form. To be more precise, I used <a target="_blank" rel="noopener" href="https://pytorch.org/docs/stable/torchvision/transforms.html">PyTorch’s TorchVision Transforms</a> to introduce (a) color jitter (variance in brightness, contrast, saturation, and hue), (b) <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Affine_transformation">affine transformations</a> and (c) rotation.</p>
+<p>Another thing I changed from the original implementation is the way input images are transformed. The net’s 64 x 64 x 3 input layer expects square RGB images. However, obviously, barely any of the training images are actually square. Whereas the original implementation essentially squeezes or tugs the images to match the required dimensions, I considered this unfavorable, especially for wide numbers, e.g. 5-digit numbers. Instead, I changed the input transformation in a way, that images are “thumbnailed”. </p>
+<p>However, so far I didn’t evaluate which way of pre-processing yields better performance.</p>
+<p><img src="https://apps.muetsch.io/images/o:auto?image=https://muetsch.io/images/svhn_cropping.png"></p>
+<h1 id="Fine-Tuning-using-Transfer-Learning"><a href="#Fine-Tuning-using-Transfer-Learning" class="headerlink" title="Fine-Tuning using Transfer Learning"></a>Fine-Tuning using Transfer Learning</h1><p>Eventually, after all data massaging and pre-processing was done, I could start with the interesting part: the actual digit recognition.<br>Due to my lack of large amounts of high-variance, representative training data, I decided that it might not be a good idea to train the CNN model-based classifier completely from scratch. Instead, I used a <a target="_blank" rel="noopener" href="https://github.com/potterhsu/SVHNClassifier-PyTorch#results">pre-trained model</a> (trained on SVHN dataset) with an accuracy of 95 % for house numbers as a feature extractor and fine-tune it to work with bib numbers. To do so, I conveniently used the given <a target="_blank" rel="noopener" href="https://github.com/potterhsu/SVHNClassifier-PyTorch/blob/master/train.py"><code>train.py</code></a> script. However, in my understanding, it does not train only the net’s very last classification layer while keeping all previous convolutional- and normalization layers frozen, but re-trains every layer. This is not exactly what I wanted, but it turned out to work quite well.</p>
+<h1 id="Results"><a href="#Results" class="headerlink" title="Results"></a>Results</h1><p>After training for 72,000 episodes with a batch size of 256, a learning rate of 10^-3 and an augmentation factor of 1.5, I eventually evaluated my two-step classification system on a set of 120 test images and reached an accuracy of <strong>~ 76 %</strong>. That is, about 3/4 of all numbers among all images were detected and classified correctly.</p>
+<p>However, there is still room for improvements. First, using a lot more training data would probably boost accuracy. Second, I didn’t do any hyper-parameter tuning, which would probably also improve performance by a few percentage points.</p>
+
+  </div>
+</article>
+
+
+
+    </div>
+    
+      <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Blog</a></li>
+         
+          <li><a href="/imprint/">Imprint</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Introduction"><span class="toc-number">1.</span> <span class="toc-text">Introduction</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Problem-Statement"><span class="toc-number">2.</span> <span class="toc-text">Problem Statement</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Approach"><span class="toc-number">3.</span> <span class="toc-text">Approach</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Multi-Digit-Recognition"><span class="toc-number">3.1.</span> <span class="toc-text">Multi-Digit Recognition</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Object-Detection-for-Localization"><span class="toc-number">3.2.</span> <span class="toc-text">Object Detection for Localization</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Outline"><span class="toc-number">3.3.</span> <span class="toc-text">Outline</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Data-Preparation"><span class="toc-number">4.</span> <span class="toc-text">Data Preparation</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Data-Acquisition-and-Labeling-for-Step-1"><span class="toc-number">4.1.</span> <span class="toc-text">Data Acquisition and Labeling for Step 1</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Training-the-Object-Detector"><span class="toc-number">4.2.</span> <span class="toc-text">Training the Object Detector</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Labeling-for-Step-2"><span class="toc-number">4.3.</span> <span class="toc-text">Labeling for Step 2</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Adding-Data-Augmentation"><span class="toc-number">4.4.</span> <span class="toc-text">Adding Data Augmentation</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Fine-Tuning-using-Transfer-Learning"><span class="toc-number">5.</span> <span class="toc-text">Fine-Tuning using Transfer Learning</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Results"><span class="toc-number">6.</span> <span class="toc-text">Results</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://muetsch.io/transfer-learning-for-multi-digit-recognition-using-tensorflow-object-detection-and-svhn-classifier.html"><i class="fa fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://muetsch.io/transfer-learning-for-multi-digit-recognition-using-tensorflow-object-detection-and-svhn-classifier.html&text=Transfer Learning for Multi-Digit Recognition using TensorFlow Object Detection and SVHN Classifier"><i class="fa fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://muetsch.io/transfer-learning-for-multi-digit-recognition-using-tensorflow-object-detection-and-svhn-classifier.html&title=Transfer Learning for Multi-Digit Recognition using TensorFlow Object Detection and SVHN Classifier"><i class="fa fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://muetsch.io/transfer-learning-for-multi-digit-recognition-using-tensorflow-object-detection-and-svhn-classifier.html&is_video=false&description=Transfer Learning for Multi-Digit Recognition using TensorFlow Object Detection and SVHN Classifier"><i class="fa fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Transfer Learning for Multi-Digit Recognition using TensorFlow Object Detection and SVHN Classifier&body=Check out this article: https://muetsch.io/transfer-learning-for-multi-digit-recognition-using-tensorflow-object-detection-and-svhn-classifier.html"><i class="fa fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://muetsch.io/transfer-learning-for-multi-digit-recognition-using-tensorflow-object-detection-and-svhn-classifier.html&title=Transfer Learning for Multi-Digit Recognition using TensorFlow Object Detection and SVHN Classifier"><i class="fa fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://muetsch.io/transfer-learning-for-multi-digit-recognition-using-tensorflow-object-detection-and-svhn-classifier.html&title=Transfer Learning for Multi-Digit Recognition using TensorFlow Object Detection and SVHN Classifier"><i class="fa fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://muetsch.io/transfer-learning-for-multi-digit-recognition-using-tensorflow-object-detection-and-svhn-classifier.html&title=Transfer Learning for Multi-Digit Recognition using TensorFlow Object Detection and SVHN Classifier"><i class="fa fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://muetsch.io/transfer-learning-for-multi-digit-recognition-using-tensorflow-object-detection-and-svhn-classifier.html&title=Transfer Learning for Multi-Digit Recognition using TensorFlow Object Detection and SVHN Classifier"><i class="fa fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://muetsch.io/transfer-learning-for-multi-digit-recognition-using-tensorflow-object-detection-and-svhn-classifier.html&name=Transfer Learning for Multi-Digit Recognition using TensorFlow Object Detection and SVHN Classifier&description="><i class="fa fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+      <ul>
+        <li id="toc"><a class="icon" href="#" onclick='toggleById("toc-footer")'><i class="fa fa-list fa-lg" aria-hidden="true"></i> TOC</a></li>
+        <li id="share"><a class="icon" href="#" onclick='toggleById("share-footer")'><i class="fa fa-share-alt fa-lg" aria-hidden="true"></i> Share</a></li>
+        <li id="top" style="display:none"><a class="icon" href="#" onclick="window.scrollTo(0,0)"><i class="fa fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a></li>
+        <li id="menu"><a class="icon" href="#" onclick='toggleById("nav-footer")'><i class="fa fa-bars fa-lg" aria-hidden="true"></i> Menu</a></li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+    
+    <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2021 Ferdinand Mütsch
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Blog</a></li>
+         
+          <li><a href="/imprint/">Imprint</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+</body>
+</html>
+<!-- styles -->
+
+<link rel="stylesheet" href="/lib/roboto/css/roboto.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+
+
+<script src="/js/main.js"></script>
+
+<!-- Google Analytics -->
+
+<!-- Disqus Comments -->
+
+

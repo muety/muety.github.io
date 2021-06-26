@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="referrer" content="no-referrer">
+    <meta name="description" content="IntroductionI bet there are a ton of tutorial like this out there already and also the Nextcloud documentations are brilliant themselves. However, I want to quickly document the process of migrating a">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Migrating Nextcloud from SQLite to MySQL with Docker">
+<meta property="og:url" content="https://muetsch.io/migrating-nextcloud-from-sqlite-to-mysql-with-docker.html">
+<meta property="og:site_name" content="Ferdinand Mütsch">
+<meta property="og:description" content="IntroductionI bet there are a ton of tutorial like this out there already and also the Nextcloud documentations are brilliant themselves. However, I want to quickly document the process of migrating a">
+<meta property="og:locale">
+<meta property="og:image" content="https://apps.muetsch.io/images/o:auto/?image=https://muetsch.io/images/nextcloud_migration.png">
+<meta property="article:published_time" content="2020-10-02T16:05:15.000Z">
+<meta property="article:modified_time" content="2020-10-30T20:05:40.291Z">
+<meta property="article:author" content="Ferdinand Mütsch">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://apps.muetsch.io/images/o:auto/?image=https://muetsch.io/images/nextcloud_migration.png">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/favicon.ico" sizes="192x192">
+          
+        
+        
+    
+    <!-- title -->
+    <title>Migrating Nextcloud from SQLite to MySQL with Docker</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- rss -->
+    
+    
+
+    <!-- rel-me links -->
+    
+      
+        <link href="http://github.com/muety" rel="me">
+      
+        <link href="https://twitter.com/n2try" rel="me">
+      
+        <link href="mailto:ferdinand@muetsch.io" rel="me">
+      
+    
+
+    <!-- Webmention link -->
+    
+      <link href="https://webmention.io/muetsch.io/webmention" rel="webmention">
+    
+
+    
+      <link href="https://webmention.io/muetsch.io/xmlrpc" rel="pingback">
+    
+<meta name="generator" content="Hexo 5.2.0"><link rel="alternate" href="/rss2.xml" title="Ferdinand Mütsch" type="application/rss+xml">
+</head>
+
+<body>
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fa fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fa fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="window.scrollTo(0, 0)" style="display:none;"><i class="fa fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Blog</a></li>
+         
+          <li><a href="/imprint/">Imprint</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/mastering-software-versioning-in-javascript-projects.html"><i class="fa fa-chevron-left" aria-hidden="true" onmouseover='toggleById("i-prev");' onmouseout='toggleById("i-prev");'></i></a></li>
+        
+        
+        <li><a class="icon" href="/pgp-encrypted-personal-e-mail-inbox.html"><i class="fa fa-chevron-right" aria-hidden="true" onmouseover='toggleById("i-next").toggleById();' onmouseout='toggleById("i-next");'></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="window.scrollTo(0,0)"><i class="fa fa-chevron-up" aria-hidden="true" onmouseover='toggleById("i-top");' onmouseout='toggleById("i-top");'></i></a></li>
+        <li><a class="icon" href="#"><i class="fa fa-share-alt" aria-hidden="true" onmouseover='toggleById("i-share");' onmouseout='toggleById("i-share");' onclick='toggleById("share");return false;'></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://muetsch.io/migrating-nextcloud-from-sqlite-to-mysql-with-docker.html"><i class="fa fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://muetsch.io/migrating-nextcloud-from-sqlite-to-mysql-with-docker.html&text=Migrating Nextcloud from SQLite to MySQL with Docker"><i class="fa fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://muetsch.io/migrating-nextcloud-from-sqlite-to-mysql-with-docker.html&title=Migrating Nextcloud from SQLite to MySQL with Docker"><i class="fa fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://muetsch.io/migrating-nextcloud-from-sqlite-to-mysql-with-docker.html&is_video=false&description=Migrating Nextcloud from SQLite to MySQL with Docker"><i class="fa fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Migrating Nextcloud from SQLite to MySQL with Docker&body=Check out this article: https://muetsch.io/migrating-nextcloud-from-sqlite-to-mysql-with-docker.html"><i class="fa fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://muetsch.io/migrating-nextcloud-from-sqlite-to-mysql-with-docker.html&title=Migrating Nextcloud from SQLite to MySQL with Docker"><i class="fa fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://muetsch.io/migrating-nextcloud-from-sqlite-to-mysql-with-docker.html&title=Migrating Nextcloud from SQLite to MySQL with Docker"><i class="fa fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://muetsch.io/migrating-nextcloud-from-sqlite-to-mysql-with-docker.html&title=Migrating Nextcloud from SQLite to MySQL with Docker"><i class="fa fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://muetsch.io/migrating-nextcloud-from-sqlite-to-mysql-with-docker.html&title=Migrating Nextcloud from SQLite to MySQL with Docker"><i class="fa fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://muetsch.io/migrating-nextcloud-from-sqlite-to-mysql-with-docker.html&name=Migrating Nextcloud from SQLite to MySQL with Docker&description="><i class="fa fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Introduction"><span class="toc-number">1.</span> <span class="toc-text">Introduction</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Setup"><span class="toc-number">2.</span> <span class="toc-text">Setup</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Migrating"><span class="toc-number">3.</span> <span class="toc-text">Migrating</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Creating-a-new-database"><span class="toc-number">3.1.</span> <span class="toc-text">Creating a new database</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Configuring-a-Docker-network"><span class="toc-number">3.2.</span> <span class="toc-text">Configuring a Docker network</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Migrating-data"><span class="toc-number">3.3.</span> <span class="toc-text">Migrating data</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Conclusion"><span class="toc-number">4.</span> <span class="toc-text">Conclusion</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#P-S"><span class="toc-number">5.</span> <span class="toc-text">P.S.</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index width mx-auto px2 my4">
+        
+        <article class="h-entry post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <a href="https://muetsch.io/migrating-nextcloud-from-sqlite-to-mysql-with-docker.html" class="u-url">
+        <h1 class="posttitle p-name" itemprop="name headline" property="headline">
+            Migrating Nextcloud from SQLite to MySQL with Docker
+        </h1>
+    </a>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" property="author" itemscope itemtype="http://schema.org/Person" vocab="http://schema.org/" typeof="Person">
+        <span itemprop="name" property="name" class="p-author h-card">Ferdinand Mütsch</span>
+      </span>
+      
+    <div class="postdate">
+        <time datetime="2020-10-02T16:05:15.000Z" class="dt-published" itemprop="datePublished" property="datePublished">2020-10-02</time>
+    </div>
+
+
+      
+
+
+      <!--
+      <div style="margin-top: 30px">
+        <a href="https://liberapay.com/muety/" target="_blank"
+          style="background-image: none; text-decoration: none;"><img
+            src="https://badges.fw-web.space/liberapay/receives/muety.svg?logo=liberapay&style=flat-square" alt="Liberapay"
+            style="height: auto !important;width: auto !important;"></a>
+      </div>
+      -->
+    </div>
+  </header>
+  
+  <div class="content e-content" itemprop="articleBody" property="articleBody">
+    <h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1><p>I bet there are a ton of tutorial like this out there already and also the Nextcloud documentations are brilliant themselves. However, I want to quickly document the process of migrating a Nextcloud 19 instance from SQLite to MySQL as a database backend.</p>
+<p>Please refer to the <a target="_blank" rel="noopener" href="https://docs.nextcloud.com/server/18/admin_manual/configuration_database/db_conversion.html">official guide</a> for further information.</p>
+<h1 id="Setup"><a href="#Setup" class="headerlink" title="Setup"></a>Setup</h1><p>My starting situation is two existing, running Docker containers, one for Nextcloud (<a target="_blank" rel="noopener" href="https://hub.docker.com/_/nextcloud"><code>nextcloud:19</code></a>) and one for a MySQL server (<a target="_blank" rel="noopener" href="https://hub.docker.com/_/mysql"><code>mysql:5.7</code></a>), which I also use for other applications as well. </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ docker ps</span><br><span class="line"></span><br><span class="line">3bea098afb11        nextcloud:19                 &quot;&#x2F;entrypoint.sh apac…&quot;   6 weeks ago         Up 7 days           127.0.0.1:9000-&gt;80&#x2F;tcp                      nextcloud</span><br><span class="line">a140a0ba21d3        mysql:5.7                    &quot;docker-entrypoint.s…&quot;   11 months ago       Up 8 days           127.0.0.1:3306-&gt;3306&#x2F;tcp, 33060&#x2F;tcp         mysql</span><br></pre></td></tr></table></figure>
+
+<h1 id="Migrating"><a href="#Migrating" class="headerlink" title="Migrating"></a>Migrating</h1><h2 id="Creating-a-new-database"><a href="#Creating-a-new-database" class="headerlink" title="Creating a new database"></a>Creating a new database</h2><p>First, a new database is needed, which can later be filled by Nextcloud. To do so, use the <code>mysql</code> command-line client provided by the Docker container to interactively create a new database and a corresponding user. </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker <span class="built_in">exec</span> -it nextcloud mysql -u root -p;</span><br></pre></td></tr></table></figure>
+
+<p>After typing your <code>root</code> password, you’re logged in to the interactive SQL console. Run the following queries.</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">DATABASE</span> <span class="string">&#x27;nextcloud&#x27;</span>;</span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">USER</span> <span class="string">&#x27;nextcloud_user&#x27;</span>@<span class="string">&#x27;%&#x27;</span> <span class="keyword">IDENTIFIED</span> <span class="keyword">BY</span> <span class="string">&#x27;some-secret-password&#x27;</span>;</span><br><span class="line"><span class="keyword">GRANT</span> <span class="keyword">ALL</span> <span class="keyword">PRIVILEGES</span> <span class="keyword">ON</span> nextcloud.* <span class="keyword">TO</span> <span class="string">&#x27;nextcloud_user&#x27;</span>@<span class="string">&#x27;%&#x27;</span>;</span><br><span class="line"><span class="keyword">ALTER</span> <span class="keyword">DATABASE</span> nextcloud <span class="built_in">CHARACTER</span> <span class="keyword">SET</span> utf8mb4 <span class="keyword">COLLATE</span> utf8mb4_general_ci;</span><br><span class="line"><span class="keyword">FLUSH</span> <span class="keyword">PRIVILEGES</span>;</span><br></pre></td></tr></table></figure>
+
+<p>As Nextcloud’s docs say, you need to explicitly <a target="_blank" rel="noopener" href="https://docs.nextcloud.com/server/18/admin_manual/configuration_database/mysql_4byte_support.html">enable MySQL 4-byte UTF-8 support</a>. This is done by the last of the above queries.</p>
+<h2 id="Configuring-a-Docker-network"><a href="#Configuring-a-Docker-network" class="headerlink" title="Configuring a Docker network"></a>Configuring a Docker network</h2><p>If you are using Docker, your Nextcloud container needs a way to talk to your database container. To enable this, they both need to be in the same virtual network. The following shows how to create a new network (called <code>mysql</code>) and join both containers to it.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ docker network create mysql</span><br><span class="line">$ docker network connect mysql mysql</span><br><span class="line">$ docker network connect mysql nextcloud</span><br></pre></td></tr></table></figure>
+
+<p>Assuming the database container has the name <code>mysql</code>, like in this example, the Nextcloud container can now reference through simply using <code>mysql</code> as a DNS name.</p>
+<h2 id="Migrating-data"><a href="#Migrating-data" class="headerlink" title="Migrating data"></a>Migrating data</h2><p>As part of the second steps, Nextcloud’s excellent <code>occ</code> command-line tool comes to play. It essentially does all the heavy lifting for you. Simply follow these steps.</p>
+<p>Note: If you are not using Docker, but a native Nextcloud installation, simply leave out the <code>docker exec</code> command and run <code>php occ</code> directly.</p>
+<p>First, we want to turn maintenance mode on, to “freeze” the data.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker <span class="built_in">exec</span> -it -u www-data nextcloud php occ maintenance:mode --on</span><br></pre></td></tr></table></figure>
+
+<p>Next, we need to do the server-side part of the above mentioned migration to 4-byte UTF-8 support.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ docker <span class="built_in">exec</span> -it -u www-data nextcloud php occ config:system:<span class="built_in">set</span> mysql.utf8mb4 --<span class="built_in">type</span> boolean --value=<span class="string">&quot;true&quot;</span></span><br><span class="line">$ docker <span class="built_in">exec</span> -it -u www-data nextcloud php occ maintenance:repair</span><br></pre></td></tr></table></figure>
+
+<p>Now, we can perform the actual migration from SQLite to MySQL. This may take a while, depending on the size of your database. Luckily, mine was only about 27 MB in size.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker <span class="built_in">exec</span> -it -u www-data nextcloud php occ db:convert-type --all-apps --clear-schema mysql nextcloud_user mysql nextcloud</span><br></pre></td></tr></table></figure>
+
+<p>Eventually, turn off maintenance mode again.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker <span class="built_in">exec</span> -it -u www-data nextcloud php occ maintenance:mode --off</span><br></pre></td></tr></table></figure>
+
+<p>If everything went well, Nextcloud has updated its own config to use the MySQL database instead of SQLite. You can check this at <a target="_blank" rel="noopener" href="http://your-nextcloud-server.tld/settings/admin/serverinfo">http://your-nextcloud-server.tld/settings/admin/serverinfo</a>.</p>
+<p><img src="https://apps.muetsch.io/images/o:auto/?image=https://muetsch.io/images/nextcloud_migration.png"></p>
+<h1 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h1><p>The above process helped me – thanks to the great tooling and documentation provided by the Nextcloud community – to migrate my Nextcloud instance from the “slow” SQLite database engine to MySQL. I hope it works for you as well.</p>
+<p>Good luck!</p>
+<h1 id="P-S"><a href="#P-S" class="headerlink" title="P.S."></a>P.S.</h1><p>Please keep in mind that the start command for your Nextcloud container is different now. For instance, if you want to update your container, you have to pass different parameters than before. Here is what works for me:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker run -d -v /var/data/nextcloud:/var/www/html -v /var/data/nextcloud/data/:/var/www/html/data -p 127.0.0.1:9000:80 --network mysql -e MYSQL_DATABASE=nextcloud -e MYSQL_USER=nextcloud_user -e MYSQL_PASSWORD=iwonttellyouthis -e MYSQL_HOST=mysql --name nextcloud nextcloud:19</span><br></pre></td></tr></table></figure>
+
+<p>(An even better practice would be to not use file system mounts but actual Docker volumes here.)</p>
+
+  </div>
+</article>
+
+
+
+    </div>
+    
+      <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Blog</a></li>
+         
+          <li><a href="/imprint/">Imprint</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Introduction"><span class="toc-number">1.</span> <span class="toc-text">Introduction</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Setup"><span class="toc-number">2.</span> <span class="toc-text">Setup</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Migrating"><span class="toc-number">3.</span> <span class="toc-text">Migrating</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Creating-a-new-database"><span class="toc-number">3.1.</span> <span class="toc-text">Creating a new database</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Configuring-a-Docker-network"><span class="toc-number">3.2.</span> <span class="toc-text">Configuring a Docker network</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Migrating-data"><span class="toc-number">3.3.</span> <span class="toc-text">Migrating data</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Conclusion"><span class="toc-number">4.</span> <span class="toc-text">Conclusion</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#P-S"><span class="toc-number">5.</span> <span class="toc-text">P.S.</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://muetsch.io/migrating-nextcloud-from-sqlite-to-mysql-with-docker.html"><i class="fa fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://muetsch.io/migrating-nextcloud-from-sqlite-to-mysql-with-docker.html&text=Migrating Nextcloud from SQLite to MySQL with Docker"><i class="fa fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://muetsch.io/migrating-nextcloud-from-sqlite-to-mysql-with-docker.html&title=Migrating Nextcloud from SQLite to MySQL with Docker"><i class="fa fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://muetsch.io/migrating-nextcloud-from-sqlite-to-mysql-with-docker.html&is_video=false&description=Migrating Nextcloud from SQLite to MySQL with Docker"><i class="fa fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Migrating Nextcloud from SQLite to MySQL with Docker&body=Check out this article: https://muetsch.io/migrating-nextcloud-from-sqlite-to-mysql-with-docker.html"><i class="fa fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://muetsch.io/migrating-nextcloud-from-sqlite-to-mysql-with-docker.html&title=Migrating Nextcloud from SQLite to MySQL with Docker"><i class="fa fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://muetsch.io/migrating-nextcloud-from-sqlite-to-mysql-with-docker.html&title=Migrating Nextcloud from SQLite to MySQL with Docker"><i class="fa fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://muetsch.io/migrating-nextcloud-from-sqlite-to-mysql-with-docker.html&title=Migrating Nextcloud from SQLite to MySQL with Docker"><i class="fa fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://muetsch.io/migrating-nextcloud-from-sqlite-to-mysql-with-docker.html&title=Migrating Nextcloud from SQLite to MySQL with Docker"><i class="fa fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://muetsch.io/migrating-nextcloud-from-sqlite-to-mysql-with-docker.html&name=Migrating Nextcloud from SQLite to MySQL with Docker&description="><i class="fa fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+      <ul>
+        <li id="toc"><a class="icon" href="#" onclick='toggleById("toc-footer")'><i class="fa fa-list fa-lg" aria-hidden="true"></i> TOC</a></li>
+        <li id="share"><a class="icon" href="#" onclick='toggleById("share-footer")'><i class="fa fa-share-alt fa-lg" aria-hidden="true"></i> Share</a></li>
+        <li id="top" style="display:none"><a class="icon" href="#" onclick="window.scrollTo(0,0)"><i class="fa fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a></li>
+        <li id="menu"><a class="icon" href="#" onclick='toggleById("nav-footer")'><i class="fa fa-bars fa-lg" aria-hidden="true"></i> Menu</a></li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+    
+    <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2021 Ferdinand Mütsch
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Blog</a></li>
+         
+          <li><a href="/imprint/">Imprint</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+</body>
+</html>
+<!-- styles -->
+
+<link rel="stylesheet" href="/lib/roboto/css/roboto.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+
+
+<script src="/js/main.js"></script>
+
+<!-- Google Analytics -->
+
+<!-- Disqus Comments -->
+
+

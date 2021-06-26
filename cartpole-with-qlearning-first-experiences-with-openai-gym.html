@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="referrer" content="no-referrer">
+    <meta name="description" content="OpenAI GymToday I made my first experiences with the OpenAI gym, more specifically with the CartPole environment. Gym is basically a Python library that includes several machine learning challenges, i">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CartPole with Q-Learning - First experiences with OpenAI Gym">
+<meta property="og:url" content="https://muetsch.io/cartpole-with-qlearning-first-experiences-with-openai-gym.html">
+<meta property="og:site_name" content="Ferdinand Mütsch">
+<meta property="og:description" content="OpenAI GymToday I made my first experiences with the OpenAI gym, more specifically with the CartPole environment. Gym is basically a Python library that includes several machine learning challenges, i">
+<meta property="og:locale">
+<meta property="og:image" content="https://apps.muetsch.io/images/o:auto?image=https://muetsch.io/images/cartpole1.jpg">
+<meta property="og:image" content="https://apps.muetsch.io/images/o:auto?image=https://muetsch.io/images/cartpole2.png">
+<meta property="og:image" content="https://apps.muetsch.io/images/o:auto?image=https://muetsch.io/images/cartpole3.png">
+<meta property="og:image" content="https://apps.muetsch.io/images/o:auto?image=https://muetsch.io/images/cartpole4.png">
+<meta property="article:published_time" content="2017-08-24T14:50:57.000Z">
+<meta property="article:modified_time" content="2020-10-30T20:05:40.281Z">
+<meta property="article:author" content="Ferdinand Mütsch">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://apps.muetsch.io/images/o:auto?image=https://muetsch.io/images/cartpole1.jpg">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/favicon.ico" sizes="192x192">
+          
+        
+        
+    
+    <!-- title -->
+    <title>CartPole with Q-Learning - First experiences with OpenAI Gym</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- rss -->
+    
+    
+
+    <!-- rel-me links -->
+    
+      
+        <link href="http://github.com/muety" rel="me">
+      
+        <link href="https://twitter.com/n2try" rel="me">
+      
+        <link href="mailto:ferdinand@muetsch.io" rel="me">
+      
+    
+
+    <!-- Webmention link -->
+    
+      <link href="https://webmention.io/muetsch.io/webmention" rel="webmention">
+    
+
+    
+      <link href="https://webmention.io/muetsch.io/xmlrpc" rel="pingback">
+    
+<meta name="generator" content="Hexo 5.2.0"><link rel="alternate" href="/rss2.xml" title="Ferdinand Mütsch" type="application/rss+xml">
+</head>
+
+<body>
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fa fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fa fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="window.scrollTo(0, 0)" style="display:none;"><i class="fa fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Blog</a></li>
+         
+          <li><a href="/imprint/">Imprint</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/cartpole-with-a-deep-q-network.html"><i class="fa fa-chevron-left" aria-hidden="true" onmouseover='toggleById("i-prev");' onmouseout='toggleById("i-prev");'></i></a></li>
+        
+        
+        <li><a class="icon" href="/telegram-middleman-bot-push-notifications-as-easy-as-post.html"><i class="fa fa-chevron-right" aria-hidden="true" onmouseover='toggleById("i-next").toggleById();' onmouseout='toggleById("i-next");'></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="window.scrollTo(0,0)"><i class="fa fa-chevron-up" aria-hidden="true" onmouseover='toggleById("i-top");' onmouseout='toggleById("i-top");'></i></a></li>
+        <li><a class="icon" href="#"><i class="fa fa-share-alt" aria-hidden="true" onmouseover='toggleById("i-share");' onmouseout='toggleById("i-share");' onclick='toggleById("share");return false;'></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://muetsch.io/cartpole-with-qlearning-first-experiences-with-openai-gym.html"><i class="fa fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://muetsch.io/cartpole-with-qlearning-first-experiences-with-openai-gym.html&text=CartPole with Q-Learning - First experiences with OpenAI Gym"><i class="fa fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://muetsch.io/cartpole-with-qlearning-first-experiences-with-openai-gym.html&title=CartPole with Q-Learning - First experiences with OpenAI Gym"><i class="fa fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://muetsch.io/cartpole-with-qlearning-first-experiences-with-openai-gym.html&is_video=false&description=CartPole with Q-Learning - First experiences with OpenAI Gym"><i class="fa fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=CartPole with Q-Learning - First experiences with OpenAI Gym&body=Check out this article: https://muetsch.io/cartpole-with-qlearning-first-experiences-with-openai-gym.html"><i class="fa fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://muetsch.io/cartpole-with-qlearning-first-experiences-with-openai-gym.html&title=CartPole with Q-Learning - First experiences with OpenAI Gym"><i class="fa fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://muetsch.io/cartpole-with-qlearning-first-experiences-with-openai-gym.html&title=CartPole with Q-Learning - First experiences with OpenAI Gym"><i class="fa fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://muetsch.io/cartpole-with-qlearning-first-experiences-with-openai-gym.html&title=CartPole with Q-Learning - First experiences with OpenAI Gym"><i class="fa fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://muetsch.io/cartpole-with-qlearning-first-experiences-with-openai-gym.html&title=CartPole with Q-Learning - First experiences with OpenAI Gym"><i class="fa fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://muetsch.io/cartpole-with-qlearning-first-experiences-with-openai-gym.html&name=CartPole with Q-Learning - First experiences with OpenAI Gym&description="><i class="fa fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#OpenAI-Gym"><span class="toc-number">1.</span> <span class="toc-text">OpenAI Gym</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CartPole-v0"><span class="toc-number">2.</span> <span class="toc-text">CartPole-v0</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Approach-Basic-Q-Learning"><span class="toc-number">3.</span> <span class="toc-text">Approach: Basic Q-Learning</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#My-implementation"><span class="toc-number">4.</span> <span class="toc-text">My implementation</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Transforming-the-feature-space"><span class="toc-number">4.1.</span> <span class="toc-text">Transforming the feature space</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Finding-the-parameters"><span class="toc-number">4.2.</span> <span class="toc-text">Finding the parameters</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Grid-search"><span class="toc-number">4.3.</span> <span class="toc-text">Grid search</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Result-amp-Future-Work"><span class="toc-number">5.</span> <span class="toc-text">Result &amp; Future Work</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index width mx-auto px2 my4">
+        
+        <article class="h-entry post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <a href="https://muetsch.io/cartpole-with-qlearning-first-experiences-with-openai-gym.html" class="u-url">
+        <h1 class="posttitle p-name" itemprop="name headline" property="headline">
+            CartPole with Q-Learning - First experiences with OpenAI Gym
+        </h1>
+    </a>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" property="author" itemscope itemtype="http://schema.org/Person" vocab="http://schema.org/" typeof="Person">
+        <span itemprop="name" property="name" class="p-author h-card">Ferdinand Mütsch</span>
+      </span>
+      
+    <div class="postdate">
+        <time datetime="2017-08-24T14:50:57.000Z" class="dt-published" itemprop="datePublished" property="datePublished">2017-08-24</time>
+    </div>
+
+
+      
+
+
+      <!--
+      <div style="margin-top: 30px">
+        <a href="https://liberapay.com/muety/" target="_blank"
+          style="background-image: none; text-decoration: none;"><img
+            src="https://badges.fw-web.space/liberapay/receives/muety.svg?logo=liberapay&style=flat-square" alt="Liberapay"
+            style="height: auto !important;width: auto !important;"></a>
+      </div>
+      -->
+    </div>
+  </header>
+  
+  <div class="content e-content" itemprop="articleBody" property="articleBody">
+    <h2 id="OpenAI-Gym"><a href="#OpenAI-Gym" class="headerlink" title="OpenAI Gym"></a>OpenAI Gym</h2><p>Today I made my first experiences with the <a target="_blank" rel="noopener" href="https://gym.openai.com/">OpenAI gym</a>, more specifically with the <a target="_blank" rel="noopener" href="https://gym.openai.com/envs/CartPole-v0">CartPole</a> environment. Gym is basically a Python library that includes several machine learning challenges, in which an autonomous agent should be learned to fulfill different tasks, e.g. to master a simple game itself. One of the simplest and most popular challenges is CartPole. It’s basically a 2D game in which the agent has to control, i.e. move left or right, a cart to balance a pole standing perpendicularly on the cart. This is a classical reinforcement learning problem, e.g. a scenario, in which the agents starts by trying random actions as a consequence to which it gets rewarded (or not). Based on the rewards, it continuously “learns”, which action is good in which specific situation. Doing so, it learns how to master the game without ever being told how the game even works. The main advantage of this type of learning is, that it’s completely generic and not bound to a specific problem. E.g. to learn a chess agent, you don’t need to “tell” it the rules of chess, but just let it do trial &amp; error, whereas “error” means giving it a negative (or small positive) reward.</p>
+<h2 id="CartPole-v0"><a href="#CartPole-v0" class="headerlink" title="CartPole-v0"></a>CartPole-v0</h2><p>In machine learning terms, CartPole is basically a binary classification problem. There are four features as inputs, which include the cart position, its velocity, the pole’s angle to the cart and its derivative (i.e. how fast the pole is “falling”). The output is binary, i.e. either 0 or 1, corresponding to “left” or “right”. One challenge is the fact that all four features are continuous values (floating point numbers), which, naively, implies an infinitely large feature space.</p>
+<p><img src="https://apps.muetsch.io/images/o:auto?image=https://muetsch.io/images/cartpole1.jpg"></p>
+<h2 id="Approach-Basic-Q-Learning"><a href="#Approach-Basic-Q-Learning" class="headerlink" title="Approach: Basic Q-Learning"></a>Approach: Basic Q-Learning</h2><p>In the <a target="_blank" rel="noopener" href="https://his.anthropomatik.kit.edu/english/28_315.php">Machine Learning 1</a> course at my university, I got to know one of the most basic, yet widely-used reinforcement learning approaches, which is <a target="_blank" rel="noopener" href="http://mnemstudio.org/path-finding-q-learning-tutorial.htm">Q-Learning</a>. The core of Q-Learning is to estimate a value for every possible pare of a state (s) and an action (a) by getting rewarded. Imagine the following graph, which consists of three states, while your agent is currently in <em>s0</em>. It can choose between two actions, one of which results in a good state <em>s1</em> (e.g. having won the game), the other one results in a bad state <em>s2</em> (e.g. having lost the game). Accordingly, the transition leading to the good (bad) state gives a reward of 100 (-100). If the agent performs action <em>a0</em>, the q-value of <em>s0</em> will probably become negative (Q(s0, a0) &lt; 0)), while Q(s0, a1) &gt; 0.</p>
+<p><img src="https://apps.muetsch.io/images/o:auto?image=https://muetsch.io/images/cartpole2.png"></p>
+<p>The update of the q-value is done according to the following equation.</p>
+<p><img src="https://apps.muetsch.io/images/o:auto?image=https://muetsch.io/images/cartpole3.png"></p>
+<p>Basically, a (S, A)-tuple’s new q-value depends on its old q-value, the immediate reward received for the action and the maximum q-value achievable in the following state. So a (S, A)-pair’s q-value indirectly depends on all its successors’ q-values, which is expressed in the recursive function definition. By repeatedly walking through all nodes and transistions, the agent can update any (S, A)-pairs q-value, while the results of good and bad actions are slowly “backpropagated” from terminal nodes to early nodes. The agent ends up with a (usually multidimensional) table mapping states and actions to q-values, so that given any state, the best action can be picked by choosing the highest respective q-value.</p>
+<h2 id="My-implementation"><a href="#My-implementation" class="headerlink" title="My implementation"></a>My implementation</h2><p>Since Q-Learning is pretty straightforward to understand and implement, I decided on picking that algorithm as a starting point for my CartPole challenge. I looked for other solutions, that also use CartPole and found <a target="_blank" rel="noopener" href="https://medium.com/@tuzzer/cart-pole-balancing-with-q-learning-b54c6068d947">this blog post</a> by <a target="_blank" rel="noopener" href="https://medium.com/@tuzzer">@tuzzer</a>, which had partially inspired me during my implementation. </p>
+<p><a target="_blank" rel="noopener" href="https://gist.github.com/muety/af0b8476ae4106ec098fea1dfe57f578">&gt;&gt; Code on GitHub (qcartpole.py)</a></p>
+<h3 id="Transforming-the-feature-space"><a href="#Transforming-the-feature-space" class="headerlink" title="Transforming the feature space"></a>Transforming the feature space</h3><p>Actually the main challenge was to convert the continuous, 4-dimensional input space to a discrete space with a finite and preferably small, yet expressive, number of discrete states. The less states we have, the smaller the Q-table will be, the less steps the agent will need to properly learn its values. However, too few states might not hold enough information to properly represent the environment. The original domains of the input features are these.</p>
+<ul>
+<li><strong>x</strong> (cart position) ∈ [-4.8, 4.8]</li>
+<li><strong>x’</strong> (cart velocity) ∈ [-3.4 * 10^38, 3.4 * 10^38]</li>
+<li><strong>theta</strong> (angle) ∈ [-0.42, 0.42]</li>
+<li><strong>theta’</strong> (angle velocity) ∈ [-3.4 * 10^38, 3.4 * 10^38]</li>
+</ul>
+<h3 id="Finding-the-parameters"><a href="#Finding-the-parameters" class="headerlink" title="Finding the parameters"></a>Finding the parameters</h3><p>As can be seen, especially the velocities’ domains are extermely large. However, from <a target="_blank" rel="noopener" href="https://medium.com/@tuzzer">@tuzzer</a>‘s post I found that astonishingly small target intervals are sufficient. Therefore, I initially started by scaling <strong>theta</strong> down to a discrete interval <code>theta ∈ [0, 6] ⊂ ℕ </code> (which is, to be precise, just a set of integers {0..6}) and <strong>theta’</strong> to <code>theta&#39; ∈ [0, 12] ⊂ ℕ </code>. Inspired by <a target="_blank" rel="noopener" href="https://medium.com/@tuzzer/">@tuzzer</a>‘s post, I dropped the <strong>x</strong> and <strong>x’</strong> features completely, which corresponds to mapping any of their values to a single scalar. The motivation behind this is that the probability of the cart leaving the environment at the left or right border in only 200 time steps (after 200 steps, the environment automatically resets itself) is pretty slow and the resulting reduction in dimensionality more worthy. </p>
+<p>The implementation of the actual Q-Learning algorithm is straightfoward and consits of a function to fetch the best action for a state from the q-table and another function to update the q-table based on the last action. Nothing special here.</p>
+<p>More interesing are the algorithm’s hyperparameters, which include <strong>alpha (= learning rate)</strong>, <strong>epsilon (= exploration rate)</strong> and <strong>gamma (= discount factor)</strong>.</p>
+<p>Alpha is used to “smooth” the updates and make them less radical, which, in the first place, prevents from errors caused by noise. Epsilon regulates between <strong>exploitation and exploration</strong>. Accordingly, instead of picking the <em>best</em> action in a state, with a chance of ε a <em>random</em> action is picked. This should prevent the algorithm from getting stuck in local minima. E.g. if a bad choice was made in the beginning, without ε the agent would continue on evaluating that suboptimal path and would never discover any other, potentially better, path. Gamma is used to penalize the agent if it takes long to reach its goal. However, in this case, gamma is set to constant 1 (no discount), since it’s even our goal to “survive” as long as possible. </p>
+<p>First I tried to choose the epsilon and alpha parameters as constants and experimented with various combinations. However, I always achieved only a very poor score (~ between 20 and 50 ticks). Then, again inspired by <a target="_blank" rel="noopener" href="https://medium.com/@tuzzer/">@tuzzer</a> I decided to introduce an adaptive learning- and exploration rate, which starts with a high value and decreases by time (with each training episode). Astonishingly, this made a huge difference. Suddenly, my algorithm converged in about ~ 200 steps. Since I never thought that these hyperparameters made such an extreme difference (from not solving the challenge at all to doing pretty well), this was probably the most interesting finding from my CartPole project. I simply adpoted <a target="_blank" rel="noopener" href="https://medium.com/@tuzzer/">@tuzzer</a>‘s adaptive function, which is visualized in the figure below (the minimum of <em>0.1</em> is a hyperparameter to be optimized).</p>
+<p><img src="https://apps.muetsch.io/images/o:auto?image=https://muetsch.io/images/cartpole4.png"></p>
+<h3 id="Grid-search"><a href="#Grid-search" class="headerlink" title="Grid search"></a>Grid search</h3><p>As my Q-Learning implementation with adaptive learning- and exploration rates was finished, I implemented an additional grid search to do some hyperparameter tuning. Goal was to find the optimal combination of feature interval lengths and lower bounds for alpha and epsilon. The following parameters turned out to perform best: <code>&#39;buckets&#39;: (1, 1, 6, 12), &#39;min_alpha&#39;: 0.1, &#39;min_epsilon&#39;: 0.1</code>. Additionally, I also could have evaluated different functions for calculating the adaptive rate, but I haven’t, yet. </p>
+<p><a target="_blank" rel="noopener" href="https://gist.github.com/muety/87b442fce7f7d58606f462191c6d6033">&gt;&gt; Code on GitHub (qcartpole_gridsearch.py)</a></p>
+<h2 id="Result-amp-Future-Work"><a href="#Result-amp-Future-Work" class="headerlink" title="Result &amp; Future Work"></a>Result &amp; Future Work</h2><p>My final score was <strong>188</strong>, <a target="_blank" rel="noopener" href="https://gym.openai.com/evaluations/eval_emRbuGdHRnWoJuMUnPwd1Q">as can be seen in the leaderboard</a>. As I progress with my knowledge on machine learning, while practicing for the upcoming <a target="_blank" rel="noopener" href="http://www.aifb.kit.edu/web/Lehre/Vorlesung_Maschinelles_Lernen_2_%E2%80%93_Fortgeschrittene_Verfahren/en">Machine Learning 2</a> exam, I want to continue improving my CartPole algorithm. Probably the next step will be to incorporate deep Q-Learning, which basically is Q-Learning with the only difference that the q-values are estimated by a deep neural net. The main (and probably only) advantage is the ability to handle way larger feature spaces. I’ll keep you guys up-to-date. I hope that I could encourage you to get started with Gym, or machine learning in general, too!</p>
+
+  </div>
+</article>
+
+
+
+    </div>
+    
+      <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Blog</a></li>
+         
+          <li><a href="/imprint/">Imprint</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#OpenAI-Gym"><span class="toc-number">1.</span> <span class="toc-text">OpenAI Gym</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#CartPole-v0"><span class="toc-number">2.</span> <span class="toc-text">CartPole-v0</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Approach-Basic-Q-Learning"><span class="toc-number">3.</span> <span class="toc-text">Approach: Basic Q-Learning</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#My-implementation"><span class="toc-number">4.</span> <span class="toc-text">My implementation</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Transforming-the-feature-space"><span class="toc-number">4.1.</span> <span class="toc-text">Transforming the feature space</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Finding-the-parameters"><span class="toc-number">4.2.</span> <span class="toc-text">Finding the parameters</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Grid-search"><span class="toc-number">4.3.</span> <span class="toc-text">Grid search</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Result-amp-Future-Work"><span class="toc-number">5.</span> <span class="toc-text">Result &amp; Future Work</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://muetsch.io/cartpole-with-qlearning-first-experiences-with-openai-gym.html"><i class="fa fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://muetsch.io/cartpole-with-qlearning-first-experiences-with-openai-gym.html&text=CartPole with Q-Learning - First experiences with OpenAI Gym"><i class="fa fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://muetsch.io/cartpole-with-qlearning-first-experiences-with-openai-gym.html&title=CartPole with Q-Learning - First experiences with OpenAI Gym"><i class="fa fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://muetsch.io/cartpole-with-qlearning-first-experiences-with-openai-gym.html&is_video=false&description=CartPole with Q-Learning - First experiences with OpenAI Gym"><i class="fa fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=CartPole with Q-Learning - First experiences with OpenAI Gym&body=Check out this article: https://muetsch.io/cartpole-with-qlearning-first-experiences-with-openai-gym.html"><i class="fa fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://muetsch.io/cartpole-with-qlearning-first-experiences-with-openai-gym.html&title=CartPole with Q-Learning - First experiences with OpenAI Gym"><i class="fa fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://muetsch.io/cartpole-with-qlearning-first-experiences-with-openai-gym.html&title=CartPole with Q-Learning - First experiences with OpenAI Gym"><i class="fa fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://muetsch.io/cartpole-with-qlearning-first-experiences-with-openai-gym.html&title=CartPole with Q-Learning - First experiences with OpenAI Gym"><i class="fa fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://muetsch.io/cartpole-with-qlearning-first-experiences-with-openai-gym.html&title=CartPole with Q-Learning - First experiences with OpenAI Gym"><i class="fa fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://muetsch.io/cartpole-with-qlearning-first-experiences-with-openai-gym.html&name=CartPole with Q-Learning - First experiences with OpenAI Gym&description="><i class="fa fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+      <ul>
+        <li id="toc"><a class="icon" href="#" onclick='toggleById("toc-footer")'><i class="fa fa-list fa-lg" aria-hidden="true"></i> TOC</a></li>
+        <li id="share"><a class="icon" href="#" onclick='toggleById("share-footer")'><i class="fa fa-share-alt fa-lg" aria-hidden="true"></i> Share</a></li>
+        <li id="top" style="display:none"><a class="icon" href="#" onclick="window.scrollTo(0,0)"><i class="fa fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a></li>
+        <li id="menu"><a class="icon" href="#" onclick='toggleById("nav-footer")'><i class="fa fa-bars fa-lg" aria-hidden="true"></i> Menu</a></li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+    
+    <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2021 Ferdinand Mütsch
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Blog</a></li>
+         
+          <li><a href="/imprint/">Imprint</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+</body>
+</html>
+<!-- styles -->
+
+<link rel="stylesheet" href="/lib/roboto/css/roboto.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+
+
+<script src="/js/main.js"></script>
+
+<!-- Google Analytics -->
+
+<!-- Disqus Comments -->
+
+

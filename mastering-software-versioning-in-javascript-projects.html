@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="referrer" content="no-referrer">
+    <meta name="description" content="IntroductionA frequently overlooked aspect of software development is the proper versioning of code. Consistent and descriptive version numbers not only help developers keep track of their own work, b">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Mastering Software Versioning in JavaScript Projects">
+<meta property="og:url" content="https://muetsch.io/mastering-software-versioning-in-javascript-projects.html">
+<meta property="og:site_name" content="Ferdinand Mütsch">
+<meta property="og:description" content="IntroductionA frequently overlooked aspect of software development is the proper versioning of code. Consistent and descriptive version numbers not only help developers keep track of their own work, b">
+<meta property="og:locale">
+<meta property="article:published_time" content="2020-11-07T15:22:37.000Z">
+<meta property="article:modified_time" content="2020-11-07T16:52:29.982Z">
+<meta property="article:author" content="Ferdinand Mütsch">
+<meta name="twitter:card" content="summary">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/favicon.ico" sizes="192x192">
+          
+        
+        
+    
+    <!-- title -->
+    <title>Mastering Software Versioning in JavaScript Projects</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- rss -->
+    
+    
+
+    <!-- rel-me links -->
+    
+      
+        <link href="http://github.com/muety" rel="me">
+      
+        <link href="https://twitter.com/n2try" rel="me">
+      
+        <link href="mailto:ferdinand@muetsch.io" rel="me">
+      
+    
+
+    <!-- Webmention link -->
+    
+      <link href="https://webmention.io/muetsch.io/webmention" rel="webmention">
+    
+
+    
+      <link href="https://webmention.io/muetsch.io/xmlrpc" rel="pingback">
+    
+<meta name="generator" content="Hexo 5.2.0"><link rel="alternate" href="/rss2.xml" title="Ferdinand Mütsch" type="application/rss+xml">
+</head>
+
+<body>
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fa fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fa fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="window.scrollTo(0, 0)" style="display:none;"><i class="fa fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Blog</a></li>
+         
+          <li><a href="/imprint/">Imprint</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/watching-stock-prices-with-node-red-and-webhook2telegram.html"><i class="fa fa-chevron-left" aria-hidden="true" onmouseover='toggleById("i-prev");' onmouseout='toggleById("i-prev");'></i></a></li>
+        
+        
+        <li><a class="icon" href="/migrating-nextcloud-from-sqlite-to-mysql-with-docker.html"><i class="fa fa-chevron-right" aria-hidden="true" onmouseover='toggleById("i-next").toggleById();' onmouseout='toggleById("i-next");'></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="window.scrollTo(0,0)"><i class="fa fa-chevron-up" aria-hidden="true" onmouseover='toggleById("i-top");' onmouseout='toggleById("i-top");'></i></a></li>
+        <li><a class="icon" href="#"><i class="fa fa-share-alt" aria-hidden="true" onmouseover='toggleById("i-share");' onmouseout='toggleById("i-share");' onclick='toggleById("share");return false;'></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://muetsch.io/mastering-software-versioning-in-javascript-projects.html"><i class="fa fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://muetsch.io/mastering-software-versioning-in-javascript-projects.html&text=Mastering Software Versioning in JavaScript Projects"><i class="fa fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://muetsch.io/mastering-software-versioning-in-javascript-projects.html&title=Mastering Software Versioning in JavaScript Projects"><i class="fa fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://muetsch.io/mastering-software-versioning-in-javascript-projects.html&is_video=false&description=Mastering Software Versioning in JavaScript Projects"><i class="fa fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Mastering Software Versioning in JavaScript Projects&body=Check out this article: https://muetsch.io/mastering-software-versioning-in-javascript-projects.html"><i class="fa fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://muetsch.io/mastering-software-versioning-in-javascript-projects.html&title=Mastering Software Versioning in JavaScript Projects"><i class="fa fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://muetsch.io/mastering-software-versioning-in-javascript-projects.html&title=Mastering Software Versioning in JavaScript Projects"><i class="fa fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://muetsch.io/mastering-software-versioning-in-javascript-projects.html&title=Mastering Software Versioning in JavaScript Projects"><i class="fa fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://muetsch.io/mastering-software-versioning-in-javascript-projects.html&title=Mastering Software Versioning in JavaScript Projects"><i class="fa fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://muetsch.io/mastering-software-versioning-in-javascript-projects.html&name=Mastering Software Versioning in JavaScript Projects&description="><i class="fa fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Introduction"><span class="toc-number">1.</span> <span class="toc-text">Introduction</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Concepts"><span class="toc-number">2.</span> <span class="toc-text">Concepts</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Semantic-Versioning"><span class="toc-number">2.1.</span> <span class="toc-text">Semantic Versioning</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Conventional-Commits"><span class="toc-number">2.2.</span> <span class="toc-text">Conventional Commits</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Tooling"><span class="toc-number">3.</span> <span class="toc-text">Tooling</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#standard-version-CLI"><span class="toc-number">3.1.</span> <span class="toc-text">standard-version CLI</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Release-Workflow"><span class="toc-number">4.</span> <span class="toc-text">Release Workflow</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Conclusion"><span class="toc-number">5.</span> <span class="toc-text">Conclusion</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index width mx-auto px2 my4">
+        
+        <article class="h-entry post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <a href="https://muetsch.io/mastering-software-versioning-in-javascript-projects.html" class="u-url">
+        <h1 class="posttitle p-name" itemprop="name headline" property="headline">
+            Mastering Software Versioning in JavaScript Projects
+        </h1>
+    </a>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" property="author" itemscope itemtype="http://schema.org/Person" vocab="http://schema.org/" typeof="Person">
+        <span itemprop="name" property="name" class="p-author h-card">Ferdinand Mütsch</span>
+      </span>
+      
+    <div class="postdate">
+        <time datetime="2020-11-07T15:22:37.000Z" class="dt-published" itemprop="datePublished" property="datePublished">2020-11-07</time>
+    </div>
+
+
+      
+
+
+      <!--
+      <div style="margin-top: 30px">
+        <a href="https://liberapay.com/muety/" target="_blank"
+          style="background-image: none; text-decoration: none;"><img
+            src="https://badges.fw-web.space/liberapay/receives/muety.svg?logo=liberapay&style=flat-square" alt="Liberapay"
+            style="height: auto !important;width: auto !important;"></a>
+      </div>
+      -->
+    </div>
+  </header>
+  
+  <div class="content e-content" itemprop="articleBody" property="articleBody">
+    <h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1><p>A frequently overlooked aspect of software development is the proper versioning of code. Consistent and descriptive version numbers not only help developers keep track of their own work, but can also inform users of your software about what to expect from a new release. While versioning is especially important for libraries and frameworks which other projects depend on, benefits apply to standalone applications equally.</p>
+<p>In this article, we introduce techniques, conventions, and tooling that helped us establish a robust way of versioning our JavaScript- and/or TypeScript-based software projects. </p>
+<h1 id="Concepts"><a href="#Concepts" class="headerlink" title="Concepts"></a>Concepts</h1><h2 id="Semantic-Versioning"><a href="#Semantic-Versioning" class="headerlink" title="Semantic Versioning"></a>Semantic Versioning</h2><p>One of the most important aspects to think of when it comes to versioning is the version number itself. Before caring about tooling and others, you need to come up with syntax and semantics for it. </p>
+<p>A concept that is well established among open source software projects is <a target="_blank" rel="noopener" href="https://semver.org/">Semantic Versioning</a>, or <em>SemVer</em>. When following this specification, a version number consists of three digits separated by dots, like <code>1.5.4</code> or, more formally <code>&lt;MAJOR&gt;.&lt;MINOR&gt;.&lt;PATCH&gt;</code>, where each individual part has a meaning:</p>
+<ul>
+<li><code>MAJOR</code>: Incrementing it indicates that there have been fundamental changes to the software and the new version is most likely not backward-compatible with the previous one.</li>
+<li><code>MINOR</code>: Essentially indicates that new features were added, but backward-compatibiltiy is still guaranteed.</li>
+<li><code>PATCH</code> or <code>BUG FIX</code>: Gives a hint that minor changes or bug fixes had been introduced recently.</li>
+</ul>
+<p>Strictly following these semantics helps to maintain a common understanding of what a certain version means and what to expect from a new release.</p>
+<h2 id="Conventional-Commits"><a href="#Conventional-Commits" class="headerlink" title="Conventional Commits"></a>Conventional Commits</h2><p>The second concept that we committed ourselves to follow is <a target="_blank" rel="noopener" href="https://www.conventionalcommits.org/en/v1.0.0/#summary">Conventional Commits</a>. Similar to semantic versioning, the conventional commits specification provides common syntax and semantics for information provided by a developer. However, in this case, the convention is not about the version number itself, but about the commit messages composed by developers when checking in new code into version control. The goal is to standardize their format and make them machine-readable to a certain extent.</p>
+<p>When following conventional commits, a commit message essentially has to be prefixed with one of a few keywords.</p>
+<ul>
+<li><code>fix:</code> – A commit message with this prefix indicates a bug fix</li>
+<li><code>feat:</code> – A commit message with this prefix indicates the introduction of a new feature or functionality</li>
+<li><code>refactor:</code> – A commit with, whose message is prefixed like this, contains code refactorings, i.e. internal, technical modifications of the implementation of certain logic</li>
+<li><code>chore:</code> – This prefix indicates minor, miscellaneous changes of any type, that do not necessarily affect the user immediately</li>
+<li><code>BREAKING CHANGE!:</code> A commit message with this prefix warns about comprehensive, fundamental changes and indicates that the newly released version is likely to be incompatible with the previous one</li>
+</ul>
+<p>The conventional commits specification comprises a few more keywords and also allows developers to come up with custom ones. However, these are the most relevant ones.</p>
+<h1 id="Tooling"><a href="#Tooling" class="headerlink" title="Tooling"></a>Tooling</h1><p>When having paid attention, one might have recognized a few similarities in the semantics of conventional commits and semantic versioning. Commits with <code>fix</code>-changes correspond to the <code>PATCH</code> version, <code>feat</code> goes well with the <code>MINOR</code> version and <code>BREAKING CHANGE</code>es will inevitably result in a new <code>MAJOR</code> version. </p>
+<p>As a consequence of following the above conventions, we enabled our project for an automated versioning workflow. </p>
+<h2 id="standard-version-CLI"><a href="#standard-version-CLI" class="headerlink" title="standard-version CLI"></a><a target="_blank" rel="noopener" href="https://www.npmjs.com/package/standard-version">standard-version</a> CLI</h2><p><a target="_blank" rel="noopener" href="https://www.npmjs.com/package/standard-version">standard-version</a> is a JavaScript tool that utilizes conventional commits to automatically enforce semantic versioning. Moreover, it is capable of automatically generating a changelog in Markdown format, which developers can provide their users with. </p>
+<p>When running <code>standard-version</code>, the tool scans your commit history since when it was last executed, searches for fixes, feats, or breaking changes, and adapts the project’s version accordingly.</p>
+<p>To add it to an existing project, all you need to do is:</p>
+<ol>
+<li><p>Install it as a dependency</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ yarn add -D standard-version  <span class="comment"># (or npm i --save-dev standard-version)</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Optionally add it as an NPM script to your <code>package.json</code></p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">&quot;name&quot;</span>: <span class="string">&quot;your-cool-project&quot;</span>,</span><br><span class="line">    <span class="attr">&quot;version:&quot;</span>: <span class="string">&quot;0.0.1&quot;</span>,</span><br><span class="line">    ...</span><br><span class="line">    <span class="string">&quot;scripts:&quot;</span> &#123;</span><br><span class="line">        <span class="attr">&quot;release&quot;</span>: <span class="string">&quot;standard-version&quot;</span></span><br><span class="line">        ...</span><br><span class="line">    &#125;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<h1 id="Release-Workflow"><a href="#Release-Workflow" class="headerlink" title="Release Workflow"></a>Release Workflow</h1><p>After the development team has committed to consequently follow the conventional commits specification and all tooling is set up, a typical workflow to release new versions of your software might look like so.</p>
+<p>Once a new version is ready to be released, i.e. at the end of a sprint, a developer executes <code>yarn release</code> (or <code>npm run release</code>) to kick off <code>standard-version</code>. As a result …</p>
+<ol>
+<li>… the project’s commit history is scanned to determine which part of the version number needs to be incremented</li>
+<li>… the <code>version</code> property of the project’s top-level <code>package.json</code> is set to the new version</li>
+<li>… a <code>CHANGELOG.md</code> file is written, containing separate sections for features and bug fixes</li>
+<li>… the changes are committed to Git</li>
+<li>… the new commit is given a Git tag corresponding to the new version</li>
+</ol>
+<p>Depending on your setup, a push to the remote repository might kick off your CI/CD workflow, which may automatically build a new Docker image with the newly introduced tag and push it to a public or private registry. Using tools like <a target="_blank" rel="noopener" href="https://github.com/containrrr/watchtower">Watchtower</a>, the new image might even be rolled out to production automatically.</p>
+<p>The only manual steps required in this workflow were a single <code>yarn release</code> command and a Git push. Nothing more, nothing less.</p>
+<h1 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h1><p>The above workflow has proven to be a convenient and consistent way of managing and releasing new versions of our JavaScript- and TypeScript-based frontend-, backend- and library projects and is even more beneficial with proper CI/CD pipelines and tooling like <a target="_blank" rel="noopener" href="https://gitlab.com/">GitLab</a>, <a target="_blank" rel="noopener" href="https://docker.io/">Docker</a>, <a target="_blank" rel="noopener" href="https://github.com/containrrr/watchtower">Watchtower</a>, <a target="_blank" rel="noopener" href="https://portainer.io/">Portainer</a>, and others. It might even be adapted to projects written in other programming languages. </p>
+
+  </div>
+</article>
+
+
+
+    </div>
+    
+      <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Blog</a></li>
+         
+          <li><a href="/imprint/">Imprint</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Introduction"><span class="toc-number">1.</span> <span class="toc-text">Introduction</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Concepts"><span class="toc-number">2.</span> <span class="toc-text">Concepts</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Semantic-Versioning"><span class="toc-number">2.1.</span> <span class="toc-text">Semantic Versioning</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Conventional-Commits"><span class="toc-number">2.2.</span> <span class="toc-text">Conventional Commits</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Tooling"><span class="toc-number">3.</span> <span class="toc-text">Tooling</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#standard-version-CLI"><span class="toc-number">3.1.</span> <span class="toc-text">standard-version CLI</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Release-Workflow"><span class="toc-number">4.</span> <span class="toc-text">Release Workflow</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Conclusion"><span class="toc-number">5.</span> <span class="toc-text">Conclusion</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://muetsch.io/mastering-software-versioning-in-javascript-projects.html"><i class="fa fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://muetsch.io/mastering-software-versioning-in-javascript-projects.html&text=Mastering Software Versioning in JavaScript Projects"><i class="fa fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://muetsch.io/mastering-software-versioning-in-javascript-projects.html&title=Mastering Software Versioning in JavaScript Projects"><i class="fa fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://muetsch.io/mastering-software-versioning-in-javascript-projects.html&is_video=false&description=Mastering Software Versioning in JavaScript Projects"><i class="fa fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Mastering Software Versioning in JavaScript Projects&body=Check out this article: https://muetsch.io/mastering-software-versioning-in-javascript-projects.html"><i class="fa fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://muetsch.io/mastering-software-versioning-in-javascript-projects.html&title=Mastering Software Versioning in JavaScript Projects"><i class="fa fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://muetsch.io/mastering-software-versioning-in-javascript-projects.html&title=Mastering Software Versioning in JavaScript Projects"><i class="fa fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://muetsch.io/mastering-software-versioning-in-javascript-projects.html&title=Mastering Software Versioning in JavaScript Projects"><i class="fa fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://muetsch.io/mastering-software-versioning-in-javascript-projects.html&title=Mastering Software Versioning in JavaScript Projects"><i class="fa fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://muetsch.io/mastering-software-versioning-in-javascript-projects.html&name=Mastering Software Versioning in JavaScript Projects&description="><i class="fa fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+      <ul>
+        <li id="toc"><a class="icon" href="#" onclick='toggleById("toc-footer")'><i class="fa fa-list fa-lg" aria-hidden="true"></i> TOC</a></li>
+        <li id="share"><a class="icon" href="#" onclick='toggleById("share-footer")'><i class="fa fa-share-alt fa-lg" aria-hidden="true"></i> Share</a></li>
+        <li id="top" style="display:none"><a class="icon" href="#" onclick="window.scrollTo(0,0)"><i class="fa fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a></li>
+        <li id="menu"><a class="icon" href="#" onclick='toggleById("nav-footer")'><i class="fa fa-bars fa-lg" aria-hidden="true"></i> Menu</a></li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+    
+    <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2021 Ferdinand Mütsch
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Blog</a></li>
+         
+          <li><a href="/imprint/">Imprint</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+</body>
+</html>
+<!-- styles -->
+
+<link rel="stylesheet" href="/lib/roboto/css/roboto.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+
+
+<script src="/js/main.js"></script>
+
+<!-- Google Analytics -->
+
+<!-- Disqus Comments -->
+
+

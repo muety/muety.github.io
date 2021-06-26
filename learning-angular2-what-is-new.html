@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="referrer" content="no-referrer">
+    <meta name="description" content="A few days ago i started teaching myself Angular 2, which is the successor of the popular frontend web-framework AngularJS 1.x. It is still in development and only released as a beta and the develope">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Learning Angular2: What is new?">
+<meta property="og:url" content="https://muetsch.io/learning-angular2-what-is-new.html">
+<meta property="og:site_name" content="Ferdinand Mütsch">
+<meta property="og:description" content="A few days ago i started teaching myself Angular 2, which is the successor of the popular frontend web-framework AngularJS 1.x. It is still in development and only released as a beta and the develope">
+<meta property="og:locale">
+<meta property="og:image" content="https://apps.muetsch.io/images/o:auto?image=https://muetsch.io/images/angular2_logo.png">
+<meta property="og:image" content="http://img.youtube.com/vi/KL4Yi3WtymA/0.jpg">
+<meta property="article:published_time" content="2016-02-17T21:51:59.000Z">
+<meta property="article:modified_time" content="2020-10-30T20:05:40.284Z">
+<meta property="article:author" content="Ferdinand Mütsch">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://apps.muetsch.io/images/o:auto?image=https://muetsch.io/images/angular2_logo.png">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/favicon.ico" sizes="192x192">
+          
+        
+        
+    
+    <!-- title -->
+    <title>Learning Angular2: What is new?</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- rss -->
+    
+    
+
+    <!-- rel-me links -->
+    
+      
+        <link href="http://github.com/muety" rel="me">
+      
+        <link href="https://twitter.com/n2try" rel="me">
+      
+        <link href="mailto:ferdinand@muetsch.io" rel="me">
+      
+    
+
+    <!-- Webmention link -->
+    
+      <link href="https://webmention.io/muetsch.io/webmention" rel="webmention">
+    
+
+    
+      <link href="https://webmention.io/muetsch.io/xmlrpc" rel="pingback">
+    
+<meta name="generator" content="Hexo 5.2.0"><link rel="alternate" href="/rss2.xml" title="Ferdinand Mütsch" type="application/rss+xml">
+</head>
+
+<body>
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fa fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fa fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="window.scrollTo(0, 0)" style="display:none;"><i class="fa fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Blog</a></li>
+         
+          <li><a href="/imprint/">Imprint</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/web-development-technology-stack.html"><i class="fa fa-chevron-left" aria-hidden="true" onmouseover='toggleById("i-prev");' onmouseout='toggleById("i-prev");'></i></a></li>
+        
+        
+        <li><a class="icon" href="/instant-messenger-security-encryption-overview.html"><i class="fa fa-chevron-right" aria-hidden="true" onmouseover='toggleById("i-next").toggleById();' onmouseout='toggleById("i-next");'></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="window.scrollTo(0,0)"><i class="fa fa-chevron-up" aria-hidden="true" onmouseover='toggleById("i-top");' onmouseout='toggleById("i-top");'></i></a></li>
+        <li><a class="icon" href="#"><i class="fa fa-share-alt" aria-hidden="true" onmouseover='toggleById("i-share");' onmouseout='toggleById("i-share");' onclick='toggleById("share");return false;'></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://muetsch.io/learning-angular2-what-is-new.html"><i class="fa fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://muetsch.io/learning-angular2-what-is-new.html&text=Learning Angular2: What is new?"><i class="fa fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://muetsch.io/learning-angular2-what-is-new.html&title=Learning Angular2: What is new?"><i class="fa fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://muetsch.io/learning-angular2-what-is-new.html&is_video=false&description=Learning Angular2: What is new?"><i class="fa fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Learning Angular2: What is new?&body=Check out this article: https://muetsch.io/learning-angular2-what-is-new.html"><i class="fa fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://muetsch.io/learning-angular2-what-is-new.html&title=Learning Angular2: What is new?"><i class="fa fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://muetsch.io/learning-angular2-what-is-new.html&title=Learning Angular2: What is new?"><i class="fa fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://muetsch.io/learning-angular2-what-is-new.html&title=Learning Angular2: What is new?"><i class="fa fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://muetsch.io/learning-angular2-what-is-new.html&title=Learning Angular2: What is new?"><i class="fa fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://muetsch.io/learning-angular2-what-is-new.html&name=Learning Angular2: What is new?&description="><i class="fa fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index width mx-auto px2 my4">
+        
+        <article class="h-entry post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <a href="https://muetsch.io/learning-angular2-what-is-new.html" class="u-url">
+        <h1 class="posttitle p-name" itemprop="name headline" property="headline">
+            Learning Angular2: What is new?
+        </h1>
+    </a>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" property="author" itemscope itemtype="http://schema.org/Person" vocab="http://schema.org/" typeof="Person">
+        <span itemprop="name" property="name" class="p-author h-card">Ferdinand Mütsch</span>
+      </span>
+      
+    <div class="postdate">
+        <time datetime="2016-02-17T21:51:59.000Z" class="dt-published" itemprop="datePublished" property="datePublished">2016-02-17</time>
+    </div>
+
+
+      
+
+
+      <!--
+      <div style="margin-top: 30px">
+        <a href="https://liberapay.com/muety/" target="_blank"
+          style="background-image: none; text-decoration: none;"><img
+            src="https://badges.fw-web.space/liberapay/receives/muety.svg?logo=liberapay&style=flat-square" alt="Liberapay"
+            style="height: auto !important;width: auto !important;"></a>
+      </div>
+      -->
+    </div>
+  </header>
+  
+  <div class="content e-content" itemprop="articleBody" property="articleBody">
+    <p><img src="https://apps.muetsch.io/images/o:auto?image=https://muetsch.io/images/angular2_logo.png"></p>
+<p>A few days ago i started teaching myself <a target="_blank" rel="noopener" href="http://angular.io/">Angular 2</a>, which is the successor of the popular frontend web-framework <a target="_blank" rel="noopener" href="https://angularjs.org/">AngularJS 1.x</a>. It is still in development and only released as a beta and the developers at Google recommend to not use it in production yet. But I’m sure it will come some time in the near future so why not take a step ahead and already learn it now? As Angular 1 has become very successful and wide-spread for web-applications’ client side I have no doubts that Angular 2 will establish itself pretty quick too.</p>
+<p>For those of you who are familiar with Angular 1 and have developed with it yet: according to what I’ve seen so far you will definitely need to take some time for learning Angular 2 – it is considerably different from the first version and got few major changes, at least in my eyes. Those changes include:</p>
+<ul>
+<li>  <strong>Different syntax for directives</strong> in HTML: They have introduced parantheses (), brackets [], stars *, hashtags # and combinations of them to be used in your markup. E.g. parantheses () are used as attributes in HTML elements to bind to their events.</li>
+<li>  There are no controllers anymore. Instead everything is based on (Web-)<strong>Components</strong> (as you may know them from <a target="_blank" rel="noopener" href="https://www.polymer-project.org/1.0/">Google Polymer</a> – if you don’t check this out as well, it is pretty cool), which basically consist of the component’s logic and a view and define a new custom HTML element each. Almost everything in Angular 2 is a component, which enables the code to be even more structurable, more modular and more reusable. But it is a completely new way of thinking in comparison to Angular 1’s controllers.</li>
+<li>  It is based on <strong>ES6 and <a target="_blank" rel="noopener" href="http://www.typescriptlang.org/">TypeScript</a></strong>. ES6 is the latest JavaScript standard (or version so to say) and TypeScript is even a superset of that, which basically introduces types and modifiers for variables and functions (as you may know from strongly-typed languages like Java). This brings some completely <a target="_blank" rel="noopener" href="https://github.com/lukehoban/es6features">new features</a> and syntax you need to get familiar with. For instance you can define classes with attributes and methods like this now:<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Greeter</span> </span>&#123;</span><br><span class="line">    greeting: string;</span><br><span class="line">    <span class="function"><span class="title">constructor</span>(<span class="params">message: string</span>)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.greeting = message;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="title">greet</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;Hello, &quot;</span> + <span class="built_in">this</span>.greeting;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> greeter = <span class="keyword">new</span> Greeter(<span class="string">&quot;world&quot;</span>);&lt;/pre&gt;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<p>Also there are interfaces, import statements, a shorthand way for anonymous functions called “arrow functions” and many more. Before learning Angular 2 I really recommend to first learn JavaScript ES6 for which <a target="_blank" rel="noopener" href="https://www.youtube.com/playlist?list=PLoYCgNOIyGACDQLaThEEKBAlgs4OIUGif">these two videos</a> are really great.</p>
+<ul>
+<li>  <strong>Dependency injection</strong> has also been reworked to be better understandable, easier to use and more modular now. You will no use @Inectable decorators for injectable services and other modules and provide in the modules by referencing to them in a providers property in components’ @Component decorator.</li>
+<li>  Two-way data-binding is still available but the focus is now on <strong>one-way data-binding</strong> (if I got it right the main reason are performance considerations). One-way data-binding means that data isn’t continuously updated between template and component but only based on events triggered.</li>
+</ul>
+<p>Those where just some of the major changes I got so far. If you want to learn Angular 2 I recommend you the following resources:</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://angular.io/docs/ts/latest/quickstart.html">Angular’s offical Getting Started</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.udemy.com/angular-2-fundamentals/">Angular 2 Fundamentals</a> (a free video course on <a target="_blank" rel="noopener" href="http://udemy.com/">Udemy</a> for the very basic concepts)</li>
+<li>This video tutorial on YouTube which I found quite good (and I really had to laugh at 30:20 minutes). You can skip the first few minutes.  </li>
+</ul>
+<p><a target="_blank" rel="noopener" href="http://www.youtube.com/watch?v=KL4Yi3WtymA"><img src="http://img.youtube.com/vi/KL4Yi3WtymA/0.jpg"></a></p>
+<p>Being able to develop the brand new, fancy Angular 2 with the brand new JavaScript ES6 (which is so new that most of today’s browsers won’t even understand it and as a result it needs to get transpiled to ES5 at present) will definitely give you benefits in web development and also in finding a job in that sector – which is probably the fastest growing and most hyped one at the moment.</p>
+
+  </div>
+</article>
+
+
+
+    </div>
+    
+      <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Blog</a></li>
+         
+          <li><a href="/imprint/">Imprint</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://muetsch.io/learning-angular2-what-is-new.html"><i class="fa fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://muetsch.io/learning-angular2-what-is-new.html&text=Learning Angular2: What is new?"><i class="fa fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://muetsch.io/learning-angular2-what-is-new.html&title=Learning Angular2: What is new?"><i class="fa fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://muetsch.io/learning-angular2-what-is-new.html&is_video=false&description=Learning Angular2: What is new?"><i class="fa fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Learning Angular2: What is new?&body=Check out this article: https://muetsch.io/learning-angular2-what-is-new.html"><i class="fa fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://muetsch.io/learning-angular2-what-is-new.html&title=Learning Angular2: What is new?"><i class="fa fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://muetsch.io/learning-angular2-what-is-new.html&title=Learning Angular2: What is new?"><i class="fa fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://muetsch.io/learning-angular2-what-is-new.html&title=Learning Angular2: What is new?"><i class="fa fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://muetsch.io/learning-angular2-what-is-new.html&title=Learning Angular2: What is new?"><i class="fa fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://muetsch.io/learning-angular2-what-is-new.html&name=Learning Angular2: What is new?&description="><i class="fa fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+      <ul>
+        <li id="toc"><a class="icon" href="#" onclick='toggleById("toc-footer")'><i class="fa fa-list fa-lg" aria-hidden="true"></i> TOC</a></li>
+        <li id="share"><a class="icon" href="#" onclick='toggleById("share-footer")'><i class="fa fa-share-alt fa-lg" aria-hidden="true"></i> Share</a></li>
+        <li id="top" style="display:none"><a class="icon" href="#" onclick="window.scrollTo(0,0)"><i class="fa fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a></li>
+        <li id="menu"><a class="icon" href="#" onclick='toggleById("nav-footer")'><i class="fa fa-bars fa-lg" aria-hidden="true"></i> Menu</a></li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+    
+    <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2021 Ferdinand Mütsch
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Blog</a></li>
+         
+          <li><a href="/imprint/">Imprint</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+</body>
+</html>
+<!-- styles -->
+
+<link rel="stylesheet" href="/lib/roboto/css/roboto.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+
+
+<script src="/js/main.js"></script>
+
+<!-- Google Analytics -->
+
+<!-- Disqus Comments -->
+
+

@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="referrer" content="no-referrer">
+    <meta name="description" content="Automated time trackingAs a developer, you might be wondering how much time you are spending coding on a specific project, in a specific programming language, etc. Gathering detailed statistics about">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Time Tracking for Developers – WakaTime vs. Hakatime vs. Wakapi">
+<meta property="og:url" content="https://muetsch.io/time-tracking-for-developers-%E2%80%93-wakatime-vs-hakatime-vs-wakapi.html">
+<meta property="og:site_name" content="Ferdinand Mütsch">
+<meta property="og:description" content="Automated time trackingAs a developer, you might be wondering how much time you are spending coding on a specific project, in a specific programming language, etc. Gathering detailed statistics about">
+<meta property="og:locale">
+<meta property="og:image" content="https://apps.muetsch.io/images/o:auto?image=https://muetsch.io/images/time_tracking_cover.jpg">
+<meta property="og:image" content="https://apps.muetsch.io/images/o:auto/rs,s:640?image=https://muetsch.io/images/wakatime_screenshot.png">
+<meta property="og:image" content="https://apps.muetsch.io/images/o:auto/rs,s:640?image=https://muetsch.io/images/hakatime_screenshot.png">
+<meta property="og:image" content="https://apps.muetsch.io/images/o:auto/rs,s:640?image=https://muetsch.io/images/wakapi_screenshot.png">
+<meta property="article:published_time" content="2021-04-10T09:01:15.000Z">
+<meta property="article:modified_time" content="2021-04-10T10:31:10.149Z">
+<meta property="article:author" content="Ferdinand Mütsch">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://apps.muetsch.io/images/o:auto?image=https://muetsch.io/images/time_tracking_cover.jpg">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/favicon.ico" sizes="192x192">
+          
+        
+        
+    
+    <!-- title -->
+    <title>Time Tracking for Developers – WakaTime vs. Hakatime vs. Wakapi</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- rss -->
+    
+    
+
+    <!-- rel-me links -->
+    
+      
+        <link href="http://github.com/muety" rel="me">
+      
+        <link href="https://twitter.com/n2try" rel="me">
+      
+        <link href="mailto:ferdinand@muetsch.io" rel="me">
+      
+    
+
+    <!-- Webmention link -->
+    
+      <link href="https://webmention.io/muetsch.io/webmention" rel="webmention">
+    
+
+    
+      <link href="https://webmention.io/muetsch.io/xmlrpc" rel="pingback">
+    
+<meta name="generator" content="Hexo 5.2.0"><link rel="alternate" href="/rss2.xml" title="Ferdinand Mütsch" type="application/rss+xml">
+</head>
+
+<body>
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fa fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fa fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="window.scrollTo(0, 0)" style="display:none;"><i class="fa fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Blog</a></li>
+         
+          <li><a href="/imprint/">Imprint</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/aggregating-and-visualizing-dmarc-reports.html"><i class="fa fa-chevron-left" aria-hidden="true" onmouseover='toggleById("i-prev");' onmouseout='toggleById("i-prev");'></i></a></li>
+        
+        
+        <li><a class="icon" href="/my-experiences-with-the-oracle-java-11-developer-certification.html"><i class="fa fa-chevron-right" aria-hidden="true" onmouseover='toggleById("i-next").toggleById();' onmouseout='toggleById("i-next");'></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="window.scrollTo(0,0)"><i class="fa fa-chevron-up" aria-hidden="true" onmouseover='toggleById("i-top");' onmouseout='toggleById("i-top");'></i></a></li>
+        <li><a class="icon" href="#"><i class="fa fa-share-alt" aria-hidden="true" onmouseover='toggleById("i-share");' onmouseout='toggleById("i-share");' onclick='toggleById("share");return false;'></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://muetsch.io/time-tracking-for-developers-%E2%80%93-wakatime-vs-hakatime-vs-wakapi.html"><i class="fa fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://muetsch.io/time-tracking-for-developers-%E2%80%93-wakatime-vs-hakatime-vs-wakapi.html&text=Time Tracking for Developers – WakaTime vs. Hakatime vs. Wakapi"><i class="fa fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://muetsch.io/time-tracking-for-developers-%E2%80%93-wakatime-vs-hakatime-vs-wakapi.html&title=Time Tracking for Developers – WakaTime vs. Hakatime vs. Wakapi"><i class="fa fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://muetsch.io/time-tracking-for-developers-%E2%80%93-wakatime-vs-hakatime-vs-wakapi.html&is_video=false&description=Time Tracking for Developers – WakaTime vs. Hakatime vs. Wakapi"><i class="fa fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Time Tracking for Developers – WakaTime vs. Hakatime vs. Wakapi&body=Check out this article: https://muetsch.io/time-tracking-for-developers-%E2%80%93-wakatime-vs-hakatime-vs-wakapi.html"><i class="fa fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://muetsch.io/time-tracking-for-developers-%E2%80%93-wakatime-vs-hakatime-vs-wakapi.html&title=Time Tracking for Developers – WakaTime vs. Hakatime vs. Wakapi"><i class="fa fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://muetsch.io/time-tracking-for-developers-%E2%80%93-wakatime-vs-hakatime-vs-wakapi.html&title=Time Tracking for Developers – WakaTime vs. Hakatime vs. Wakapi"><i class="fa fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://muetsch.io/time-tracking-for-developers-%E2%80%93-wakatime-vs-hakatime-vs-wakapi.html&title=Time Tracking for Developers – WakaTime vs. Hakatime vs. Wakapi"><i class="fa fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://muetsch.io/time-tracking-for-developers-%E2%80%93-wakatime-vs-hakatime-vs-wakapi.html&title=Time Tracking for Developers – WakaTime vs. Hakatime vs. Wakapi"><i class="fa fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://muetsch.io/time-tracking-for-developers-%E2%80%93-wakatime-vs-hakatime-vs-wakapi.html&name=Time Tracking for Developers – WakaTime vs. Hakatime vs. Wakapi&description="><i class="fa fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Automated-time-tracking"><span class="toc-number">1.</span> <span class="toc-text">Automated time tracking</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#WakaTime-and-friends"><span class="toc-number">2.</span> <span class="toc-text">WakaTime and friends</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Comparison"><span class="toc-number">3.</span> <span class="toc-text">Comparison</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#General"><span class="toc-number">3.1.</span> <span class="toc-text">General</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Features"><span class="toc-number">3.2.</span> <span class="toc-text">Features</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Statistics"><span class="toc-number">3.3.</span> <span class="toc-text">Statistics</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Screenshots"><span class="toc-number">4.</span> <span class="toc-text">Screenshots</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#WakaTime"><span class="toc-number">4.1.</span> <span class="toc-text">WakaTime</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Hakatime"><span class="toc-number">4.2.</span> <span class="toc-text">Hakatime</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Wakapi"><span class="toc-number">4.3.</span> <span class="toc-text">Wakapi</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Summary"><span class="toc-number">5.</span> <span class="toc-text">Summary</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index width mx-auto px2 my4">
+        
+        <article class="h-entry post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <a href="https://muetsch.io/time-tracking-for-developers-%E2%80%93-wakatime-vs-hakatime-vs-wakapi.html" class="u-url">
+        <h1 class="posttitle p-name" itemprop="name headline" property="headline">
+            Time Tracking for Developers – WakaTime vs. Hakatime vs. Wakapi
+        </h1>
+    </a>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" property="author" itemscope itemtype="http://schema.org/Person" vocab="http://schema.org/" typeof="Person">
+        <span itemprop="name" property="name" class="p-author h-card">Ferdinand Mütsch</span>
+      </span>
+      
+    <div class="postdate">
+        <time datetime="2021-04-10T09:01:15.000Z" class="dt-published" itemprop="datePublished" property="datePublished">2021-04-10</time>
+    </div>
+
+
+      
+
+
+      <!--
+      <div style="margin-top: 30px">
+        <a href="https://liberapay.com/muety/" target="_blank"
+          style="background-image: none; text-decoration: none;"><img
+            src="https://badges.fw-web.space/liberapay/receives/muety.svg?logo=liberapay&style=flat-square" alt="Liberapay"
+            style="height: auto !important;width: auto !important;"></a>
+      </div>
+      -->
+    </div>
+  </header>
+  
+  <div class="content e-content" itemprop="articleBody" property="articleBody">
+    <p><img src="https://apps.muetsch.io/images/o:auto?image=https://muetsch.io/images/time_tracking_cover.jpg" alt="Title Image"></p>
+<h1 id="Automated-time-tracking"><a href="#Automated-time-tracking" class="headerlink" title="Automated time tracking"></a>Automated time tracking</h1><p>As a developer, you might be wondering how much time you are spending coding on a specific project, in a specific programming language, etc. Gathering detailed statistics about your work day might help you gain valuable insights on how to increase your productivity. Or maybe you are just a statistics freak, like me, who likes to track and analyze things. What you will need for that purpose is an automated time tracking tool. Many of these exist, but this article focuses on such that are specifically meant for developers, more specifically, on <a target="_blank" rel="noopener" href="https://wakatime.com/">WakaTime</a> and its derivatives in particular.</p>
+<h1 id="WakaTime-and-friends"><a href="#WakaTime-and-friends" class="headerlink" title="WakaTime and friends"></a>WakaTime and friends</h1><p>WakaTime is one of the most popular and wide-spread automated time tracking softwares for developers. It was – and still is – built by <a target="_blank" rel="noopener" href="https://github.com/alanhamlett">Alan Hamlett</a> and started out <a target="_blank" rel="noopener" href="https://news.ycombinator.com/item?id=9994143">back in 2013</a>. Its concept is very straightforward. Developers install a plugin into their code editor or IDE, which sends so called heartbeats to a web service on a regular basis. These heartbeats include all kinds of information on the project and the specific file you are currently working on. The backend-side web service aggregates and processes those heartbeats and generates detailed statistics and graphs from them, which you can then browse in a web dashboard. Many parts of WakaTime are open-source, however, the web service itself, which contains most of the core business logic, is not.</p>
+<p>WakaTime comes with around <a target="_blank" rel="noopener" href="https://wakatime.com/plugins">50 different IDE plugins</a> (ranging from IntelliJ over VSCode to Vim and Emacs), which are all open source. Third-party projects like <a target="_blank" rel="noopener" href="https://github.com/mujx/hakatime">Hakatime</a> and <a target="_blank" rel="noopener" href="https://wakapi.dev/">Wakapi</a> started to build up on that basis and implement their own backends, which resemble the official WakaTime’s API and therefore are (partially) compatible.</p>
+<p>In the following, I want to present a brief comparison between these three software tools. Feel free to reach out if you are missing any aspect or if there is a mistake.</p>
+<p><strong>Disclaimer:</strong> I am the author of Wakapi.</p>
+<h1 id="Comparison"><a href="#Comparison" class="headerlink" title="Comparison"></a>Comparison</h1><h2 id="General"><a href="#General" class="headerlink" title="General"></a>General</h2><table>
+<thead>
+<tr>
+<th></th>
+<th>WakaTime</th>
+<th>Hakatime</th>
+<th>Wakapi</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Started in</td>
+<td><a target="_blank" rel="noopener" href="https://github.com/wakatime/wakatime/commit/3da94756aa1903c1cca5035803e3f704e818c086">2013</a></td>
+<td><a target="_blank" rel="noopener" href="https://github.com/mujx/hakatime/commit/7dae338ece5bb485183c8c3e97e1cd3e36d7baae">2020</a></td>
+<td><a target="_blank" rel="noopener" href="https://github.com/muety/wakapi/commit/0bd71b77085da62c573b44bb3a39f420840e7157">2019</a></td>
+</tr>
+<tr>
+<td><strong>Open source</strong></td>
+<td>Partially (BSD-3)</td>
+<td>✅ Yes (Unlicense)</td>
+<td>✅ Yes (GPL-3.0)</td>
+</tr>
+<tr>
+<td><strong>GitHub</strong></td>
+<td><a target="_blank" rel="noopener" href="https://github.com/wakatime/wakatime">wakatime/wakatime</a></td>
+<td><a target="_blank" rel="noopener" href="https://github.com/mujx/hakatime">mujx/hakatime</a></td>
+<td><a target="_blank" rel="noopener" href="https://github.com/muety/wakapi">muety/wakapi</a></td>
+</tr>
+<tr>
+<td><strong>Written in</strong></td>
+<td>Python</td>
+<td>Haskell</td>
+<td>Go</td>
+</tr>
+<tr>
+<td><strong>Databases</strong></td>
+<td>–</td>
+<td>Postgres</td>
+<td>SQLite, MySQL, Postgres, CockroachDB</td>
+</tr>
+<tr>
+<td><strong>API</strong></td>
+<td>✅ Yes</td>
+<td>✅ Yes</td>
+<td>✅ Yes</td>
+</tr>
+<tr>
+<td><strong>API Docs</strong></td>
+<td>✅ <a target="_blank" rel="noopener" href="https://wakatime.com/developers">Yes</a></td>
+<td>⛔️ No</td>
+<td>✅ <a target="_blank" rel="noopener" href="https://wakapi.dev/swagger-ui/">Yes</a></td>
+</tr>
+<tr>
+<td><strong>SaaS</strong></td>
+<td>✅ <a target="_blank" rel="noopener" href="https://wakatime.com/">Yes</a></td>
+<td><a target="_blank" rel="noopener" href="https://hakatime-demo.mtx-dev.xyz/">Demo only</a></td>
+<td>✅ <a target="_blank" rel="noopener" href="https://wakapi.dev/">Yes</a></td>
+</tr>
+<tr>
+<td><strong>Self-hosted</strong></td>
+<td>⛔️ No</td>
+<td>✅ Yes</td>
+<td>✅ Yes</td>
+</tr>
+<tr>
+<td><strong>Docker deployment</strong></td>
+<td>⛔️ No</td>
+<td>✅ Yes</td>
+<td>✅ Yes</td>
+</tr>
+<tr>
+<td><strong>Pricing</strong></td>
+<td>$0 - $49 / month</td>
+<td>–</td>
+<td>–</td>
+</tr>
+</tbody></table>
+<h2 id="Features"><a href="#Features" class="headerlink" title="Features"></a>Features</h2><table>
+<thead>
+<tr>
+<th></th>
+<th>WakaTime</th>
+<th>Hakatime</th>
+<th>Wakapi</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Teams / Orgs</strong></td>
+<td>✅ Yes</td>
+<td>⛔️ No</td>
+<td>⛔️ No</td>
+</tr>
+<tr>
+<td><strong>Goals</strong></td>
+<td>✅ Yes</td>
+<td>⛔️ No</td>
+<td>⏳ <a target="_blank" rel="noopener" href="https://github.com/muety/wakapi/issues/166">TBD</a></td>
+</tr>
+<tr>
+<td><strong>Leaderboards</strong></td>
+<td>✅ Yes</td>
+<td>✅ Yes</td>
+<td>⛔️ No</td>
+</tr>
+<tr>
+<td><strong>Badges</strong></td>
+<td>✅ Yes</td>
+<td>✅ Yes</td>
+<td>✅ Yes</td>
+</tr>
+<tr>
+<td><strong>Data import</strong></td>
+<td>–</td>
+<td>✅ Yes</td>
+<td>✅ Yes</td>
+</tr>
+<tr>
+<td><strong>3rd-party integrations</strong></td>
+<td>✅ Yes</td>
+<td>⛔️ No</td>
+<td>⛔️ No</td>
+</tr>
+<tr>
+<td><strong>Prometheus export</strong></td>
+<td>⛔️ No</td>
+<td>⛔️ No</td>
+<td>✅ Yes</td>
+</tr>
+<tr>
+<td><strong>E-Mail reports</strong></td>
+<td>✅ Yes</td>
+<td>⛔️ No</td>
+<td>✅ Yes</td>
+</tr>
+<tr>
+<td><strong>Timeline charts</strong></td>
+<td>✅ Yes</td>
+<td>✅ Yes</td>
+<td>⏳ <a target="_blank" rel="noopener" href="https://github.com/muety/wakapi/issues/101">TBD</a></td>
+</tr>
+<tr>
+<td><strong>Activity charts</strong></td>
+<td>⛔️ No</td>
+<td>✅ Yes</td>
+<td>⏳ <a target="_blank" rel="noopener" href="https://github.com/muety/wakapi/issues/12">TBD</a></td>
+</tr>
+</tbody></table>
+<h2 id="Statistics"><a href="#Statistics" class="headerlink" title="Statistics"></a>Statistics</h2><table>
+<thead>
+<tr>
+<th></th>
+<th>WakaTime</th>
+<th>Hakatime</th>
+<th>Wakapi</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Projects</strong></td>
+<td>✅ Yes</td>
+<td>✅ Yes</td>
+<td>✅ Yes</td>
+</tr>
+<tr>
+<td><strong>Languages</strong></td>
+<td>✅ Yes</td>
+<td>✅ Yes</td>
+<td>✅ Yes</td>
+</tr>
+<tr>
+<td><strong>Editors / IDEs</strong></td>
+<td>✅ Yes</td>
+<td>⛔️ No (?)</td>
+<td>✅ Yes</td>
+</tr>
+<tr>
+<td><strong>Operating Systems</strong></td>
+<td>✅ Yes</td>
+<td>⛔️ No (?)</td>
+<td>✅ Yes</td>
+</tr>
+<tr>
+<td><strong>Machines</strong></td>
+<td>✅ Yes</td>
+<td>⛔️ No (?)</td>
+<td>✅ Yes</td>
+</tr>
+<tr>
+<td><strong>Files</strong></td>
+<td>✅ Yes</td>
+<td>✅ Yes</td>
+<td>⏳ <a target="_blank" rel="noopener" href="https://github.com/muety/wakapi/issues/80">TBD</a></td>
+</tr>
+<tr>
+<td><strong>Branches</strong></td>
+<td>✅ Yes</td>
+<td>✅ Yes</td>
+<td>⛔️ No</td>
+</tr>
+<tr>
+<td><strong>Commits</strong></td>
+<td>✅ Yes</td>
+<td>✅ Yes</td>
+<td>⛔️ No</td>
+</tr>
+</tbody></table>
+<h1 id="Screenshots"><a href="#Screenshots" class="headerlink" title="Screenshots"></a>Screenshots</h1><h2 id="WakaTime"><a href="#WakaTime" class="headerlink" title="WakaTime"></a>WakaTime</h2><p><img src="https://apps.muetsch.io/images/o:auto/rs,s:640?image=https://muetsch.io/images/wakatime_screenshot.png"></p>
+<h2 id="Hakatime"><a href="#Hakatime" class="headerlink" title="Hakatime"></a>Hakatime</h2><p><img src="https://apps.muetsch.io/images/o:auto/rs,s:640?image=https://muetsch.io/images/hakatime_screenshot.png"></p>
+<h2 id="Wakapi"><a href="#Wakapi" class="headerlink" title="Wakapi"></a>Wakapi</h2><p><img src="https://apps.muetsch.io/images/o:auto/rs,s:640?image=https://muetsch.io/images/wakapi_screenshot.png"></p>
+<p>For Wakapi, a major redesign of the user interface <a target="_blank" rel="noopener" href="https://github.com/muety/wakapi/issues/82#issuecomment-774993875">is planned</a>.</p>
+<h1 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h1><p>Clearly, WakaTime is the most mature and feature-rich tool, but, of course, comes at a cost.</p>
+<p>Hakatime has a nice-looking, clean user interface and beautiful visualizations. On the other hand, it felt a bit rough and sometimes buggy here and there during my tests. But of course, this is a subjective experience.</p>
+<p>Wakapi is built on a solid, technical basis and provides lots of configuration options for developers. However, its current UI is quite minimalist and less fancy, compared to the other tools.</p>
+<p>All three projects are under active development and with many new features about to come in the future. Wakapi also highly welcomes open source contributions to its code base.</p>
+<p>If you are interested in tracking your coding statistics, I would like to encourage you to give all three tools a try. Feel free to share your thoughts!</p>
+
+  </div>
+</article>
+
+
+
+    </div>
+    
+      <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Blog</a></li>
+         
+          <li><a href="/imprint/">Imprint</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Automated-time-tracking"><span class="toc-number">1.</span> <span class="toc-text">Automated time tracking</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#WakaTime-and-friends"><span class="toc-number">2.</span> <span class="toc-text">WakaTime and friends</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Comparison"><span class="toc-number">3.</span> <span class="toc-text">Comparison</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#General"><span class="toc-number">3.1.</span> <span class="toc-text">General</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Features"><span class="toc-number">3.2.</span> <span class="toc-text">Features</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Statistics"><span class="toc-number">3.3.</span> <span class="toc-text">Statistics</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Screenshots"><span class="toc-number">4.</span> <span class="toc-text">Screenshots</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#WakaTime"><span class="toc-number">4.1.</span> <span class="toc-text">WakaTime</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Hakatime"><span class="toc-number">4.2.</span> <span class="toc-text">Hakatime</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Wakapi"><span class="toc-number">4.3.</span> <span class="toc-text">Wakapi</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Summary"><span class="toc-number">5.</span> <span class="toc-text">Summary</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://muetsch.io/time-tracking-for-developers-%E2%80%93-wakatime-vs-hakatime-vs-wakapi.html"><i class="fa fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://muetsch.io/time-tracking-for-developers-%E2%80%93-wakatime-vs-hakatime-vs-wakapi.html&text=Time Tracking for Developers – WakaTime vs. Hakatime vs. Wakapi"><i class="fa fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://muetsch.io/time-tracking-for-developers-%E2%80%93-wakatime-vs-hakatime-vs-wakapi.html&title=Time Tracking for Developers – WakaTime vs. Hakatime vs. Wakapi"><i class="fa fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://muetsch.io/time-tracking-for-developers-%E2%80%93-wakatime-vs-hakatime-vs-wakapi.html&is_video=false&description=Time Tracking for Developers – WakaTime vs. Hakatime vs. Wakapi"><i class="fa fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Time Tracking for Developers – WakaTime vs. Hakatime vs. Wakapi&body=Check out this article: https://muetsch.io/time-tracking-for-developers-%E2%80%93-wakatime-vs-hakatime-vs-wakapi.html"><i class="fa fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://muetsch.io/time-tracking-for-developers-%E2%80%93-wakatime-vs-hakatime-vs-wakapi.html&title=Time Tracking for Developers – WakaTime vs. Hakatime vs. Wakapi"><i class="fa fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://muetsch.io/time-tracking-for-developers-%E2%80%93-wakatime-vs-hakatime-vs-wakapi.html&title=Time Tracking for Developers – WakaTime vs. Hakatime vs. Wakapi"><i class="fa fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://muetsch.io/time-tracking-for-developers-%E2%80%93-wakatime-vs-hakatime-vs-wakapi.html&title=Time Tracking for Developers – WakaTime vs. Hakatime vs. Wakapi"><i class="fa fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://muetsch.io/time-tracking-for-developers-%E2%80%93-wakatime-vs-hakatime-vs-wakapi.html&title=Time Tracking for Developers – WakaTime vs. Hakatime vs. Wakapi"><i class="fa fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://muetsch.io/time-tracking-for-developers-%E2%80%93-wakatime-vs-hakatime-vs-wakapi.html&name=Time Tracking for Developers – WakaTime vs. Hakatime vs. Wakapi&description="><i class="fa fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+      <ul>
+        <li id="toc"><a class="icon" href="#" onclick='toggleById("toc-footer")'><i class="fa fa-list fa-lg" aria-hidden="true"></i> TOC</a></li>
+        <li id="share"><a class="icon" href="#" onclick='toggleById("share-footer")'><i class="fa fa-share-alt fa-lg" aria-hidden="true"></i> Share</a></li>
+        <li id="top" style="display:none"><a class="icon" href="#" onclick="window.scrollTo(0,0)"><i class="fa fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a></li>
+        <li id="menu"><a class="icon" href="#" onclick='toggleById("nav-footer")'><i class="fa fa-bars fa-lg" aria-hidden="true"></i> Menu</a></li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+    
+    <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2021 Ferdinand Mütsch
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Blog</a></li>
+         
+          <li><a href="/imprint/">Imprint</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+</body>
+</html>
+<!-- styles -->
+
+<link rel="stylesheet" href="/lib/roboto/css/roboto.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+
+
+<script src="/js/main.js"></script>
+
+<!-- Google Analytics -->
+
+<!-- Disqus Comments -->
+
+

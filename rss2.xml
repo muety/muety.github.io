@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0"
+  xmlns:atom="http://www.w3.org/2005/Atom"
+  xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Ferdinand Mütsch</title>
+    <link>https://muetsch.io/</link>
+    
+    <atom:link href="https://muetsch.io/rss2.xml" rel="self" type="application/rss+xml"/>
+    
+    <description>I&#39;m a passionate web developer and technology enthusiast from Karlsruhe, Germany. My personal webpage is the right place to find out about me and my projects as well as to read about software development, DevOps, some machine learning and technology in general.</description>
+    <pubDate>Fri, 25 Jun 2021 08:18:24 GMT</pubDate>
+    <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>Open-source, self-hosted location tracking with OwnTracks and Grafana</title>
+      <link>https://muetsch.io/open-source-self-hosted-location-tracking-with-owntracks-and-grafana.html</link>
+      <guid>https://muetsch.io/open-source-self-hosted-location-tracking-with-owntracks-and-grafana.html</guid>
+      <pubDate>Fri, 25 Jun 2021 06:49:45 GMT</pubDate>
+      
+        
+        
+      <description>&lt;h1 id=&quot;Introduction&quot;&gt;&lt;a href=&quot;#Introduction&quot; class=&quot;headerlink&quot; title=&quot;Introduction&quot;&gt;&lt;/a&gt;Introduction&lt;/h1&gt;&lt;p&gt;If you are using any kinds of </description>
+        
+      
+      
+      
+      
+      
+      
+      <comments>https://muetsch.io/open-source-self-hosted-location-tracking-with-owntracks-and-grafana.html#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>Aggregating and Visualizing DMARC Reports</title>
+      <link>https://muetsch.io/aggregating-and-visualizing-dmarc-reports.html</link>
+      <guid>https://muetsch.io/aggregating-and-visualizing-dmarc-reports.html</guid>
+      <pubDate>Fri, 07 May 2021 19:23:08 GMT</pubDate>
+      
+        
+        
+      <description>&lt;p&gt;&lt;img src=&quot;https://apps.muetsch.io/images/o:auto/rs,s:640?image=https://muetsch.io/images/dmarc-cover.jpg&quot;&gt;&lt;/p&gt;
+&lt;h1 id=&quot;DMARC-DKIM-and-SPF</description>
+        
+      
+      
+      
+      
+      
+      
+      <comments>https://muetsch.io/aggregating-and-visualizing-dmarc-reports.html#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>Time Tracking for Developers – WakaTime vs. Hakatime vs. Wakapi</title>
+      <link>https://muetsch.io/time-tracking-for-developers-%E2%80%93-wakatime-vs-hakatime-vs-wakapi.html</link>
+      <guid>https://muetsch.io/time-tracking-for-developers-%E2%80%93-wakatime-vs-hakatime-vs-wakapi.html</guid>
+      <pubDate>Sat, 10 Apr 2021 09:01:15 GMT</pubDate>
+      
+        
+        
+      <description>&lt;p&gt;&lt;img src=&quot;https://apps.muetsch.io/images/o:auto?image=https://muetsch.io/images/time_tracking_cover.jpg&quot; alt=&quot;Title Image&quot;&gt;&lt;/p&gt;
+&lt;h1 id=&quot;A</description>
+        
+      
+      
+      
+      
+      
+      
+      <comments>https://muetsch.io/time-tracking-for-developers-%E2%80%93-wakatime-vs-hakatime-vs-wakapi.html#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>My Experiences with the Oracle Java 11 Developer Certification</title>
+      <link>https://muetsch.io/my-experiences-with-the-oracle-java-11-developer-certification.html</link>
+      <guid>https://muetsch.io/my-experiences-with-the-oracle-java-11-developer-certification.html</guid>
+      <pubDate>Fri, 19 Mar 2021 12:03:30 GMT</pubDate>
+      
+        
+        
+      <description>&lt;p&gt;&lt;img src=&quot;https://apps.muetsch.io/images/o:auto/rs,s:640?image=https://muetsch.io/images/java_cert2.png&quot;&gt;&lt;/p&gt;
+&lt;p&gt;On the occasion of the J</description>
+        
+      
+      
+      
+      
+      
+      
+      <comments>https://muetsch.io/my-experiences-with-the-oracle-java-11-developer-certification.html#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>Consider Sponsoring Open Source</title>
+      <link>https://muetsch.io/consider-sponsoring-open-source.html</link>
+      <guid>https://muetsch.io/consider-sponsoring-open-source.html</guid>
+      <pubDate>Sat, 12 Dec 2020 18:36:00 GMT</pubDate>
+      
+        
+        
+      <description>&lt;p&gt;&lt;img src=&quot;https://apps.muetsch.io/images/o:auto?image=https://muetsch.io/images/foss_sponsoring.png&quot; alt=&quot;Title Image&quot;&gt;&lt;/p&gt;
+&lt;h1 id=&quot;Open-</description>
+        
+      
+      
+      
+      
+      
+      
+      <comments>https://muetsch.io/consider-sponsoring-open-source.html#disqus_thread</comments>
+      
+    </item>
+    
+  </channel>
+</rss>

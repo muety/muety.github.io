@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="referrer" content="no-referrer">
+    <meta name="description" content="IntroductionIn the course of this two-part article, the interested reader is briefly introduced to the basic of GraphQL and how it compares to traditional approaches. In the second part, an example s">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Modern, reactive web APIs with GraphQL, Go and Server-Sent Events – Part 1">
+<meta property="og:url" content="https://muetsch.io/modern-reactive-web-apis-with-graphql-go-and-server-sent-events-part-1.html">
+<meta property="og:site_name" content="Ferdinand Mütsch">
+<meta property="og:description" content="IntroductionIn the course of this two-part article, the interested reader is briefly introduced to the basic of GraphQL and how it compares to traditional approaches. In the second part, an example s">
+<meta property="og:locale">
+<meta property="og:image" content="https://apps.muetsch.io/images/o:auto?image=https://muetsch.io/images/graphql_cover.png">
+<meta property="og:image" content="https://apps.muetsch.io/images/o:auto?image=https://muetsch.io/images/graphql_github.png">
+<meta property="article:published_time" content="2020-06-06T09:59:23.000Z">
+<meta property="article:modified_time" content="2020-10-30T20:05:40.284Z">
+<meta property="article:author" content="Ferdinand Mütsch">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://apps.muetsch.io/images/o:auto?image=https://muetsch.io/images/graphql_cover.png">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/favicon.ico" sizes="192x192">
+          
+        
+        
+    
+    <!-- title -->
+    <title>Modern, reactive web APIs with GraphQL, Go and Server-Sent Events – Part 1</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- rss -->
+    
+    
+
+    <!-- rel-me links -->
+    
+      
+        <link href="http://github.com/muety" rel="me">
+      
+        <link href="https://twitter.com/n2try" rel="me">
+      
+        <link href="mailto:ferdinand@muetsch.io" rel="me">
+      
+    
+
+    <!-- Webmention link -->
+    
+      <link href="https://webmention.io/muetsch.io/webmention" rel="webmention">
+    
+
+    
+      <link href="https://webmention.io/muetsch.io/xmlrpc" rel="pingback">
+    
+<meta name="generator" content="Hexo 5.2.0"><link rel="alternate" href="/rss2.xml" title="Ferdinand Mütsch" type="application/rss+xml">
+</head>
+
+<body>
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fa fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fa fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="window.scrollTo(0, 0)" style="display:none;"><i class="fa fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Blog</a></li>
+         
+          <li><a href="/imprint/">Imprint</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/modern-reactive-web-apis-with-graphql-go-and-server-sent-events-part-2.html"><i class="fa fa-chevron-left" aria-hidden="true" onmouseover='toggleById("i-prev");' onmouseout='toggleById("i-prev");'></i></a></li>
+        
+        
+        <li><a class="icon" href="/how-to-enable-dns-over-tls-on-ubuntu-using-coredns.html"><i class="fa fa-chevron-right" aria-hidden="true" onmouseover='toggleById("i-next").toggleById();' onmouseout='toggleById("i-next");'></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="window.scrollTo(0,0)"><i class="fa fa-chevron-up" aria-hidden="true" onmouseover='toggleById("i-top");' onmouseout='toggleById("i-top");'></i></a></li>
+        <li><a class="icon" href="#"><i class="fa fa-share-alt" aria-hidden="true" onmouseover='toggleById("i-share");' onmouseout='toggleById("i-share");' onclick='toggleById("share");return false;'></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://muetsch.io/modern-reactive-web-apis-with-graphql-go-and-server-sent-events-part-1.html"><i class="fa fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://muetsch.io/modern-reactive-web-apis-with-graphql-go-and-server-sent-events-part-1.html&text=Modern, reactive web APIs with GraphQL, Go and Server-Sent Events – Part 1"><i class="fa fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://muetsch.io/modern-reactive-web-apis-with-graphql-go-and-server-sent-events-part-1.html&title=Modern, reactive web APIs with GraphQL, Go and Server-Sent Events – Part 1"><i class="fa fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://muetsch.io/modern-reactive-web-apis-with-graphql-go-and-server-sent-events-part-1.html&is_video=false&description=Modern, reactive web APIs with GraphQL, Go and Server-Sent Events – Part 1"><i class="fa fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Modern, reactive web APIs with GraphQL, Go and Server-Sent Events – Part 1&body=Check out this article: https://muetsch.io/modern-reactive-web-apis-with-graphql-go-and-server-sent-events-part-1.html"><i class="fa fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://muetsch.io/modern-reactive-web-apis-with-graphql-go-and-server-sent-events-part-1.html&title=Modern, reactive web APIs with GraphQL, Go and Server-Sent Events – Part 1"><i class="fa fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://muetsch.io/modern-reactive-web-apis-with-graphql-go-and-server-sent-events-part-1.html&title=Modern, reactive web APIs with GraphQL, Go and Server-Sent Events – Part 1"><i class="fa fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://muetsch.io/modern-reactive-web-apis-with-graphql-go-and-server-sent-events-part-1.html&title=Modern, reactive web APIs with GraphQL, Go and Server-Sent Events – Part 1"><i class="fa fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://muetsch.io/modern-reactive-web-apis-with-graphql-go-and-server-sent-events-part-1.html&title=Modern, reactive web APIs with GraphQL, Go and Server-Sent Events – Part 1"><i class="fa fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://muetsch.io/modern-reactive-web-apis-with-graphql-go-and-server-sent-events-part-1.html&name=Modern, reactive web APIs with GraphQL, Go and Server-Sent Events – Part 1&description="><i class="fa fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Introduction"><span class="toc-number">1.</span> <span class="toc-text">Introduction</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#What-is-GraphQL"><span class="toc-number">2.</span> <span class="toc-text">What is GraphQL?</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Comparison-with-REST-and-RPC"><span class="toc-number">2.1.</span> <span class="toc-text">Comparison with REST and RPC</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Example"><span class="toc-number">2.2.</span> <span class="toc-text">Example</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Try-it-out"><span class="toc-number">2.3.</span> <span class="toc-text">Try it out</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#GraphQL-Basic"><span class="toc-number">3.</span> <span class="toc-text">GraphQL Basic</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Subscriptions"><span class="toc-number">3.1.</span> <span class="toc-text">Subscriptions</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#What%E2%80%99s-next"><span class="toc-number">4.</span> <span class="toc-text">What’s next?</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index width mx-auto px2 my4">
+        
+        <article class="h-entry post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <a href="https://muetsch.io/modern-reactive-web-apis-with-graphql-go-and-server-sent-events-part-1.html" class="u-url">
+        <h1 class="posttitle p-name" itemprop="name headline" property="headline">
+            Modern, reactive web APIs with GraphQL, Go and Server-Sent Events – Part 1
+        </h1>
+    </a>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" property="author" itemscope itemtype="http://schema.org/Person" vocab="http://schema.org/" typeof="Person">
+        <span itemprop="name" property="name" class="p-author h-card">Ferdinand Mütsch</span>
+      </span>
+      
+    <div class="postdate">
+        <time datetime="2020-06-06T09:59:23.000Z" class="dt-published" itemprop="datePublished" property="datePublished">2020-06-06</time>
+    </div>
+
+
+      
+
+
+      <!--
+      <div style="margin-top: 30px">
+        <a href="https://liberapay.com/muety/" target="_blank"
+          style="background-image: none; text-decoration: none;"><img
+            src="https://badges.fw-web.space/liberapay/receives/muety.svg?logo=liberapay&style=flat-square" alt="Liberapay"
+            style="height: auto !important;width: auto !important;"></a>
+      </div>
+      -->
+    </div>
+  </header>
+  
+  <div class="content e-content" itemprop="articleBody" property="articleBody">
+    <p><img src="https://apps.muetsch.io/images/o:auto?image=https://muetsch.io/images/graphql_cover.png"></p>
+<h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1><p>In the course of this two-part article, the interested reader is briefly introduced to the basic of GraphQL and how it compares to traditional approaches. In the second part, an example single-page web application (SPA) is built to demonstrate the use of GraphQL in combination with further modern web technologies. The <a target="_blank" rel="noopener" href="https://github.com/muety/go-graphql-sse-example">final project</a> provides a clean, opinionated code- and project structure for both backend and frontend and constitutes a good starting point for new apps based on the presented tech stack.</p>
+<p>&gt; <strong>Code</strong>: <a target="_blank" rel="noopener" href="https://github.com/muety/go-graphql-sse-example">muety/go-graphql-sse-example</a></p>
+<h1 id="What-is-GraphQL"><a href="#What-is-GraphQL" class="headerlink" title="What is GraphQL?"></a>What is GraphQL?</h1><p><a target="_blank" rel="noopener" href="https://engineering.fb.com/core-data/graphql-a-data-query-language/">GraphQL</a> is a relatively new (proposed in 2015 by Facebook engineers) approach to designing APIs for (web) backend applications and can be considered an alternative to <a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Glossary/REST">REST</a> or remote-procedure-call (RPC) mechanisms like <a target="_blank" rel="noopener" href="https://www.jsonrpc.org/">JSON-RPC</a>. In other words, it’s <em>“an open-source data query and manipulation language for APIs”</em> <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/GraphQL">[1]</a>. The specification is open-source and actively evolving on <a target="_blank" rel="noopener" href="https://github.com/graphql/graphql-spec">GitHub</a>. While REST APIs are currently the de-facto standard on the web (although not necessarily all of them being fully <a target="_blank" rel="noopener" href="https://www.martinfowler.com/articles/richardsonMaturityModel.html">mature</a>) – GraphQL starts to <a target="_blank" rel="noopener" href="https://trends.google.com/trends/explore?date=2018-05-06%202020-06-06&gprop=youtube&q=graphql">gain traction</a>.</p>
+<h2 id="Comparison-with-REST-and-RPC"><a href="#Comparison-with-REST-and-RPC" class="headerlink" title="Comparison with REST and RPC"></a>Comparison with REST and RPC</h2><p>In contrast to REST, which is primarily structured around resources or entities and RPC-based APIs, which focus on actions or methods, GraphQL is all about the underlying data itself. The consumer of an API – usually the frontend / client-side part of a SPA – only has to know the schema and structure of the data provided by the API to <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Create,_read,_update_and_delete">CRUD</a> it. Compared to REST APIs, where the consumer heavily depends on the fixed data structure delivered by the backend API, this is especially beneficial as it introduced a lot more flexibility and decoupling and can save the developer some time making the client-side application <a target="_blank" rel="noopener" href="https://martinfowler.com/bliki/TolerantReader.html">tolerant</a>. Also, you will probably not need <a target="_blank" rel="noopener" href="https://docs.microsoft.com/en-us/azure/architecture/patterns/backends-for-frontends">backends for frontends</a> anymore.</p>
+<p>Essentially, with GraphQL, <strong>the consumer asks exactly for what it needs and how it needs it</strong>, i.e. your client application tells the backend exactly what to return and in which format. <strong>Consuming a GraphQL API is like querying a database, but with more guidance and control.</strong></p>
+<h2 id="Example"><a href="#Example" class="headerlink" title="Example"></a>Example</h2><p>Let’s look at an example to get a better idea of how GraphQL works, especially in comparison to the REST principles. </p>
+<p>Imagine you have an e-commerce application with products and orders. Every order consists, among others, of a set of products. As the operator of the web shop, you might want to get a list of all orders. With a more or less RESTful API (we neglect the hypermedia controls in the example though), your request-response pair could look like this:</p>
+<details>
+<summary>Click to view</summary>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">Request</span><br><span class="line">-------</span><br><span class="line">GET &#x2F;api&#x2F;orders</span><br><span class="line"></span><br><span class="line">Response Body</span><br><span class="line">-------------</span><br><span class="line">[</span><br><span class="line">    &#123;</span><br><span class="line">        &quot;id&quot;: 125,</span><br><span class="line">        &quot;customerId&quot;: 8977,</span><br><span class="line">        &quot;createdAt&quot;: &quot;2020-06-06T13:40:49.038Z&quot;,</span><br><span class="line">        &quot;productIds&quot;: [ 49863176 ]</span><br><span class="line">    &#125;</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+</details>
+
+<p>So far so good, but potentially you will also want to view the actual products right away. What you got are only ids, for each of which you would have to issue another API call to retrieve it. Alternatively, the API could also return nested objects, like so:</p>
+<details>
+<summary>Click to view</summary>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">[</span><br><span class="line">    &#123;</span><br><span class="line">        &quot;id&quot;: 125,</span><br><span class="line">        &quot;customerId&quot;: 8977,</span><br><span class="line">        &quot;createdAt&quot;: &quot;2020-06-06T13:40:49.038Z&quot;,</span><br><span class="line">        &quot;products&quot;: [</span><br><span class="line">            &#123;</span><br><span class="line">                &quot;id&quot;: 49863176,</span><br><span class="line">                &quot;name&quot;: &quot;Slim T-Shirt navy-blue&quot;,</span><br><span class="line">                &quot;price&quot;: 17.90,</span><br><span class="line">                &quot;options&quot;: [</span><br><span class="line">                    &#123;</span><br><span class="line">                        &quot;id&quot;: &quot;size&quot;,</span><br><span class="line">                        &quot;name&quot;: &quot;Size&quot;,</span><br><span class="line">                        &quot;description&quot;: &quot;T-Shirt size&quot;,</span><br><span class="line">                        &quot;values&quot;: [</span><br><span class="line">                            &#123;</span><br><span class="line">                                &quot;id&quot;: &quot;s&quot;,</span><br><span class="line">                                &quot;name&quot;: &quot;Size S&quot;,</span><br><span class="line">                            &#125;,</span><br><span class="line">                            &#123;</span><br><span class="line">                                &quot;id&quot;: &quot;m&quot;,</span><br><span class="line">                                &quot;name&quot;: &quot;Size M&quot;,</span><br><span class="line">                            &#125;,</span><br><span class="line">                            &#123;</span><br><span class="line">                                &quot;id&quot;: &quot;l&quot;,</span><br><span class="line">                                &quot;name&quot;: &quot;Size L&quot;,</span><br><span class="line">                            &#125;</span><br><span class="line">                        ]</span><br><span class="line">                    &#125;</span><br><span class="line">                ]</span><br><span class="line">            &#125;,</span><br><span class="line">        ]</span><br><span class="line">    &#125;</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+</details>
+
+<p>However, that is — to my understanding – not truly RESTful anymore. Also, while the above example is still quite straightforward, things get ugly as nested objects include other nested objects, that include other nested objects, that… Quickly you get JSON responses of several tens or hundreds of kilobytes, although you’re potentially only interested in two or three attributes. Moreover, on some pages of your shop you may be interested in all possible options (e.g. “size”) of a product, but not on others. Should your API define different <a target="_blank" rel="noopener" href="https://www.infoq.com/articles/View-Model-Definition/">view models</a> now and expose different endpoints? Or a single endpoints with query flags like <code>?expanded=true</code>? Soon you might be catching yourself <strong>tailoring your API specifically to the needs of your client</strong> while neglecting REST conventions and a straightforward design. </p>
+<p>With GraphQL, things are different. Your API is a bit <strong>dumber and less opinionated</strong> now and does not deliver data in a fixed structure, according to a specified <a target="_blank" rel="noopener" href="https://graphql.org/learn/queries/">GQL query</a>, which looks a lot like JSON. The above example might look like this, now:</p>
+<details>
+<summary>Click to view</summary>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line">Request</span><br><span class="line">-------</span><br><span class="line">POST &#x2F;api&#x2F;graphql&#x2F;query</span><br><span class="line"></span><br><span class="line">&#123;</span><br><span class="line">    &quot;query&quot;: &quot;\&#123;</span><br><span class="line">        orders &#123;</span><br><span class="line">            id</span><br><span class="line">            customerId</span><br><span class="line">            products &#123;</span><br><span class="line">                name</span><br><span class="line">                price</span><br><span class="line">                options &#123;</span><br><span class="line">                    name</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    \&#125;&quot;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Response Body</span><br><span class="line">-------------</span><br><span class="line">&#123;</span><br><span class="line">    &quot;data&quot;: &#123;</span><br><span class="line">        &quot;orders&quot;: [</span><br><span class="line">            &#123;</span><br><span class="line">                &quot;id&quot;: 125,</span><br><span class="line">                &quot;customerId&quot;: 8977,</span><br><span class="line">                &quot;products&quot;: [</span><br><span class="line">                    &#123;</span><br><span class="line">                        &quot;name&quot;: &quot;Slim T-Shirt navy-blue&quot;,</span><br><span class="line">                        &quot;price&quot;: 17.90,</span><br><span class="line">                        &quot;options&quot;: [</span><br><span class="line">                            &#123;</span><br><span class="line">                                &quot;name&quot;: &quot;Size&quot;,</span><br><span class="line">                            &#125;</span><br><span class="line">                        ]</span><br><span class="line">                    &#125;</span><br><span class="line">                ]</span><br><span class="line">            &#125;</span><br><span class="line">        ]</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</details>
+
+<p>This way, you get only the data you want. All your API has to know is how to fetch every piece of data. All your client has to know is how the data schema itself looks like.</p>
+<h2 id="Try-it-out"><a href="#Try-it-out" class="headerlink" title="Try it out"></a>Try it out</h2><p><img src="https://apps.muetsch.io/images/o:auto?image=https://muetsch.io/images/graphql_github.png"></p>
+<p>GitHub’s official API offers GraphQL query endpoints. You can try it out using their <a target="_blank" rel="noopener" href="https://developer.github.com/v4/explorer/">GraphQL explorer</a>.</p>
+<h1 id="GraphQL-Basic"><a href="#GraphQL-Basic" class="headerlink" title="GraphQL Basic"></a>GraphQL Basic</h1><p>Since this article does not aim to be another introduction to GraphQL, you can read most of the basics about fields, data types, etc. in the <a target="_blank" rel="noopener" href="https://graphql.org/learn/queries/">official docs</a>. However, it is worth mentioning that GraphQL supports three types of queries:</p>
+<ul>
+<li><strong><code>Query</code></strong>: “Standard” type of queries, used for fetching data (see above). Similar to what you would do with a <code>GET</code> in REST.</li>
+<li><strong><code>Mutation</code></strong>: Query type used to modify data. Similar to what you would do with a <code>PUT</code>, <code>POST</code>, <code>PATCH</code> or <code>DELETE</code> in REST.</li>
+<li><strong><code>Subscription</code></strong>: Query type to communicate your intent to subscribe to live data updates. </li>
+</ul>
+<h2 id="Subscriptions"><a href="#Subscriptions" class="headerlink" title="Subscriptions"></a>Subscriptions</h2><p>While a basic GraphQL application will at least use the former two types, the latter is especially interesting in the context of this article. Using subscriptions, you can have your web frontend be notified when new data arrives at the server or existing data changes. For instance, the operator of the above web shop could have a live-updating dashboard, that shows new orders just as they are placed. </p>
+<p>For subscriptions, the GraphQL standard does not define a lot more than their plain existence and purpose. Especially, it is not defined how and which technology to implement them. On the web, any <a target="_blank" rel="noopener" href="https://docs.microsoft.com/en-us/azure/architecture/patterns/publisher-subscriber">publish/subscribe</a>-like mechanism that provides bi-directional or uni-directional server-to-client communication is appropriate. For the sake of simplicity, <a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events">Server-Sent Events</a> are used in this article.</p>
+<h1 id="What’s-next"><a href="#What’s-next" class="headerlink" title="What’s next?"></a>What’s next?</h1><p>This part gave a brief introduction to GraphQL. The next part is about actual code. We’re going to build an example web app with live-updates using GraphQL, Go, MongoDB and VueJs. Stay tuned!</p>
+<p>&gt; <a href="https://muetsch.io/modern-reactive-web-apis-with-graphql-go-and-server-sent-events-part-2.html"><strong>Part 2</strong></a></p>
+
+  </div>
+</article>
+
+
+
+    </div>
+    
+      <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Blog</a></li>
+         
+          <li><a href="/imprint/">Imprint</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Introduction"><span class="toc-number">1.</span> <span class="toc-text">Introduction</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#What-is-GraphQL"><span class="toc-number">2.</span> <span class="toc-text">What is GraphQL?</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Comparison-with-REST-and-RPC"><span class="toc-number">2.1.</span> <span class="toc-text">Comparison with REST and RPC</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Example"><span class="toc-number">2.2.</span> <span class="toc-text">Example</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Try-it-out"><span class="toc-number">2.3.</span> <span class="toc-text">Try it out</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#GraphQL-Basic"><span class="toc-number">3.</span> <span class="toc-text">GraphQL Basic</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Subscriptions"><span class="toc-number">3.1.</span> <span class="toc-text">Subscriptions</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#What%E2%80%99s-next"><span class="toc-number">4.</span> <span class="toc-text">What’s next?</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://muetsch.io/modern-reactive-web-apis-with-graphql-go-and-server-sent-events-part-1.html"><i class="fa fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://muetsch.io/modern-reactive-web-apis-with-graphql-go-and-server-sent-events-part-1.html&text=Modern, reactive web APIs with GraphQL, Go and Server-Sent Events – Part 1"><i class="fa fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://muetsch.io/modern-reactive-web-apis-with-graphql-go-and-server-sent-events-part-1.html&title=Modern, reactive web APIs with GraphQL, Go and Server-Sent Events – Part 1"><i class="fa fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://muetsch.io/modern-reactive-web-apis-with-graphql-go-and-server-sent-events-part-1.html&is_video=false&description=Modern, reactive web APIs with GraphQL, Go and Server-Sent Events – Part 1"><i class="fa fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Modern, reactive web APIs with GraphQL, Go and Server-Sent Events – Part 1&body=Check out this article: https://muetsch.io/modern-reactive-web-apis-with-graphql-go-and-server-sent-events-part-1.html"><i class="fa fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://muetsch.io/modern-reactive-web-apis-with-graphql-go-and-server-sent-events-part-1.html&title=Modern, reactive web APIs with GraphQL, Go and Server-Sent Events – Part 1"><i class="fa fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://muetsch.io/modern-reactive-web-apis-with-graphql-go-and-server-sent-events-part-1.html&title=Modern, reactive web APIs with GraphQL, Go and Server-Sent Events – Part 1"><i class="fa fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://muetsch.io/modern-reactive-web-apis-with-graphql-go-and-server-sent-events-part-1.html&title=Modern, reactive web APIs with GraphQL, Go and Server-Sent Events – Part 1"><i class="fa fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://muetsch.io/modern-reactive-web-apis-with-graphql-go-and-server-sent-events-part-1.html&title=Modern, reactive web APIs with GraphQL, Go and Server-Sent Events – Part 1"><i class="fa fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://muetsch.io/modern-reactive-web-apis-with-graphql-go-and-server-sent-events-part-1.html&name=Modern, reactive web APIs with GraphQL, Go and Server-Sent Events – Part 1&description="><i class="fa fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+      <ul>
+        <li id="toc"><a class="icon" href="#" onclick='toggleById("toc-footer")'><i class="fa fa-list fa-lg" aria-hidden="true"></i> TOC</a></li>
+        <li id="share"><a class="icon" href="#" onclick='toggleById("share-footer")'><i class="fa fa-share-alt fa-lg" aria-hidden="true"></i> Share</a></li>
+        <li id="top" style="display:none"><a class="icon" href="#" onclick="window.scrollTo(0,0)"><i class="fa fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a></li>
+        <li id="menu"><a class="icon" href="#" onclick='toggleById("nav-footer")'><i class="fa fa-bars fa-lg" aria-hidden="true"></i> Menu</a></li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+    
+    <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2021 Ferdinand Mütsch
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Blog</a></li>
+         
+          <li><a href="/imprint/">Imprint</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+</body>
+</html>
+<!-- styles -->
+
+<link rel="stylesheet" href="/lib/roboto/css/roboto.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+
+
+<script src="/js/main.js"></script>
+
+<!-- Google Analytics -->
+
+<!-- Disqus Comments -->
+
+

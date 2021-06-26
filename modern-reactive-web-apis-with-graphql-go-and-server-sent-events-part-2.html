@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="referrer" content="no-referrer">
+    <meta name="description" content="In the previous part, concepts and benefits of GraphQL and GraphQL Subscriptions were presented and proposed as a modern, highly flexible alternative for designing web APIs. In this post, we are goin">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Modern, reactive web APIs with GraphQL, Go and Server-Sent Events – Part 2">
+<meta property="og:url" content="https://muetsch.io/modern-reactive-web-apis-with-graphql-go-and-server-sent-events-part-2.html">
+<meta property="og:site_name" content="Ferdinand Mütsch">
+<meta property="og:description" content="In the previous part, concepts and benefits of GraphQL and GraphQL Subscriptions were presented and proposed as a modern, highly flexible alternative for designing web APIs. In this post, we are goin">
+<meta property="og:locale">
+<meta property="og:image" content="https://apps.muetsch.io/images/o:auto?image=https://muetsch.io/images/graphql_cover.png">
+<meta property="og:image" content="https://apps.muetsch.io/images/o:auto?image=https://muetsch.io/images/graphql_screenshots1.png">
+<meta property="og:image" content="https://muetsch.io/images/graphql_screencast2.gif">
+<meta property="og:image" content="https://muetsch.io/images/graphql_screencast1.gif">
+<meta property="article:published_time" content="2020-06-06T16:34:02.000Z">
+<meta property="article:modified_time" content="2020-10-30T20:05:40.284Z">
+<meta property="article:author" content="Ferdinand Mütsch">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://apps.muetsch.io/images/o:auto?image=https://muetsch.io/images/graphql_cover.png">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/favicon.ico" sizes="192x192">
+          
+        
+        
+    
+    <!-- title -->
+    <title>Modern, reactive web APIs with GraphQL, Go and Server-Sent Events – Part 2</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- rss -->
+    
+    
+
+    <!-- rel-me links -->
+    
+      
+        <link href="http://github.com/muety" rel="me">
+      
+        <link href="https://twitter.com/n2try" rel="me">
+      
+        <link href="mailto:ferdinand@muetsch.io" rel="me">
+      
+    
+
+    <!-- Webmention link -->
+    
+      <link href="https://webmention.io/muetsch.io/webmention" rel="webmention">
+    
+
+    
+      <link href="https://webmention.io/muetsch.io/xmlrpc" rel="pingback">
+    
+<meta name="generator" content="Hexo 5.2.0"><link rel="alternate" href="/rss2.xml" title="Ferdinand Mütsch" type="application/rss+xml">
+</head>
+
+<body>
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fa fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fa fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="window.scrollTo(0, 0)" style="display:none;"><i class="fa fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Blog</a></li>
+         
+          <li><a href="/imprint/">Imprint</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/talkycars-a-distributed-software-platform-for-cooperative-perception.html"><i class="fa fa-chevron-left" aria-hidden="true" onmouseover='toggleById("i-prev");' onmouseout='toggleById("i-prev");'></i></a></li>
+        
+        
+        <li><a class="icon" href="/modern-reactive-web-apis-with-graphql-go-and-server-sent-events-part-1.html"><i class="fa fa-chevron-right" aria-hidden="true" onmouseover='toggleById("i-next").toggleById();' onmouseout='toggleById("i-next");'></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="window.scrollTo(0,0)"><i class="fa fa-chevron-up" aria-hidden="true" onmouseover='toggleById("i-top");' onmouseout='toggleById("i-top");'></i></a></li>
+        <li><a class="icon" href="#"><i class="fa fa-share-alt" aria-hidden="true" onmouseover='toggleById("i-share");' onmouseout='toggleById("i-share");' onclick='toggleById("share");return false;'></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://muetsch.io/modern-reactive-web-apis-with-graphql-go-and-server-sent-events-part-2.html"><i class="fa fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://muetsch.io/modern-reactive-web-apis-with-graphql-go-and-server-sent-events-part-2.html&text=Modern, reactive web APIs with GraphQL, Go and Server-Sent Events – Part 2"><i class="fa fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://muetsch.io/modern-reactive-web-apis-with-graphql-go-and-server-sent-events-part-2.html&title=Modern, reactive web APIs with GraphQL, Go and Server-Sent Events – Part 2"><i class="fa fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://muetsch.io/modern-reactive-web-apis-with-graphql-go-and-server-sent-events-part-2.html&is_video=false&description=Modern, reactive web APIs with GraphQL, Go and Server-Sent Events – Part 2"><i class="fa fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Modern, reactive web APIs with GraphQL, Go and Server-Sent Events – Part 2&body=Check out this article: https://muetsch.io/modern-reactive-web-apis-with-graphql-go-and-server-sent-events-part-2.html"><i class="fa fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://muetsch.io/modern-reactive-web-apis-with-graphql-go-and-server-sent-events-part-2.html&title=Modern, reactive web APIs with GraphQL, Go and Server-Sent Events – Part 2"><i class="fa fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://muetsch.io/modern-reactive-web-apis-with-graphql-go-and-server-sent-events-part-2.html&title=Modern, reactive web APIs with GraphQL, Go and Server-Sent Events – Part 2"><i class="fa fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://muetsch.io/modern-reactive-web-apis-with-graphql-go-and-server-sent-events-part-2.html&title=Modern, reactive web APIs with GraphQL, Go and Server-Sent Events – Part 2"><i class="fa fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://muetsch.io/modern-reactive-web-apis-with-graphql-go-and-server-sent-events-part-2.html&title=Modern, reactive web APIs with GraphQL, Go and Server-Sent Events – Part 2"><i class="fa fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://muetsch.io/modern-reactive-web-apis-with-graphql-go-and-server-sent-events-part-2.html&name=Modern, reactive web APIs with GraphQL, Go and Server-Sent Events – Part 2&description="><i class="fa fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#What-to-build"><span class="toc-number">1.</span> <span class="toc-text">What to build?</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Technology-Stack"><span class="toc-number">1.1.</span> <span class="toc-text">Technology Stack</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Data-Model"><span class="toc-number">2.</span> <span class="toc-text">Data Model</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Resolvers"><span class="toc-number">3.</span> <span class="toc-text">Resolvers</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Subscriptions"><span class="toc-number">4.</span> <span class="toc-text">Subscriptions</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Running-Queries"><span class="toc-number">5.</span> <span class="toc-text">Running Queries</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Using-GraphiQL"><span class="toc-number">5.1.</span> <span class="toc-text">Using GraphiQL</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Programatically"><span class="toc-number">6.</span> <span class="toc-text">Programatically</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Demo"><span class="toc-number">7.</span> <span class="toc-text">Demo</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Outlook"><span class="toc-number">8.</span> <span class="toc-text">Outlook</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index width mx-auto px2 my4">
+        
+        <article class="h-entry post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <a href="https://muetsch.io/modern-reactive-web-apis-with-graphql-go-and-server-sent-events-part-2.html" class="u-url">
+        <h1 class="posttitle p-name" itemprop="name headline" property="headline">
+            Modern, reactive web APIs with GraphQL, Go and Server-Sent Events – Part 2
+        </h1>
+    </a>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" property="author" itemscope itemtype="http://schema.org/Person" vocab="http://schema.org/" typeof="Person">
+        <span itemprop="name" property="name" class="p-author h-card">Ferdinand Mütsch</span>
+      </span>
+      
+    <div class="postdate">
+        <time datetime="2020-06-06T16:34:02.000Z" class="dt-published" itemprop="datePublished" property="datePublished">2020-06-06</time>
+    </div>
+
+
+      
+
+
+      <!--
+      <div style="margin-top: 30px">
+        <a href="https://liberapay.com/muety/" target="_blank"
+          style="background-image: none; text-decoration: none;"><img
+            src="https://badges.fw-web.space/liberapay/receives/muety.svg?logo=liberapay&style=flat-square" alt="Liberapay"
+            style="height: auto !important;width: auto !important;"></a>
+      </div>
+      -->
+    </div>
+  </header>
+  
+  <div class="content e-content" itemprop="articleBody" property="articleBody">
+    <p><img src="https://apps.muetsch.io/images/o:auto?image=https://muetsch.io/images/graphql_cover.png"></p>
+<p>In the <a href="https://muetsch.io/modern-reactive-web-apis-with-graphql-go-and-server-sent-events-part-1.html">previous</a> part, concepts and benefits of GraphQL and <a target="_blank" rel="noopener" href="https://graphql.org/blog/subscriptions-in-graphql-and-relay/">GraphQL Subscriptions</a> were presented and proposed as a modern, highly flexible alternative for designing web APIs.</p>
+<p>In this post, we are going to look at actual code. For demonstration purposes, a small single-page application (SPA) is built as an example. It can serve as a cleanly structured starting point for new apps based on the proposed tech stack.</p>
+<p>&gt; <strong>Code</strong>: <a target="_blank" rel="noopener" href="https://github.com/muety/go-graphql-sse-example">muety/go-graphql-sse-example</a></p>
+<h1 id="What-to-build"><a href="#What-to-build" class="headerlink" title="What to build?"></a>What to build?</h1><p>The demo web app built in the context of this article comprised of a client-side frontend, built with <a target="_blank" rel="noopener" href="https://vuejs.org/">VueJS</a> and a server-side component built with Go. The two components interact with each other through a GraphQL API, which additionally offers the option to subscribe to data updates using <a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events">Server-Sent Events</a>.</p>
+<p>With this demo app, we aim to mimic the functionality of a very basic, minimalist food ordering system. Customers can choose from a list of food products and place their orders. They are shown a waiting number an estimated processing time for their orders and are notified once the order is ready to be picked up. One the other side there is the kiosk operator, who views a live dashboard of currently pending orders, which appear just as they are being placed. </p>
+<p><img src="https://apps.muetsch.io/images/o:auto?image=https://muetsch.io/images/graphql_screenshots1.png"></p>
+<h2 id="Technology-Stack"><a href="#Technology-Stack" class="headerlink" title="Technology Stack"></a>Technology Stack</h2><p>In summary, the following technologies are used:</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://golang.org/">Go</a> as the primary backend-side language </li>
+<li><a target="_blank" rel="noopener" href="https://graphql.org/">GraphQL</a> as a “protocol” for defining web interfaces</li>
+<li><a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events">Server-Sent Events</a> as a simple protocol for live updates, used as an implementation of <a target="_blank" rel="noopener" href="https://graphql.org/blog/subscriptions-in-graphql-and-relay/">GraphQL Subscriptions</a> here</li>
+<li><a target="_blank" rel="noopener" href="https://www.mongodb.com/">MongoDB</a> as a flexible document database for storage</li>
+<li><a target="_blank" rel="noopener" href="https://vuejs.org/">VueJS</a> as a frontend framework to build single-page web applications</li>
+</ul>
+<p>In addition, <a target="_blank" rel="noopener" href="https://www.npmjs.com/package/graphql-request">graphql-request</a> is used as a little helper library on the frontend to issue GraphQL queries more easily. It constitutes a light-weight wrapper around the plain <a target="_blank" rel="noopener" href="https://developer.mozilla.org/de/docs/Web/API/Fetch_API">Fetch API</a>.</p>
+<p>On the backend side, GraphQL development is facilitated by the excellent <a href="github.com/graph-gophers/graphql-go">graphql-go</a> package, which already provides well-defined guidelines to get started (thanks to the authors!).</p>
+<h1 id="Data-Model"><a href="#Data-Model" class="headerlink" title="Data Model"></a>Data Model</h1><p>With GraphQL, you need to specify a <a target="_blank" rel="noopener" href="https://graphql.org/learn/schema/">schema</a> using a GrapQL-specific syntax. It includes all entities, which your API should be able to deal with and is essentially a set of type definitions, split among one or more <code>.graphql</code> files.</p>
+<p>Every GraphQL app consists of root types, defining all supported queries, mutations, and subscriptions as well as entity types. </p>
+<p>For our app, the root schema looks like this (<a target="_blank" rel="noopener" href="https://github.com/muety/go-graphql-sse-example/blob/master/schema/schema.graphql">schema/schema.graphql</a>):</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">schema &#123;</span><br><span class="line">    query: Query</span><br><span class="line">    mutation: Mutation</span><br><span class="line">    subscription: Subscription</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">type Query &#123;</span><br><span class="line">    product(id: ID!): Product</span><br><span class="line">    products(): [Product]</span><br><span class="line">    order(id: ID!): Order</span><br><span class="line">    orders(status: String): [Order]</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">type Mutation &#123;</span><br><span class="line">    createOrder(order: OrderInput!): Order</span><br><span class="line">    updateOrder(order: OrderUpdateInput!): Order</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">type Subscription &#123;</span><br><span class="line">    orderCreated(): Order</span><br><span class="line">    orderChanged(id: ID!): Order</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>The type definition for the <code>Product</code> type referenced in the root schema is given as (<a target="_blank" rel="noopener" href="https://github.com/muety/go-graphql-sse-example/blob/master/schema/type/product.graphql">schema/type/product.graphql</a>):</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">type Product &#123;</span><br><span class="line">    id: ID!</span><br><span class="line">    name: String</span><br><span class="line">    description: String</span><br><span class="line">    price: Float</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>The entire schema can be found in the GitHub <a target="_blank" rel="noopener" href="https://github.com/muety/go-graphql-sse-example/tree/master/schema/type">repository</a>.</p>
+<p>After having defined your schema, in the case of <a href="github.com/graph-gophers/graphql-go">graphql-go</a>, it gets transformed into Go code, so it can be compiled into the final Go executable. It can then be loaded on application startup (see <a target="_blank" rel="noopener" href="https://github.com/muety/go-graphql-sse-example/blob/master/server.go#L35">server.go</a>) and served via an HTTP endpoint. Pretty straightforward!</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">graphqlSchema := graphql.MustParseSchema(schema.GetRootSchema(), &amp;resolver.Resolver&#123;&#125;)</span><br><span class="line">http.Handle(<span class="string">&quot;/api/query&quot;</span>, middleware.AddContext(ctx, &amp;middleware.GraphQL&#123;Schema: graphqlSchema&#125;))</span><br></pre></td></tr></table></figure>
+
+<h1 id="Resolvers"><a href="#Resolvers" class="headerlink" title="Resolvers"></a>Resolvers</h1><p>After having defined and loaded the schema, so-called <a target="_blank" rel="noopener" href="https://graphql.org/learn/execution/#root-fields-resolvers">resolvers</a> need to be defined. The concept of resolvers is common among most GraphQL server libraries for various different programming languages. A resolver is responsible for providing the data for every field of an entity, e.g. for the <code>ID</code>, <code>name</code>, <code>description</code>, and <code>price</code> fields. Such fields can be literals, as it is the case with all fields of the <code>Product</code> type, but also other nested entities, like in the <code>products</code> field of the following <code>Order</code> type:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">type Order &#123;</span><br><span class="line">    id: ID!</span><br><span class="line">    ...</span><br><span class="line">    products: [Product]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>For literals, the resolver simply fills in the actual string, number, or boolean. For complex types, it delegates their resolution to their respective resolvers recursively. For instance, to resolve <code>products</code>, the <code>orderResolver</code> will ask a <code>productResolver</code> to do its respective duty. </p>
+<p>When working with <code>go-graphql</code>, a simple resolver looks like this (<a target="_blank" rel="noopener" href="https://github.com/muety/go-graphql-sse-example/blob/master/resolver/product.go">resolvers/product.go</a>):</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">type</span> productResolver <span class="keyword">struct</span> &#123;</span><br><span class="line">	p *model.Product</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(r *productResolver)</span> <span class="title">Id</span><span class="params">()</span> <span class="title">graphql</span>.<span class="title">ID</span></span> &#123;</span><br><span class="line">	<span class="keyword">return</span> graphql.ID(r.p.Id)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(r *productResolver)</span> <span class="title">Name</span><span class="params">()</span> *<span class="title">string</span></span> &#123;</span><br><span class="line">	<span class="keyword">return</span> &amp;r.p.Name</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(r *productResolver)</span> <span class="title">Description</span><span class="params">()</span> *<span class="title">string</span></span> &#123;</span><br><span class="line">	<span class="keyword">return</span> &amp;r.p.Description</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(r *productResolver)</span> <span class="title">Price</span><span class="params">()</span> *<span class="title">float64</span></span> &#123;</span><br><span class="line">	<span class="keyword">return</span> &amp;r.p.Price</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p>Very simple. It is instantiated with a reference to a <code>Product</code> struct, which was previously loaded from the database and simply maps attributes of the raw data model to the respective GraphQL fields. Please note that it doesn’t have to be that trivial. For instance, your MongoDB schema might define <code>firstName</code> and <code>lastName</code> fields, while your GraphQL type only has <code>name</code>. In that case, the resolver would have to do some basic concatenation.</p>
+<p>Things get a little more complex when dealing with non-literal fields, like the <code>Order&#39;s</code> <code>products</code> above. In our database schema, an order only holds a list of product IDs as <code>items</code>. However, the GraphQL schema declares to return actual product objects. To do so, the respective resolver method first fetches the products for every ID from the database and then passes it on to <code>productResolver</code>s (see <a target="_blank" rel="noopener" href="https://github.com/muety/go-graphql-sse-example/blob/e8e5c24ea413aa078e3c6816a5a85f7337209091/resolver/order.go#L53">resolvers/order.go</a>):</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(r *orderResolver)</span> <span class="title">Products</span><span class="params">(ctx context.Context)</span> <span class="params">(*[]*productResolver, error)</span></span> &#123;</span><br><span class="line">	l := <span class="built_in">make</span>([]*productResolver, <span class="built_in">len</span>(r.o.Items))</span><br><span class="line"></span><br><span class="line">	products, err := ctx.Value(service.KeyProductService).(*service.ProductService).GetBatchMap(r.o.Items)</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">nil</span>, err</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">for</span> i, id := <span class="keyword">range</span> r.o.Items &#123;</span><br><span class="line">		l[i] = &amp;productResolver&#123;p: products[id]&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> &amp;l, <span class="literal">nil</span></span><br><span class="line">&#125;</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+
+<p>Resolvers are very modular, coherent in themselves and can be composed together to build up an entire API. Note that even the very entrypoint of the GraphQL API is just a “root” resolver. You can find all resolvers, including those for mutations and subscriptions as well, in the <a target="_blank" rel="noopener" href="https://github.com/muety/go-graphql-sse-example/tree/master/resolver">repo</a>.</p>
+<h1 id="Subscriptions"><a href="#Subscriptions" class="headerlink" title="Subscriptions"></a>Subscriptions</h1><p>Probably the most interesting part here is subscriptions, as they provide a nice mechanism to make web applications reactive to backend-side data updates. As mentioned in the previous article, the GraphQL specification does not dictate how to technically implement subscriptions. Therefore, we decided to use Server-Sent Events (SSE) as a server-to-client communication channel. Technically, SSEs are simply a long-running HTTP request, which data is written to in form of a text stream and therefore very light-weight and easy to use. </p>
+<p>On the backend side, we introduce a light-weight <a href="github.com/leandro-lugaresi/hub">event bus</a> to our <a target="_blank" rel="noopener" href="https://github.com/muety/go-graphql-sse-example/tree/master/service">services</a>. For every data change, i.e. updates, creations or deletions, an event is published to the bus (see <a target="_blank" rel="noopener" href="https://github.com/muety/go-graphql-sse-example/blob/e8e5c24ea413aa078e3c6816a5a85f7337209091/service/order.go#L66">services/order.go</a>):</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(s *OrderService)</span> <span class="title">Create</span><span class="params">(order *model.Order)</span> <span class="params">(*model.Order, error)</span></span> &#123;</span><br><span class="line">	...</span><br><span class="line">	order.Id = res.InsertedID.(primitive.ObjectID).Hex()</span><br><span class="line">	s.Hub.Publish(eventhub.Message&#123;</span><br><span class="line">		Name:   KeyOrderCreated, <span class="comment">// order.create</span></span><br><span class="line">		Fields: eventhub.Fields&#123;<span class="string">&quot;id&quot;</span>: order.Id&#125;,</span><br><span class="line">    &#125;)</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Inside the resolver responsible for <code>orderCreated</code> queries, a subscription to the event bus is made once the user requests that subscription.</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(r *Resolver)</span> <span class="title">OrderCreated</span><span class="params">(ctx context.Context)</span> <span class="params">(<span class="keyword">chan</span> *orderResolver, error)</span></span> &#123;</span><br><span class="line">	c := <span class="built_in">make</span>(<span class="keyword">chan</span> *orderResolver)</span><br><span class="line">	<span class="keyword">go</span> subscribeOrder(service.KeyOrderCreated, ctx, c)</span><br><span class="line">	<span class="keyword">return</span> c, <span class="literal">nil</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="title">subscribeOrder</span><span class="params">(key <span class="keyword">string</span>, ctx context.Context, c <span class="keyword">chan</span> *orderResolver)</span></span> &#123;</span><br><span class="line">	srv := ctx.Value(service.KeyOrderService).(*service.OrderService)</span><br><span class="line">	sub := srv.Hub.NonBlockingSubscribe(<span class="number">10</span>, key)</span><br><span class="line"></span><br><span class="line">	<span class="keyword">defer</span> <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123;</span><br><span class="line">		srv.Hub.Unsubscribe(sub)</span><br><span class="line">		<span class="built_in">close</span>(c)</span><br><span class="line">	&#125;()</span><br><span class="line"></span><br><span class="line">	<span class="keyword">for</span> &#123;</span><br><span class="line">		<span class="keyword">select</span> &#123;</span><br><span class="line">		<span class="keyword">case</span> &lt;-ctx.Done():</span><br><span class="line">			<span class="keyword">return</span></span><br><span class="line">		<span class="keyword">case</span> m := &lt;-sub.Receiver:</span><br><span class="line">			<span class="keyword">if</span> u, err := srv.Get(m.Fields[<span class="string">&quot;id&quot;</span>].(<span class="keyword">string</span>)); err != <span class="literal">nil</span> &#123;</span><br><span class="line">				log.Println(err)</span><br><span class="line">			&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">				c &lt;- &amp;orderResolver&#123;u&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>When a new order is inserted via the respective service, the above method is triggered as a consequence of being subscribed to <code>order.create</code> events. It reads the orer’s ID from the event, uses the qualified service to fetch it from the database and passes it on to an <code>orderResolver</code> to translate it into the schema-conformal format. </p>
+<p>The HTTP handler, which dispatched the user’s GraphQL query to the above resolver, in turn, has subscribed to the result Go channel and writes every incoming <code>Order</code> instance to always-open HTTP stream (see <a target="_blank" rel="noopener" href="https://github.com/muety/go-graphql-sse-example/blob/e8e5c24ea413aa078e3c6816a5a85f7337209091/middleware/graphql.go#L59">middleware/graphql.go</a>):</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line">c, err := h.Schema.Subscribe(ctx, params.Query, params.OperationName, params.Variables)</span><br><span class="line">...</span><br><span class="line"><span class="keyword">for</span> r := <span class="keyword">range</span> c &#123;</span><br><span class="line">        response := r.(*graphql.Response)</span><br><span class="line">        responseJSON, err := json.Marshal(response)</span><br><span class="line">        ...</span><br><span class="line">        fmt.Fprintf(w, <span class="string">&quot;data: %s\n\n&quot;</span>, responseJSON)</span><br><span class="line">        flusher.Flush()</span><br><span class="line">        ...</span><br><span class="line">&#125;</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+
+<h1 id="Running-Queries"><a href="#Running-Queries" class="headerlink" title="Running Queries"></a>Running Queries</h1><h2 id="Using-GraphiQL"><a href="#Using-GraphiQL" class="headerlink" title="Using GraphiQL"></a>Using GraphiQL</h2><p>During development, queries against a GraphQL API can be issued using the interactive GraphiQL browser, as demonstrated here.</p>
+<p><img src="images/graphql_screencast2.gif"></p>
+<h1 id="Programatically"><a href="#Programatically" class="headerlink" title="Programatically"></a>Programatically</h1><p>On the client-side of our application, GraphQL queries are run to consume the API. After all, any client, that is able to speak HTTP, can also consume a GraphQL API, as GraphQL requests are really just <code>POST</code> requests with a certain query in the body. </p>
+<p>For instance, the <a target="_blank" rel="noopener" href="https://vuex.vuejs.org/">Vuex</a> store action responsible for loading a list of products in the frontend is this (see <a target="_blank" rel="noopener" href="https://github.com/muety/go-graphql-sse-example/blob/e8e5c24ea413aa078e3c6816a5a85f7337209091/web/src/store/products.js#L30">store/products.js</a>):</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">async</span> <span class="function"><span class="title">fetchProducts</span>(<span class="params">&#123;commit&#125;</span>)</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> q = <span class="string">`&#123;</span></span><br><span class="line"><span class="string">        products() &#123;</span></span><br><span class="line"><span class="string">        id</span></span><br><span class="line"><span class="string">        name</span></span><br><span class="line"><span class="string">        description</span></span><br><span class="line"><span class="string">        price</span></span><br><span class="line"><span class="string">        &#125;</span></span><br><span class="line"><span class="string">    &#125;`</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> data = <span class="keyword">await</span> Vue.$api.graphql.request(q)</span><br><span class="line">    commit(<span class="string">&#x27;addProducts&#x27;</span>, data.products.map(Product.new))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>For subscriptions, we rely on a slightly <a target="_blank" rel="noopener" href="https://github.com/muety/go-graphql-sse-example/blob/master/web/src/vendor/sse.js">modified version</a> of <a target="_blank" rel="noopener" href="https://github.com/mpetazzoni/sse.js">sse.js</a>. It acts as a minimal wrapper around the browser’s standard <a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/API/EventSource">EventSource</a> and allows us to run SSE requests as <code>POST</code> (instead of <code>GET</code>) queries and pass some data in the body. We do so to fit well with GraphQL, where queries are always <code>POST</code> requests with a respective query body. </p>
+<p>Subscribing to new orders in the frontend is mostly done like this:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">async</span> <span class="function"><span class="title">subscribeOrderCreated</span>(<span class="params">&#123;commit&#125;</span>)</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> q = <span class="string">`subscription &#123;</span></span><br><span class="line"><span class="string">        orderCreated() &#123;</span></span><br><span class="line"><span class="string">            id</span></span><br><span class="line"><span class="string">            queueId</span></span><br><span class="line"><span class="string">            createdAt</span></span><br><span class="line"><span class="string">            updatedAt</span></span><br><span class="line"><span class="string">            status</span></span><br><span class="line"><span class="string">            eta</span></span><br><span class="line"><span class="string">            totalSum</span></span><br><span class="line"><span class="string">            products &#123;</span></span><br><span class="line"><span class="string">                id</span></span><br><span class="line"><span class="string">                name</span></span><br><span class="line"><span class="string">            &#125;</span></span><br><span class="line"><span class="string">        &#125;</span></span><br><span class="line"><span class="string">    &#125;`</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">const</span> source = Vue.$api.sse.request(q, <span class="literal">null</span>)</span><br><span class="line">    source.addEventListener(<span class="string">&#x27;message&#x27;</span>, <span class="function"><span class="params">e</span> =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">const</span> payload = <span class="built_in">JSON</span>.parse(e.data)</span><br><span class="line">        ...</span><br><span class="line">        commit(<span class="string">&#x27;addOrder&#x27;</span>, <span class="keyword">new</span> Order(payload.data.orderCreated))</span><br><span class="line">    &#125;)</span><br><span class="line">    ...</span><br><span class="line">    source.stream()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="Demo"><a href="#Demo" class="headerlink" title="Demo"></a>Demo</h1><p>And here’s a live demo in action!</p>
+<p><img src="images/graphql_screencast1.gif"></p>
+<h1 id="Outlook"><a href="#Outlook" class="headerlink" title="Outlook"></a>Outlook</h1><p>While the current demo implementation serves as a – in our opinion – clean and well-structured starting point for building GraphQL-based web apps, its current state has one major drawback. It lacks authentication and authorization. Usually, you want to control which user can query and modify which data. Therefore, another blog post will follow in the future, which explains how to authorize GraphQL query endpoints.</p>
+<p>Apart from that, we consider the present technology stack a promising choice for new web applications with the potential to facilitate clean, well-organized code and to make development easier, and more flexible. </p>
+
+  </div>
+</article>
+
+
+
+    </div>
+    
+      <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Blog</a></li>
+         
+          <li><a href="/imprint/">Imprint</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#What-to-build"><span class="toc-number">1.</span> <span class="toc-text">What to build?</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Technology-Stack"><span class="toc-number">1.1.</span> <span class="toc-text">Technology Stack</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Data-Model"><span class="toc-number">2.</span> <span class="toc-text">Data Model</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Resolvers"><span class="toc-number">3.</span> <span class="toc-text">Resolvers</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Subscriptions"><span class="toc-number">4.</span> <span class="toc-text">Subscriptions</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Running-Queries"><span class="toc-number">5.</span> <span class="toc-text">Running Queries</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Using-GraphiQL"><span class="toc-number">5.1.</span> <span class="toc-text">Using GraphiQL</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Programatically"><span class="toc-number">6.</span> <span class="toc-text">Programatically</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Demo"><span class="toc-number">7.</span> <span class="toc-text">Demo</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Outlook"><span class="toc-number">8.</span> <span class="toc-text">Outlook</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://muetsch.io/modern-reactive-web-apis-with-graphql-go-and-server-sent-events-part-2.html"><i class="fa fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://muetsch.io/modern-reactive-web-apis-with-graphql-go-and-server-sent-events-part-2.html&text=Modern, reactive web APIs with GraphQL, Go and Server-Sent Events – Part 2"><i class="fa fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://muetsch.io/modern-reactive-web-apis-with-graphql-go-and-server-sent-events-part-2.html&title=Modern, reactive web APIs with GraphQL, Go and Server-Sent Events – Part 2"><i class="fa fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://muetsch.io/modern-reactive-web-apis-with-graphql-go-and-server-sent-events-part-2.html&is_video=false&description=Modern, reactive web APIs with GraphQL, Go and Server-Sent Events – Part 2"><i class="fa fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Modern, reactive web APIs with GraphQL, Go and Server-Sent Events – Part 2&body=Check out this article: https://muetsch.io/modern-reactive-web-apis-with-graphql-go-and-server-sent-events-part-2.html"><i class="fa fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://muetsch.io/modern-reactive-web-apis-with-graphql-go-and-server-sent-events-part-2.html&title=Modern, reactive web APIs with GraphQL, Go and Server-Sent Events – Part 2"><i class="fa fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://muetsch.io/modern-reactive-web-apis-with-graphql-go-and-server-sent-events-part-2.html&title=Modern, reactive web APIs with GraphQL, Go and Server-Sent Events – Part 2"><i class="fa fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://muetsch.io/modern-reactive-web-apis-with-graphql-go-and-server-sent-events-part-2.html&title=Modern, reactive web APIs with GraphQL, Go and Server-Sent Events – Part 2"><i class="fa fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://muetsch.io/modern-reactive-web-apis-with-graphql-go-and-server-sent-events-part-2.html&title=Modern, reactive web APIs with GraphQL, Go and Server-Sent Events – Part 2"><i class="fa fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://muetsch.io/modern-reactive-web-apis-with-graphql-go-and-server-sent-events-part-2.html&name=Modern, reactive web APIs with GraphQL, Go and Server-Sent Events – Part 2&description="><i class="fa fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+      <ul>
+        <li id="toc"><a class="icon" href="#" onclick='toggleById("toc-footer")'><i class="fa fa-list fa-lg" aria-hidden="true"></i> TOC</a></li>
+        <li id="share"><a class="icon" href="#" onclick='toggleById("share-footer")'><i class="fa fa-share-alt fa-lg" aria-hidden="true"></i> Share</a></li>
+        <li id="top" style="display:none"><a class="icon" href="#" onclick="window.scrollTo(0,0)"><i class="fa fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a></li>
+        <li id="menu"><a class="icon" href="#" onclick='toggleById("nav-footer")'><i class="fa fa-bars fa-lg" aria-hidden="true"></i> Menu</a></li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+    
+    <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2021 Ferdinand Mütsch
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Blog</a></li>
+         
+          <li><a href="/imprint/">Imprint</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+</body>
+</html>
+<!-- styles -->
+
+<link rel="stylesheet" href="/lib/roboto/css/roboto.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+
+
+<script src="/js/main.js"></script>
+
+<!-- Google Analytics -->
+
+<!-- Disqus Comments -->
+
+

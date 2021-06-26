@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="referrer" content="no-referrer">
+    <meta name="description" content="In 2015, the Telegram messenger announced their Bots. Basically they are pieces of software that act like a normal chat user in many ways. They could have any functionality, from being helpful at dail">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Telegram: ExpenseBot &amp; DoodlerBot">
+<meta property="og:url" content="https://muetsch.io/telegram-expensebot-doodlerbot.html">
+<meta property="og:site_name" content="Ferdinand Mütsch">
+<meta property="og:description" content="In 2015, the Telegram messenger announced their Bots. Basically they are pieces of software that act like a normal chat user in many ways. They could have any functionality, from being helpful at dail">
+<meta property="og:locale">
+<meta property="og:image" content="https://apps.muetsch.io/images/o:auto?image=https://muetsch.io/images/expensebot_icon.png">
+<meta property="og:image" content="https://apps.muetsch.io/images/o:auto?image=https://muetsch.io/images/doodlerbot_icon.png">
+<meta property="article:published_time" content="2016-05-08T20:59:33.000Z">
+<meta property="article:modified_time" content="2020-10-30T20:05:40.285Z">
+<meta property="article:author" content="Ferdinand Mütsch">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://apps.muetsch.io/images/o:auto?image=https://muetsch.io/images/expensebot_icon.png">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/favicon.ico" sizes="192x192">
+          
+        
+        
+    
+    <!-- title -->
+    <title>Telegram: ExpenseBot &amp; DoodlerBot</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- rss -->
+    
+    
+
+    <!-- rel-me links -->
+    
+      
+        <link href="http://github.com/muety" rel="me">
+      
+        <link href="https://twitter.com/n2try" rel="me">
+      
+        <link href="mailto:ferdinand@muetsch.io" rel="me">
+      
+    
+
+    <!-- Webmention link -->
+    
+      <link href="https://webmention.io/muetsch.io/webmention" rel="webmention">
+    
+
+    
+      <link href="https://webmention.io/muetsch.io/xmlrpc" rel="pingback">
+    
+<meta name="generator" content="Hexo 5.2.0"><link rel="alternate" href="/rss2.xml" title="Ferdinand Mütsch" type="application/rss+xml">
+</head>
+
+<body>
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fa fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fa fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="window.scrollTo(0, 0)" style="display:none;"><i class="fa fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Blog</a></li>
+         
+          <li><a href="/imprint/">Imprint</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/innovation-in-germany-not.html"><i class="fa fa-chevron-left" aria-hidden="true" onmouseover='toggleById("i-prev");' onmouseout='toggleById("i-prev");'></i></a></li>
+        
+        
+        <li><a class="icon" href="/unhostedorg-applications-with-remotestorageio-and-webfingernet.html"><i class="fa fa-chevron-right" aria-hidden="true" onmouseover='toggleById("i-next").toggleById();' onmouseout='toggleById("i-next");'></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="window.scrollTo(0,0)"><i class="fa fa-chevron-up" aria-hidden="true" onmouseover='toggleById("i-top");' onmouseout='toggleById("i-top");'></i></a></li>
+        <li><a class="icon" href="#"><i class="fa fa-share-alt" aria-hidden="true" onmouseover='toggleById("i-share");' onmouseout='toggleById("i-share");' onclick='toggleById("share");return false;'></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://muetsch.io/telegram-expensebot-doodlerbot.html"><i class="fa fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://muetsch.io/telegram-expensebot-doodlerbot.html&text=Telegram: ExpenseBot &amp; DoodlerBot"><i class="fa fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://muetsch.io/telegram-expensebot-doodlerbot.html&title=Telegram: ExpenseBot &amp; DoodlerBot"><i class="fa fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://muetsch.io/telegram-expensebot-doodlerbot.html&is_video=false&description=Telegram: ExpenseBot &amp; DoodlerBot"><i class="fa fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Telegram: ExpenseBot &amp; DoodlerBot&body=Check out this article: https://muetsch.io/telegram-expensebot-doodlerbot.html"><i class="fa fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://muetsch.io/telegram-expensebot-doodlerbot.html&title=Telegram: ExpenseBot &amp; DoodlerBot"><i class="fa fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://muetsch.io/telegram-expensebot-doodlerbot.html&title=Telegram: ExpenseBot &amp; DoodlerBot"><i class="fa fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://muetsch.io/telegram-expensebot-doodlerbot.html&title=Telegram: ExpenseBot &amp; DoodlerBot"><i class="fa fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://muetsch.io/telegram-expensebot-doodlerbot.html&title=Telegram: ExpenseBot &amp; DoodlerBot"><i class="fa fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://muetsch.io/telegram-expensebot-doodlerbot.html&name=Telegram: ExpenseBot &amp; DoodlerBot&description="><i class="fa fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#ExpenseBot-%E2%80%93-Keep-track-of-your-finances"><span class="toc-number">1.</span> <span class="toc-text">ExpenseBot – Keep track of your finances</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#DoodlerBot-%E2%80%93-Coordinate-group-appointments"><span class="toc-number">2.</span> <span class="toc-text">DoodlerBot – Coordinate group appointments</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index width mx-auto px2 my4">
+        
+        <article class="h-entry post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <a href="https://muetsch.io/telegram-expensebot-doodlerbot.html" class="u-url">
+        <h1 class="posttitle p-name" itemprop="name headline" property="headline">
+            Telegram: ExpenseBot &amp; DoodlerBot
+        </h1>
+    </a>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" property="author" itemscope itemtype="http://schema.org/Person" vocab="http://schema.org/" typeof="Person">
+        <span itemprop="name" property="name" class="p-author h-card">Ferdinand Mütsch</span>
+      </span>
+      
+    <div class="postdate">
+        <time datetime="2016-05-08T20:59:33.000Z" class="dt-published" itemprop="datePublished" property="datePublished">2016-05-08</time>
+    </div>
+
+
+      
+
+
+      <!--
+      <div style="margin-top: 30px">
+        <a href="https://liberapay.com/muety/" target="_blank"
+          style="background-image: none; text-decoration: none;"><img
+            src="https://badges.fw-web.space/liberapay/receives/muety.svg?logo=liberapay&style=flat-square" alt="Liberapay"
+            style="height: auto !important;width: auto !important;"></a>
+      </div>
+      -->
+    </div>
+  </header>
+  
+  <div class="content e-content" itemprop="articleBody" property="articleBody">
+    <p>In 2015, the <a target="_blank" rel="noopener" href="https://telegram.org/">Telegram</a> messenger announced their <a target="_blank" rel="noopener" href="https://core.telegram.org/bots">Bots</a>. Basically they are pieces of software that act like a normal chat user in many ways. They could have any functionality, from being helpful at daily tasks to even simple games or trivias – all within an ordinary Telegram chat. You send them message, they give answers – some more and some less intelligent. Recently, also other companies – like <a target="_blank" rel="noopener" href="http://techcrunch.com/2016/04/07/facebook-chatbots/">Facebook</a> or <a target="_blank" rel="noopener" href="https://dev.botframework.com/">Microsoft</a> – announced such bots for their messaging apps. Sometimes bots are even considered kind of the next step after native (web-) applications in the future.</p>
+<p>From a developer’s perspective, making a bot is fun, because there are almost no restrictions on how to develop your bot. All communication with Telegram works by requesting a single REST API provided by them. Choices like which programming language and -framework to use and how to structure the code are completely up to the developer. A Telegram bot can theoretically be built in any programming language. The only requirements are to be able to make HTTP request from the application and to have a server to host the bot on.</p>
+<p>I’ve recently created two bots for Telegram that should each help with a daily task.</p>
+<h3 id="ExpenseBot-–-Keep-track-of-your-finances"><a href="#ExpenseBot-–-Keep-track-of-your-finances" class="headerlink" title="ExpenseBot – Keep track of your finances"></a>ExpenseBot – Keep track of your finances</h3><p><img src="https://apps.muetsch.io/images/o:auto?image=https://muetsch.io/images/expensebot_icon.png" alt="1461614801_Money-Increase"></p>
+<p>This bot’s purpose is to help people manage their daily expenses and keep track of their financial situation. Users can add expenses from wherever they are using a few simple commands from within the chat and have an eye on how much they have spent in a month or a day. This obviates the need for confusing Excel spreadsheets or paper notes. You can reach the bot by sending a Message to <em><a target="_blank" rel="noopener" href="https://telegram.me/ExpenseBot">@ExpenseBot</a></em> in Telegram.</p>
+<h3 id="DoodlerBot-–-Coordinate-group-appointments"><a href="#DoodlerBot-–-Coordinate-group-appointments" class="headerlink" title="DoodlerBot – Coordinate group appointments"></a>DoodlerBot – Coordinate group appointments</h3><p><img src="https://apps.muetsch.io/images/o:auto?image=https://muetsch.io/images/doodlerbot_icon.png" alt="1462726473_calendar"></p>
+<p>My second bot helps users coordinate a group of people and find the right date for a common appointment, just like you might know from <a target="_blank" rel="noopener" href="http://doodle.com/">doodle.com</a> (even though it doesn’t have anything to do with that commercial service, except for fulfilling the same need). Open a new doodle and let your mates in the group chat vote for their preferred date to finally make the best decision for everyone. You can reach the bot by sending a Message to <em><a target="_blank" rel="noopener" href="https://telegram.me/DoodlerBot">@DoodlerBot</a></em> in Telegram.</p>
+<p>Both projects are completely independent, non-commercial and privately operated. If you have any questions our found a bug (both bots are still in beta phase and therefore might show some unexpected behavior), please contact me at @n1try or via e-mail. In both cases, you should first read a basic introduction on how to use the respective bot, by sending a message with <em>/help</em> to it.</p>
+<p>In case you like my bots, I’d be really happy if you rated them at <a target="_blank" rel="noopener" href="https://storebot.me/bot/expensebot">https://storebot.me/bot/expensebot</a> and <a target="_blank" rel="noopener" href="https://storebot.me/bot/doodlerbot">https://storebot.me/bot/doodlerbot</a>. Have fun!</p>
+
+  </div>
+</article>
+
+
+
+    </div>
+    
+      <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Blog</a></li>
+         
+          <li><a href="/imprint/">Imprint</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#ExpenseBot-%E2%80%93-Keep-track-of-your-finances"><span class="toc-number">1.</span> <span class="toc-text">ExpenseBot – Keep track of your finances</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#DoodlerBot-%E2%80%93-Coordinate-group-appointments"><span class="toc-number">2.</span> <span class="toc-text">DoodlerBot – Coordinate group appointments</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://muetsch.io/telegram-expensebot-doodlerbot.html"><i class="fa fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://muetsch.io/telegram-expensebot-doodlerbot.html&text=Telegram: ExpenseBot &amp; DoodlerBot"><i class="fa fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://muetsch.io/telegram-expensebot-doodlerbot.html&title=Telegram: ExpenseBot &amp; DoodlerBot"><i class="fa fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://muetsch.io/telegram-expensebot-doodlerbot.html&is_video=false&description=Telegram: ExpenseBot &amp; DoodlerBot"><i class="fa fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Telegram: ExpenseBot &amp; DoodlerBot&body=Check out this article: https://muetsch.io/telegram-expensebot-doodlerbot.html"><i class="fa fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://muetsch.io/telegram-expensebot-doodlerbot.html&title=Telegram: ExpenseBot &amp; DoodlerBot"><i class="fa fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://muetsch.io/telegram-expensebot-doodlerbot.html&title=Telegram: ExpenseBot &amp; DoodlerBot"><i class="fa fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://muetsch.io/telegram-expensebot-doodlerbot.html&title=Telegram: ExpenseBot &amp; DoodlerBot"><i class="fa fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://muetsch.io/telegram-expensebot-doodlerbot.html&title=Telegram: ExpenseBot &amp; DoodlerBot"><i class="fa fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://muetsch.io/telegram-expensebot-doodlerbot.html&name=Telegram: ExpenseBot &amp; DoodlerBot&description="><i class="fa fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+      <ul>
+        <li id="toc"><a class="icon" href="#" onclick='toggleById("toc-footer")'><i class="fa fa-list fa-lg" aria-hidden="true"></i> TOC</a></li>
+        <li id="share"><a class="icon" href="#" onclick='toggleById("share-footer")'><i class="fa fa-share-alt fa-lg" aria-hidden="true"></i> Share</a></li>
+        <li id="top" style="display:none"><a class="icon" href="#" onclick="window.scrollTo(0,0)"><i class="fa fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a></li>
+        <li id="menu"><a class="icon" href="#" onclick='toggleById("nav-footer")'><i class="fa fa-bars fa-lg" aria-hidden="true"></i> Menu</a></li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+    
+    <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2021 Ferdinand Mütsch
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Blog</a></li>
+         
+          <li><a href="/imprint/">Imprint</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+</body>
+</html>
+<!-- styles -->
+
+<link rel="stylesheet" href="/lib/roboto/css/roboto.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+
+
+<script src="/js/main.js"></script>
+
+<!-- Google Analytics -->
+
+<!-- Disqus Comments -->
+
+

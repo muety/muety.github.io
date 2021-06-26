@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="referrer" content="no-referrer">
+    <meta name="description" content="Sounds like overkill, right? It is. Obviously, you don’t need a whole bunch of cloud services to build a simple web scraper, especially since there is already a lot of them out there. However, this de">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Building a cloud-native web scraper using 8 different AWS services">
+<meta property="og:url" content="https://muetsch.io/building-a-cloud-native-web-scraper-using-8-different-aws-services.html">
+<meta property="og:site_name" content="Ferdinand Mütsch">
+<meta property="og:description" content="Sounds like overkill, right? It is. Obviously, you don’t need a whole bunch of cloud services to build a simple web scraper, especially since there is already a lot of them out there. However, this de">
+<meta property="og:locale">
+<meta property="og:image" content="https://apps.muetsch.io/images/o:auto?image=https://muetsch.io/images/crawlbuddy2.png">
+<meta property="article:published_time" content="2018-12-01T13:52:28.000Z">
+<meta property="article:modified_time" content="2020-10-30T20:05:40.280Z">
+<meta property="article:author" content="Ferdinand Mütsch">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://apps.muetsch.io/images/o:auto?image=https://muetsch.io/images/crawlbuddy2.png">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/favicon.ico" sizes="192x192">
+          
+        
+        
+    
+    <!-- title -->
+    <title>Building a cloud-native web scraper using 8 different AWS services</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- rss -->
+    
+    
+
+    <!-- rel-me links -->
+    
+      
+        <link href="http://github.com/muety" rel="me">
+      
+        <link href="https://twitter.com/n2try" rel="me">
+      
+        <link href="mailto:ferdinand@muetsch.io" rel="me">
+      
+    
+
+    <!-- Webmention link -->
+    
+      <link href="https://webmention.io/muetsch.io/webmention" rel="webmention">
+    
+
+    
+      <link href="https://webmention.io/muetsch.io/xmlrpc" rel="pingback">
+    
+<meta name="generator" content="Hexo 5.2.0"><link rel="alternate" href="/rss2.xml" title="Ferdinand Mütsch" type="application/rss+xml">
+</head>
+
+<body>
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fa fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fa fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="window.scrollTo(0, 0)" style="display:none;"><i class="fa fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Blog</a></li>
+         
+          <li><a href="/imprint/">Imprint</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/detecting-academics-major-from-facial-images.html"><i class="fa fa-chevron-left" aria-hidden="true" onmouseover='toggleById("i-prev");' onmouseout='toggleById("i-prev");'></i></a></li>
+        
+        
+        <li><a class="icon" href="/how-to-load-svg-into-imageview-by-url-in-android.html"><i class="fa fa-chevron-right" aria-hidden="true" onmouseover='toggleById("i-next").toggleById();' onmouseout='toggleById("i-next");'></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="window.scrollTo(0,0)"><i class="fa fa-chevron-up" aria-hidden="true" onmouseover='toggleById("i-top");' onmouseout='toggleById("i-top");'></i></a></li>
+        <li><a class="icon" href="#"><i class="fa fa-share-alt" aria-hidden="true" onmouseover='toggleById("i-share");' onmouseout='toggleById("i-share");' onclick='toggleById("share");return false;'></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://muetsch.io/building-a-cloud-native-web-scraper-using-8-different-aws-services.html"><i class="fa fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://muetsch.io/building-a-cloud-native-web-scraper-using-8-different-aws-services.html&text=Building a cloud-native web scraper using 8 different AWS services"><i class="fa fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://muetsch.io/building-a-cloud-native-web-scraper-using-8-different-aws-services.html&title=Building a cloud-native web scraper using 8 different AWS services"><i class="fa fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://muetsch.io/building-a-cloud-native-web-scraper-using-8-different-aws-services.html&is_video=false&description=Building a cloud-native web scraper using 8 different AWS services"><i class="fa fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Building a cloud-native web scraper using 8 different AWS services&body=Check out this article: https://muetsch.io/building-a-cloud-native-web-scraper-using-8-different-aws-services.html"><i class="fa fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://muetsch.io/building-a-cloud-native-web-scraper-using-8-different-aws-services.html&title=Building a cloud-native web scraper using 8 different AWS services"><i class="fa fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://muetsch.io/building-a-cloud-native-web-scraper-using-8-different-aws-services.html&title=Building a cloud-native web scraper using 8 different AWS services"><i class="fa fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://muetsch.io/building-a-cloud-native-web-scraper-using-8-different-aws-services.html&title=Building a cloud-native web scraper using 8 different AWS services"><i class="fa fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://muetsch.io/building-a-cloud-native-web-scraper-using-8-different-aws-services.html&title=Building a cloud-native web scraper using 8 different AWS services"><i class="fa fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://muetsch.io/building-a-cloud-native-web-scraper-using-8-different-aws-services.html&name=Building a cloud-native web scraper using 8 different AWS services&description="><i class="fa fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#The-Goal"><span class="toc-number">1.</span> <span class="toc-text">The Goal</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Example-Use-Case"><span class="toc-number">1.1.</span> <span class="toc-text">Example Use Case</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Requirements"><span class="toc-number">1.2.</span> <span class="toc-text">Requirements</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Architecture"><span class="toc-number">2.</span> <span class="toc-text">Architecture</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#AWS-services"><span class="toc-number">2.1.</span> <span class="toc-text">AWS services</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Components"><span class="toc-number">2.2.</span> <span class="toc-text">Components</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#crawling-core"><span class="toc-number">2.3.</span> <span class="toc-text">crawling-core</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%CE%BB-crawling-crawl"><span class="toc-number">2.4.</span> <span class="toc-text">λ crawling-crawl</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%CE%BB-crawling-notify"><span class="toc-number">2.5.</span> <span class="toc-text">λ crawling-notify</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%CE%BB-crawling-web-subscribe"><span class="toc-number">2.6.</span> <span class="toc-text">λ crawling-web-subscribe</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Okay-cool-And-now"><span class="toc-number">3.</span> <span class="toc-text">Okay, cool. And now?</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index width mx-auto px2 my4">
+        
+        <article class="h-entry post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <a href="https://muetsch.io/building-a-cloud-native-web-scraper-using-8-different-aws-services.html" class="u-url">
+        <h1 class="posttitle p-name" itemprop="name headline" property="headline">
+            Building a cloud-native web scraper using 8 different AWS services
+        </h1>
+    </a>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" property="author" itemscope itemtype="http://schema.org/Person" vocab="http://schema.org/" typeof="Person">
+        <span itemprop="name" property="name" class="p-author h-card">Ferdinand Mütsch</span>
+      </span>
+      
+    <div class="postdate">
+        <time datetime="2018-12-01T13:52:28.000Z" class="dt-published" itemprop="datePublished" property="datePublished">2018-12-01</time>
+    </div>
+
+
+      
+
+
+      <!--
+      <div style="margin-top: 30px">
+        <a href="https://liberapay.com/muety/" target="_blank"
+          style="background-image: none; text-decoration: none;"><img
+            src="https://badges.fw-web.space/liberapay/receives/muety.svg?logo=liberapay&style=flat-square" alt="Liberapay"
+            style="height: auto !important;width: auto !important;"></a>
+      </div>
+      -->
+    </div>
+  </header>
+  
+  <div class="content e-content" itemprop="articleBody" property="articleBody">
+    <p>Sounds like overkill, right? It is. Obviously, you don’t need a whole bunch of cloud services to build a simple web scraper, especially since there is already a lot of them out there. However, this describes my personal journey of exploring cloud-native development on AWS by building a simple, yet useful application.</p>
+<h1 id="The-Goal"><a href="#The-Goal" class="headerlink" title="The Goal"></a>The Goal</h1><p>What I wanted to build was a web scraper that runs entirely on cloud infrastructure. More precisely, I wanted to build a scraper using <a target="_blank" rel="noopener" href="https://www.seleniumhq.org/projects/webdriver/">Selenium WebDriver</a>, because it should be able to scrape not only static HTML pages, but also dynamic, JavaScript-powered single-page apps. With this requirement in mind, a simple Python script incorporating <a target="_blank" rel="noopener" href="http://docs.python-requests.org/en/master/">requests</a> or <a target="_blank" rel="noopener" href="https://docs.python.org/3.7/library/urllib.html#module-urllib">urllib</a> is not sufficient anymore. Instead, you would need at least a headless browser (like Firefox, Chrome or the out-dated <a target="_blank" rel="noopener" href="http://phantomjs.org/">PhantomJS</a>).</p>
+<h2 id="Example-Use-Case"><a href="#Example-Use-Case" class="headerlink" title="Example Use Case"></a>Example Use Case</h2><p>To get a better idea of what I had been building, imagine the following use case. You are a student and your university provides a JavaScript-based website where exam results are published as soon as they are available. To retrieve your results you need to enter your student id and select a department from a drop-down list. You are curious about your grade in the most recent exam, but since you’re lazy, you do not want manually check the website every day. That’s where a totally over-engineered web scraper comes to play.</p>
+<h2 id="Requirements"><a href="#Requirements" class="headerlink" title="Requirements"></a>Requirements</h2><p>Here are some notes on what the application was supposed to be able to do (and how) - just to get a slightly better understanding.</p>
+<ul>
+<li>Different crawl tasks are pre-defined as WebDriver scripts in Java.</li>
+<li>Users can add subscriptions for pre-defined crawling jobs. They will result in a certain crawl task being executed with certain parameters (e.g. form input field values to be filled by Selenium) at a regular interval (e.g. every 24 hours).</li>
+<li>When adding a subscription for a certain task (corresponding to a certain webpage), users provide their e-mail address and are getting notified once the scraper detects a change.</li>
+<li>The state of a web-site is persisted in the Dynamo item for the respective subscription and compared to the most recent state that is retrieved when the scraper runs.</li>
+</ul>
+<h1 id="Architecture"><a href="#Architecture" class="headerlink" title="Architecture"></a>Architecture</h1><p>Below you can see a high-level overview of all components and the corresponding AWS services, as well as basic interactions between the components. Please note that the diagram is not proper UML, but it should help getting an idea of the overall architecture. And it looks kind of fancy at first sight.)</p>
+<p><img src="https://apps.muetsch.io/images/o:auto?image=https://muetsch.io/images/crawlbuddy2.png"><br>(<a target="_blank" rel="noopener" href="https://apps.muetsch.io/images/o:auto?image=https://muetsch.io/images/crawlbuddy2.png">Click to view large</a>)</p>
+<h2 id="AWS-services"><a href="#AWS-services" class="headerlink" title="AWS services"></a>AWS services</h2><p>The cloud services used are:</p>
+<ul>
+<li><strong>AWS Lambda</strong> for Serverless NodeJS functions to perform stateless tasks</li>
+<li><strong>AWS Fargate</strong> as an on-demand Docker container runtime to execute longer-running, more resource-intense tasks</li>
+<li><strong>AWS DynamoDB</strong> as a schema-less data store to manage subscriptions and website states</li>
+<li><strong>AWS SQS</strong> as a asynchronous messaging channel for communication between components and to trigger Lambdas</li>
+<li><strong>AWS S3</strong> to host a static HTML page containing a form to be used for adding new subscriptions thorugh a UI</li>
+<li><strong>AWS API Gateway</strong> to provide an HTTP endpoint for adding new subscriptions. It is called by the “frontend”-side script and subsequently triggers a Lambda to add the new subscription to Dynamo.</li>
+<li><strong>AWS CloudWatch</strong> to regularly trigger the execution of the scraper on Fargate in a crontab-like fashion</li>
+<li><strong>AWS SES</strong> to send notification e-mails when something has changed</li>
+</ul>
+<h2 id="Components"><a href="#Components" class="headerlink" title="Components"></a>Components</h2><p>Let’s take a very brief look at what the several components are doing.</p>
+<h2 id="crawling-core"><a href="#crawling-core" class="headerlink" title="crawling-core"></a>crawling-core</h2><p>This is essentially the core part of the whole application, the actual scraper / crawler. I implemented it as a <strong>Java</strong> command-line application, which has the WebDriver as a dependency to be able to interact with webpages dynamically.</p>
+<p>The program is responsible for executing an actual crawling task itself, for detecting changes by comparing the task’s result to the latest state in the database, for updating the database item and for potentially pushing a change notification message to a queue. </p>
+<p>Scraping tasks are defined as Java classes extending the <code>AbstractTask</code> class. For instance, you could create sub-classes <code>AmazonPriceTask</code> and <code>ExamsResultsTask</code>. While implementing these classes, you would essentially need to define input parameters (e.g. your student ID number to be filled in to a search form on the university website later on) for the crawling script and a series of commands in the <code>run()</code> method to be executed by WebDriver. </p>
+<p><code>crawling-core</code> is developed as a standalone Java command-line application, where the name of the task to be executed (e.g. <code>EXAM_RESULT_TASK</code>) and the input parameters (e.g. <code>VAR_STUDENT_ID</code>, <code>VAR_DEPARTMENT_NAME</code>) are provided as run arguments or environment variables.</p>
+<p>In addition to the Java program, packaged as a simple JAR, we need a browser the WebDriver can use to browse the web. I decided to use Firefox in headless mode. Ultimately, the JAR and the Firefox binary are packaged together into a Docker images based on <a target="_blank" rel="noopener" href="https://hub.docker.com/r/selenium/standalone-firefox/">selenium/standalone-firefox</a> and pushed to <strong>AWS ECR</strong> (AWS’ container registry). </p>
+<p>To execute a scraping task, e.g. our <code>ExamsResultsTask</code>, <strong>AWS Fargate</strong> will pull the latest Docker image from the registry, create a new container from it, set the required input parameters as environment variables and eventually run the entrypoint, which is our JAR file. </p>
+<h2 id="λ-crawling-crawl"><a href="#λ-crawling-crawl" class="headerlink" title="λ crawling-crawl"></a>λ crawling-crawl</h2><p>… is a very simple Lambda function written in <strong>NodeJS</strong>, which is responsible for launching a crawling job. It is triggered regularly through a <strong>CloudWatch</strong> event. First, it fetches all crawling tasks from Dynamo. A crawling task is a unique combination of a task name and a set of input parameters. Afterwards it requests Fargate to start a new new instance of <code>crawling-core</code> for every task and passes the input parameters contained in the database item. </p>
+<h2 id="λ-crawling-notify"><a href="#λ-crawling-notify" class="headerlink" title="λ crawling-notify"></a>λ crawling-notify</h2><p>… is another Lambda, which stands at the very end of one iteration of our crawling process. It is invoked through messages in the <code>crawling-changes</code> <strong>SQS</strong> queue and responsible for sending out notification e-mails to subscribers. It reads change information from the invoking event, including task name, the subscriber’s e-mail address and the task’s output parameters (e.g. your exam grade) and composes an e-mail message that eventually gets sent through the Simple E-Mail Service (<strong>SES</strong>).</p>
+<h2 id="λ-crawling-web-subscribe"><a href="#λ-crawling-web-subscribe" class="headerlink" title="λ crawling-web-subscribe"></a>λ crawling-web-subscribe</h2><p>The last of our three Lambdas is not directly related to the crawling itself. Instead, it is used for handling HTTP requests sent by a user who wants to add a new subscription. Initiated by a simple script on an HTML page called <code>subscribe.html</code>, a POST is sent to the <code>/subscriptions</code> endpoint in the <strong>API Gateway</strong>, then forwarded to the <code>crawling-web-subscribe</code> and ultimately added to the Dynamo database as a new item in the <code>subscriptions</code> table.</p>
+<h1 id="Okay-cool-And-now"><a href="#Okay-cool-And-now" class="headerlink" title="Okay, cool. And now?"></a>Okay, cool. And now?</h1><p>As I mentioned before, this project was rather a learning playground for me than a reasonable architecture for a web scraper. Although this one should, in fact, be quite scalable, you could definitely build a scraper script with much less effort. However, I learned a lot about cloud development and AWS specifically and I really like how easy things can be and how well all these different components play together. Maybe I was able to encourage the less cloud-experienced developers among you to start playing around with AWS (or some other cloud provider) as well and I hope you liked my (very spontaneously written) article. </p>
+
+  </div>
+</article>
+
+
+
+    </div>
+    
+      <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Blog</a></li>
+         
+          <li><a href="/imprint/">Imprint</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#The-Goal"><span class="toc-number">1.</span> <span class="toc-text">The Goal</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Example-Use-Case"><span class="toc-number">1.1.</span> <span class="toc-text">Example Use Case</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Requirements"><span class="toc-number">1.2.</span> <span class="toc-text">Requirements</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Architecture"><span class="toc-number">2.</span> <span class="toc-text">Architecture</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#AWS-services"><span class="toc-number">2.1.</span> <span class="toc-text">AWS services</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Components"><span class="toc-number">2.2.</span> <span class="toc-text">Components</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#crawling-core"><span class="toc-number">2.3.</span> <span class="toc-text">crawling-core</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%CE%BB-crawling-crawl"><span class="toc-number">2.4.</span> <span class="toc-text">λ crawling-crawl</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%CE%BB-crawling-notify"><span class="toc-number">2.5.</span> <span class="toc-text">λ crawling-notify</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%CE%BB-crawling-web-subscribe"><span class="toc-number">2.6.</span> <span class="toc-text">λ crawling-web-subscribe</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Okay-cool-And-now"><span class="toc-number">3.</span> <span class="toc-text">Okay, cool. And now?</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://muetsch.io/building-a-cloud-native-web-scraper-using-8-different-aws-services.html"><i class="fa fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://muetsch.io/building-a-cloud-native-web-scraper-using-8-different-aws-services.html&text=Building a cloud-native web scraper using 8 different AWS services"><i class="fa fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://muetsch.io/building-a-cloud-native-web-scraper-using-8-different-aws-services.html&title=Building a cloud-native web scraper using 8 different AWS services"><i class="fa fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://muetsch.io/building-a-cloud-native-web-scraper-using-8-different-aws-services.html&is_video=false&description=Building a cloud-native web scraper using 8 different AWS services"><i class="fa fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Building a cloud-native web scraper using 8 different AWS services&body=Check out this article: https://muetsch.io/building-a-cloud-native-web-scraper-using-8-different-aws-services.html"><i class="fa fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://muetsch.io/building-a-cloud-native-web-scraper-using-8-different-aws-services.html&title=Building a cloud-native web scraper using 8 different AWS services"><i class="fa fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://muetsch.io/building-a-cloud-native-web-scraper-using-8-different-aws-services.html&title=Building a cloud-native web scraper using 8 different AWS services"><i class="fa fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://muetsch.io/building-a-cloud-native-web-scraper-using-8-different-aws-services.html&title=Building a cloud-native web scraper using 8 different AWS services"><i class="fa fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://muetsch.io/building-a-cloud-native-web-scraper-using-8-different-aws-services.html&title=Building a cloud-native web scraper using 8 different AWS services"><i class="fa fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://muetsch.io/building-a-cloud-native-web-scraper-using-8-different-aws-services.html&name=Building a cloud-native web scraper using 8 different AWS services&description="><i class="fa fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+      <ul>
+        <li id="toc"><a class="icon" href="#" onclick='toggleById("toc-footer")'><i class="fa fa-list fa-lg" aria-hidden="true"></i> TOC</a></li>
+        <li id="share"><a class="icon" href="#" onclick='toggleById("share-footer")'><i class="fa fa-share-alt fa-lg" aria-hidden="true"></i> Share</a></li>
+        <li id="top" style="display:none"><a class="icon" href="#" onclick="window.scrollTo(0,0)"><i class="fa fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a></li>
+        <li id="menu"><a class="icon" href="#" onclick='toggleById("nav-footer")'><i class="fa fa-bars fa-lg" aria-hidden="true"></i> Menu</a></li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+    
+    <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2021 Ferdinand Mütsch
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Blog</a></li>
+         
+          <li><a href="/imprint/">Imprint</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+</body>
+</html>
+<!-- styles -->
+
+<link rel="stylesheet" href="/lib/roboto/css/roboto.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+
+
+<script src="/js/main.js"></script>
+
+<!-- Google Analytics -->
+
+<!-- Disqus Comments -->
+
+

@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="referrer" content="no-referrer">
+    <meta name="description" content="BackgroundA few days ago, I wrote a crawler (with NodeJS and Sequelize) that fetches publicly available data from GitHub’s GraphQL API. More precisely, I downloaded information about users, repositori">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Exploratory Analysis on GitHub Data">
+<meta property="og:url" content="https://muetsch.io/exploratory-analysis-on-github-data.html">
+<meta property="og:site_name" content="Ferdinand Mütsch">
+<meta property="og:description" content="BackgroundA few days ago, I wrote a crawler (with NodeJS and Sequelize) that fetches publicly available data from GitHub’s GraphQL API. More precisely, I downloaded information about users, repositori">
+<meta property="og:locale">
+<meta property="og:image" content="https://apps.muetsch.io/images/o:auto?image=https://muetsch.io/images/gh_eer.png">
+<meta property="og:image" content="https://apps.muetsch.io/images/o:auto?image=https://muetsch.io/images/gh_popular_lang.png">
+<meta property="og:image" content="https://apps.muetsch.io/images/o:auto?image=https://muetsch.io/images/gh_locations.png">
+<meta property="og:image" content="https://apps.muetsch.io/images/o:auto?image=https://muetsch.io/images/gh_location_langs.png">
+<meta property="og:image" content="https://apps.muetsch.io/images/o:auto?image=https://muetsch.io/images/gh_ka_world.png">
+<meta property="article:published_time" content="2019-04-11T19:00:59.000Z">
+<meta property="article:modified_time" content="2020-10-30T20:05:40.282Z">
+<meta property="article:author" content="Ferdinand Mütsch">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://apps.muetsch.io/images/o:auto?image=https://muetsch.io/images/gh_eer.png">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/favicon.ico" sizes="192x192">
+          
+        
+        
+    
+    <!-- title -->
+    <title>Exploratory Analysis on GitHub Data</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- rss -->
+    
+    
+
+    <!-- rel-me links -->
+    
+      
+        <link href="http://github.com/muety" rel="me">
+      
+        <link href="https://twitter.com/n2try" rel="me">
+      
+        <link href="mailto:ferdinand@muetsch.io" rel="me">
+      
+    
+
+    <!-- Webmention link -->
+    
+      <link href="https://webmention.io/muetsch.io/webmention" rel="webmention">
+    
+
+    
+      <link href="https://webmention.io/muetsch.io/xmlrpc" rel="pingback">
+    
+<meta name="generator" content="Hexo 5.2.0"><link rel="alternate" href="/rss2.xml" title="Ferdinand Mütsch" type="application/rss+xml">
+</head>
+
+<body>
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fa fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fa fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="window.scrollTo(0, 0)" style="display:none;"><i class="fa fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Blog</a></li>
+         
+          <li><a href="/imprint/">Imprint</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/basic-benchmarks-of-5-different-mqtt-brokers.html"><i class="fa fa-chevron-left" aria-hidden="true" onmouseover='toggleById("i-prev");' onmouseout='toggleById("i-prev");'></i></a></li>
+        
+        
+        <li><a class="icon" href="/what-i-like-about-developing-apps-with-flutter.html"><i class="fa fa-chevron-right" aria-hidden="true" onmouseover='toggleById("i-next").toggleById();' onmouseout='toggleById("i-next");'></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="window.scrollTo(0,0)"><i class="fa fa-chevron-up" aria-hidden="true" onmouseover='toggleById("i-top");' onmouseout='toggleById("i-top");'></i></a></li>
+        <li><a class="icon" href="#"><i class="fa fa-share-alt" aria-hidden="true" onmouseover='toggleById("i-share");' onmouseout='toggleById("i-share");' onclick='toggleById("share");return false;'></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://muetsch.io/exploratory-analysis-on-github-data.html"><i class="fa fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://muetsch.io/exploratory-analysis-on-github-data.html&text=Exploratory Analysis on GitHub Data"><i class="fa fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://muetsch.io/exploratory-analysis-on-github-data.html&title=Exploratory Analysis on GitHub Data"><i class="fa fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://muetsch.io/exploratory-analysis-on-github-data.html&is_video=false&description=Exploratory Analysis on GitHub Data"><i class="fa fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Exploratory Analysis on GitHub Data&body=Check out this article: https://muetsch.io/exploratory-analysis-on-github-data.html"><i class="fa fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://muetsch.io/exploratory-analysis-on-github-data.html&title=Exploratory Analysis on GitHub Data"><i class="fa fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://muetsch.io/exploratory-analysis-on-github-data.html&title=Exploratory Analysis on GitHub Data"><i class="fa fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://muetsch.io/exploratory-analysis-on-github-data.html&title=Exploratory Analysis on GitHub Data"><i class="fa fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://muetsch.io/exploratory-analysis-on-github-data.html&title=Exploratory Analysis on GitHub Data"><i class="fa fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://muetsch.io/exploratory-analysis-on-github-data.html&name=Exploratory Analysis on GitHub Data&description="><i class="fa fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Background"><span class="toc-number">1.</span> <span class="toc-text">Background</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Analyses"><span class="toc-number">2.</span> <span class="toc-text">Analyses</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Most-popular-programming-languages"><span class="toc-number">2.1.</span> <span class="toc-text">Most popular programming languages</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Least-popular-programming-languages"><span class="toc-number">2.2.</span> <span class="toc-text">Least popular programming languages</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#User-Skills"><span class="toc-number">3.</span> <span class="toc-text">User Skills</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Association-Rules"><span class="toc-number">3.0.1.</span> <span class="toc-text">Association Rules</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Locations"><span class="toc-number">3.1.</span> <span class="toc-text">Locations</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Skills-by-location"><span class="toc-number">3.2.</span> <span class="toc-text">Skills by location</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Skills-Karlsruhe-vs-the-World"><span class="toc-number">3.3.</span> <span class="toc-text">Skills: Karlsruhe vs. the World</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Project-Tech-Stacks"><span class="toc-number">3.4.</span> <span class="toc-text">Project Tech Stacks</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Conclusion"><span class="toc-number">4.</span> <span class="toc-text">Conclusion</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index width mx-auto px2 my4">
+        
+        <article class="h-entry post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <a href="https://muetsch.io/exploratory-analysis-on-github-data.html" class="u-url">
+        <h1 class="posttitle p-name" itemprop="name headline" property="headline">
+            Exploratory Analysis on GitHub Data
+        </h1>
+    </a>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" property="author" itemscope itemtype="http://schema.org/Person" vocab="http://schema.org/" typeof="Person">
+        <span itemprop="name" property="name" class="p-author h-card">Ferdinand Mütsch</span>
+      </span>
+      
+    <div class="postdate">
+        <time datetime="2019-04-11T19:00:59.000Z" class="dt-published" itemprop="datePublished" property="datePublished">2019-04-11</time>
+    </div>
+
+
+      
+
+
+      <!--
+      <div style="margin-top: 30px">
+        <a href="https://liberapay.com/muety/" target="_blank"
+          style="background-image: none; text-decoration: none;"><img
+            src="https://badges.fw-web.space/liberapay/receives/muety.svg?logo=liberapay&style=flat-square" alt="Liberapay"
+            style="height: auto !important;width: auto !important;"></a>
+      </div>
+      -->
+    </div>
+  </header>
+  
+  <div class="content e-content" itemprop="articleBody" property="articleBody">
+    <h1 id="Background"><a href="#Background" class="headerlink" title="Background"></a>Background</h1><p>A few days ago, I wrote a crawler (with NodeJS and <a target="_blank" rel="noopener" href="http://docs.sequelizejs.com/">Sequelize</a>) that fetches publicly available data from GitHub’s <a target="_blank" rel="noopener" href="https://developer.github.com/v4/">GraphQL API</a>. More precisely, I downloaded information about users, repositories, programming languages and topics.</p>
+<p>After running the crawler for a few days, I ended up with <strong>154,248 user profiles</strong>, <strong>993,919 repositories</strong> and <strong>351 languages</strong>, many of which I had never heard of (e.g. did you know about <em>PogoScript</em>?). However, although my MySQL database is already 953 MB in size with only these data, I barely crawled 0.4 % of all user profiles (~ 31 million).</p>
+<p>The first (less extensive) version of my database – which I performed the following analyses on – looked like this.</p>
+<p><img src="https://apps.muetsch.io/images/o:auto?image=https://muetsch.io/images/gh_eer.png"></p>
+<p>While one could argue that the data I collected is not of a representative sample size, I still wanted to do some data analysis on it – just for fun.</p>
+<h1 id="Analyses"><a href="#Analyses" class="headerlink" title="Analyses"></a>Analyses</h1><p>To perform the analyses, I used Python 3 with Pandas and Matplotlib. </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> apriori</span><br><span class="line"><span class="keyword">import</span> pymysql</span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">from</span> sqlalchemy <span class="keyword">import</span> create_engine</span><br><span class="line"></span><br><span class="line">%matplotlib inline</span><br><span class="line"></span><br><span class="line">pymysql.install_as_MySQLdb()</span><br><span class="line"></span><br><span class="line">sql_engine = create_engine(<span class="string">&#x27;mysql://user:heheyouwish@localhost:3306/github_data&#x27;</span>, echo=<span class="literal">False</span>)</span><br><span class="line">connection = sql_engine.raw_connection()</span><br></pre></td></tr></table></figure>
+
+<h2 id="Most-popular-programming-languages"><a href="#Most-popular-programming-languages" class="headerlink" title="Most popular programming languages"></a>Most popular programming languages</h2><p>One of the first and most obvious thing to check (for the sake of brevity I’ll skip basic data set statistics like count, mean, variance, …) is which languages are most widely used.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">df_top_langs = pd.read_sql_query(<span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">    select LanguageName, count(LanguageName) as count from RepositoryLanguages</span></span><br><span class="line"><span class="string">    group by LanguageName</span></span><br><span class="line"><span class="string">    order by count(LanguageName) desc</span></span><br><span class="line"><span class="string">    limit 10;</span></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span>, con=connection)</span><br><span class="line">df_top_langs.set_index(<span class="string">&#x27;LanguageName&#x27;</span>).plot.bar(figsize=(<span class="number">12</span>,<span class="number">8</span>))</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://apps.muetsch.io/images/o:auto?image=https://muetsch.io/images/gh_popular_lang.png"></p>
+<p>Not too surprisingly, the typical web stack consisting of JavaScript, HTML and CSS, is among the most popular programming languages, according to how often they appear in repositories.</p>
+<h2 id="Least-popular-programming-languages"><a href="#Least-popular-programming-languages" class="headerlink" title="Least popular programming languages"></a>Least popular programming languages</h2><p>A little more interesting is to see, which programming languages occur least.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">df_last_langs = pd.read_sql_query(<span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">    select LanguageName, count(LanguageName) as count from RepositoryLanguages</span></span><br><span class="line"><span class="string">    group by LanguageName</span></span><br><span class="line"><span class="string">    order by count(LanguageName) asc</span></span><br><span class="line"><span class="string">    limit 10;</span></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span>, con=connection)</span><br><span class="line">print(df_last_langs)</span><br></pre></td></tr></table></figure>
+
+<p>Here are the results. Have you heard of any one of them? I didn’t.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">  LanguageName  count</span><br><span class="line">0          Nit      1</span><br><span class="line">1       Myghty      1</span><br><span class="line">2   Public Key      1</span><br><span class="line">3  DCPU-16 ASM      1</span><br><span class="line">4   TI Program      1</span><br><span class="line">5        Genie      1</span><br><span class="line">6           Ox      1</span><br><span class="line">7   PogoScript      1</span><br><span class="line">8        Cirru      1</span><br><span class="line">9        JFlex      2</span><br></pre></td></tr></table></figure>
+
+<h1 id="User-Skills"><a href="#User-Skills" class="headerlink" title="User Skills"></a>User Skills</h1><p>Let’s analyze the users’ skills in terms of languages. I decided to consider a user being “skilled” in a certain language if at least 10 % of her repositories’ code is in that language. </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">N = <span class="built_in">int</span>(<span class="number">1e7</span>)</span><br><span class="line">MIN_SUPP = <span class="number">.0005</span></span><br><span class="line">MIN_CONF = <span class="number">.45</span></span><br><span class="line">MIN_LANG_RATIO = <span class="number">.1</span></span><br><span class="line"></span><br><span class="line">df_skills = pd.read_sql_query(<span class="string">f&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">    select RepositoryLanguages.LanguageName, RepositoryLanguages.size, Users.login, Users.location from RepositoryLanguages</span></span><br><span class="line"><span class="string">    left join Repositories on Repositories.id = RepositoryLanguages.RepositoryId</span></span><br><span class="line"><span class="string">    right join Users on Users.login = Repositories.userLogin</span></span><br><span class="line"><span class="string">    limit <span class="subst">&#123;N&#125;</span></span></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span>, con=connection)</span><br><span class="line"></span><br><span class="line">df_skills = df_skills.merge(pd.DataFrame(df_skills.groupby(<span class="string">&#x27;login&#x27;</span>)[<span class="string">&#x27;size&#x27;</span>].<span class="built_in">sum</span>()), how=<span class="string">&#x27;left&#x27;</span>, on=<span class="string">&#x27;login&#x27;</span>).rename(columns=&#123;<span class="string">&#x27;size_x&#x27;</span>: <span class="string">&#x27;size&#x27;</span>, <span class="string">&#x27;size_y&#x27;</span>: <span class="string">&#x27;totalSize&#x27;</span>&#125;)</span><br><span class="line">df_skills = df_skills[df_skills[<span class="string">&#x27;totalSize&#x27;</span>] &gt; <span class="number">0</span>]</span><br><span class="line">df_skills[<span class="string">&#x27;sizeRatio&#x27;</span>] = df_skills[<span class="string">&#x27;size&#x27;</span>] / df_skills[<span class="string">&#x27;totalSize&#x27;</span>]</span><br><span class="line"></span><br><span class="line">print(<span class="string">f&quot;<span class="subst">&#123;df_skills[<span class="string">&#x27;login&#x27;</span>].unique().size&#125;</span> users&quot;</span>)</span><br><span class="line">print(<span class="string">f&quot;<span class="subst">&#123;df_skills[<span class="string">&#x27;LanguageName&#x27;</span>].unique().size&#125;</span> languages&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Output:</span></span><br><span class="line"><span class="comment"># 130402 users</span></span><br><span class="line"><span class="comment"># 351 languages</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="Association-Rules"><a href="#Association-Rules" class="headerlink" title="Association Rules"></a>Association Rules</h3><p>What I wanted to look at is combinations of different skills, i.e. languages that usually occur together as developer skills. One approach to get insights like these is to mine the data for <em>association rules</em>, e.g. using an algorithm like <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Apriori_algorithm">Apriori</a> (as I did). The implementation I used was <a target="_blank" rel="noopener" href="https://github.com/asaini/Apriori">asaini/Apriori</a>.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">user_langs = df_skills[df_skills[<span class="string">&#x27;sizeRatio&#x27;</span>] &gt;= MIN_LANG_RATIO].groupby(<span class="string">&#x27;login&#x27;</span>)[<span class="string">&#x27;LanguageName&#x27;</span>].apply(<span class="built_in">set</span>).values</span><br><span class="line">items1, rules1 = apriori.runApriori(user_langs, MIN_SUPP, MIN_CONF)</span><br><span class="line">rules1 = <span class="built_in">sorted</span>(rules1, key=<span class="keyword">lambda</span> e: e[<span class="number">1</span>], reverse=<span class="literal">True</span>)</span><br><span class="line">print(rules1)</span><br></pre></td></tr></table></figure>
+
+<p><strong>Output:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">[(((&#39;ShaderLab&#39;,), (&#39;C#&#39;,)), 0.904),</span><br><span class="line"> (((&#39;Vue&#39;,), (&#39;JavaScript&#39;,)), 0.671277997364954),</span><br><span class="line"> (((&#39;Vue&#39;, &#39;CSS&#39;), (&#39;JavaScript&#39;,)), 0.656140350877193),</span><br><span class="line"> (((&#39;GLSL&#39;,), (&#39;C#&#39;,)), 0.625),</span><br><span class="line"> (((&#39;CMake&#39;,), (&#39;C++&#39;,)), 0.6229508196721312),</span><br><span class="line"> (((&#39;CSS&#39;,), (&#39;JavaScript&#39;,)), 0.5807683959192532),</span><br><span class="line"> (((&#39;Tcl&#39;,), (&#39;Python&#39;,)), 0.5658914728682171),</span><br><span class="line"> (((&#39;Kotlin&#39;,), (&#39;Java&#39;,)), 0.5655375552282769),</span><br><span class="line"> (((&#39;ASP&#39;,), (&#39;C#&#39;,)), 0.5488215488215488),</span><br><span class="line"> (((&#39;Vue&#39;, &#39;HTML&#39;), (&#39;JavaScript&#39;,)), 0.5404411764705882),</span><br><span class="line"> (((&#39;CoffeeScript&#39;,), (&#39;JavaScript&#39;,)), 0.5339578454332553),</span><br><span class="line"> (((&#39;CSS&#39;, &#39;PHP&#39;), (&#39;JavaScript&#39;,)), 0.5116117850953206),</span><br><span class="line"> (((&#39;Elm&#39;,), (&#39;JavaScript&#39;,)), 0.4951923076923077),</span><br><span class="line"> (((&#39;CSS&#39;, &#39;HTML&#39;), (&#39;JavaScript&#39;,)), 0.4906486271388778),</span><br><span class="line"> (((&#39;Smarty&#39;,), (&#39;PHP&#39;,)), 0.4788732394366197),</span><br><span class="line"> (((&#39;TypeScript&#39;,), (&#39;JavaScript&#39;,)), 0.4739540607054964),</span><br><span class="line"> (((&#39;CSS&#39;, &#39;C#&#39;), (&#39;JavaScript&#39;,)), 0.464926590538336),</span><br><span class="line"> (((&#39;Groovy&#39;,), (&#39;Java&#39;,)), 0.4604651162790698)]</span><br></pre></td></tr></table></figure>
+
+<p>The left part of each row is a tuple of tuples of programming languages that represent an association rule. The right part is the <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Association_rule_learning#Confidence">confidence</a> of that rule.</p>
+<p><strong>For example:</strong><br>Read <code>(((&#39;ShaderLab&#39;,), (&#39;C#&#39;,)), 0.904)</code> as “90 % of all people who know <em>ShaderLab</em> also know C#”.</p>
+<p>The results reflect common sense. For instance, the rule that developers, who know <em>VueJS</em>, also know <em>JavaScript</em> seems to make sense, given that VueJS is a JavaScript framework. Analogously, <em>CMake</em> is a common build tool for <em>C++</em>, etc. Nothing too fancy here, except for that I didn’t know about <em>ShaderLab</em> and <em>GLSL</em>.</p>
+<h2 id="Locations"><a href="#Locations" class="headerlink" title="Locations"></a>Locations</h2><p>Let’s take a look at where most GitHub users are from. Obviously, this only respects profiles where users have set their locations.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">df_locations = df1.reindex([<span class="string">&#x27;location&#x27;</span>], axis=<span class="number">1</span>).groupby(<span class="string">&#x27;location&#x27;</span>).size()</span><br><span class="line">df_locations = df_locations.sort_values(ascending=<span class="literal">False</span>)[:<span class="number">20</span>]</span><br><span class="line">df_locations.plot.bar(figsize=(<span class="number">12</span>,<span class="number">8</span>))</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://apps.muetsch.io/images/o:auto?image=https://muetsch.io/images/gh_locations.png"></p>
+<p>Clearly, San Francisco seems to be the most popular city for developers (or at least for those who are active on GitHub). </p>
+<h2 id="Skills-by-location"><a href="#Skills-by-location" class="headerlink" title="Skills by location"></a>Skills by location</h2><p>To take this a step further, let’s take a look at which skills users tend to have in what cities.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">language_replace</span>(<span class="params">df</span>):</span></span><br><span class="line">    df = df.copy()</span><br><span class="line">    <span class="comment"># Little bit of manual cleaning</span></span><br><span class="line">    replace = &#123;<span class="string">&#x27;San Francisco&#x27;</span>: <span class="string">&#x27;San Francisco, CA&#x27;</span>,</span><br><span class="line">               <span class="string">&#x27;Berlin&#x27;</span>: <span class="string">&#x27;Berlin, Germany&#x27;</span>,</span><br><span class="line">               <span class="string">&#x27;New York&#x27;</span>: <span class="string">&#x27;New York, NY&#x27;</span>,</span><br><span class="line">               <span class="string">&#x27;London&#x27;</span>: <span class="string">&#x27;London, UK&#x27;</span>,</span><br><span class="line">               <span class="string">&#x27;Beijing&#x27;</span>: <span class="string">&#x27;Beijing, China&#x27;</span>,</span><br><span class="line">               <span class="string">&#x27;Paris&#x27;</span>: <span class="string">&#x27;Paris, France&#x27;</span>&#125;</span><br><span class="line">    <span class="keyword">for</span> (k, v) <span class="keyword">in</span> replace.items():</span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">isinstance</span>(df, pd.DataFrame):</span><br><span class="line">            <span class="keyword">if</span> k <span class="keyword">in</span> df.columns <span class="keyword">and</span> v <span class="keyword">in</span> df.columns:</span><br><span class="line">                df[k] = df[k] + df[v]</span><br><span class="line">                df = df.drop([v], axis=<span class="number">1</span>, errors=<span class="string">&#x27;ignore&#x27;</span>)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">if</span> k <span class="keyword">in</span> df.index <span class="keyword">and</span> v <span class="keyword">in</span> df.index:</span><br><span class="line">                df[k] = df[k] + df[v]</span><br><span class="line">                <span class="comment">#df = df.drop([v], axis=1)</span></span><br><span class="line">                <span class="keyword">del</span> df[v]</span><br><span class="line">    <span class="keyword">return</span> df</span><br><span class="line"></span><br><span class="line">langs_by_loc = &#123;&#125;</span><br><span class="line"><span class="keyword">for</span> l <span class="keyword">in</span> df_locations.index:</span><br><span class="line">    langs_by_loc[l] = df1[df1[<span class="string">&#x27;location&#x27;</span>] == l][[<span class="string">&#x27;LanguageName&#x27;</span>]].groupby(<span class="string">&#x27;LanguageName&#x27;</span>).size()</span><br><span class="line">df_loc_langs = pd.DataFrame.from_dict(langs_by_loc).fillna(<span class="number">0</span>)</span><br><span class="line"></span><br><span class="line">df_loc_langs = language_replace(df_loc_langs)</span><br><span class="line">df_loc_langs = df_loc_langs.T</span><br><span class="line">df_loc_langs = df_loc_langs.drop([c <span class="keyword">for</span> c <span class="keyword">in</span> df_loc_langs.columns <span class="keyword">if</span> c <span class="keyword">not</span> <span class="keyword">in</span> df_top_langs[<span class="string">&#x27;LanguageName&#x27;</span>].values], axis=<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">df_loc_langs = (df_loc_langs.T / df_loc_langs.T.<span class="built_in">sum</span>()).T <span class="comment"># normalize heights</span></span><br><span class="line">df_loc_langs.plot.bar(stacked=<span class="literal">True</span>, figsize=(<span class="number">16</span>,<span class="number">10</span>))</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://apps.muetsch.io/images/o:auto?image=https://muetsch.io/images/gh_location_langs.png"></p>
+<p>Look like there are no real outliers in the distribution of developer skills between different cities of the world. Maybe you could say that, e.g., Indians like web frontends a little more than command-line hacking.</p>
+<h2 id="Skills-Karlsruhe-vs-the-World"><a href="#Skills-Karlsruhe-vs-the-World" class="headerlink" title="Skills: Karlsruhe vs. the World"></a>Skills: Karlsruhe vs. the World</h2><p>While an overview is cool, I found it even more interesting to specifically compare between to cities. So in the following chart I compare language-specific programming skills in Karlsruhe (the city where I live and study) to the rest of the world’s average.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">df_ka = df1[df1[<span class="string">&#x27;location&#x27;</span>] == <span class="string">&#x27;Karlsruhe&#x27;</span>][[<span class="string">&#x27;LanguageName&#x27;</span>]].groupby(<span class="string">&#x27;LanguageName&#x27;</span>).size()</span><br><span class="line">df_ka = pd.DataFrame(df_ka, index=df_ka.index, columns=[<span class="string">&#x27;Karlsruhe&#x27;</span>]) / df_ka.<span class="built_in">sum</span>()</span><br><span class="line">df_world = pd.DataFrame(df_loc_langs.mean(), index=df_loc_langs.mean().index, columns=[<span class="string">&#x27;World&#x27;</span>])</span><br><span class="line">df_compare = df_world.merge(df_ka, how=<span class="string">&#x27;left&#x27;</span>, left_index=<span class="literal">True</span>, right_index=<span class="literal">True</span>)</span><br><span class="line">ax = df_compare.plot.barh(title=<span class="string">&#x27;Languages: World vs. Karlsruhe&#x27;</span>, legend=<span class="literal">True</span>, figsize=(<span class="number">10</span>,<span class="number">5</span>))</span><br><span class="line">ax.set_xlabel(<span class="string">&#x27;Percentage (Top 10)&#x27;</span>)</span><br><span class="line">ax.set_ylabel(<span class="string">&#x27;Programming Language Skills&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://apps.muetsch.io/images/o:auto?image=https://muetsch.io/images/gh_ka_world.png"> </p>
+<p>These results are a bit surprising to me. Clearly, Karlsruhe-based developers seem to dislike JavaScript compared to the world. However, this is different from what I experienced in several student jobs and internships here.</p>
+<h2 id="Project-Tech-Stacks"><a href="#Project-Tech-Stacks" class="headerlink" title="Project Tech Stacks"></a>Project Tech Stacks</h2><p>Last but not least, let’s apply Apriori once more, but this time in a slightly different way. Instead of looking at user skills, let’s look at languages that occur together on a per-repository basis. And instead of trying to find rules, let’s only look at <em>frequent item sets</em> (which are the basis for rules). My expectation was to get back sets of commonly used tech stacks. </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">N = <span class="built_in">int</span>(<span class="number">1e7</span>)</span><br><span class="line">MIN_SUPP = <span class="number">.0005</span></span><br><span class="line">MIN_CONF = <span class="number">.45</span></span><br><span class="line">MIN_LANG_RATIO = <span class="number">.1</span></span><br><span class="line"></span><br><span class="line">df_stacks = pd.read_sql_query(<span class="string">f&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">    select LanguageName, size, RepositoryId from RepositoryLanguages</span></span><br><span class="line"><span class="string">    order by RepositoryId</span></span><br><span class="line"><span class="string">    limit <span class="subst">&#123;N&#125;</span></span></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span>, con=connection)</span><br><span class="line"></span><br><span class="line">df_stacks = df_stacks.merge(pd.DataFrame(df_stacks.groupby(<span class="string">&#x27;RepositoryId&#x27;</span>)[<span class="string">&#x27;size&#x27;</span>].<span class="built_in">sum</span>()), how=<span class="string">&#x27;left&#x27;</span>, on=<span class="string">&#x27;RepositoryId&#x27;</span>).rename(columns=&#123;<span class="string">&#x27;size_x&#x27;</span>: <span class="string">&#x27;size&#x27;</span>, <span class="string">&#x27;size_y&#x27;</span>: <span class="string">&#x27;totalSize&#x27;</span>&#125;)</span><br><span class="line">df_stacks = df_stacks[df_stacks[<span class="string">&#x27;totalSize&#x27;</span>] &gt; <span class="number">0</span>]</span><br><span class="line">df_stacks[<span class="string">&#x27;sizeRatio&#x27;</span>] = df_stacks[<span class="string">&#x27;size&#x27;</span>] / df_stacks[<span class="string">&#x27;totalSize&#x27;</span>]</span><br><span class="line"></span><br><span class="line">print(<span class="string">f&quot;<span class="subst">&#123;df_stacks[<span class="string">&#x27;RepositoryId&#x27;</span>].unique().size&#125;</span> repositories&quot;</span>)</span><br><span class="line">print(<span class="string">f&quot;<span class="subst">&#123;df_stacks[<span class="string">&#x27;LanguageName&#x27;</span>].unique().size&#125;</span> languages&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Output: </span></span><br><span class="line"><span class="comment"># 853114 repositories</span></span><br><span class="line"><span class="comment"># 351 languages</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">repo_langs = df_stacks[df_stacks[<span class="string">&#x27;sizeRatio&#x27;</span>] &gt;= MIN_LANG_RATIO].groupby(<span class="string">&#x27;RepositoryId&#x27;</span>)[<span class="string">&#x27;LanguageName&#x27;</span>].apply(<span class="built_in">set</span>).values</span><br><span class="line">items2, rules2 = apriori.runApriori(repo_langs, MIN_SUPP, MIN_CONF)</span><br><span class="line">itemsets2 = <span class="built_in">sorted</span>(<span class="built_in">list</span>(<span class="built_in">filter</span>(<span class="keyword">lambda</span> i: <span class="built_in">len</span>(i[<span class="number">0</span>]) &gt; <span class="number">2</span>, items2)), key=<span class="keyword">lambda</span> i: i[<span class="number">1</span>], reverse=<span class="literal">True</span>)</span><br><span class="line">print(itemsets2)</span><br></pre></td></tr></table></figure>
+
+<p><strong>Output:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">[((&#39;CSS&#39;, &#39;JavaScript&#39;, &#39;HTML&#39;), 0.04360026913167525),</span><br><span class="line"> ((&#39;CSS&#39;, &#39;JavaScript&#39;, &#39;PHP&#39;), 0.0045574213997191465),</span><br><span class="line"> ((&#39;Ruby&#39;, &#39;CSS&#39;, &#39;HTML&#39;), 0.004456614239128651),</span><br><span class="line"> ((&#39;TypeScript&#39;, &#39;JavaScript&#39;, &#39;HTML&#39;), 0.0042034241613664765),</span><br><span class="line"> ((&#39;TypeScript&#39;, &#39;HTML&#39;, &#39;CSS&#39;), 0.0035024627423767517),</span><br><span class="line"> ((&#39;Python&#39;, &#39;JavaScript&#39;, &#39;HTML&#39;), 0.002962089474560258),</span><br><span class="line"> ((&#39;Python&#39;, &#39;HTML&#39;, &#39;CSS&#39;), 0.002769852563666755),</span><br><span class="line"> ((&#39;Ruby&#39;, &#39;JavaScript&#39;, &#39;HTML&#39;), 0.0022400288824236856),</span><br><span class="line"> ((&#39;JavaScript&#39;, &#39;HTML&#39;, &#39;PHP&#39;), 0.0022154131804190294),</span><br><span class="line"> ((&#39;Ruby&#39;, &#39;CSS&#39;, &#39;JavaScript&#39;), 0.0021532878372644217),</span><br><span class="line"> ((&#39;CSS&#39;, &#39;HTML&#39;, &#39;PHP&#39;), 0.0019915275098052547),</span><br><span class="line"> ((&#39;JavaScript&#39;, &#39;Objective-C&#39;, &#39;Java&#39;), 0.0018614159420663593),</span><br><span class="line"> ((&#39;CSS&#39;, &#39;JavaScript&#39;, &#39;Python&#39;), 0.0017992905989117516),</span><br><span class="line"> ((&#39;Python&#39;, &#39;JavaScript&#39;, &#39;Objective-C&#39;), 0.0017735027206211597),</span><br><span class="line"> ((&#39;Python&#39;, &#39;JavaScript&#39;, &#39;Java&#39;), 0.001508590879999625),</span><br><span class="line"> ((&#39;CSS&#39;, &#39;JavaScript&#39;, &#39;TypeScript&#39;), 0.0014745977677074812),</span><br><span class="line"> ((&#39;Python&#39;, &#39;Objective-C&#39;, &#39;Java&#39;), 0.0014066115431231934),</span><br><span class="line"> ((&#39;Python&#39;, &#39;JavaScript&#39;, &#39;Objective-C&#39;, &#39;Java&#39;), 0.0013222148505358019),</span><br><span class="line"> ((&#39;Vue&#39;, &#39;CSS&#39;, &#39;JavaScript&#39;), 0.0012554008022374501)]</span><br></pre></td></tr></table></figure>
+
+<p>Here, the left side is sets of frequently occurring combinations of languages. The right side is the set’s <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Association_rule_learning#Support">support</a>, which is the relative occurrences of that set among the whole data set.<br>Obviously, many of these are actually common “tech stacks” and almost all of them are web technologies. I guess GitHub is most popular among web developers. </p>
+<h1 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h1><p>There is a lot of more complex analyses that could be might on rich data like this and probably tools like <a target="_blank" rel="noopener" href="https://cloud.google.com/bigquery/public-data/">BigQuery</a> are better suitable than Pandas, operating on a tiny sample. However, I used this little project to improve my EDA skills and hopefully give you guys an interesting article to read. Let me know if you like it!</p>
+
+  </div>
+</article>
+
+
+
+    </div>
+    
+      <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Blog</a></li>
+         
+          <li><a href="/imprint/">Imprint</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Background"><span class="toc-number">1.</span> <span class="toc-text">Background</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Analyses"><span class="toc-number">2.</span> <span class="toc-text">Analyses</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Most-popular-programming-languages"><span class="toc-number">2.1.</span> <span class="toc-text">Most popular programming languages</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Least-popular-programming-languages"><span class="toc-number">2.2.</span> <span class="toc-text">Least popular programming languages</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#User-Skills"><span class="toc-number">3.</span> <span class="toc-text">User Skills</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Association-Rules"><span class="toc-number">3.0.1.</span> <span class="toc-text">Association Rules</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Locations"><span class="toc-number">3.1.</span> <span class="toc-text">Locations</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Skills-by-location"><span class="toc-number">3.2.</span> <span class="toc-text">Skills by location</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Skills-Karlsruhe-vs-the-World"><span class="toc-number">3.3.</span> <span class="toc-text">Skills: Karlsruhe vs. the World</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Project-Tech-Stacks"><span class="toc-number">3.4.</span> <span class="toc-text">Project Tech Stacks</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Conclusion"><span class="toc-number">4.</span> <span class="toc-text">Conclusion</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://muetsch.io/exploratory-analysis-on-github-data.html"><i class="fa fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://muetsch.io/exploratory-analysis-on-github-data.html&text=Exploratory Analysis on GitHub Data"><i class="fa fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://muetsch.io/exploratory-analysis-on-github-data.html&title=Exploratory Analysis on GitHub Data"><i class="fa fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://muetsch.io/exploratory-analysis-on-github-data.html&is_video=false&description=Exploratory Analysis on GitHub Data"><i class="fa fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Exploratory Analysis on GitHub Data&body=Check out this article: https://muetsch.io/exploratory-analysis-on-github-data.html"><i class="fa fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://muetsch.io/exploratory-analysis-on-github-data.html&title=Exploratory Analysis on GitHub Data"><i class="fa fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://muetsch.io/exploratory-analysis-on-github-data.html&title=Exploratory Analysis on GitHub Data"><i class="fa fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://muetsch.io/exploratory-analysis-on-github-data.html&title=Exploratory Analysis on GitHub Data"><i class="fa fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://muetsch.io/exploratory-analysis-on-github-data.html&title=Exploratory Analysis on GitHub Data"><i class="fa fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://muetsch.io/exploratory-analysis-on-github-data.html&name=Exploratory Analysis on GitHub Data&description="><i class="fa fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+      <ul>
+        <li id="toc"><a class="icon" href="#" onclick='toggleById("toc-footer")'><i class="fa fa-list fa-lg" aria-hidden="true"></i> TOC</a></li>
+        <li id="share"><a class="icon" href="#" onclick='toggleById("share-footer")'><i class="fa fa-share-alt fa-lg" aria-hidden="true"></i> Share</a></li>
+        <li id="top" style="display:none"><a class="icon" href="#" onclick="window.scrollTo(0,0)"><i class="fa fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a></li>
+        <li id="menu"><a class="icon" href="#" onclick='toggleById("nav-footer")'><i class="fa fa-bars fa-lg" aria-hidden="true"></i> Menu</a></li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+    
+    <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2021 Ferdinand Mütsch
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Blog</a></li>
+         
+          <li><a href="/imprint/">Imprint</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+</body>
+</html>
+<!-- styles -->
+
+<link rel="stylesheet" href="/lib/roboto/css/roboto.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+
+
+<script src="/js/main.js"></script>
+
+<!-- Google Analytics -->
+
+<!-- Disqus Comments -->
+
+

@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="referrer" content="no-referrer">
+    <meta name="description" content="IntroductionIf you are using any kinds of Google services on your smartphone, chances are high that Google continuously tracks your location and updates your Timeline. (Source) This is a pretty cool f">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Open-source, self-hosted location tracking with OwnTracks and Grafana">
+<meta property="og:url" content="https://muetsch.io/open-source-self-hosted-location-tracking-with-owntracks-and-grafana.html">
+<meta property="og:site_name" content="Ferdinand Mütsch">
+<meta property="og:description" content="IntroductionIf you are using any kinds of Google services on your smartphone, chances are high that Google continuously tracks your location and updates your Timeline. (Source) This is a pretty cool f">
+<meta property="og:locale">
+<meta property="og:image" content="https://apps.muetsch.io/images/o:auto/rs,s:640?image=https://muetsch.io/images/owntracks4.jpg">
+<meta property="og:image" content="https://apps.muetsch.io/images/o:auto?image=https://muetsch.io/images/owntracks1.png">
+<meta property="og:image" content="https://owntracks.org/booklet/guide/images/owntracks-iotconf-http-arch.png">
+<meta property="og:image" content="https://apps.muetsch.io/images/o:auto/rs,s:320?image=https://muetsch.io/images/owntracks2.png">
+<meta property="og:image" content="https://apps.muetsch.io/images/o:auto/rs,s:640?image=https://muetsch.io/images/owntracks3.png">
+<meta property="article:published_time" content="2021-06-25T06:49:45.000Z">
+<meta property="article:modified_time" content="2021-06-25T08:18:24.417Z">
+<meta property="article:author" content="Ferdinand Mütsch">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://apps.muetsch.io/images/o:auto/rs,s:640?image=https://muetsch.io/images/owntracks4.jpg">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/favicon.ico" sizes="192x192">
+          
+        
+        
+    
+    <!-- title -->
+    <title>Open-source, self-hosted location tracking with OwnTracks and Grafana</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- rss -->
+    
+    
+
+    <!-- rel-me links -->
+    
+      
+        <link href="http://github.com/muety" rel="me">
+      
+        <link href="https://twitter.com/n2try" rel="me">
+      
+        <link href="mailto:ferdinand@muetsch.io" rel="me">
+      
+    
+
+    <!-- Webmention link -->
+    
+      <link href="https://webmention.io/muetsch.io/webmention" rel="webmention">
+    
+
+    
+      <link href="https://webmention.io/muetsch.io/xmlrpc" rel="pingback">
+    
+<meta name="generator" content="Hexo 5.2.0"><link rel="alternate" href="/rss2.xml" title="Ferdinand Mütsch" type="application/rss+xml">
+</head>
+
+<body>
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fa fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fa fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="window.scrollTo(0, 0)" style="display:none;"><i class="fa fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Blog</a></li>
+         
+          <li><a href="/imprint/">Imprint</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" href="/aggregating-and-visualizing-dmarc-reports.html"><i class="fa fa-chevron-right" aria-hidden="true" onmouseover='toggleById("i-next").toggleById();' onmouseout='toggleById("i-next");'></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="window.scrollTo(0,0)"><i class="fa fa-chevron-up" aria-hidden="true" onmouseover='toggleById("i-top");' onmouseout='toggleById("i-top");'></i></a></li>
+        <li><a class="icon" href="#"><i class="fa fa-share-alt" aria-hidden="true" onmouseover='toggleById("i-share");' onmouseout='toggleById("i-share");' onclick='toggleById("share");return false;'></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://muetsch.io/open-source-self-hosted-location-tracking-with-owntracks-and-grafana.html"><i class="fa fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://muetsch.io/open-source-self-hosted-location-tracking-with-owntracks-and-grafana.html&text=Open-source, self-hosted location tracking with OwnTracks and Grafana"><i class="fa fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://muetsch.io/open-source-self-hosted-location-tracking-with-owntracks-and-grafana.html&title=Open-source, self-hosted location tracking with OwnTracks and Grafana"><i class="fa fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://muetsch.io/open-source-self-hosted-location-tracking-with-owntracks-and-grafana.html&is_video=false&description=Open-source, self-hosted location tracking with OwnTracks and Grafana"><i class="fa fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Open-source, self-hosted location tracking with OwnTracks and Grafana&body=Check out this article: https://muetsch.io/open-source-self-hosted-location-tracking-with-owntracks-and-grafana.html"><i class="fa fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://muetsch.io/open-source-self-hosted-location-tracking-with-owntracks-and-grafana.html&title=Open-source, self-hosted location tracking with OwnTracks and Grafana"><i class="fa fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://muetsch.io/open-source-self-hosted-location-tracking-with-owntracks-and-grafana.html&title=Open-source, self-hosted location tracking with OwnTracks and Grafana"><i class="fa fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://muetsch.io/open-source-self-hosted-location-tracking-with-owntracks-and-grafana.html&title=Open-source, self-hosted location tracking with OwnTracks and Grafana"><i class="fa fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://muetsch.io/open-source-self-hosted-location-tracking-with-owntracks-and-grafana.html&title=Open-source, self-hosted location tracking with OwnTracks and Grafana"><i class="fa fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://muetsch.io/open-source-self-hosted-location-tracking-with-owntracks-and-grafana.html&name=Open-source, self-hosted location tracking with OwnTracks and Grafana&description="><i class="fa fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Introduction"><span class="toc-number">1.</span> <span class="toc-text">Introduction</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Your-Own-Setup"><span class="toc-number">2.</span> <span class="toc-text">Your Own Setup</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Requirements-Components"><span class="toc-number">2.1.</span> <span class="toc-text">Requirements &#x2F; Components</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#OwnTracks"><span class="toc-number">2.2.</span> <span class="toc-text">OwnTracks</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Server-side-script"><span class="toc-number">2.3.</span> <span class="toc-text">Server-side script</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Grafana-dashboard"><span class="toc-number">2.4.</span> <span class="toc-text">Grafana dashboard</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Conclusion"><span class="toc-number">3.</span> <span class="toc-text">Conclusion</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index width mx-auto px2 my4">
+        
+        <article class="h-entry post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <a href="https://muetsch.io/open-source-self-hosted-location-tracking-with-owntracks-and-grafana.html" class="u-url">
+        <h1 class="posttitle p-name" itemprop="name headline" property="headline">
+            Open-source, self-hosted location tracking with OwnTracks and Grafana
+        </h1>
+    </a>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" property="author" itemscope itemtype="http://schema.org/Person" vocab="http://schema.org/" typeof="Person">
+        <span itemprop="name" property="name" class="p-author h-card">Ferdinand Mütsch</span>
+      </span>
+      
+    <div class="postdate">
+        <time datetime="2021-06-25T06:49:45.000Z" class="dt-published" itemprop="datePublished" property="datePublished">2021-06-25</time>
+    </div>
+
+
+      
+
+
+      <!--
+      <div style="margin-top: 30px">
+        <a href="https://liberapay.com/muety/" target="_blank"
+          style="background-image: none; text-decoration: none;"><img
+            src="https://badges.fw-web.space/liberapay/receives/muety.svg?logo=liberapay&style=flat-square" alt="Liberapay"
+            style="height: auto !important;width: auto !important;"></a>
+      </div>
+      -->
+    </div>
+  </header>
+  
+  <div class="content e-content" itemprop="articleBody" property="articleBody">
+    <h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1><p>If you are using any kinds of Google services on your smartphone, chances are high that Google continuously tracks your location and updates your <a target="_blank" rel="noopener" href="https://www.google.com/maps/timeline">Timeline</a>.</p>
+<p><img src="https://apps.muetsch.io/images/o:auto/rs,s:640?image=https://muetsch.io/images/owntracks4.jpg" alt="Google Location Timeline Screenshot"><br>(<a target="_blank" rel="noopener" href="https://techwelkin.com/wp-content/uploads/2017/04/google-timeline-location-history.jpg">Source</a>)</p>
+<p>This is a pretty cool feature and for me it is super interesting to see in retrospect which places I have visited in the past. However, it is also a bit concerning to see how precisely Google tracks your daily life. That is why I turned the location tracking off and decided to go for a rather privacy-focused approach instead.</p>
+<h1 id="Your-Own-Setup"><a href="#Your-Own-Setup" class="headerlink" title="Your Own Setup"></a>Your Own Setup</h1><p>To build your own, self-hosted location tracking system, you are going to need a bit of technical expertise, a few different open-source software components and a small server to host them.</p>
+<h2 id="Requirements-Components"><a href="#Requirements-Components" class="headerlink" title="Requirements / Components"></a>Requirements / Components</h2><ul>
+<li>Android- or iOS smartphone</li>
+<li>Web server (Caddy, nginx, Apache 2, …)</li>
+<li>PHP &gt;= 7.x</li>
+<li>MySQL or MariaDB</li>
+<li>Grafana</li>
+</ul>
+<h2 id="OwnTracks"><a href="#OwnTracks" class="headerlink" title="OwnTracks"></a>OwnTracks</h2><p><img src="https://apps.muetsch.io/images/o:auto?image=https://muetsch.io/images/owntracks1.png" alt="OwnTracks Logo"></p>
+<p>The first step to tracking your location is to record it anywhere you go. As most people almost always carry their smartphones with them and as most smartphones have GNSS sensors, the choice is quite obvious. The only thing missing is an appropriate app. This is where <a target="_blank" rel="noopener" href="https://owntracks.org/">OwnTracks</a> comes to play. It is an open-source mobile app that does exactly what we need - record your location and send it to a custom configured MQTT broker or HTTP endpoint. It is available for both Android (written in Kotlin) and iOS (written in Objective-C) and comes with super detailed, developer-focused <a target="_blank" rel="noopener" href="https://owntracks.org/booklet/">documentation</a>.</p>
+<p><img src="https://owntracks.org/booklet/guide/images/owntracks-iotconf-http-arch.png" alt="OwnTracks Architecture Diagram"><br>(<a target="_blank" rel="noopener" href="https://owntracks.org/booklet/guide/whathow/#how-owntracks-works">Source</a>)</p>
+<p>It comes with different tracking <a target="_blank" rel="noopener" href="https://owntracks.org/booklet/features/location/">modes</a>, which essentially specify how often to send your location. Weirdly enough, these modes behave differently on Android an iOS.</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th><strong>Tracking on iOS</strong></th>
+<th><strong>Tracking on Android</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Move mode</strong></td>
+<td>After <code>x</code> meters (default: 100) or <code>t</code> seconds (default: 300)</td>
+<td>Every 30 seconds</td>
+</tr>
+<tr>
+<td><strong>Significant changes mode</strong></td>
+<td>After &gt;= 500 meters and &gt;= 5 minutes</td>
+<td>After &gt;= <code>x</code> meters and &gt;= <code>t</code> seconds</td>
+</tr>
+<tr>
+<td><strong>Manual mode</strong></td>
+<td>On user request</td>
+<td>On user request</td>
+</tr>
+<tr>
+<td><strong>Quiet mode</strong></td>
+<td>Never</td>
+<td>Never</td>
+</tr>
+</tbody></table>
+<p>In fact, things are a bit more complex than this, as you will have to distinguish between how often the app <strong>requests</strong> your location from the device’s sensors and how often it <strong>sends</strong> it. Also, there are different options regarding the desired precision (e.g. GPS is more accurate, but uses more power). Moreover, on iOS, there are <em>region monitoring</em> and <em>iBeacon</em> monitoring modes in addition. </p>
+<p>I would suggest to read through the docs and decide which modes suits you best, depending on your smartphone’s OS. I, however, decided to go for the <em>significant changes</em> mode on Android with the following custom config variables.</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">&quot;locatorDisplacement&quot;</span>: <span class="number">25</span>,</span><br><span class="line">    <span class="attr">&quot;locatorInterval&quot;</span>: <span class="number">60</span>,</span><br><span class="line">    <span class="attr">&quot;locatorPriority&quot;</span>: <span class="number">2</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>This basically tells the app to <em>request my location with block-level accuracy (100 meters) every time I move by more than 25 meters, but at most every 60 seconds</em>. These settings work quite well for me and I did not recognize any significant impact on battery consumption. </p>
+<p><img src="https://apps.muetsch.io/images/o:auto/rs,s:320?image=https://muetsch.io/images/owntracks2.png"></p>
+<h2 id="Server-side-script"><a href="#Server-side-script" class="headerlink" title="Server-side script"></a>Server-side script</h2><p>After setting up the client side, a server-side component to receive the OwnTracks app’s requests is still missing. OwnTracks ships with its <a target="_blank" rel="noopener" href="https://github.com/owntracks/recorder">Recorder</a>, which is a small and simple web application written in C. However, I did not like it a lot, as it does not look particularly beautiful and is very limited regarding its functionality. I rather wanted to visualize my data in Grafana. But to get it there, it first needs to be persisted to a database. </p>
+<hr>
+<p><strong>UPDATE:</strong> I found <a target="_blank" rel="noopener" href="https://github.com/owntracks/frontend"><code>owntracks/frontend</code></a> in the meantime, which seems to be a lot more advanced than the recorder’s web UI. You may want to use this as an alternative to Grafana, which will make the setup a lot easier.</p>
+<hr>
+<p>A heartbeat request’s payload looks like this.</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">&quot;_type&quot;</span>: <span class="string">&quot;location&quot;</span>,</span><br><span class="line">  <span class="attr">&quot;acc&quot;</span>: <span class="number">13</span>,</span><br><span class="line">  <span class="attr">&quot;alt&quot;</span>: <span class="number">163</span>,</span><br><span class="line">  <span class="attr">&quot;batt&quot;</span>: <span class="number">91</span>,</span><br><span class="line">  <span class="attr">&quot;bs&quot;</span>: <span class="number">1</span>,</span><br><span class="line">  <span class="attr">&quot;conn&quot;</span>: <span class="string">&quot;w&quot;</span>,</span><br><span class="line">  <span class="attr">&quot;created_at&quot;</span>: <span class="number">1624607444</span>,</span><br><span class="line">  <span class="attr">&quot;lat&quot;</span>: <span class="number">48.9995682</span>,</span><br><span class="line">  <span class="attr">&quot;lon&quot;</span>: <span class="number">8.3940805</span>,</span><br><span class="line">  <span class="attr">&quot;t&quot;</span>: <span class="string">&quot;u&quot;</span>,</span><br><span class="line">  <span class="attr">&quot;tid&quot;</span>: <span class="string">&quot;l3&quot;</span>,</span><br><span class="line">  <span class="attr">&quot;tst&quot;</span>: <span class="number">1624607139</span>,</span><br><span class="line">  <span class="attr">&quot;vac&quot;</span>: <span class="number">3</span>,</span><br><span class="line">  <span class="attr">&quot;vel&quot;</span>: <span class="number">0</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>I quickly wrote <a target="_blank" rel="noopener" href="https://gist.github.com/muety/3dcbb22916a4812cf3ed40ff17f1d9e2">a little PHP script</a> to take OwnTracks location heartbeats and write them to a MySQL database. It can live at any web server with PHP support (I am using <a target="_blank" rel="noopener" href="https://caddyserver.com/">Caddy2</a> with <code>php-fpm</code>). Assuming it is deployed under <code>https://my.server.tld/track.php</code> then that is the URL you need to configure as an HTTP target endpoint in the OwnTracks app. Optionally, you can configure HTTP Basic auth inside your web server’s config. OwnTrack’s client app has support for that built in.</p>
+<h2 id="Grafana-dashboard"><a href="#Grafana-dashboard" class="headerlink" title="Grafana dashboard"></a>Grafana dashboard</h2><p>The last missing part is to actually visualize your location data. I am a big fan of Grafana, as you can easily build beautiful visualizations with low effort. Grafana integrates with MySQL as a data source, so it can read the location data previously ingested by the above script. Using the <a target="_blank" rel="noopener" href="https://github.com/panodata/grafana-map-panel">grafana-map-panel</a> plugin, you can visualize geo data in dashboard. In addition, I added another two graphs for plotting my velocity and my phone’s battery level over time. This is what it looks like in the end. </p>
+<p><img src="https://apps.muetsch.io/images/o:auto/rs,s:640?image=https://muetsch.io/images/owntracks3.png" alt="Grafana Dashboard Screenshot"></p>
+<p>The geo data panel is generated from this underlying SQL query:</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span></span><br><span class="line">  tst <span class="keyword">AS</span> <span class="string">&quot;time&quot;</span>,</span><br><span class="line">  lat,</span><br><span class="line">  lon,</span><br><span class="line">  vel</span><br><span class="line"><span class="keyword">FROM</span> recordings</span><br><span class="line"><span class="keyword">WHERE</span></span><br><span class="line">  $__unixEpochFilter(tst) <span class="keyword">AND</span></span><br><span class="line">  <span class="keyword">user</span> = <span class="string">&#x27;$user&#x27;</span> <span class="keyword">AND</span></span><br><span class="line">  device = <span class="string">&#x27;$device&#x27;</span></span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> tst</span><br></pre></td></tr></table></figure>
+
+<h1 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h1><p>This is it! You have your own, self-hosted, Google-free location timeline now. Have fun!</p>
+
+  </div>
+</article>
+
+
+
+    </div>
+    
+      <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Blog</a></li>
+         
+          <li><a href="/imprint/">Imprint</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Introduction"><span class="toc-number">1.</span> <span class="toc-text">Introduction</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Your-Own-Setup"><span class="toc-number">2.</span> <span class="toc-text">Your Own Setup</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Requirements-Components"><span class="toc-number">2.1.</span> <span class="toc-text">Requirements &#x2F; Components</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#OwnTracks"><span class="toc-number">2.2.</span> <span class="toc-text">OwnTracks</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Server-side-script"><span class="toc-number">2.3.</span> <span class="toc-text">Server-side script</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Grafana-dashboard"><span class="toc-number">2.4.</span> <span class="toc-text">Grafana dashboard</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Conclusion"><span class="toc-number">3.</span> <span class="toc-text">Conclusion</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://muetsch.io/open-source-self-hosted-location-tracking-with-owntracks-and-grafana.html"><i class="fa fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://muetsch.io/open-source-self-hosted-location-tracking-with-owntracks-and-grafana.html&text=Open-source, self-hosted location tracking with OwnTracks and Grafana"><i class="fa fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://muetsch.io/open-source-self-hosted-location-tracking-with-owntracks-and-grafana.html&title=Open-source, self-hosted location tracking with OwnTracks and Grafana"><i class="fa fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://muetsch.io/open-source-self-hosted-location-tracking-with-owntracks-and-grafana.html&is_video=false&description=Open-source, self-hosted location tracking with OwnTracks and Grafana"><i class="fa fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Open-source, self-hosted location tracking with OwnTracks and Grafana&body=Check out this article: https://muetsch.io/open-source-self-hosted-location-tracking-with-owntracks-and-grafana.html"><i class="fa fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://muetsch.io/open-source-self-hosted-location-tracking-with-owntracks-and-grafana.html&title=Open-source, self-hosted location tracking with OwnTracks and Grafana"><i class="fa fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://muetsch.io/open-source-self-hosted-location-tracking-with-owntracks-and-grafana.html&title=Open-source, self-hosted location tracking with OwnTracks and Grafana"><i class="fa fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://muetsch.io/open-source-self-hosted-location-tracking-with-owntracks-and-grafana.html&title=Open-source, self-hosted location tracking with OwnTracks and Grafana"><i class="fa fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://muetsch.io/open-source-self-hosted-location-tracking-with-owntracks-and-grafana.html&title=Open-source, self-hosted location tracking with OwnTracks and Grafana"><i class="fa fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://muetsch.io/open-source-self-hosted-location-tracking-with-owntracks-and-grafana.html&name=Open-source, self-hosted location tracking with OwnTracks and Grafana&description="><i class="fa fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+      <ul>
+        <li id="toc"><a class="icon" href="#" onclick='toggleById("toc-footer")'><i class="fa fa-list fa-lg" aria-hidden="true"></i> TOC</a></li>
+        <li id="share"><a class="icon" href="#" onclick='toggleById("share-footer")'><i class="fa fa-share-alt fa-lg" aria-hidden="true"></i> Share</a></li>
+        <li id="top" style="display:none"><a class="icon" href="#" onclick="window.scrollTo(0,0)"><i class="fa fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a></li>
+        <li id="menu"><a class="icon" href="#" onclick='toggleById("nav-footer")'><i class="fa fa-bars fa-lg" aria-hidden="true"></i> Menu</a></li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+    
+    <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2021 Ferdinand Mütsch
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Blog</a></li>
+         
+          <li><a href="/imprint/">Imprint</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+</body>
+</html>
+<!-- styles -->
+
+<link rel="stylesheet" href="/lib/roboto/css/roboto.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+
+
+<script src="/js/main.js"></script>
+
+<!-- Google Analytics -->
+
+<!-- Disqus Comments -->
+
+

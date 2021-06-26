@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="referrer" content="no-referrer">
+    <meta name="description" content="The IdeaA few months ago I read a paper with the title “Deep Neural Networks Are More Accurate Than Humans at Detecting Sexual Orientation From Facial Images”, which caused a lot of controversy. While">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Detecting academics&#39; major from facial images">
+<meta property="og:url" content="https://muetsch.io/detecting-academics-major-from-facial-images.html">
+<meta property="og:site_name" content="Ferdinand Mütsch">
+<meta property="og:description" content="The IdeaA few months ago I read a paper with the title “Deep Neural Networks Are More Accurate Than Humans at Detecting Sexual Orientation From Facial Images”, which caused a lot of controversy. While">
+<meta property="og:locale">
+<meta property="og:image" content="https://apps.muetsch.io/images/o:auto?image=https://muetsch.io/images/academic_faces1.png">
+<meta property="og:image" content="https://apps.muetsch.io/images/o:auto?image=https://muetsch.io/images/academic_faces2.png">
+<meta property="og:image" content="https://apps.muetsch.io/images/o:auto?image=https://muetsch.io/images/academic_faces3.png">
+<meta property="article:published_time" content="2019-01-02T10:02:21.000Z">
+<meta property="article:modified_time" content="2020-10-30T20:05:40.282Z">
+<meta property="article:author" content="Ferdinand Mütsch">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://apps.muetsch.io/images/o:auto?image=https://muetsch.io/images/academic_faces1.png">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/favicon.ico" sizes="192x192">
+          
+        
+        
+    
+    <!-- title -->
+    <title>Detecting academics&#39; major from facial images</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- rss -->
+    
+    
+
+    <!-- rel-me links -->
+    
+      
+        <link href="http://github.com/muety" rel="me">
+      
+        <link href="https://twitter.com/n2try" rel="me">
+      
+        <link href="mailto:ferdinand@muetsch.io" rel="me">
+      
+    
+
+    <!-- Webmention link -->
+    
+      <link href="https://webmention.io/muetsch.io/webmention" rel="webmention">
+    
+
+    
+      <link href="https://webmention.io/muetsch.io/xmlrpc" rel="pingback">
+    
+<meta name="generator" content="Hexo 5.2.0"><link rel="alternate" href="/rss2.xml" title="Ferdinand Mütsch" type="application/rss+xml">
+</head>
+
+<body>
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fa fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fa fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="window.scrollTo(0, 0)" style="display:none;"><i class="fa fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Blog</a></li>
+         
+          <li><a href="/imprint/">Imprint</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/quiznerd-my-experiences-with-the-android-developer-nanodegree.html"><i class="fa fa-chevron-left" aria-hidden="true" onmouseover='toggleById("i-prev");' onmouseout='toggleById("i-prev");'></i></a></li>
+        
+        
+        <li><a class="icon" href="/building-a-cloud-native-web-scraper-using-8-different-aws-services.html"><i class="fa fa-chevron-right" aria-hidden="true" onmouseover='toggleById("i-next").toggleById();' onmouseout='toggleById("i-next");'></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="window.scrollTo(0,0)"><i class="fa fa-chevron-up" aria-hidden="true" onmouseover='toggleById("i-top");' onmouseout='toggleById("i-top");'></i></a></li>
+        <li><a class="icon" href="#"><i class="fa fa-share-alt" aria-hidden="true" onmouseover='toggleById("i-share");' onmouseout='toggleById("i-share");' onclick='toggleById("share");return false;'></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://muetsch.io/detecting-academics-major-from-facial-images.html"><i class="fa fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://muetsch.io/detecting-academics-major-from-facial-images.html&text=Detecting academics&#39; major from facial images"><i class="fa fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://muetsch.io/detecting-academics-major-from-facial-images.html&title=Detecting academics&#39; major from facial images"><i class="fa fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://muetsch.io/detecting-academics-major-from-facial-images.html&is_video=false&description=Detecting academics&#39; major from facial images"><i class="fa fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Detecting academics&#39; major from facial images&body=Check out this article: https://muetsch.io/detecting-academics-major-from-facial-images.html"><i class="fa fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://muetsch.io/detecting-academics-major-from-facial-images.html&title=Detecting academics&#39; major from facial images"><i class="fa fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://muetsch.io/detecting-academics-major-from-facial-images.html&title=Detecting academics&#39; major from facial images"><i class="fa fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://muetsch.io/detecting-academics-major-from-facial-images.html&title=Detecting academics&#39; major from facial images"><i class="fa fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://muetsch.io/detecting-academics-major-from-facial-images.html&title=Detecting academics&#39; major from facial images"><i class="fa fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://muetsch.io/detecting-academics-major-from-facial-images.html&name=Detecting academics&#39; major from facial images&description="><i class="fa fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#The-Idea"><span class="toc-number">1.</span> <span class="toc-text">The Idea</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Disclaimer"><span class="toc-number">2.</span> <span class="toc-text">Disclaimer</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Approach"><span class="toc-number">3.</span> <span class="toc-text">Approach</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Getting-the-data"><span class="toc-number">4.</span> <span class="toc-text">Getting the data</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Examples"><span class="toc-number">4.1.</span> <span class="toc-text">Examples</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Images"><span class="toc-number">4.1.1.</span> <span class="toc-text">Images</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Labels"><span class="toc-number">4.1.2.</span> <span class="toc-text">Labels</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Preprocessing-the-data"><span class="toc-number">5.</span> <span class="toc-text">Preprocessing the data</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Building-a-model"><span class="toc-number">6.</span> <span class="toc-text">Building a model</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Approach-1-Simple-custom-CNN"><span class="toc-number">6.1.</span> <span class="toc-text">Approach 1: Simple, custom CNN</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Results-57-1-accuracy"><span class="toc-number">6.1.1.</span> <span class="toc-text">Results (57.1 % accuracy)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Approach-2-Fine-tuning-VGGFace"><span class="toc-number">6.2.</span> <span class="toc-text">Approach 2: Fine-tuning VGGFace</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Step-1-Transfer-learning-to-initialize-weights"><span class="toc-number">6.2.1.</span> <span class="toc-text">Step 1: Transfer-learning to initialize weights</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Step-2-Fine-tuning"><span class="toc-number">6.2.2.</span> <span class="toc-text">Step 2: Fine-tuning</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Results-54-6-accuracy"><span class="toc-number">6.2.3.</span> <span class="toc-text">Results (54.6 % accuracy)</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Inspecting-the-model"><span class="toc-number">7.</span> <span class="toc-text">Inspecting the model</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Code"><span class="toc-number">7.1.</span> <span class="toc-text">Code</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Class-distribution"><span class="toc-number">7.2.</span> <span class="toc-text">Class distribution</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Examples-of-false-classifications"><span class="toc-number">7.3.</span> <span class="toc-text">Examples of false classifications</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Confusion-matrix"><span class="toc-number">7.4.</span> <span class="toc-text">Confusion matrix</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Conclusion"><span class="toc-number">8.</span> <span class="toc-text">Conclusion</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index width mx-auto px2 my4">
+        
+        <article class="h-entry post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <a href="https://muetsch.io/detecting-academics-major-from-facial-images.html" class="u-url">
+        <h1 class="posttitle p-name" itemprop="name headline" property="headline">
+            Detecting academics&#39; major from facial images
+        </h1>
+    </a>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" property="author" itemscope itemtype="http://schema.org/Person" vocab="http://schema.org/" typeof="Person">
+        <span itemprop="name" property="name" class="p-author h-card">Ferdinand Mütsch</span>
+      </span>
+      
+    <div class="postdate">
+        <time datetime="2019-01-02T10:02:21.000Z" class="dt-published" itemprop="datePublished" property="datePublished">2019-01-02</time>
+    </div>
+
+
+      
+
+
+      <!--
+      <div style="margin-top: 30px">
+        <a href="https://liberapay.com/muety/" target="_blank"
+          style="background-image: none; text-decoration: none;"><img
+            src="https://badges.fw-web.space/liberapay/receives/muety.svg?logo=liberapay&style=flat-square" alt="Liberapay"
+            style="height: auto !important;width: auto !important;"></a>
+      </div>
+      -->
+    </div>
+  </header>
+  
+  <div class="content e-content" itemprop="articleBody" property="articleBody">
+    <h1 id="The-Idea"><a href="#The-Idea" class="headerlink" title="The Idea"></a>The Idea</h1><p>A few months ago I read a paper with the title <a target="_blank" rel="noopener" href="https://www.gsb.stanford.edu/faculty-research/publications/deep-neural-networks-are-more-accurate-humans-detecting-sexual">“Deep Neural Networks Are More Accurate Than Humans at Detecting Sexual Orientation From Facial Images”</a>, which caused a lot of <a target="_blank" rel="noopener" href="https://news.ycombinator.com/item?id=15198997">controversy</a>. While I don’t want to comment on the methodology and quality of the paper (that was already done, e.g. in <a target="_blank" rel="noopener" href="https://www.fast.ai/2017/09/13/kosinski/">an article by Jeremy Howard</a>), I found it very interesting and inspiring. In a nutshell, the researchers collected face pictures from dating websites and built a machine learning model to classify people’s sexual orientation and reached quite an impressive accuracy with their approach.</p>
+<p><a target="_blank" rel="noopener" href="https://scatter.wordpress.com/2017/09/10/guest-post-artificial-intelligence-discovers-gayface-sigh/">This guest post</a> summarizes the results as: </p>
+<blockquote>
+<p>AI Can’t Tell if You’re Gay… But it Can Tell if You’re a Walking Stereotype.</p>
+</blockquote>
+<p> And indeed, we often see people who look very stereotypical. I tried to think of more such scenarios and came to the conclusion that another environment, where this phenomenon can be found quite often, is a university campus. So often you walk around the campus and see students, who just look like a law student, a computer science nerd, a sportsman, etc. Sometimes I’m so curious that I almost want to ask them whether my assumption is correct.</p>
+<p> After having read the above paper, I wondered if some machine learning model might be able to quantify these latent assumptions and find out a stereotypical-looking student’s profession or major. </p>
+<p>Although I only have a little more than basic knowledge in machine learning, especially in image classification using deep neural nets, I took it as a personal challenge to <strong>build a classifier, that detects academics’ major based on an image of their face</strong>. </p>
+<h1 id="Disclaimer"><a href="#Disclaimer" class="headerlink" title="Disclaimer"></a>Disclaimer</h1><p>Please don’t take this article too serious. I’m not a machine learning expert or a professional scientist. There might be some mistakes in my methodology or implementation. However, I’d love to hear your thoughts and feedback.</p>
+<h1 id="Approach"><a href="#Approach" class="headerlink" title="Approach"></a>Approach</h1><p>My first (and final) approach was to <strong>(1.) collect face pictures of students</strong> or other academics, <strong>(2.) label them</strong> with a small, limited set of classes, corresponding to their major, and eventually <strong>(3.) fit a convolutional neural net (CNN)</strong> as a classifier. I thought of fields of study, whose students might potentially look a bit stereotypical and came up with four classes:</p>
+<ol>
+<li>computer science (~ cs)</li>
+<li>economics (~ econ)</li>
+<li>(German) linguistics (~ german)</li>
+<li>mechanical engineering (~ mechanical)</li>
+</ol>
+<p>Please note that this is not meant to be offending by any means! (I’m a computer science nerd myself 😉).</p>
+<h1 id="Getting-the-data"><a href="#Getting-the-data" class="headerlink" title="Getting the data"></a>Getting the data</h1><p>The very first prerequisite is training data - as usual, when doing machine learning. And since I aimed at training a convolutional neural net (CNN), there should be a lot of data, preferably.</p>
+<p>While it would have been a funny approach to walk around my campus and ask students for their major and a picture of their face, I would probably not have ended up with a lot of data. Instead, I decided to <strong>crawl pictures from university websites</strong>. Almost every department at every university has a page called “<a target="_blank" rel="noopener" href="http://dbis.ipd.kit.edu/english/722.php">Staff</a>“, “People”, “Researchers” or the like on their websites. While these are not particularly lists of students, but of professors, research assistants and PhD candidates, I presumed that those pictures should still be sufficient as training data. </p>
+<p>I wrote a bunch of <strong>crawler scripts</strong> using Python and <a target="_blank" rel="noopener" href="https://www.seleniumhq.org/">Selenium WebDriver</a> to crawl <strong>57</strong> different websites, including the websites of various departments of the following universities:</p>
+<ul>
+<li>Karlsruhe Institute of Technology</li>
+<li>TU Munich</li>
+<li>University of Munich</li>
+<li>University of Würzburg</li>
+<li>University of Siegen</li>
+<li>University of Bayreuth</li>
+<li>University of Feiburg</li>
+<li>University of Heidelberg</li>
+<li>University of Erlangen</li>
+<li>University of Bamberg</li>
+<li>University of Mannheim</li>
+</ul>
+<p>After a bit of manual data cleaning (removing pictures without faces, rotating pictures, …), I ended up with a total of <strong>1369</strong> labeled images from four different classes. While this is not very much data for training a CNN, I decided to give it a try anyway.</p>
+<h2 id="Examples"><a href="#Examples" class="headerlink" title="Examples"></a>Examples</h2><h3 id="Images"><a href="#Images" class="headerlink" title="Images"></a>Images</h3><p><strong>An excerpt from the folder containing all raw images after crawling:</strong><br><img src="https://apps.muetsch.io/images/o:auto?image=https://muetsch.io/images/academic_faces1.png" alt="Excerpt from all crawled raw images"><br>(If you are in one of these pictures and want to get removed, please contact me.)</p>
+<h3 id="Labels"><a href="#Labels" class="headerlink" title="Labels"></a>Labels</h3><p><strong>An excerpt from <code>index.csv</code> containing labels and meta-data for every image:</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">id,category,image_url,name</span><br><span class="line">c35464fd,mechanical,http:&#x2F;&#x2F;www.fast.kit.edu&#x2F;lff&#x2F;1011_1105.php,Prof. Dr. rer. nat. Frank Gauterin</span><br><span class="line">a73d11a7,cs,http:&#x2F;&#x2F;h2t.anthropomatik.kit.edu&#x2F;21_1784.php,Kevin Liang</span><br><span class="line">97e230ff,econ,http:&#x2F;&#x2F;marketing.iism.kit.edu&#x2F;21_371.php,Dr. Hanna Schumacher</span><br><span class="line">cde71a5c,german,https:&#x2F;&#x2F;www.germanistik.uni-muenchen.de&#x2F;personal&#x2F;ndl&#x2F;mitarbeiter&#x2F;bach&#x2F;index.html,Dr. Oliver Bach</span><br></pre></td></tr></table></figure>
+
+<h1 id="Preprocessing-the-data"><a href="#Preprocessing-the-data" class="headerlink" title="Preprocessing the data"></a>Preprocessing the data</h1><p>Before the images could be used as training data for a learning algorithm, a bit of preprocessing needed to be applied. Mainly, I did two major steps of preprocessing.</p>
+<ol>
+<li><strong>Cropping</strong> images to faces - As you can see, pictures are taken from different angles, some of them contain a lot of background, some are not centered, etc. To get better training data, the pictures have to be cropped to only the face and nothing else. </li>
+<li><strong>Scaling</strong> - All pictures come in different resolutions, but eventually need to be of exactly the same size in order to be used as input to a neural network. </li>
+</ol>
+<p>To achieve both of these preprocessing steps I used a great, little, open-source, OpenCV-based Python tool called <a target="_blank" rel="noopener" href="https://github.com/leblancfg/autocrop">autocrop</a> with the following command:</p>
+<p><code>autocrop -i raw -o preprocessed -w 128 -H 128 &gt; autocrop.log</code>.</p>
+<p>This detects the face in every picture in <code>raw</code> folder, crops the picture to that face, re-scales the resulting image to 128 x 128 pixels and saves it to <code>preprocessed</code> folder. Of course, there are some pictures in which the algorithm can not detect a face. Those are logged to stdout and persisted to <code>autocrop.log</code>.</p>
+<p>In addition, I wrote a script that parses <code>autocrop.log</code> to get the failed images and subsequently split the images into <em>train</em> (70 %), <em>test</em> (20 %) and <em>validation</em> (10 %) and copy them to a folder structure that is compatible to the format required by <a target="_blank" rel="noopener" href="https://keras.io/preprocessing/image/">Keras ImageDataGenerator</a> to read training data.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">- raw</span><br><span class="line">    - index.csv</span><br><span class="line">    - c35464fd.jpg</span><br><span class="line">    - a73d11a7.jpg</span><br><span class="line">    - ...</span><br><span class="line">- preprocessed </span><br><span class="line">    - train</span><br><span class="line">        - cs</span><br><span class="line">            - a73d11a7.jpg</span><br><span class="line">            - ...</span><br><span class="line">        - econ</span><br><span class="line">            - 97e230ff.jpg</span><br><span class="line">            - ...</span><br><span class="line">        - german</span><br><span class="line">            - cde71a5c.jpg</span><br><span class="line">            - ...</span><br><span class="line">        - mechanical</span><br><span class="line">            - c35464fd.jpg</span><br><span class="line">            - ...</span><br><span class="line">    - test</span><br><span class="line">        - cs</span><br><span class="line">            - ...</span><br><span class="line">        - ...</span><br><span class="line">    - validation</span><br><span class="line">        - cs</span><br><span class="line">            - ...</span><br><span class="line">        - ...</span><br></pre></td></tr></table></figure>
+
+<h1 id="Building-a-model"><a href="#Building-a-model" class="headerlink" title="Building a model"></a>Building a model</h1><h2 id="Approach-1-Simple-custom-CNN"><a href="#Approach-1-Simple-custom-CNN" class="headerlink" title="Approach 1: Simple, custom CNN"></a>Approach 1: Simple, custom CNN</h2><p><strong>Code</strong></p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://gist.github.com/muety/78bf6d7929e4facd199ad0ffea0b3ad9">custom_model.ipynb</a></li>
+</ul>
+<p>I decided to start simple and see if anything can be learned from the data at all. I defined the following simple CNN architecture in Keras: </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">_________________________________________________________________</span><br><span class="line">Layer (type)                 Output Shape              Param #   </span><br><span class="line">&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;</span><br><span class="line">conv2d_1 (Conv2D)            (None, 62, 62, 32)        320       </span><br><span class="line">_________________________________________________________________</span><br><span class="line">max_pooling2d_1 (MaxPooling2 (None, 31, 31, 32)        0         </span><br><span class="line">_________________________________________________________________</span><br><span class="line">conv2d_2 (Conv2D)            (None, 29, 29, 32)        9248      </span><br><span class="line">_________________________________________________________________</span><br><span class="line">max_pooling2d_2 (MaxPooling2 (None, 14, 14, 32)        0         </span><br><span class="line">_________________________________________________________________</span><br><span class="line">conv2d_3 (Conv2D)            (None, 12, 12, 32)        9248      </span><br><span class="line">_________________________________________________________________</span><br><span class="line">max_pooling2d_3 (MaxPooling2 (None, 6, 6, 32)          0         </span><br><span class="line">_________________________________________________________________</span><br><span class="line">flatten_1 (Flatten)          (None, 1152)              0         </span><br><span class="line">_________________________________________________________________</span><br><span class="line">dense_1 (Dense)              (None, 64)                73792     </span><br><span class="line">_________________________________________________________________</span><br><span class="line">dropout_1 (Dropout)          (None, 64)                0         </span><br><span class="line">_________________________________________________________________</span><br><span class="line">dense_2 (Dense)              (None, 4)                 260       </span><br><span class="line">&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;</span><br><span class="line">Total params: 92,868</span><br><span class="line">Trainable params: 92,868</span><br><span class="line">Non-trainable params: 0</span><br></pre></td></tr></table></figure>
+
+<p>I used Keras’ <a target="_blank" rel="noopener" href="https://keras.io/preprocessing/image/">ImageDataGenerator</a> (great tool!) to read images into NumPy arrays, re-scale them to a shape of <code>(64, 63, 3)</code> (64 x 64 pixels, RGB) and perform some data augmentation using transformations like rotations, zooming, horizontal flipping, etc. to blow up my training data and hopefully build more robust, less overfitted models.</p>
+<p>I let the model train for <strong>100 epochs</strong>, using the <strong>Adam optimizer</strong> with default parameters and <strong>categorical crossentropy loss</strong>, a mini-batch size of <strong>32</strong> and <strong>3x augmentation</strong> (use transformations to blow up training data by a factor of three). </p>
+<h3 id="Results-57-1-accuracy"><a href="#Results-57-1-accuracy" class="headerlink" title="Results (57.1 % accuracy)"></a>Results (57.1 % accuracy)</h3><p>The maximum <strong>validation accuracy of 0.66</strong> was reached after 74 epochs. <strong>Test accuracy</strong> turned out to be <strong>0.571</strong>. Considering that a quite simple model was trained completely from scratch with less than 1000 training examples, I am quite impressed by that result. It means that on average the model predicts more than every second student’s major correctly. The <strong>a-priori probability</strong> of a correct classification <strong>is 0.25</strong>, so the model has definitely learned at least something.</p>
+<h2 id="Approach-2-Fine-tuning-VGGFace"><a href="#Approach-2-Fine-tuning-VGGFace" class="headerlink" title="Approach 2: Fine-tuning VGGFace"></a>Approach 2: Fine-tuning VGGFace</h2><p><strong>Code</strong></p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://gist.github.com/muety/a079dcb27d921d58323c9574152b2c2d">vggfaces_bottleneck_model.ipynb</a></li>
+<li><a target="_blank" rel="noopener" href="https://gist.github.com/muety/c3b9e9401f178807c91ad890a6c67e18">vggfaces_finetuned_model.ipynb</a></li>
+</ul>
+<p>As an alternative to a simple, custom-defined CNN model, that is trained from scratch, I wanted to follow the common approach of fine-tuning the weights of an existing, pre-trained model. The basic idea of such an approach is to not “re-invent the wheel”, but take advantage of what was already learned before and only slightly adapt that “knowledge” (in form of weights) to a certain problem. Latent features in images, which a learning algorithm had already extracted from a giant set of training data before, can just be leveraged. <a target="_blank" rel="noopener" href="https://www.learnopencv.com/keras-tutorial-using-pre-trained-imagenet-models/">“Image Classification using pre-trained models in Keras”</a> gives an excellent overview of how <strong>fine-tuning</strong> works and how it is different from <strong>transfer learning</strong> and custom models. Expectations are that my given classification problem can be solved more accurately with less data. </p>
+<p> I decided to take a <strong>VGG16</strong> model architecture trained on <a target="_blank" rel="noopener" href="http://www.robots.ox.ac.uk/~vgg/data/vgg_face2/"><strong>VGGFace</strong></a> as a base (using the <a target="_blank" rel="noopener" href="https://github.com/rcmalli/keras-vggface">keras-vggface</a> implementation) and followed <a target="_blank" rel="noopener" href="https://blog.keras.io/building-powerful-image-classification-models-using-very-little-data.html">this guide</a> to fine-tune it. VGGFace is a dataset published by the University of Oxford that contains more than 3.3 million face images. Accordingly, I expected it to have extracted very robust facial features and to be quite well-suited for face classification. </p>
+<h3 id="Step-1-Transfer-learning-to-initialize-weights"><a href="#Step-1-Transfer-learning-to-initialize-weights" class="headerlink" title="Step 1: Transfer-learning to initialize weights"></a>Step 1: Transfer-learning to initialize weights</h3><p>My implementation consists of two steps, since <a target="_blank" rel="noopener" href="https://blog.keras.io/building-powerful-image-classification-models-using-very-little-data.html">it is recommended</a> that</p>
+<blockquote>
+<p>in order to perform fine-tuning, all layers should start with properly trained weights.</p>
+</blockquote>
+<p>In this first step, transfer-learning is used to find proper weights for a set of a few newly added, custom, fully-connected classification layers. These are used as the initial weights in step 2 later on. To perform this initialization, a pre-trained VGGFace model, with the final classification layers cut off, is used to extract 128 <em>bottleneck features</em> for every image. Subsequently, another tiny model, consisting of fully-connected layers, is trained on these features to perform the eventual classification. The weights are persisted to a file and loaded again in step 2.</p>
+<p>The model architecture looks like this:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">________________________________________________________________</span><br><span class="line">Layer (type)                 Output Shape              Param #   </span><br><span class="line">&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;</span><br><span class="line">dense_1 (Dense)              (None, 128)               65664     </span><br><span class="line">_________________________________________________________________</span><br><span class="line">dropout_1 (Dropout)          (None, 128)               0         </span><br><span class="line">_________________________________________________________________</span><br><span class="line">dense_2 (Dense)              (None, 4)                 516       </span><br><span class="line">&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;</span><br><span class="line">Total params: 66,180</span><br><span class="line">Trainable params: 66,180</span><br><span class="line">Non-trainable params: 0</span><br></pre></td></tr></table></figure>
+
+<h3 id="Step-2-Fine-tuning"><a href="#Step-2-Fine-tuning" class="headerlink" title="Step 2: Fine-tuning"></a>Step 2: Fine-tuning</h3><p>In this second step, a pre-trained VGGFace model (with the first n - 3 layers freezed) is used in combination with the pre-trained top layers from step 1 to fine-tune weights for our specific classification task. It takes mini-batches of (128, 128, 3)-shaped tensors (128 x 128 pixels, RGB) as input and predicts probabilities for each of our four target classes.</p>
+<p>The architecture of the combined model looks like this:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">_________________________________________________________________</span><br><span class="line">Layer (type)                 Output Shape              Param #   </span><br><span class="line">&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;</span><br><span class="line">vggface_vgg16 (Model)        (None, 512)               14714688  </span><br><span class="line">_________________________________________________________________</span><br><span class="line">top (Sequential)             (None, 4)                 66180     </span><br><span class="line">&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;</span><br><span class="line">Total params: 14,780,868</span><br><span class="line">Trainable params: 2,425,988</span><br><span class="line">Non-trainable params: 12,354,880</span><br></pre></td></tr></table></figure>
+
+<p><code>top</code> is the model described in step 1, <code>vggface_vgg16</code> is a VGG16 model and looks like this:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line">_________________________________________________________________</span><br><span class="line">Layer (type)                 Output Shape              Param #   </span><br><span class="line">&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;</span><br><span class="line">input_3 (InputLayer)         (None, 128, 128, 3)       0         </span><br><span class="line">_________________________________________________________________</span><br><span class="line">conv1_1 (Conv2D)             (None, 128, 128, 64)      1792      </span><br><span class="line">_________________________________________________________________</span><br><span class="line">conv1_2 (Conv2D)             (None, 128, 128, 64)      36928     </span><br><span class="line">_________________________________________________________________</span><br><span class="line">pool1 (MaxPooling2D)         (None, 64, 64, 64)        0         </span><br><span class="line">_________________________________________________________________</span><br><span class="line">conv2_1 (Conv2D)             (None, 64, 64, 128)       73856     </span><br><span class="line">_________________________________________________________________</span><br><span class="line">conv2_2 (Conv2D)             (None, 64, 64, 128)       147584    </span><br><span class="line">_________________________________________________________________</span><br><span class="line">pool2 (MaxPooling2D)         (None, 32, 32, 128)       0         </span><br><span class="line">_________________________________________________________________</span><br><span class="line">conv3_1 (Conv2D)             (None, 32, 32, 256)       295168    </span><br><span class="line">_________________________________________________________________</span><br><span class="line">conv3_2 (Conv2D)             (None, 32, 32, 256)       590080    </span><br><span class="line">_________________________________________________________________</span><br><span class="line">conv3_3 (Conv2D)             (None, 32, 32, 256)       590080    </span><br><span class="line">_________________________________________________________________</span><br><span class="line">pool3 (MaxPooling2D)         (None, 16, 16, 256)       0         </span><br><span class="line">_________________________________________________________________</span><br><span class="line">conv4_1 (Conv2D)             (None, 16, 16, 512)       1180160   </span><br><span class="line">_________________________________________________________________</span><br><span class="line">conv4_2 (Conv2D)             (None, 16, 16, 512)       2359808   </span><br><span class="line">_________________________________________________________________</span><br><span class="line">conv4_3 (Conv2D)             (None, 16, 16, 512)       2359808   </span><br><span class="line">_________________________________________________________________</span><br><span class="line">pool4 (MaxPooling2D)         (None, 8, 8, 512)         0         </span><br><span class="line">_________________________________________________________________</span><br><span class="line">conv5_1 (Conv2D)             (None, 8, 8, 512)         2359808   </span><br><span class="line">_________________________________________________________________</span><br><span class="line">conv5_2 (Conv2D)             (None, 8, 8, 512)         2359808   </span><br><span class="line">_________________________________________________________________</span><br><span class="line">conv5_3 (Conv2D)             (None, 8, 8, 512)         2359808   </span><br><span class="line">_________________________________________________________________</span><br><span class="line">pool5 (MaxPooling2D)         (None, 4, 4, 512)         0         </span><br><span class="line">_________________________________________________________________</span><br><span class="line">global_max_pooling2d_3 (Glob (None, 512)               0         </span><br><span class="line">&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;</span><br><span class="line">Total params: 14,714,688</span><br><span class="line">Trainable params: 2,359,808</span><br><span class="line">Non-trainable params: 12,354,880</span><br></pre></td></tr></table></figure>
+
+
+<p>I was using Keras <em>ImageDataGenerator</em> again for loading the data, augmenting (3x) and resizing it. As <a target="_blank" rel="noopener" href="https://blog.keras.io/building-powerful-image-classification-models-using-very-little-data.html">recommended</a>, <em>stochastic gradient descent</em> is used with a small learning rate (10^-4) to carefully adapt weights. The model was trained for <strong>100 epochs</strong> on <strong>batches of 32 images</strong> and, again, used <strong>categorical cross entropy</strong> as a loss function. </p>
+<h3 id="Results-54-6-accuracy"><a href="#Results-54-6-accuracy" class="headerlink" title="Results (54.6 % accuracy)"></a>Results (54.6 % accuracy)</h3><p>The maximum <strong>validation accuracy of 0.64</strong> was reached after 38 epochs already. <strong>Test accuracy</strong> turned out to be <strong>0.546</strong>, which is a quite disappointing result, considering that even our simple, custom CNN-model achieved a higher accuracy. Maybe the model’s complexity is too high for the small amount of training data?</p>
+<h1 id="Inspecting-the-model"><a href="#Inspecting-the-model" class="headerlink" title="Inspecting the model"></a>Inspecting the model</h1><p>To get better insights on how the model performs, I briefly inspected it with regards to several criteria. This is a short summary of my finding. </p>
+<h2 id="Code"><a href="#Code" class="headerlink" title="Code"></a>Code</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://gist.github.com/muety/404befcfb2eef4b59398f3c8590ce692">inspection.ipynb</a> </li>
+</ul>
+<h2 id="Class-distribution"><a href="#Class-distribution" class="headerlink" title="Class distribution"></a>Class distribution</h2><p>The first thing I looked at was the class distribution. How are the four study major subjects represented in our data and what does the model predict?</p>
+<p> | cs | econ | german | mechanical</p>
+<ul>
+<li>| - | - | - | -</li>
+</ul>
+<p><em>real</em> | 0.2510 | 0.2808 | 0.2127 | 0.2553<br><em>pred</em> | 0.2595 | 0.2936 | 0.1361 | 0.3106</p>
+<p>Apparently, the model neglects the class of <em>german linguists</em> a bit. That is also the class for which we have the least training data. Probably I should collect more.</p>
+<h2 id="Examples-of-false-classifications"><a href="#Examples-of-false-classifications" class="headerlink" title="Examples of false classifications"></a>Examples of false classifications</h2><p>I wanted to get an idea of what the model does wrong and what it does right. Consequently, I took a look at the top (with respect to confidence) five <strong>(1) false negatives</strong>, <strong>(2) false positives</strong> and <strong>(3) true positives</strong>. </p>
+<p>Here is an excerpt for class <em>econ</em>:</p>
+<p><img src="https://apps.muetsch.io/images/o:auto?image=https://muetsch.io/images/academic_faces2.png"></p>
+<p>The top row shows examples of economists, who the model didn’t recognize as such.<br>The center row depicts examples of what the model “thinks” economists look like, but who are actually students / researchers with a different major.<br>Finally, the bottom row shows examples of good matches, i.e. people for whom the model had a very high confidence for their actual class.</p>
+<p>Again, if you are in one of these pictures and want to get removed, please contact me.</p>
+<h2 id="Confusion-matrix"><a href="#Confusion-matrix" class="headerlink" title="Confusion matrix"></a>Confusion matrix</h2><p>To see which profession the model is unsure about, I calculated the confusion matrix.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">array([[12.76595745,  5.95744681,  0.        ,  6.38297872],</span><br><span class="line">       [ 3.40425532, 12.76595745,  3.82978723,  8.08510638],</span><br><span class="line">       [ 3.82978723,  5.53191489,  8.5106383 ,  3.40425532],</span><br><span class="line">       [ 5.95744681,  5.10638298,  1.27659574, 13.19148936]])</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://apps.muetsch.io/images/o:auto?image=https://muetsch.io/images/academic_faces3.png"><br><strong>Legend:</strong></p>
+<ul>
+<li>0 = cs, 1 = econ, 2 = german, 3 = mechanical</li>
+<li>Brighter colors ~ higher value</li>
+</ul>
+<p>What we can read from the confusion matrix is that, for instance, the model tends to classify economists as mechanical engineers quite often. </p>
+<h1 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h1><p>First of all, this is not a scientific study, but rather a small hobby project of mine. Also, it does not have a lot of real-world importance, since one might rarely want to classify students into four categories.</p>
+<p>Although the results are not spectacular, I am still quite happy about them and at least my model was able to do a lot better than random guessing. Given an <strong>accuracy of 57 %</strong> with four classes, you could definitely say that it is, to some extent, possible to learn a stereotypical-looking person’s study major from only in image of their face. Of course, this only holds true within a bounded context and under a set of restrictions, but it is still an interesting insight to me. </p>
+<p>Moreover, I am quite sure that there is still a lot of room for improvements to the model, which could yield a better performance. Those might include:</p>
+<ul>
+<li>More training data from a wider range of sources</li>
+<li>More thorough preprocessing (e.g. filter out images of secretaries)</li>
+<li>Different model architecture</li>
+<li>Hyper-parameter tuning</li>
+<li>Manual feature engineering</li>
+<li>…</li>
+</ul>
+<p>Please let me know what you think of this project. I would love to get some feedback!</p>
+
+  </div>
+</article>
+
+
+
+    </div>
+    
+      <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Blog</a></li>
+         
+          <li><a href="/imprint/">Imprint</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#The-Idea"><span class="toc-number">1.</span> <span class="toc-text">The Idea</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Disclaimer"><span class="toc-number">2.</span> <span class="toc-text">Disclaimer</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Approach"><span class="toc-number">3.</span> <span class="toc-text">Approach</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Getting-the-data"><span class="toc-number">4.</span> <span class="toc-text">Getting the data</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Examples"><span class="toc-number">4.1.</span> <span class="toc-text">Examples</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Images"><span class="toc-number">4.1.1.</span> <span class="toc-text">Images</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Labels"><span class="toc-number">4.1.2.</span> <span class="toc-text">Labels</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Preprocessing-the-data"><span class="toc-number">5.</span> <span class="toc-text">Preprocessing the data</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Building-a-model"><span class="toc-number">6.</span> <span class="toc-text">Building a model</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Approach-1-Simple-custom-CNN"><span class="toc-number">6.1.</span> <span class="toc-text">Approach 1: Simple, custom CNN</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Results-57-1-accuracy"><span class="toc-number">6.1.1.</span> <span class="toc-text">Results (57.1 % accuracy)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Approach-2-Fine-tuning-VGGFace"><span class="toc-number">6.2.</span> <span class="toc-text">Approach 2: Fine-tuning VGGFace</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Step-1-Transfer-learning-to-initialize-weights"><span class="toc-number">6.2.1.</span> <span class="toc-text">Step 1: Transfer-learning to initialize weights</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Step-2-Fine-tuning"><span class="toc-number">6.2.2.</span> <span class="toc-text">Step 2: Fine-tuning</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Results-54-6-accuracy"><span class="toc-number">6.2.3.</span> <span class="toc-text">Results (54.6 % accuracy)</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Inspecting-the-model"><span class="toc-number">7.</span> <span class="toc-text">Inspecting the model</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Code"><span class="toc-number">7.1.</span> <span class="toc-text">Code</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Class-distribution"><span class="toc-number">7.2.</span> <span class="toc-text">Class distribution</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Examples-of-false-classifications"><span class="toc-number">7.3.</span> <span class="toc-text">Examples of false classifications</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Confusion-matrix"><span class="toc-number">7.4.</span> <span class="toc-text">Confusion matrix</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Conclusion"><span class="toc-number">8.</span> <span class="toc-text">Conclusion</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://muetsch.io/detecting-academics-major-from-facial-images.html"><i class="fa fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://muetsch.io/detecting-academics-major-from-facial-images.html&text=Detecting academics&#39; major from facial images"><i class="fa fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://muetsch.io/detecting-academics-major-from-facial-images.html&title=Detecting academics&#39; major from facial images"><i class="fa fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://muetsch.io/detecting-academics-major-from-facial-images.html&is_video=false&description=Detecting academics&#39; major from facial images"><i class="fa fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Detecting academics&#39; major from facial images&body=Check out this article: https://muetsch.io/detecting-academics-major-from-facial-images.html"><i class="fa fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://muetsch.io/detecting-academics-major-from-facial-images.html&title=Detecting academics&#39; major from facial images"><i class="fa fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://muetsch.io/detecting-academics-major-from-facial-images.html&title=Detecting academics&#39; major from facial images"><i class="fa fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://muetsch.io/detecting-academics-major-from-facial-images.html&title=Detecting academics&#39; major from facial images"><i class="fa fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://muetsch.io/detecting-academics-major-from-facial-images.html&title=Detecting academics&#39; major from facial images"><i class="fa fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://muetsch.io/detecting-academics-major-from-facial-images.html&name=Detecting academics&#39; major from facial images&description="><i class="fa fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+      <ul>
+        <li id="toc"><a class="icon" href="#" onclick='toggleById("toc-footer")'><i class="fa fa-list fa-lg" aria-hidden="true"></i> TOC</a></li>
+        <li id="share"><a class="icon" href="#" onclick='toggleById("share-footer")'><i class="fa fa-share-alt fa-lg" aria-hidden="true"></i> Share</a></li>
+        <li id="top" style="display:none"><a class="icon" href="#" onclick="window.scrollTo(0,0)"><i class="fa fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a></li>
+        <li id="menu"><a class="icon" href="#" onclick='toggleById("nav-footer")'><i class="fa fa-bars fa-lg" aria-hidden="true"></i> Menu</a></li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+    
+    <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2021 Ferdinand Mütsch
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Blog</a></li>
+         
+          <li><a href="/imprint/">Imprint</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+</body>
+</html>
+<!-- styles -->
+
+<link rel="stylesheet" href="/lib/roboto/css/roboto.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+
+
+<script src="/js/main.js"></script>
+
+<!-- Google Analytics -->
+
+<!-- Disqus Comments -->
+
+

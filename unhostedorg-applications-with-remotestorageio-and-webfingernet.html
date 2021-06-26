@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="referrer" content="no-referrer">
+    <meta name="description" content="Lately you as an interested web developer might have heard or read about a thing called unhosted applications, mostly with a reference to unhosted.org. This basically means web-apps running in your br">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Unhosted.org applications with remoteStorage.io and WebFinger.net">
+<meta property="og:url" content="https://muetsch.io/unhostedorg-applications-with-remotestorageio-and-webfingernet.html">
+<meta property="og:site_name" content="Ferdinand Mütsch">
+<meta property="og:description" content="Lately you as an interested web developer might have heard or read about a thing called unhosted applications, mostly with a reference to unhosted.org. This basically means web-apps running in your br">
+<meta property="og:locale">
+<meta property="og:image" content="https://apps.muetsch.io/images/o:auto?image=https://muetsch.io/images/unhosted.jpg">
+<meta property="article:published_time" content="2016-04-12T20:57:43.000Z">
+<meta property="article:modified_time" content="2020-10-30T20:05:40.286Z">
+<meta property="article:author" content="Ferdinand Mütsch">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://apps.muetsch.io/images/o:auto?image=https://muetsch.io/images/unhosted.jpg">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/favicon.ico" sizes="192x192">
+          
+        
+        
+    
+    <!-- title -->
+    <title>Unhosted.org applications with remoteStorage.io and WebFinger.net</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- rss -->
+    
+    
+
+    <!-- rel-me links -->
+    
+      
+        <link href="http://github.com/muety" rel="me">
+      
+        <link href="https://twitter.com/n2try" rel="me">
+      
+        <link href="mailto:ferdinand@muetsch.io" rel="me">
+      
+    
+
+    <!-- Webmention link -->
+    
+      <link href="https://webmention.io/muetsch.io/webmention" rel="webmention">
+    
+
+    
+      <link href="https://webmention.io/muetsch.io/xmlrpc" rel="pingback">
+    
+<meta name="generator" content="Hexo 5.2.0"><link rel="alternate" href="/rss2.xml" title="Ferdinand Mütsch" type="application/rss+xml">
+</head>
+
+<body>
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fa fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fa fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="window.scrollTo(0, 0)" style="display:none;"><i class="fa fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Blog</a></li>
+         
+          <li><a href="/imprint/">Imprint</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/telegram-expensebot-doodlerbot.html"><i class="fa fa-chevron-left" aria-hidden="true" onmouseover='toggleById("i-prev");' onmouseout='toggleById("i-prev");'></i></a></li>
+        
+        
+        <li><a class="icon" href="/digitalocean-my-preferred-cloud-hosting-provider.html"><i class="fa fa-chevron-right" aria-hidden="true" onmouseover='toggleById("i-next").toggleById();' onmouseout='toggleById("i-next");'></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="window.scrollTo(0,0)"><i class="fa fa-chevron-up" aria-hidden="true" onmouseover='toggleById("i-top");' onmouseout='toggleById("i-top");'></i></a></li>
+        <li><a class="icon" href="#"><i class="fa fa-share-alt" aria-hidden="true" onmouseover='toggleById("i-share");' onmouseout='toggleById("i-share");' onclick='toggleById("share");return false;'></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://muetsch.io/unhostedorg-applications-with-remotestorageio-and-webfingernet.html"><i class="fa fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://muetsch.io/unhostedorg-applications-with-remotestorageio-and-webfingernet.html&text=Unhosted.org applications with remoteStorage.io and WebFinger.net"><i class="fa fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://muetsch.io/unhostedorg-applications-with-remotestorageio-and-webfingernet.html&title=Unhosted.org applications with remoteStorage.io and WebFinger.net"><i class="fa fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://muetsch.io/unhostedorg-applications-with-remotestorageio-and-webfingernet.html&is_video=false&description=Unhosted.org applications with remoteStorage.io and WebFinger.net"><i class="fa fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Unhosted.org applications with remoteStorage.io and WebFinger.net&body=Check out this article: https://muetsch.io/unhostedorg-applications-with-remotestorageio-and-webfingernet.html"><i class="fa fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://muetsch.io/unhostedorg-applications-with-remotestorageio-and-webfingernet.html&title=Unhosted.org applications with remoteStorage.io and WebFinger.net"><i class="fa fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://muetsch.io/unhostedorg-applications-with-remotestorageio-and-webfingernet.html&title=Unhosted.org applications with remoteStorage.io and WebFinger.net"><i class="fa fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://muetsch.io/unhostedorg-applications-with-remotestorageio-and-webfingernet.html&title=Unhosted.org applications with remoteStorage.io and WebFinger.net"><i class="fa fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://muetsch.io/unhostedorg-applications-with-remotestorageio-and-webfingernet.html&title=Unhosted.org applications with remoteStorage.io and WebFinger.net"><i class="fa fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://muetsch.io/unhostedorg-applications-with-remotestorageio-and-webfingernet.html&name=Unhosted.org applications with remoteStorage.io and WebFinger.net&description="><i class="fa fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index width mx-auto px2 my4">
+        
+        <article class="h-entry post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <a href="https://muetsch.io/unhostedorg-applications-with-remotestorageio-and-webfingernet.html" class="u-url">
+        <h1 class="posttitle p-name" itemprop="name headline" property="headline">
+            Unhosted.org applications with remoteStorage.io and WebFinger.net
+        </h1>
+    </a>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" property="author" itemscope itemtype="http://schema.org/Person" vocab="http://schema.org/" typeof="Person">
+        <span itemprop="name" property="name" class="p-author h-card">Ferdinand Mütsch</span>
+      </span>
+      
+    <div class="postdate">
+        <time datetime="2016-04-12T20:57:43.000Z" class="dt-published" itemprop="datePublished" property="datePublished">2016-04-12</time>
+    </div>
+
+
+      
+
+
+      <!--
+      <div style="margin-top: 30px">
+        <a href="https://liberapay.com/muety/" target="_blank"
+          style="background-image: none; text-decoration: none;"><img
+            src="https://badges.fw-web.space/liberapay/receives/muety.svg?logo=liberapay&style=flat-square" alt="Liberapay"
+            style="height: auto !important;width: auto !important;"></a>
+      </div>
+      -->
+    </div>
+  </header>
+  
+  <div class="content e-content" itemprop="articleBody" property="articleBody">
+    <p>Lately you as an interested web developer might have heard or read about a thing called <strong>unhosted applications</strong>, mostly with a reference to <a target="_blank" rel="noopener" href="http://unhosted.org/">unhosted.org</a>. This basically means web-apps running in your browser which do not rely on any kind of backend. Most apps you’re using on the web store data to a backend service at the provider’s host server, regardless of them being Google Docs, Evernote, Wunderlist or also <a target="_blank" rel="noopener" href="https://anchr.io/">Anchr.io</a>. Obviously this makes you dependent on the provider in terms of availability and security. Also these apps are usually online-only apps, meaning that you can only use them with an internet connection. Another type of apps are those without a specific backend but still with a central, cloud-based data store, e.g. Firebase. In this case your data is still anywhere out there in the cloud at a provider you potentially could not trust (even though not on any kind of dubious private-hosted server but on a certified platform of one of the big players – deciding whether that is better or worse it’s up to you, actually). These apps are usually offline-capable, so you can use them without internet connection and if the connection comes back again, the data is synced to the data platform. And then there’s this third kind of apps, which they call unhosted ones. These are intended to be completely static, without needing any kind of backend. Theoretically you could download a zip of their HTML, JavaScript and CSS files to your computer and perfectly run the app without a webserver and a database. Well, ok, probably you’ll need a webserver, but it only needs to server static files (like an Apache2, nginx or <a target="_blank" rel="noopener" href="https://www.npmjs.com/package/http-server">http-server</a>), nothing else – no PHP, node Node.js… Those apps (e.g. a simple todo-list) store all their data to your browser’s localStorage or IndexedDB. As a result it obviously is only available on your local computer and only until you clear you browser data. After all you might still want to sync your data to other devices now – but without giving your data away to a untrusted provider.</p>
+<p><img src="https://apps.muetsch.io/images/o:auto?image=https://muetsch.io/images/unhosted.jpg"></p>
+<p>This is where quite a new thing called <a target="_blank" rel="noopener" href="https://remotestorage.io/">RemoteStorage</a> comes in. It’s a protocol for storing per-user data on the web in an unhosted fasion. Anything implementing the remoteStorage protocol can be your data-repository, which basically works as a simple key-value store. As a result you can implement your own remoteStorage or e.g. take the “official” PHP library to host one on your own server. There are also a few providers (like <a target="_blank" rel="noopener" href="http://5apps.com/">5apps</a>) out there, yet, which you can use, but don’t have to, if you don’t trust them. An unhosted-app that is remoteStorage-capable can now connect to your remoteStorage, e.g. <em><a target="_blank" rel="noopener" href="https://rs.yourserver.com/user1/appXyz">https://rs.yourserver.com/user1/appXyz</a></em>, and sync its data there. RemoteStorage works together with <a target="_blank" rel="noopener" href="https://webfinger.net/">WebFinger</a>. What is WebFinger now? WebFinger is kind of a registry on the web, where unique keys (usually in email-address style, like <a href="mailto:&#117;&#x73;&#x65;&#x72;&#x31;&#64;&#121;&#x6f;&#117;&#114;&#115;&#101;&#x72;&#x76;&#101;&#x72;&#x2e;&#99;&#111;&#109;">&#117;&#x73;&#x65;&#x72;&#x31;&#64;&#121;&#x6f;&#117;&#114;&#115;&#101;&#x72;&#x76;&#101;&#x72;&#x2e;&#99;&#111;&#109;</a>), are mapped to URL’s for a certain type of relation. In this case you would tell your unhosted app such an email-address-like identifier, which maps to your remoteStorage-endpoint for the relation-type “remotestorage”. The app queries WebFinger for that key and follows the returned registered URL to the datastore. In <a target="_blank" rel="noopener" href="https://client.webfinger.net/lookup?resource=tony@5apps.com">this example</a> the identifier <em><a href="mailto:&#x74;&#111;&#x6e;&#121;&#x40;&#53;&#97;&#112;&#x70;&#x73;&#x2e;&#x63;&#111;&#x6d;">&#x74;&#111;&#x6e;&#121;&#x40;&#53;&#97;&#112;&#x70;&#x73;&#x2e;&#x63;&#111;&#x6d;</a></em> maps to a <em>remotestorage</em> located at <em><a target="_blank" rel="noopener" href="https://storage.5apps.com/tony">https://storage.5apps.com/tony</a></em>. This makes the entire thing as decentralized as possible. Note that you could change your remoteStorage anytime by simply registering a new URL at WebFinger (you usually wouldn’t have to do this registration on your own, but the remoteStorage server implementation handles that for you). The authorization – like which app may access which subkeys on the remoteStorage – is handled by OAuth at your remoteStorage server implementation, where you can grant or revoke access for certain apps to certain store keys.</p>
+<p>Two apps you can try are <a target="_blank" rel="noopener" href="https://litewrite.net/">litewrite.net</a> and <a target="_blank" rel="noopener" href="http://grouptabs.5apps.com/">Grouptabs</a>. If you just want to play around with remoteStorage it might be the easiest way to use <a target="_blank" rel="noopener" href="http://5apps.com/">5apps</a>‘ remoteStorage for this.</p>
+
+  </div>
+</article>
+
+
+
+    </div>
+    
+      <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Blog</a></li>
+         
+          <li><a href="/imprint/">Imprint</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://muetsch.io/unhostedorg-applications-with-remotestorageio-and-webfingernet.html"><i class="fa fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://muetsch.io/unhostedorg-applications-with-remotestorageio-and-webfingernet.html&text=Unhosted.org applications with remoteStorage.io and WebFinger.net"><i class="fa fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://muetsch.io/unhostedorg-applications-with-remotestorageio-and-webfingernet.html&title=Unhosted.org applications with remoteStorage.io and WebFinger.net"><i class="fa fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://muetsch.io/unhostedorg-applications-with-remotestorageio-and-webfingernet.html&is_video=false&description=Unhosted.org applications with remoteStorage.io and WebFinger.net"><i class="fa fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Unhosted.org applications with remoteStorage.io and WebFinger.net&body=Check out this article: https://muetsch.io/unhostedorg-applications-with-remotestorageio-and-webfingernet.html"><i class="fa fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://muetsch.io/unhostedorg-applications-with-remotestorageio-and-webfingernet.html&title=Unhosted.org applications with remoteStorage.io and WebFinger.net"><i class="fa fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://muetsch.io/unhostedorg-applications-with-remotestorageio-and-webfingernet.html&title=Unhosted.org applications with remoteStorage.io and WebFinger.net"><i class="fa fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://muetsch.io/unhostedorg-applications-with-remotestorageio-and-webfingernet.html&title=Unhosted.org applications with remoteStorage.io and WebFinger.net"><i class="fa fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://muetsch.io/unhostedorg-applications-with-remotestorageio-and-webfingernet.html&title=Unhosted.org applications with remoteStorage.io and WebFinger.net"><i class="fa fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://muetsch.io/unhostedorg-applications-with-remotestorageio-and-webfingernet.html&name=Unhosted.org applications with remoteStorage.io and WebFinger.net&description="><i class="fa fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+      <ul>
+        <li id="toc"><a class="icon" href="#" onclick='toggleById("toc-footer")'><i class="fa fa-list fa-lg" aria-hidden="true"></i> TOC</a></li>
+        <li id="share"><a class="icon" href="#" onclick='toggleById("share-footer")'><i class="fa fa-share-alt fa-lg" aria-hidden="true"></i> Share</a></li>
+        <li id="top" style="display:none"><a class="icon" href="#" onclick="window.scrollTo(0,0)"><i class="fa fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a></li>
+        <li id="menu"><a class="icon" href="#" onclick='toggleById("nav-footer")'><i class="fa fa-bars fa-lg" aria-hidden="true"></i> Menu</a></li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+    
+    <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2021 Ferdinand Mütsch
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Blog</a></li>
+         
+          <li><a href="/imprint/">Imprint</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+</body>
+</html>
+<!-- styles -->
+
+<link rel="stylesheet" href="/lib/roboto/css/roboto.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+
+
+<script src="/js/main.js"></script>
+
+<!-- Google Analytics -->
+
+<!-- Disqus Comments -->
+
+
