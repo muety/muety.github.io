@@ -9,8 +9,29 @@
     <atom:link href="https://muetsch.io/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description>Hi and welcome! 👋 I&#39;m Ferdinand, a passionate web developer and technology enthusiast from Karlsruhe, Germany. My personal webpage is the right place to find out about me and my projects and to read about software development, DevOps, some machine learning and technology in general. Enjoy and feel free to leave me a message!</description>
-    <pubDate>Fri, 25 Jun 2021 08:18:24 GMT</pubDate>
+    <pubDate>Thu, 21 Oct 2021 16:06:35 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>Serving raster data from PostGIS as WMS using Python and FastAPI or Flask</title>
+      <link>https://muetsch.io/serving-raster-data-from-postgis-as-wms-using-python-and-fastapi-or-flask.html</link>
+      <guid>https://muetsch.io/serving-raster-data-from-postgis-as-wms-using-python-and-fastapi-or-flask.html</guid>
+      <pubDate>Thu, 21 Oct 2021 15:13:53 GMT</pubDate>
+      
+        
+        
+      <description>&lt;p&gt;&lt;img src=&quot;https://apps.muetsch.io/images/o:auto/rs,s:640?image=https://muetsch.io/images/raster_data_2.jpg&quot;&gt;&lt;/p&gt;
+&lt;h1 id=&quot;Raster-Data&quot;&gt;&lt;a </description>
+        
+      
+      
+      
+      
+      
+      
+      <comments>https://muetsch.io/serving-raster-data-from-postgis-as-wms-using-python-and-fastapi-or-flask.html#disqus_thread</comments>
+      
+    </item>
     
     <item>
       <title>Open-source, self-hosted location tracking with OwnTracks and Grafana</title>
@@ -92,27 +113,6 @@
       
       
       <comments>https://muetsch.io/my-experiences-with-the-oracle-java-11-developer-certification.html#disqus_thread</comments>
-      
-    </item>
-    
-    <item>
-      <title>Consider Sponsoring Open Source</title>
-      <link>https://muetsch.io/consider-sponsoring-open-source.html</link>
-      <guid>https://muetsch.io/consider-sponsoring-open-source.html</guid>
-      <pubDate>Sat, 12 Dec 2020 18:36:00 GMT</pubDate>
-      
-        
-        
-      <description>&lt;p&gt;&lt;img src=&quot;https://apps.muetsch.io/images/o:auto?image=https://muetsch.io/images/foss_sponsoring.png&quot; alt=&quot;Title Image&quot;&gt;&lt;/p&gt;
-&lt;h1 id=&quot;Open-</description>
-        
-      
-      
-      
-      
-      
-      
-      <comments>https://muetsch.io/consider-sponsoring-open-source.html#disqus_thread</comments>
       
     </item>
     

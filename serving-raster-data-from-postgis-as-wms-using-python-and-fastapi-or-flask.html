@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="referrer" content="no-referrer">
+    <meta name="description" content="Raster DataWhen dealing with geo data, there are essentially two major types of data: vector data and raster data. Vector data includes points, lines and polygons, while raster data is represented as">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Serving raster data from PostGIS as WMS using Python and FastAPI or Flask">
+<meta property="og:url" content="https://muetsch.io/serving-raster-data-from-postgis-as-wms-using-python-and-fastapi-or-flask.html">
+<meta property="og:site_name" content="Ferdinand Mütsch">
+<meta property="og:description" content="Raster DataWhen dealing with geo data, there are essentially two major types of data: vector data and raster data. Vector data includes points, lines and polygons, while raster data is represented as">
+<meta property="og:locale">
+<meta property="og:image" content="https://apps.muetsch.io/images/o:auto/rs,s:640?image=https://muetsch.io/images/raster_data_2.jpg">
+<meta property="og:image" content="https://apps.muetsch.io/images/o:auto/rs,s:640?image=https://muetsch.io/images/raster_data_1.png">
+<meta property="article:published_time" content="2021-10-21T15:13:53.000Z">
+<meta property="article:modified_time" content="2021-10-21T16:06:35.166Z">
+<meta property="article:author" content="Ferdinand Mütsch">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://apps.muetsch.io/images/o:auto/rs,s:640?image=https://muetsch.io/images/raster_data_2.jpg">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/favicon.ico" sizes="192x192">
+          
+        
+        
+    
+    <!-- title -->
+    <title>Serving raster data from PostGIS as WMS using Python and FastAPI or Flask</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- rss -->
+    
+    
+
+    <!-- rel-me links -->
+    
+      
+        <link href="http://github.com/muety" rel="me">
+      
+        <link href="https://social.tchncs.de/web/accounts/106761076750920593" rel="me">
+      
+        <link href="mailto:ferdinand@muetsch.io" rel="me">
+      
+    
+
+    <!-- Webmention link -->
+    
+      <link href="https://webmention.io/muetsch.io/webmention" rel="webmention">
+    
+
+    
+      <link href="https://webmention.io/muetsch.io/xmlrpc" rel="pingback">
+    
+<meta name="generator" content="Hexo 5.2.0"><link rel="alternate" href="/rss2.xml" title="Ferdinand Mütsch" type="application/rss+xml">
+</head>
+
+<body>
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="window.scrollTo(0, 0)" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Blog</a></li>
+         
+          <li><a href="/imprint/">Imprint</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" href="/open-source-self-hosted-location-tracking-with-owntracks-and-grafana.html"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover='toggleById("i-next").toggleById();' onmouseout='toggleById("i-next");'></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="window.scrollTo(0,0)"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover='toggleById("i-top");' onmouseout='toggleById("i-top");'></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover='toggleById("i-share");' onmouseout='toggleById("i-share");' onclick='toggleById("share");return false;'></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://muetsch.io/serving-raster-data-from-postgis-as-wms-using-python-and-fastapi-or-flask.html"><i class="fas fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://muetsch.io/serving-raster-data-from-postgis-as-wms-using-python-and-fastapi-or-flask.html&text=Serving raster data from PostGIS as WMS using Python and FastAPI or Flask"><i class="fas fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://muetsch.io/serving-raster-data-from-postgis-as-wms-using-python-and-fastapi-or-flask.html&title=Serving raster data from PostGIS as WMS using Python and FastAPI or Flask"><i class="fas fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://muetsch.io/serving-raster-data-from-postgis-as-wms-using-python-and-fastapi-or-flask.html&is_video=false&description=Serving raster data from PostGIS as WMS using Python and FastAPI or Flask"><i class="fas fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Serving raster data from PostGIS as WMS using Python and FastAPI or Flask&body=Check out this article: https://muetsch.io/serving-raster-data-from-postgis-as-wms-using-python-and-fastapi-or-flask.html"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://muetsch.io/serving-raster-data-from-postgis-as-wms-using-python-and-fastapi-or-flask.html&title=Serving raster data from PostGIS as WMS using Python and FastAPI or Flask"><i class="fas fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://muetsch.io/serving-raster-data-from-postgis-as-wms-using-python-and-fastapi-or-flask.html&title=Serving raster data from PostGIS as WMS using Python and FastAPI or Flask"><i class="fas fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://muetsch.io/serving-raster-data-from-postgis-as-wms-using-python-and-fastapi-or-flask.html&title=Serving raster data from PostGIS as WMS using Python and FastAPI or Flask"><i class="fas fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://muetsch.io/serving-raster-data-from-postgis-as-wms-using-python-and-fastapi-or-flask.html&title=Serving raster data from PostGIS as WMS using Python and FastAPI or Flask"><i class="fas fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://muetsch.io/serving-raster-data-from-postgis-as-wms-using-python-and-fastapi-or-flask.html&name=Serving raster data from PostGIS as WMS using Python and FastAPI or Flask&description="><i class="fas fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Raster-Data"><span class="toc-number">1.</span> <span class="toc-text">Raster Data</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#PostGIS-Geoserver-and-WMS"><span class="toc-number">2.</span> <span class="toc-text">PostGIS, Geoserver and WMS</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Custom-WMS-endpoint-implementation"><span class="toc-number">3.</span> <span class="toc-text">Custom WMS endpoint implementation</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#PL-pgSQL-database-routine"><span class="toc-number">3.1.</span> <span class="toc-text">PL&#x2F;pgSQL database routine</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Web-endpoint"><span class="toc-number">3.2.</span> <span class="toc-text">Web endpoint</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#FastAPI"><span class="toc-number">3.2.1.</span> <span class="toc-text">FastAPI</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Flask"><span class="toc-number">3.2.2.</span> <span class="toc-text">Flask</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Try-it"><span class="toc-number">3.3.</span> <span class="toc-text">Try it</span></a></li></ol></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index width mx-auto px2 my4">
+        
+        <article class="h-entry post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <a href="https://muetsch.io/serving-raster-data-from-postgis-as-wms-using-python-and-fastapi-or-flask.html" class="u-url">
+        <h1 class="posttitle p-name" itemprop="name headline" property="headline">
+            Serving raster data from PostGIS as WMS using Python and FastAPI or Flask
+        </h1>
+    </a>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" property="author" itemscope itemtype="http://schema.org/Person" vocab="http://schema.org/" typeof="Person">
+        <span itemprop="name" property="name" class="p-author h-card">Ferdinand Mütsch</span>
+      </span>
+      
+    <div class="postdate">
+        <time datetime="2021-10-21T15:13:53.000Z" class="dt-published" itemprop="datePublished" property="datePublished">2021-10-21</time>
+    </div>
+
+
+      
+
+
+      <!--
+      <div style="margin-top: 30px">
+        <a href="https://liberapay.com/muety/" target="_blank"
+          style="background-image: none; text-decoration: none;"><img
+            src="https://badges.fw-web.space/liberapay/receives/muety.svg?logo=liberapay&style=flat-square" alt="Liberapay"
+            style="height: auto !important;width: auto !important;"></a>
+      </div>
+      -->
+    </div>
+  </header>
+  
+  <div class="content e-content" itemprop="articleBody" property="articleBody">
+    <p><img src="https://apps.muetsch.io/images/o:auto/rs,s:640?image=https://muetsch.io/images/raster_data_2.jpg"></p>
+<h1 id="Raster-Data"><a href="#Raster-Data" class="headerlink" title="Raster Data"></a>Raster Data</h1><p>When dealing with geo data, there are essentially two major types of data: vector data and raster data. Vector data includes points, lines and polygons, while raster data is represented as a two- or three-dimensional pixel map.</p>
+<p>If your aim is to map every fast-food restaurant in the US, you would probably represent each of them as a point, i.e. you will deal with vector data. </p>
+<p>Raster data, on the other hand, could, for example, be the geographical altitude of every single pixel within some area. Or, in the case of <a target="_blank" rel="noopener" href="https://orbio.earth/">Orbio</a> – where we largely work with satellite imagery – a satellite observation of a certain geographical area is also represented as raster of pixels, each of which holds, for instance, a value for the observed light intensity / brightness. </p>
+<p><img src="https://apps.muetsch.io/images/o:auto/rs,s:640?image=https://muetsch.io/images/raster_data_1.png"> (<a target="_blank" rel="noopener" href="https://desktop.arcgis.com/de/arcmap/10.3/manage-data/raster-and-images/what-is-raster-data.htm">https://desktop.arcgis.com/de/arcmap/10.3/manage-data/raster-and-images/what-is-raster-data.htm</a>)</p>
+<p>Every raster has a certain spatial resolution, that is, every pixel represents a certain area in m². Moreover, raster can – but do not have to – be geo-referenced, i.e. aligned to some geographical coordinate system (the most prominent of which is <code>EPSG:4326</code>).</p>
+<h1 id="PostGIS-Geoserver-and-WMS"><a href="#PostGIS-Geoserver-and-WMS" class="headerlink" title="PostGIS, Geoserver and WMS"></a>PostGIS, Geoserver and WMS</h1><p>The by far most popular way to store and query any kind of geo data is using <a target="_blank" rel="noopener" href="https://postgis.net/">PostGIS</a>, which is a brilliant, open-source extension to the PostgreSQL database management system. It supports vector data types (e.g. <code>POINT</code>, <code>POLYGON</code>, <code>LINESTRING</code>) as well as raster data (<code>RASTER</code> type).</p>
+<p>Besides storing the data, a common use case is to visualize it on a map. For web applications, popular map libraries include <a target="_blank" rel="noopener" href="https://openlayers.org/">OpenLayers</a> and <a target="_blank" rel="noopener" href="https://leafletjs.com/">Leaflet</a>. To visualize it, these libraries first need to pull the geo data from somewhere. However, a client-side JavaScript application can (and should) not get direct access to the database. Instead, usually, there will be a backend-side web application in between, acting as an intermediary.</p>
+<p>This is where <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Web_Map_Service">WMS</a> (aka. <em>web map service</em>) comes in. WMS is a protocol, that specifies how to request geo data on the web. Input parameters include a bounding box of the requested area, an SRID code and others, while the output of a WMS service is rendered images (usually PNGs, JPEGs or TIFFs).</p>
+<p>Consequently, as the developer of a <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Geographic_information_system">GIS</a> application, you somehow need to provide a WMS endpoint, that, on one end, fetches data from PostGIS, and, on the other end, delivers it to the web frontend. </p>
+<p>One approach to do so is to use a map server, like <a target="_blank" rel="noopener" href="http://geoserver.org/">Geoserver</a>, <a target="_blank" rel="noopener" href="https://mapserver.org/">Mapserver</a> or <a target="_blank" rel="noopener" href="https://docs.qgis.org/3.16/en/docs/server_manual/index.html">QGIS Server</a>. Geoserver is arguably the most feature-rich software among those, however, unfortunately, it inherently lacks the ability to serve raster data from a PostGIS data base. </p>
+<h1 id="Custom-WMS-endpoint-implementation"><a href="#Custom-WMS-endpoint-implementation" class="headerlink" title="Custom WMS endpoint implementation"></a>Custom WMS endpoint implementation</h1><p>Since WMS itself is not that complex as a protocol, you can quite easily come up with your own WMS-compatible endpoint (at least one that suffices the <code>GetMap</code> capability).</p>
+<h2 id="PL-pgSQL-database-routine"><a href="#PL-pgSQL-database-routine" class="headerlink" title="PL/pgSQL database routine"></a>PL/pgSQL database routine</h2><p>The first component is a quite comprehensive SQL function, that does most of the heavy lifting. Once created in your database it can be called as part of SQL queries with a couple of parameters. Connect to your PostGIS database and run the following script to initially create the function.</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">--- get_tast_tile.sql</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">create</span> <span class="keyword">or</span> <span class="keyword">replace</span> <span class="keyword">function</span> get_rast_tile(param_format <span class="built_in">text</span>, param_width <span class="built_in">integer</span>, param_height <span class="built_in">integer</span>, param_srid <span class="built_in">integer</span>, param_bbox <span class="built_in">text</span>, param_schema <span class="built_in">text</span>, param_table <span class="built_in">text</span>) <span class="keyword">returns</span> bytea</span><br><span class="line">    immutable</span><br><span class="line">    <span class="keyword">parallel</span> <span class="keyword">safe</span></span><br><span class="line">    <span class="keyword">cost</span> <span class="number">1000</span></span><br><span class="line">    <span class="keyword">language</span> plpgsql</span><br><span class="line"><span class="keyword">as</span></span><br><span class="line">$$</span><br><span class="line"><span class="keyword">DECLARE</span></span><br><span class="line">    var_sql <span class="built_in">text</span>; var_result raster; var_srid integer;</span><br><span class="line">    var_env geometry; var_erast raster;</span><br><span class="line"><span class="keyword">BEGIN</span></span><br><span class="line">    <span class="keyword">EXECUTE</span></span><br><span class="line">        <span class="string">&#x27;SELECT ST_MakeEnvelope(&#x27;</span> || array_to_string((<span class="string">&#x27;&#123;&#x27;</span> || param_bbox || <span class="string">&#x27;&#125;&#x27;</span>)::float8[], <span class="string">&#x27;,&#x27;</span>) || <span class="string">&#x27;,&#x27;</span> || param_srid ||<span class="string">&#x27;)&#x27;</span></span><br><span class="line">        <span class="keyword">INTO</span> var_env; <span class="comment">-- &lt;1&gt;</span></span><br><span class="line"></span><br><span class="line">    var_sql :=</span><br><span class="line">            &#x27;<span class="keyword">SELECT</span> srid, ST_AsRaster($<span class="number">4</span>,$<span class="number">5</span>,$<span class="number">6</span>,pixel_types,nodata_values,nodata_values) <span class="keyword">As</span> erast</span><br><span class="line">            <span class="keyword">FROM</span> raster_columns</span><br><span class="line">            <span class="keyword">WHERE</span> r_table_schema = $<span class="number">1</span> <span class="keyword">AND</span> r_table_name = $<span class="number">2</span> <span class="keyword">AND</span> r_raster_column=$<span class="number">3</span><span class="string">&#x27;;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    EXECUTE var_sql INTO var_srid, var_erast</span></span><br><span class="line"><span class="string">        USING param_schema, param_table, &#x27;</span>rast<span class="string">&#x27;, var_env, param_width, param_height; -- &lt;2&gt;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    var_sql :=</span></span><br><span class="line"><span class="string">        &#x27;</span><span class="keyword">WITH</span> r <span class="keyword">AS</span> (<span class="keyword">SELECT</span> ST_Clip(rast,<span class="string">&#x27; ||</span></span><br><span class="line"><span class="string">        CASE</span></span><br><span class="line"><span class="string">            WHEN var_srid = param_srid THEN &#x27;</span>$<span class="number">3</span><span class="string">&#x27;</span></span><br><span class="line"><span class="string">            ELSE &#x27;</span>ST_Transform($<span class="number">3</span>,$<span class="number">2</span>)<span class="string">&#x27;</span></span><br><span class="line"><span class="string">            END || &#x27;</span>) <span class="keyword">As</span> rast <span class="keyword">FROM</span>  <span class="string">&#x27; ||</span></span><br><span class="line"><span class="string">        quote_ident(param_schema) || &#x27;</span>.<span class="string">&#x27; ||</span></span><br><span class="line"><span class="string">        quote_ident(param_table) || &#x27;</span></span><br><span class="line">        <span class="keyword">WHERE</span> ST_Intersects(rast,<span class="string">&#x27; ||</span></span><br><span class="line"><span class="string">        CASE</span></span><br><span class="line"><span class="string">            WHEN var_srid = param_srid THEN &#x27;</span>$<span class="number">3</span><span class="string">&#x27;</span></span><br><span class="line"><span class="string">            ELSE &#x27;</span>ST_Transform($<span class="number">3</span>,$<span class="number">2</span>)<span class="string">&#x27;</span></span><br><span class="line"><span class="string">            END || &#x27;</span>) <span class="keyword">limit</span> <span class="number">15</span>)</span><br><span class="line">        <span class="keyword">SELECT</span> ST_Clip(ST_Union(rast), $<span class="number">3</span>) <span class="keyword">As</span> rast</span><br><span class="line">        <span class="keyword">FROM</span> (<span class="keyword">SELECT</span> ST_Resample(<span class="string">&#x27; ||</span></span><br><span class="line"><span class="string">        CASE</span></span><br><span class="line"><span class="string">            WHEN var_srid = param_srid THEN &#x27;</span>rast<span class="string">&#x27;</span></span><br><span class="line"><span class="string">            ELSE &#x27;</span>ST_Transform(rast,$<span class="number">1</span>)<span class="string">&#x27;</span></span><br><span class="line"><span class="string">            END ||</span></span><br><span class="line"><span class="string">        &#x27;</span>,$<span class="number">6</span>,<span class="literal">true</span>,<span class="string">&#x27;&#x27;</span>CubicSpline<span class="string">&#x27;&#x27;</span>) <span class="keyword">As</span> rast <span class="keyword">FROM</span> r) <span class="keyword">As</span> <span class="keyword">final</span><span class="string">&#x27;; -- &lt;3&gt;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    EXECUTE var_sql INTO var_result</span></span><br><span class="line"><span class="string">        USING</span></span><br><span class="line"><span class="string">            param_srid,</span></span><br><span class="line"><span class="string">            var_srid,</span></span><br><span class="line"><span class="string">            var_env,</span></span><br><span class="line"><span class="string">            param_width,</span></span><br><span class="line"><span class="string">            param_height,</span></span><br><span class="line"><span class="string">            var_erast; -- &lt;4&gt;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    IF var_result IS NULL THEN</span></span><br><span class="line"><span class="string">        var_result := var_erast;</span></span><br><span class="line"><span class="string">    End If;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    RETURN</span></span><br><span class="line"><span class="string">        CASE</span></span><br><span class="line"><span class="string">            WHEN param_format ILIKE &#x27;</span>image/jpeg<span class="string">&#x27; THEN ST_AsJPEG(ST_ColorMap(var_result, 1, &#x27;</span>bluered<span class="string">&#x27;))</span></span><br><span class="line"><span class="string">            ELSE ST_AsPNG(ST_ColorMap(var_result, 1, &#x27;</span>bluered<span class="string">&#x27;))</span></span><br><span class="line"><span class="string">            END;</span></span><br><span class="line"><span class="string">END;</span></span><br><span class="line"><span class="string">$$;</span></span><br></pre></td></tr></table></figure>
+
+<p>The function takes a set of parameters, which mostly correspond to WMS parameters and it returns a fully rendered PNG (or JPEG) image as a byte array.</p>
+<h2 id="Web-endpoint"><a href="#Web-endpoint" class="headerlink" title="Web endpoint"></a>Web endpoint</h2><p>Second step is to implement the actual web endpoint, that can be called from GIS clients using HTTP. The following examples show implementations of a WMS endpoint (utilizing the above <code>get_rast_tile</code> SQL function) in two of the most popular Python web frameworks, <a target="_blank" rel="noopener" href="https://fastapi.tiangolo.com/">FastAPI</a> and <a target="_blank" rel="noopener" href="https://flask.palletsprojects.com/en/2.0.x/">Flask</a>.</p>
+<p>Both examples assume the presence of a PostGIS database called <code>geodb</code>, which includes a table <code>observations</code> for storing raster data. The table has to, at least, consist of a primary key column and a column <code>rast</code> of type <code>RASTER</code>. </p>
+<p>You can either create that table manually (not recommended), or use the command-line program <a target="_blank" rel="noopener" href="https://postgis.net/docs/using_raster_dataman.html"><code>raster2pgsql</code></a> automatically create  an appropriate table structure.</p>
+<h3 id="FastAPI"><a href="#FastAPI" class="headerlink" title="FastAPI"></a>FastAPI</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/bin/python</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># app.py</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Prerequisites:</span></span><br><span class="line"><span class="comment"># pip install fastapi, uvicorn, sqlalchemy[asyncpg], asyncpg</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> typing</span><br><span class="line"><span class="keyword">from</span> io <span class="keyword">import</span> BytesIO</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> uvicorn <span class="keyword">as</span> uvicorn</span><br><span class="line"><span class="keyword">from</span> fastapi <span class="keyword">import</span> FastAPI, Query, Depends</span><br><span class="line"><span class="keyword">from</span> sqlalchemy <span class="keyword">import</span> text</span><br><span class="line"><span class="keyword">from</span> sqlalchemy.ext.asyncio <span class="keyword">import</span> create_async_engine, AsyncSession</span><br><span class="line"><span class="keyword">from</span> sqlalchemy.orm <span class="keyword">import</span> sessionmaker</span><br><span class="line"><span class="keyword">from</span> starlette.responses <span class="keyword">import</span> StreamingResponse</span><br><span class="line"></span><br><span class="line"><span class="comment"># Connect to database (asynchronously)</span></span><br><span class="line">engine = create_async_engine(<span class="string">&#x27;postgresql+asyncpg://user:password@localhost:5432/geodb&#x27;</span>, pool_pre_ping=<span class="literal">True</span>)</span><br><span class="line">session = sessionmaker(engine, autocommit=<span class="literal">False</span>, autoflush=<span class="literal">False</span>, expire_on_commit=<span class="literal">False</span>, class_=AsyncSession)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Initialize FastAPI app</span></span><br><span class="line">app = FastAPI()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># Service method for retrieving WMS data from database</span></span><br><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">def</span> <span class="title">get_wms</span>(<span class="params">db: AsyncSession, width: <span class="built_in">int</span>, height: <span class="built_in">int</span>, bbox: <span class="built_in">str</span>, crs: <span class="built_in">int</span>, <span class="built_in">format</span>: <span class="built_in">str</span> = <span class="string">&#x27;image/png&#x27;</span></span>) -&gt; typing.BinaryIO:</span></span><br><span class="line">    <span class="keyword">async</span> <span class="keyword">with</span> db.begin():</span><br><span class="line">        params = &#123;</span><br><span class="line">            <span class="string">&#x27;format&#x27;</span>: <span class="built_in">format</span>,</span><br><span class="line">            <span class="string">&#x27;width&#x27;</span>: width,</span><br><span class="line">            <span class="string">&#x27;height&#x27;</span>: height,</span><br><span class="line">            <span class="string">&#x27;crs&#x27;</span>: crs,</span><br><span class="line">            <span class="string">&#x27;bbox&#x27;</span>: bbox,</span><br><span class="line">            <span class="string">&#x27;table&#x27;</span>: <span class="string">&#x27;observations&#x27;</span></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment"># Required for ST_AsPNG and ST_AsJPEG to work</span></span><br><span class="line">        <span class="keyword">await</span> db.execute(<span class="string">&quot;SET postgis.gdal_enabled_drivers = &#x27;ENABLE_ALL&#x27;;&quot;</span>)</span><br><span class="line">        <span class="keyword">await</span> db.execute(<span class="string">&quot;SET postgis.enable_outdb_rasters TO true;&quot;</span>)</span><br><span class="line"></span><br><span class="line">        result = (<span class="keyword">await</span> db.execute(text(<span class="string">&quot;SELECT get_rast_tile(:format, :width, :height, :crs, :bbox, &#x27;public&#x27;, :table)&quot;</span>), params)).first()</span><br><span class="line">        <span class="keyword">return</span> BytesIO(result[<span class="number">0</span>])</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">_get_db</span>() -&gt; typing.Generator[AsyncSession, <span class="keyword">None</span>, <span class="keyword">None</span>]:</span></span><br><span class="line">    <span class="keyword">yield</span> session()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># Web endpoint</span></span><br><span class="line"><span class="meta">@app.get(&quot;/wms&quot;)</span></span><br><span class="line"><span class="keyword">async</span> <span class="function"><span class="keyword">def</span> <span class="title">wms</span>(<span class="params"></span></span></span><br><span class="line"><span class="function"><span class="params">        layers: <span class="built_in">str</span> = Query(<span class="params">..., regex=<span class="string">r&#x27;^observations&#x27;</span></span>),</span></span></span><br><span class="line"><span class="function"><span class="params">        <span class="built_in">format</span>: <span class="built_in">str</span> = Query(<span class="params"><span class="string">&#x27;image/png&#x27;</span>, regex=<span class="string">&#x27;^image/(png|jpeg)$&#x27;</span></span>),</span></span></span><br><span class="line"><span class="function"><span class="params">        width: <span class="built_in">int</span> = Query(<span class="params">..., gt=<span class="number">0</span></span>),</span></span></span><br><span class="line"><span class="function"><span class="params">        height: <span class="built_in">int</span> = Query(<span class="params">..., gt=<span class="number">0</span></span>),</span></span></span><br><span class="line"><span class="function"><span class="params">        bbox: <span class="built_in">str</span> = Query(<span class="params">..., regex=<span class="string">r&#x27;^[\d\.-]+,[\d\.-]+,[\d\.-]+,[\d\.-]+$&#x27;</span></span>),</span></span></span><br><span class="line"><span class="function"><span class="params">        crs: <span class="built_in">str</span> = Query(<span class="params">..., regex=<span class="string">r&#x27;^EPSG:\d+$&#x27;</span></span>),</span></span></span><br><span class="line"><span class="function"><span class="params">        db: AsyncSession = Depends(<span class="params">_get_db</span>)</span></span></span><br><span class="line"><span class="function"><span class="params"></span>):</span></span><br><span class="line">    crs = <span class="built_in">int</span>(crs.removeprefix(<span class="string">&#x27;EPSG:&#x27;</span>))</span><br><span class="line">    image = <span class="keyword">await</span> get_wms(db, width, height, bbox, crs, <span class="built_in">format</span>)</span><br><span class="line">    <span class="keyword">return</span> StreamingResponse(image, media_type=<span class="built_in">format</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">    uvicorn.run(app, host=<span class="string">&quot;127.0.0.1&quot;</span>, port=<span class="number">8000</span>)</span><br></pre></td></tr></table></figure>
+
+<h3 id="Flask"><a href="#Flask" class="headerlink" title="Flask"></a>Flask</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/bin/python</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># app.py</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Prerequisites:</span></span><br><span class="line"><span class="comment"># pip install flask, sqlalchemy[psycopg2], psycopg2-binary</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> typing</span><br><span class="line"><span class="keyword">from</span> io <span class="keyword">import</span> BytesIO</span><br><span class="line"></span><br><span class="line"><span class="keyword">from</span> flask <span class="keyword">import</span> Flask, request, send_file</span><br><span class="line"><span class="keyword">from</span> sqlalchemy <span class="keyword">import</span> create_engine, text</span><br><span class="line"><span class="keyword">from</span> sqlalchemy.orm <span class="keyword">import</span> Session, sessionmaker</span><br><span class="line"></span><br><span class="line"><span class="comment"># Connect to database</span></span><br><span class="line">engine = create_engine(<span class="string">&#x27;postgresql://user:password@localhost:5432/geodb&#x27;</span>, pool_pre_ping=<span class="literal">True</span>)</span><br><span class="line">session = sessionmaker(engine, autocommit=<span class="literal">False</span>, autoflush=<span class="literal">False</span>, expire_on_commit=<span class="literal">False</span>, class_=Session)</span><br><span class="line"></span><br><span class="line"><span class="comment"># Initialize Flask app</span></span><br><span class="line">app = Flask(__name__)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># Service method for retrieving WMS data from database</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_wms</span>(<span class="params">db: Session, params: typing.Dict[<span class="built_in">str</span>, typing.Any]</span>) -&gt; typing.BinaryIO:</span></span><br><span class="line">    <span class="keyword">with</span> db.begin():</span><br><span class="line">        params[<span class="string">&#x27;crs&#x27;</span>] = <span class="built_in">int</span>(params[<span class="string">&#x27;crs&#x27;</span>].removeprefix(<span class="string">&#x27;EPSG:&#x27;</span>))</span><br><span class="line"></span><br><span class="line">        <span class="comment"># Required for ST_AsPNG and ST_AsJPEG to work</span></span><br><span class="line">        db.execute(<span class="string">&quot;SET postgis.gdal_enabled_drivers = &#x27;ENABLE_ALL&#x27;;&quot;</span>)</span><br><span class="line">        db.execute(<span class="string">&quot;SET postgis.enable_outdb_rasters TO true;&quot;</span>)</span><br><span class="line"></span><br><span class="line">        result = db.execute(text(<span class="string">&quot;SELECT get_rast_tile(:format, :width, :height, :crs, :bbox, &#x27;public&#x27;, :layers)&quot;</span>), params).first()</span><br><span class="line">        <span class="keyword">return</span> BytesIO(result[<span class="number">0</span>])</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># Web endpoint</span></span><br><span class="line"><span class="meta">@app.route(&quot;/wms&quot;)</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">wms</span>():</span></span><br><span class="line">    image = get_wms(session(), &#123;**request.args&#125;)</span><br><span class="line">    <span class="keyword">return</span> send_file(image, mimetype=request.args[<span class="string">&#x27;format&#x27;</span>])</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">    app.run(host=<span class="string">&quot;127.0.0.1&quot;</span>, port=<span class="number">8000</span>)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="Try-it"><a href="#Try-it" class="headerlink" title="Try it"></a>Try it</h2><p>Use <a target="_blank" rel="noopener" href="https://postgis.net/docs/using_raster_dataman.html"><code>raster2pgsql</code></a> to import raster data into your database in the first place. Afterwards, you can query it using WMS right from your browser. For instance, just try to go to:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">http:&#x2F;&#x2F;localhost:8000&#x2F;wms?</span><br><span class="line">    width&#x3D;256&amp;</span><br><span class="line">    height&#x3D;256&amp;</span><br><span class="line">    bbox&#x3D;49.007044,8.3946413,48.991105,8.413903&amp;</span><br><span class="line">    format&#x3D;image&#x2F;png&amp;</span><br><span class="line">    crs&#x3D;EPSG:4326&amp;</span><br><span class="line">    layers&#x3D;observations</span><br></pre></td></tr></table></figure>
+  </div>
+</article>
+
+
+
+    </div>
+    
+      <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Blog</a></li>
+         
+          <li><a href="/imprint/">Imprint</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Raster-Data"><span class="toc-number">1.</span> <span class="toc-text">Raster Data</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#PostGIS-Geoserver-and-WMS"><span class="toc-number">2.</span> <span class="toc-text">PostGIS, Geoserver and WMS</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Custom-WMS-endpoint-implementation"><span class="toc-number">3.</span> <span class="toc-text">Custom WMS endpoint implementation</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#PL-pgSQL-database-routine"><span class="toc-number">3.1.</span> <span class="toc-text">PL&#x2F;pgSQL database routine</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Web-endpoint"><span class="toc-number">3.2.</span> <span class="toc-text">Web endpoint</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#FastAPI"><span class="toc-number">3.2.1.</span> <span class="toc-text">FastAPI</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Flask"><span class="toc-number">3.2.2.</span> <span class="toc-text">Flask</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Try-it"><span class="toc-number">3.3.</span> <span class="toc-text">Try it</span></a></li></ol></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://muetsch.io/serving-raster-data-from-postgis-as-wms-using-python-and-fastapi-or-flask.html"><i class="fas fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://muetsch.io/serving-raster-data-from-postgis-as-wms-using-python-and-fastapi-or-flask.html&text=Serving raster data from PostGIS as WMS using Python and FastAPI or Flask"><i class="fas fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://muetsch.io/serving-raster-data-from-postgis-as-wms-using-python-and-fastapi-or-flask.html&title=Serving raster data from PostGIS as WMS using Python and FastAPI or Flask"><i class="fas fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://muetsch.io/serving-raster-data-from-postgis-as-wms-using-python-and-fastapi-or-flask.html&is_video=false&description=Serving raster data from PostGIS as WMS using Python and FastAPI or Flask"><i class="fas fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Serving raster data from PostGIS as WMS using Python and FastAPI or Flask&body=Check out this article: https://muetsch.io/serving-raster-data-from-postgis-as-wms-using-python-and-fastapi-or-flask.html"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://muetsch.io/serving-raster-data-from-postgis-as-wms-using-python-and-fastapi-or-flask.html&title=Serving raster data from PostGIS as WMS using Python and FastAPI or Flask"><i class="fas fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://muetsch.io/serving-raster-data-from-postgis-as-wms-using-python-and-fastapi-or-flask.html&title=Serving raster data from PostGIS as WMS using Python and FastAPI or Flask"><i class="fas fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://muetsch.io/serving-raster-data-from-postgis-as-wms-using-python-and-fastapi-or-flask.html&title=Serving raster data from PostGIS as WMS using Python and FastAPI or Flask"><i class="fas fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://muetsch.io/serving-raster-data-from-postgis-as-wms-using-python-and-fastapi-or-flask.html&title=Serving raster data from PostGIS as WMS using Python and FastAPI or Flask"><i class="fas fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://muetsch.io/serving-raster-data-from-postgis-as-wms-using-python-and-fastapi-or-flask.html&name=Serving raster data from PostGIS as WMS using Python and FastAPI or Flask&description="><i class="fas fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+      <ul>
+        <li id="toc"><a class="icon" href="#" onclick='toggleById("toc-footer")'><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a></li>
+        <li id="share"><a class="icon" href="#" onclick='toggleById("share-footer")'><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a></li>
+        <li id="top" style="display:none"><a class="icon" href="#" onclick="window.scrollTo(0,0)"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a></li>
+        <li id="menu"><a class="icon" href="#" onclick='toggleById("nav-footer")'><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a></li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+    
+    <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2021 Ferdinand Mütsch
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Blog</a></li>
+         
+          <li><a href="/imprint/">Imprint</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+<!--
+<script defer type="text/javascript" src="js/pirsch.js"
+    id="pirschjs"
+    data-code="GoPk8VNmzk8Z6n7xikwZahvOxm1MNPud"></script>
+-->
+</body>
+</html>
+<!-- styles -->
+
+<link rel="stylesheet" href="/lib/roboto/css/roboto.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+
+
+
+<script src="/js/main.js"></script>
+
+<!-- Google Analytics -->
+
+<!-- Disqus Comments -->
+
+
