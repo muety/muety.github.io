@@ -9,8 +9,28 @@
     <atom:link href="https://muetsch.io/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description>Hi and welcome! 👋 I&#39;m Ferdinand, a passionate web developer and technology enthusiast from Karlsruhe, Germany. My personal webpage is the right place to find out about me and my projects and to read about software development, DevOps, some machine learning and technology in general. Enjoy and feel free to leave me a message!</description>
-    <pubDate>Mon, 08 Nov 2021 16:38:54 GMT</pubDate>
+    <pubDate>Sun, 28 Nov 2021 13:13:13 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>Simple continuous Docker deployments with Caddy</title>
+      <link>https://muetsch.io/simple-continuous-docker-deployments-with-caddy.html</link>
+      <guid>https://muetsch.io/simple-continuous-docker-deployments-with-caddy.html</guid>
+      <pubDate>Sun, 28 Nov 2021 11:52:11 GMT</pubDate>
+      
+        
+        
+      <description>&lt;h1 id=&quot;CI-and-CD&quot;&gt;&lt;a href=&quot;#CI-and-CD&quot; class=&quot;headerlink&quot; title=&quot;CI and CD&quot;&gt;&lt;/a&gt;CI and CD&lt;/h1&gt;&lt;!--![](https://apps.muetsch.io/images/o:auto</description>
+        
+      
+      
+      
+      
+      
+      
+      <comments>https://muetsch.io/simple-continuous-docker-deployments-with-caddy.html#disqus_thread</comments>
+      
+    </item>
     
     <item>
       <title>Serving raster data from PostGIS as WMS using Python and FastAPI or Flask</title>
@@ -92,27 +112,6 @@
       
       
       <comments>https://muetsch.io/time-tracking-for-developers-%E2%80%93-wakatime-vs-hakatime-vs-wakapi.html#disqus_thread</comments>
-      
-    </item>
-    
-    <item>
-      <title>My Experiences with the Oracle Java 11 Developer Certification</title>
-      <link>https://muetsch.io/my-experiences-with-the-oracle-java-11-developer-certification.html</link>
-      <guid>https://muetsch.io/my-experiences-with-the-oracle-java-11-developer-certification.html</guid>
-      <pubDate>Fri, 19 Mar 2021 12:03:30 GMT</pubDate>
-      
-        
-        
-      <description>&lt;p&gt;&lt;img src=&quot;https://apps.muetsch.io/images/o:auto/rs,s:640?image=https://muetsch.io/images/java_cert2.png&quot;&gt;&lt;/p&gt;
-&lt;p&gt;On the occasion of the J</description>
-        
-      
-      
-      
-      
-      
-      
-      <comments>https://muetsch.io/my-experiences-with-the-oracle-java-11-developer-certification.html#disqus_thread</comments>
       
     </item>
     
