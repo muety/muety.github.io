@@ -9,8 +9,52 @@
     <atom:link href="https://muetsch.io/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description>Hi and welcome! 👋 I&#39;m Ferdinand, a passionate web developer and technology enthusiast from Karlsruhe, Germany. My personal webpage is the right place to find out about me and my projects and to read about software development, DevOps, some machine learning and technology in general. Enjoy and feel free to leave me a message!</description>
-    <pubDate>Sat, 18 Dec 2021 22:44:04 GMT</pubDate>
+    <pubDate>Sun, 10 Apr 2022 19:33:30 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>Sending Prometheus Alerts to Telegram with Telepush</title>
+      <link>https://muetsch.io/sending-prometheus-alerts-to-telegram-with-telepush.html</link>
+      <guid>https://muetsch.io/sending-prometheus-alerts-to-telegram-with-telepush.html</guid>
+      <pubDate>Fri, 11 Mar 2022 19:13:37 GMT</pubDate>
+      
+        
+        
+      <description>&lt;img src=&quot;images/prometheus_telepush.webp&quot; width=&quot;256px&quot;&gt;
+
+&lt;h1 id=&quot;Prometheus-Alerting&quot;&gt;&lt;a href=&quot;#Prometheus-Alerting&quot; class=&quot;headerlink&quot; ti</description>
+        
+      
+      
+      
+      
+      
+      
+      <comments>https://muetsch.io/sending-prometheus-alerts-to-telegram-with-telepush.html#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>Wakapi&#39;s Year 2021</title>
+      <link>https://muetsch.io/wakapi-s-year-2021.html</link>
+      <guid>https://muetsch.io/wakapi-s-year-2021.html</guid>
+      <pubDate>Sun, 26 Dec 2021 20:11:41 GMT</pubDate>
+      
+        
+        
+      <description>&lt;img src=&quot;https://wakapi.dev/assets/images/logo.svg&quot; width=&quot;200px&quot;&gt;
+
+&lt;p&gt;&lt;img src=&quot;https://apps.muetsch.io/images/o:auto/rs,s:640?image=https</description>
+        
+      
+      
+      
+      
+      
+      
+      <comments>https://muetsch.io/wakapi-s-year-2021.html#disqus_thread</comments>
+      
+    </item>
     
     <item>
       <title>Simple continuous Docker deployments with Caddy</title>
@@ -70,48 +114,6 @@
       
       
       <comments>https://muetsch.io/open-source-self-hosted-location-tracking-with-owntracks-and-grafana.html#disqus_thread</comments>
-      
-    </item>
-    
-    <item>
-      <title>Aggregating and Visualizing DMARC Reports</title>
-      <link>https://muetsch.io/aggregating-and-visualizing-dmarc-reports.html</link>
-      <guid>https://muetsch.io/aggregating-and-visualizing-dmarc-reports.html</guid>
-      <pubDate>Fri, 07 May 2021 19:23:08 GMT</pubDate>
-      
-        
-        
-      <description>&lt;p&gt;&lt;img src=&quot;https://apps.muetsch.io/images/o:auto/rs,s:640?image=https://muetsch.io/images/dmarc-cover.jpg&quot;&gt;&lt;/p&gt;
-&lt;h1 id=&quot;DMARC-DKIM-and-SPF</description>
-        
-      
-      
-      
-      
-      
-      
-      <comments>https://muetsch.io/aggregating-and-visualizing-dmarc-reports.html#disqus_thread</comments>
-      
-    </item>
-    
-    <item>
-      <title>Time Tracking for Developers – WakaTime vs. Hakatime vs. Wakapi</title>
-      <link>https://muetsch.io/time-tracking-for-developers-%E2%80%93-wakatime-vs-hakatime-vs-wakapi.html</link>
-      <guid>https://muetsch.io/time-tracking-for-developers-%E2%80%93-wakatime-vs-hakatime-vs-wakapi.html</guid>
-      <pubDate>Sat, 10 Apr 2021 09:01:15 GMT</pubDate>
-      
-        
-        
-      <description>&lt;p&gt;&lt;img src=&quot;https://apps.muetsch.io/images/o:auto?image=https://muetsch.io/images/time_tracking_cover.jpg&quot; alt=&quot;Title Image&quot;&gt;&lt;/p&gt;
-&lt;h1 id=&quot;A</description>
-        
-      
-      
-      
-      
-      
-      
-      <comments>https://muetsch.io/time-tracking-for-developers-%E2%80%93-wakatime-vs-hakatime-vs-wakapi.html#disqus_thread</comments>
       
     </item>
     

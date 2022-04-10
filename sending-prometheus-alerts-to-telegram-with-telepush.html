@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="referrer" content="no-referrer">
+    <meta name="description" content="Prometheus AlertingPrometheus is among the most popular tools for server monitoring. It aggregates metrics from potentially countless different sources (provided through so called exporters), stores">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Sending Prometheus Alerts to Telegram with Telepush">
+<meta property="og:url" content="https://muetsch.io/sending-prometheus-alerts-to-telegram-with-telepush.html">
+<meta property="og:site_name" content="Ferdinand Mütsch">
+<meta property="og:description" content="Prometheus AlertingPrometheus is among the most popular tools for server monitoring. It aggregates metrics from potentially countless different sources (provided through so called exporters), stores">
+<meta property="og:locale">
+<meta property="og:image" content="https://muetsch.io/images/prometheus_telepush.webp">
+<meta property="og:image" content="https://muetsch.io/images/telepush1.webp">
+<meta property="article:published_time" content="2022-03-11T19:13:37.000Z">
+<meta property="article:modified_time" content="2022-04-10T19:33:30.946Z">
+<meta property="article:author" content="Ferdinand Mütsch">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://muetsch.io/images/prometheus_telepush.webp">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/favicon.ico" sizes="192x192">
+          
+        
+        
+    
+    <!-- title -->
+    <title>Sending Prometheus Alerts to Telegram with Telepush</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- rss -->
+    
+    
+
+    <!-- rel-me links -->
+    
+      
+        <link href="http://github.com/muety" rel="me">
+      
+        <link href="https://social.tchncs.de/web/accounts/106761076750920593" rel="me">
+      
+        <link href="mailto:ferdinand@muetsch.io" rel="me">
+      
+    
+
+    <!-- Webmention link -->
+    
+      <link href="https://webmention.io/muetsch.io/webmention" rel="webmention">
+    
+
+    
+      <link href="https://webmention.io/muetsch.io/xmlrpc" rel="pingback">
+    
+<meta name="generator" content="Hexo 5.2.0"><link rel="alternate" href="/rss2.xml" title="Ferdinand Mütsch" type="application/rss+xml">
+</head>
+
+<body>
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="window.scrollTo(0, 0)" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Blog</a></li>
+         
+          <li><a href="/imprint/">Imprint</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" href="/wakapi-s-year-2021.html"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover='toggleById("i-next").toggleById();' onmouseout='toggleById("i-next");'></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="window.scrollTo(0,0)"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover='toggleById("i-top");' onmouseout='toggleById("i-top");'></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover='toggleById("i-share");' onmouseout='toggleById("i-share");' onclick='toggleById("share");return false;'></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://muetsch.io/sending-prometheus-alerts-to-telegram-with-telepush.html"><i class="fas fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://muetsch.io/sending-prometheus-alerts-to-telegram-with-telepush.html&text=Sending Prometheus Alerts to Telegram with Telepush"><i class="fas fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://muetsch.io/sending-prometheus-alerts-to-telegram-with-telepush.html&title=Sending Prometheus Alerts to Telegram with Telepush"><i class="fas fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://muetsch.io/sending-prometheus-alerts-to-telegram-with-telepush.html&is_video=false&description=Sending Prometheus Alerts to Telegram with Telepush"><i class="fas fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Sending Prometheus Alerts to Telegram with Telepush&body=Check out this article: https://muetsch.io/sending-prometheus-alerts-to-telegram-with-telepush.html"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://muetsch.io/sending-prometheus-alerts-to-telegram-with-telepush.html&title=Sending Prometheus Alerts to Telegram with Telepush"><i class="fas fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://muetsch.io/sending-prometheus-alerts-to-telegram-with-telepush.html&title=Sending Prometheus Alerts to Telegram with Telepush"><i class="fas fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://muetsch.io/sending-prometheus-alerts-to-telegram-with-telepush.html&title=Sending Prometheus Alerts to Telegram with Telepush"><i class="fas fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://muetsch.io/sending-prometheus-alerts-to-telegram-with-telepush.html&title=Sending Prometheus Alerts to Telegram with Telepush"><i class="fas fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://muetsch.io/sending-prometheus-alerts-to-telegram-with-telepush.html&name=Sending Prometheus Alerts to Telegram with Telepush&description="><i class="fas fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Prometheus-Alerting"><span class="toc-number">1.</span> <span class="toc-text">Prometheus Alerting</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Receiving-alerts-in-Telegram"><span class="toc-number">2.</span> <span class="toc-text">Receiving alerts in Telegram</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Prerequisites"><span class="toc-number">2.1.</span> <span class="toc-text">Prerequisites</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Obtain-a-token-from-Telepush"><span class="toc-number">2.2.</span> <span class="toc-text">Obtain a token from Telepush</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Configure-Alertmanager"><span class="toc-number">2.3.</span> <span class="toc-text">Configure Alertmanager</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Excursus-Configure-Prometheus"><span class="toc-number">2.4.</span> <span class="toc-text">Excursus: Configure Prometheus</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Excursus-Configure-Blackbox-Exporter"><span class="toc-number">2.5.</span> <span class="toc-text">Excursus: Configure Blackbox Exporter</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Testing-it"><span class="toc-number">3.</span> <span class="toc-text">Testing it</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index width mx-auto px2 my4">
+        
+        <article class="h-entry post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <a href="https://muetsch.io/sending-prometheus-alerts-to-telegram-with-telepush.html" class="u-url">
+        <h1 class="posttitle p-name" itemprop="name headline" property="headline">
+            Sending Prometheus Alerts to Telegram with Telepush
+        </h1>
+    </a>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" property="author" itemscope itemtype="http://schema.org/Person" vocab="http://schema.org/" typeof="Person">
+        <span itemprop="name" property="name" class="p-author h-card">Ferdinand Mütsch</span>
+      </span>
+      
+    <div class="postdate">
+        <time datetime="2022-03-11T19:13:37.000Z" class="dt-published" itemprop="datePublished" property="datePublished">2022-03-11</time>
+    </div>
+
+
+      
+
+
+      <!--
+      <div style="margin-top: 30px">
+        <a href="https://liberapay.com/muety/" target="_blank"
+          style="background-image: none; text-decoration: none;"><img
+            src="https://badges.fw-web.space/liberapay/receives/muety.svg?logo=liberapay&style=flat-square" alt="Liberapay"
+            style="height: auto !important;width: auto !important;"></a>
+      </div>
+      -->
+    </div>
+  </header>
+  
+  <div class="content e-content" itemprop="articleBody" property="articleBody">
+    <img src="images/prometheus_telepush.webp" width="256px">
+
+<h1 id="Prometheus-Alerting"><a href="#Prometheus-Alerting" class="headerlink" title="Prometheus Alerting"></a>Prometheus Alerting</h1><p><a target="_blank" rel="noopener" href="https://www.prometheus.io/">Prometheus</a> is among the most popular tools for server monitoring. It aggregates metrics from potentially countless different sources (provided through so called <a target="_blank" rel="noopener" href="https://www.prometheus.io/docs/instrumenting/exporters/">exporters</a>), stores them in its own time series database and allows them to be queried, e.g. by visualization tools like <a target="_blank" rel="noopener" href="https://grafana.com/">Grafana</a>. One central aspect of monitoring, besides visualization of data, is <strong>alerting</strong>. A very common use case for Prometheus is to watch a server’s runtime performance metrics, e.g. its CPU utilization or hard drive usage, and be notified when things go unusual, for instance, when the hard drive is close to running out of free space. Or you might want to use the <a target="_blank" rel="noopener" href="https://github.com/prometheus/blackbox_exporter"><code>blackbox_exporter</code></a> to watch an HTTP or TCP endpoint for being available and get immediate alerts as it goes down. For this, Prometheus integrates with <a target="_blank" rel="noopener" href="https://www.prometheus.io/docs/alerting/latest/overview/">Alertmanager</a>, their own little daemon process whose sole purpose is to send out alert notifications triggered by Prometheus queries.</p>
+<p>Alertmanager supports for different receivers, among the most popular of which arguably is <a target="_blank" rel="noopener" href="https://www.prometheus.io/docs/alerting/latest/configuration/#email_config"><code>email</code></a>. But there are many more, including the generic <a target="_blank" rel="noopener" href="https://www.prometheus.io/docs/alerting/latest/configuration/#webhook_config"><code>webhook</code></a> one, which is quite powerful.</p>
+<h1 id="Receiving-alerts-in-Telegram"><a href="#Receiving-alerts-in-Telegram" class="headerlink" title="Receiving alerts in Telegram"></a>Receiving alerts in Telegram</h1><p>E-Mail is well and good, but also feels a bit “heavy-weight” and outdated. You might rather want to receive your server monitoring alerts through your favorite messenger, for instance, Telegram. In the following, you’ll learn how to do so with minimal effort by using <a target="_blank" rel="noopener" href="https://telepush.dev/"><strong>Telepush</strong></a>. As an example, we are going to set up Prometheus to watch a locally running web service and send a Telegram messages once it’s unavailable.</p>
+<h2 id="Prerequisites"><a href="#Prerequisites" class="headerlink" title="Prerequisites"></a>Prerequisites</h2><p>I assume you have an up and running setup of Prometheus, Alertmanager and Blackbox Exporter (only required for this example) already.</p>
+<h2 id="Obtain-a-token-from-Telepush"><a href="#Obtain-a-token-from-Telepush" class="headerlink" title="Obtain a token from Telepush"></a>Obtain a token from <a target="_blank" rel="noopener" href="https://telepush.dev/">Telepush</a></h2><p>You will receive notifications through Telepush’s bot. From a technical perspective, an alert takes this way:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Prometheus --&gt; Alertmanager --&gt; Telepush API --&gt; Telegram</span><br></pre></td></tr></table></figure>
+
+<p>That is, Alertmanager sends all alerts to Telepush’s web API, which then forwards it to your Telegram chat with the bot. To instruct Telepush where to route which messages, you initially have to get in contact with Telepush’s Telegram bot and obtain a token.</p>
+<p>Open a new chat with <a target="_blank" rel="noopener" href="https://t.me/MiddlemanBot">TelepushBot</a> (<em>Telepush was formerly called MiddlemanBot</em>) and simply send <code>/start</code>. You’ll receive a <strong>token</strong>. Keep it for the next step.</p>
+<h2 id="Configure-Alertmanager"><a href="#Configure-Alertmanager" class="headerlink" title="Configure Alertmanager"></a>Configure Alertmanager</h2><p>Let’s continue with the interesting part and configure Alertmanager to send alerts via Telepush. In my case, the Alertmanager’s config file lives at <code>/opt/alertmanager/alertmanager.yml</code>.</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># alertmanager.yml</span></span><br><span class="line"></span><br><span class="line"><span class="attr">global:</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># catch-all route to receive and handle all incoming alerts</span></span><br><span class="line"><span class="attr">route:</span></span><br><span class="line">  <span class="attr">group_by:</span> [<span class="string">&#x27;alertname&#x27;</span>]</span><br><span class="line">  <span class="attr">group_wait:</span> <span class="string">10s</span>       <span class="comment"># wait up to 10s for more alerts to group them</span></span><br><span class="line">  <span class="attr">receiver:</span> <span class="string">&#x27;telepush&#x27;</span>  <span class="comment"># see below</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># telepush configuration here</span></span><br><span class="line"><span class="attr">receivers:</span></span><br><span class="line"><span class="bullet">-</span> <span class="attr">name:</span> <span class="string">&#x27;telepush&#x27;</span></span><br><span class="line">  <span class="attr">webhook_configs:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="attr">url:</span> <span class="string">&#x27;https://telepush.dev/api/inlets/alertmanager/&lt;YOUR_TOKEN&gt;&#x27;</span>    <span class="comment"># add your Telepush token here</span></span><br><span class="line">    <span class="attr">http_config:</span></span><br></pre></td></tr></table></figure>
+
+<p>Then, apply the configuration through a reload:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -X POST http://localhost:9093/-/reload</span><br></pre></td></tr></table></figure>
+
+<p><strong>🎉 You’re done!</strong> That’s already it.</p>
+<p>No more is needed to hook up Alertmanager with Telepush. For the sake of completeness, though, let’s continue with the config requires to connect Prometheus and Alertmanager in the first place and to set up blackbox monitoring.</p>
+<h2 id="Excursus-Configure-Prometheus"><a href="#Excursus-Configure-Prometheus" class="headerlink" title="Excursus: Configure Prometheus"></a>Excursus: Configure Prometheus</h2><p>Below is the configuration to instruct Prometheus where to find the Alertmanager and a job to monitor a webpage at <code>http://localhost:4000</code> for being up and returning a <code>2xx</code> HTTP response code.</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># prometheus.yml</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Alertmanager configuration</span></span><br><span class="line"><span class="attr">alerting:</span></span><br><span class="line">  <span class="attr">alertmanagers:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="attr">static_configs:</span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">targets:</span></span><br><span class="line">       <span class="bullet">-</span> <span class="string">&quot;localhost:9093&quot;</span>                   <span class="comment"># address of your alertmanager service</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Load custom rules rules once and periodically evaluate them according to the global &#x27;evaluation_interval&#x27;.</span></span><br><span class="line"><span class="attr">rule_files:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">&quot;custom_alerts.yml&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Scrape configs</span></span><br><span class="line"><span class="attr">scrape_configs:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="attr">job_name:</span> <span class="string">&#x27;blackbox-demo&#x27;</span>               <span class="comment"># choose a name</span></span><br><span class="line">    <span class="attr">metrics_path:</span> <span class="string">/probe</span></span><br><span class="line">    <span class="attr">scrape_timeout:</span> <span class="string">10s</span></span><br><span class="line">    <span class="attr">params:</span></span><br><span class="line">      <span class="attr">module:</span> [<span class="string">https_2xx</span>]                   <span class="comment"># check for http success response</span></span><br><span class="line">    <span class="attr">static_configs:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">targets:</span></span><br><span class="line">        <span class="bullet">-</span> <span class="string">&#x27;http://localhost:4000&#x27;</span>           <span class="comment"># add your target url to watch</span></span><br><span class="line">    <span class="attr">relabel_configs:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">source_labels:</span> [<span class="string">__address__</span>]</span><br><span class="line">        <span class="attr">target_label:</span> <span class="string">__param_target</span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">source_labels:</span> [<span class="string">__param_target</span>]</span><br><span class="line">        <span class="attr">target_label:</span> <span class="string">instance</span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">target_label:</span> <span class="string">__address__</span></span><br><span class="line">        <span class="attr">replacement:</span> <span class="string">&#x27;127.0.0.1:9101&#x27;</span>       <span class="comment"># address of your blackbox exporter</span></span><br></pre></td></tr></table></figure>
+
+<p>Additionally, we need to configure the notification template for alerts triggered by Blackbox Exporter.</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># custom_alerts.yml</span></span><br><span class="line"></span><br><span class="line"><span class="bullet">-</span> <span class="attr">name:</span> <span class="string">BlackboxAlerts</span></span><br><span class="line">  <span class="attr">rules:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="attr">alert:</span> <span class="string">EndpointDown</span></span><br><span class="line">    <span class="attr">expr:</span> <span class="string">probe_success</span> <span class="string">==</span> <span class="number">0</span></span><br><span class="line">    <span class="attr">for:</span> <span class="string">1m</span></span><br><span class="line">    <span class="attr">labels:</span></span><br><span class="line">      <span class="attr">severity:</span> <span class="string">&quot;critical&quot;</span></span><br><span class="line">    <span class="attr">annotations:</span></span><br><span class="line">      <span class="attr">summary:</span> <span class="string">&quot;Endpoint <span class="template-variable">&#123;&#123; $labels.instance &#125;&#125;</span> down&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="Excursus-Configure-Blackbox-Exporter"><a href="#Excursus-Configure-Blackbox-Exporter" class="headerlink" title="Excursus: Configure Blackbox Exporter"></a>Excursus: Configure Blackbox Exporter</h2><p>Another short snippet is required in the blackbox exporter’s config file to make available the <code>http_2xx</code> module used above.</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># blackbox.yml</span></span><br><span class="line"></span><br><span class="line"><span class="attr">modules:</span></span><br><span class="line">  <span class="attr">http_2xx:</span></span><br><span class="line">    <span class="attr">prober:</span> <span class="string">http</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="Testing-it"><a href="#Testing-it" class="headerlink" title="Testing it"></a>Testing it</h1><p>To set the set up, we simply reload Prometheus (just like reloading the Alertmanager above) and wait for a minute.</p>
+<p><img src="images/telepush1.webp"></p>
+
+  </div>
+</article>
+
+
+
+    </div>
+    
+      <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Blog</a></li>
+         
+          <li><a href="/imprint/">Imprint</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Prometheus-Alerting"><span class="toc-number">1.</span> <span class="toc-text">Prometheus Alerting</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Receiving-alerts-in-Telegram"><span class="toc-number">2.</span> <span class="toc-text">Receiving alerts in Telegram</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Prerequisites"><span class="toc-number">2.1.</span> <span class="toc-text">Prerequisites</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Obtain-a-token-from-Telepush"><span class="toc-number">2.2.</span> <span class="toc-text">Obtain a token from Telepush</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Configure-Alertmanager"><span class="toc-number">2.3.</span> <span class="toc-text">Configure Alertmanager</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Excursus-Configure-Prometheus"><span class="toc-number">2.4.</span> <span class="toc-text">Excursus: Configure Prometheus</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Excursus-Configure-Blackbox-Exporter"><span class="toc-number">2.5.</span> <span class="toc-text">Excursus: Configure Blackbox Exporter</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Testing-it"><span class="toc-number">3.</span> <span class="toc-text">Testing it</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://muetsch.io/sending-prometheus-alerts-to-telegram-with-telepush.html"><i class="fas fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://muetsch.io/sending-prometheus-alerts-to-telegram-with-telepush.html&text=Sending Prometheus Alerts to Telegram with Telepush"><i class="fas fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://muetsch.io/sending-prometheus-alerts-to-telegram-with-telepush.html&title=Sending Prometheus Alerts to Telegram with Telepush"><i class="fas fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://muetsch.io/sending-prometheus-alerts-to-telegram-with-telepush.html&is_video=false&description=Sending Prometheus Alerts to Telegram with Telepush"><i class="fas fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Sending Prometheus Alerts to Telegram with Telepush&body=Check out this article: https://muetsch.io/sending-prometheus-alerts-to-telegram-with-telepush.html"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://muetsch.io/sending-prometheus-alerts-to-telegram-with-telepush.html&title=Sending Prometheus Alerts to Telegram with Telepush"><i class="fas fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://muetsch.io/sending-prometheus-alerts-to-telegram-with-telepush.html&title=Sending Prometheus Alerts to Telegram with Telepush"><i class="fas fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://muetsch.io/sending-prometheus-alerts-to-telegram-with-telepush.html&title=Sending Prometheus Alerts to Telegram with Telepush"><i class="fas fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://muetsch.io/sending-prometheus-alerts-to-telegram-with-telepush.html&title=Sending Prometheus Alerts to Telegram with Telepush"><i class="fas fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://muetsch.io/sending-prometheus-alerts-to-telegram-with-telepush.html&name=Sending Prometheus Alerts to Telegram with Telepush&description="><i class="fas fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+      <ul>
+        <li id="toc"><a class="icon" href="#" onclick='toggleById("toc-footer")'><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a></li>
+        <li id="share"><a class="icon" href="#" onclick='toggleById("share-footer")'><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a></li>
+        <li id="top" style="display:none"><a class="icon" href="#" onclick="window.scrollTo(0,0)"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a></li>
+        <li id="menu"><a class="icon" href="#" onclick='toggleById("nav-footer")'><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a></li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+    
+    <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2022 Ferdinand Mütsch
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Blog</a></li>
+         
+          <li><a href="/imprint/">Imprint</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+<!--
+<script defer type="text/javascript" src="js/pirsch.js"
+    id="pirschjs"
+    data-code="GoPk8VNmzk8Z6n7xikwZahvOxm1MNPud"></script>
+-->
+</body>
+</html>
+
+<script src="/js/main.js"></script>
+
+<!-- Google Analytics -->
+
+<!-- Disqus Comments -->
+
+
+<!-- styles -->
+
+<link rel="stylesheet" href="/lib/roboto/css/roboto.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+
+
