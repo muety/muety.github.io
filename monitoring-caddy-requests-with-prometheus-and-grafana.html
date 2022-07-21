@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="referrer" content="no-referrer">
+    <meta name="description" content="IntroductionCaddy is cool web server and I really like it for how simple and easy it is to use. I’m using it both as a static file server and a reverse proxy for years now (including for service like">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Monitoring Caddy requests with Prometheus and Grafana">
+<meta property="og:url" content="https://muetsch.io/monitoring-caddy-requests-with-prometheus-and-grafana.html">
+<meta property="og:site_name" content="Ferdinand Mütsch">
+<meta property="og:description" content="IntroductionCaddy is cool web server and I really like it for how simple and easy it is to use. I’m using it both as a static file server and a reverse proxy for years now (including for service like">
+<meta property="og:locale">
+<meta property="og:image" content="https://muetsch.io/images/caddy_logging.webp">
+<meta property="article:published_time" content="2022-07-21T20:03:57.000Z">
+<meta property="article:modified_time" content="2022-07-21T20:42:30.829Z">
+<meta property="article:author" content="Ferdinand Mütsch">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://muetsch.io/images/caddy_logging.webp">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/favicon.ico" sizes="192x192">
+          
+        
+        
+    
+    <!-- title -->
+    <title>Monitoring Caddy requests with Prometheus and Grafana</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- rss -->
+    
+    
+
+    <!-- rel-me links -->
+    
+      
+        <link href="http://github.com/muety" rel="me">
+      
+        <link href="https://social.tchncs.de/web/accounts/106761076750920593" rel="me">
+      
+        <link href="mailto:ferdinand@muetsch.io" rel="me">
+      
+    
+
+    <!-- Webmention link -->
+    
+      <link href="https://webmention.io/muetsch.io/webmention" rel="webmention">
+    
+
+    
+      <link href="https://webmention.io/muetsch.io/xmlrpc" rel="pingback">
+    
+<meta name="generator" content="Hexo 5.2.0"><link rel="alternate" href="/rss2.xml" title="Ferdinand Mütsch" type="application/rss+xml">
+</head>
+
+<body>
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="window.scrollTo(0, 0)" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Blog</a></li>
+         
+          <li><a href="/imprint/">Imprint</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" href="/sending-prometheus-alerts-to-telegram-with-telepush.html"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover='toggleById("i-next").toggleById();' onmouseout='toggleById("i-next");'></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="window.scrollTo(0,0)"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover='toggleById("i-top");' onmouseout='toggleById("i-top");'></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover='toggleById("i-share");' onmouseout='toggleById("i-share");' onclick='toggleById("share");return false;'></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://muetsch.io/monitoring-caddy-requests-with-prometheus-and-grafana.html"><i class="fas fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://muetsch.io/monitoring-caddy-requests-with-prometheus-and-grafana.html&text=Monitoring Caddy requests with Prometheus and Grafana"><i class="fas fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://muetsch.io/monitoring-caddy-requests-with-prometheus-and-grafana.html&title=Monitoring Caddy requests with Prometheus and Grafana"><i class="fas fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://muetsch.io/monitoring-caddy-requests-with-prometheus-and-grafana.html&is_video=false&description=Monitoring Caddy requests with Prometheus and Grafana"><i class="fas fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Monitoring Caddy requests with Prometheus and Grafana&body=Check out this article: https://muetsch.io/monitoring-caddy-requests-with-prometheus-and-grafana.html"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://muetsch.io/monitoring-caddy-requests-with-prometheus-and-grafana.html&title=Monitoring Caddy requests with Prometheus and Grafana"><i class="fas fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://muetsch.io/monitoring-caddy-requests-with-prometheus-and-grafana.html&title=Monitoring Caddy requests with Prometheus and Grafana"><i class="fas fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://muetsch.io/monitoring-caddy-requests-with-prometheus-and-grafana.html&title=Monitoring Caddy requests with Prometheus and Grafana"><i class="fas fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://muetsch.io/monitoring-caddy-requests-with-prometheus-and-grafana.html&title=Monitoring Caddy requests with Prometheus and Grafana"><i class="fas fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://muetsch.io/monitoring-caddy-requests-with-prometheus-and-grafana.html&name=Monitoring Caddy requests with Prometheus and Grafana&description="><i class="fas fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Introduction"><span class="toc-number">1.</span> <span class="toc-text">Introduction</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Problem"><span class="toc-number">2.</span> <span class="toc-text">Problem</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Who-needs-Common-Log-Format-anyway"><span class="toc-number">2.1.</span> <span class="toc-text">Who needs Common Log Format anyway?</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Solution"><span class="toc-number">3.</span> <span class="toc-text">Solution</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Switching-to-JSON-logging"><span class="toc-number">3.1.</span> <span class="toc-text">Switching to JSON logging</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Parsing-and-exporting-logs-to-Prometheus"><span class="toc-number">3.2.</span> <span class="toc-text">Parsing and exporting logs to Prometheus</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SystemD-service"><span class="toc-number">3.3.</span> <span class="toc-text">SystemD service</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Testing-it"><span class="toc-number">3.4.</span> <span class="toc-text">Testing it</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Grafana-visualization"><span class="toc-number">3.5.</span> <span class="toc-text">Grafana visualization</span></a></li></ol></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index width mx-auto px2 my4">
+        
+        <article class="h-entry post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <a href="https://muetsch.io/monitoring-caddy-requests-with-prometheus-and-grafana.html" class="u-url">
+        <h1 class="posttitle p-name" itemprop="name headline" property="headline">
+            Monitoring Caddy requests with Prometheus and Grafana
+        </h1>
+    </a>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" property="author" itemscope itemtype="http://schema.org/Person" vocab="http://schema.org/" typeof="Person">
+        <span itemprop="name" property="name" class="p-author h-card">Ferdinand Mütsch</span>
+      </span>
+      
+    <div class="postdate">
+        <time datetime="2022-07-21T20:03:57.000Z" class="dt-published" itemprop="datePublished" property="datePublished">2022-07-21</time>
+    </div>
+
+
+      
+
+
+      <!--
+      <div style="margin-top: 30px">
+        <a href="https://liberapay.com/muety/" target="_blank"
+          style="background-image: none; text-decoration: none;"><img
+            src="https://badges.fw-web.space/liberapay/receives/muety.svg?logo=liberapay&style=flat-square" alt="Liberapay"
+            style="height: auto !important;width: auto !important;"></a>
+      </div>
+      -->
+    </div>
+  </header>
+  
+  <div class="content e-content" itemprop="articleBody" property="articleBody">
+    <h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1><p><a target="_blank" rel="noopener" href="https://caddyserver.com/">Caddy</a> is cool web server and I really like it for how simple and easy it is to use. I’m using it both as a static file server and a reverse proxy for years now (including for service like <a target="_blank" rel="noopener" href="https://wakapi.dev/">Wakapi</a>). You could even use it as an API gateway, featuring authentication / authorization, load balancing, etc. </p>
+<h1 id="Problem"><a href="#Problem" class="headerlink" title="Problem"></a>Problem</h1><h2 id="Who-needs-Common-Log-Format-anyway"><a href="#Who-needs-Common-Log-Format-anyway" class="headerlink" title="Who needs Common Log Format anyway?"></a>Who needs Common Log Format anyway?</h2><p>From version 2.4 to 2.5, the authors <a target="_blank" rel="noopener" href="https://github.com/caddyserver/caddy/pull/4282">removed support</a> for logging requests in <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Common_Log_Format">Common Log Format (CLF)</a> (<a target="_blank" rel="noopener" href="https://github.com/caddyserver/caddy/issues/4148">here</a> is why). I didn’t really like that decision because, first, what about semantic versioning?! 🤔 And, second, while I see the downsides of CLF, it’s probably still the most widely used format for web server logs and simply dropping that feels a bit drastic. Anyways, after upgrading Caddy, my monitoring broke. I was using <a target="_blank" rel="noopener" href="https://github.com/fstab/grok_exporter">grok_exporter</a> (Caddy istself <a target="_blank" rel="noopener" href="https://github.com/caddyserver/caddy/issues/3784">doesn’t support per-host metrics</a>, yet) to read Caddy’s access logs and provide them to Prometheus, which, in turn, was called by Grafana to plot cool-looking dashboard with stats about my web apps.</p>
+<h1 id="Solution"><a href="#Solution" class="headerlink" title="Solution"></a>Solution</h1><h2 id="Switching-to-JSON-logging"><a href="#Switching-to-JSON-logging" class="headerlink" title="Switching to JSON logging"></a>Switching to JSON logging</h2><p>I decided to switch to logging in JSON format instead, because JSON is commonly understood and well supported by all kinds of programs and libraries. My vhosts now look like this:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"># &#x2F;etc&#x2F;caddy&#x2F;Caddyfile</span><br><span class="line"></span><br><span class="line">wakapi.dev &#123;</span><br><span class="line">    # ...</span><br><span class="line">    </span><br><span class="line">    reverse_proxy http:&#x2F;&#x2F;[::1]:3000</span><br><span class="line"></span><br><span class="line">    log &#123;</span><br><span class="line">        output &#x2F;var&#x2F;log&#x2F;caddy&#x2F;wakapi.access.log</span><br><span class="line">        format json</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    # ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Parsing-and-exporting-logs-to-Prometheus"><a href="#Parsing-and-exporting-logs-to-Prometheus" class="headerlink" title="Parsing and exporting logs to Prometheus"></a>Parsing and exporting logs to Prometheus</h2><p>This also meant that I had to find a new way of parsing an exporting the logs. Technically, I could have continued using the _grok_exporter_, but writing a regex pattern to extract fields from JSON lines seemed to much of a hassle to me. Instead, I found <a target="_blank" rel="noopener" href="https://github.com/muety/json-log-exporter">json-log-exporter</a>, which does exactly what I needed. It takes a list of files in <a target="_blank" rel="noopener" href="https://jsonlines.org/">JSON Lines</a> format and exports certain fields as Prometheus metrics, depending on your config / mapping. I came up with this config for the tool:</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># /etc/json-log-exporter/json_log_exporter.yml</span></span><br><span class="line"></span><br><span class="line"><span class="attr">namespace:</span> <span class="string">jsonlog</span></span><br><span class="line"><span class="attr">exports:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">default</span></span><br><span class="line">    <span class="attr">path:</span> <span class="string">/metrics</span></span><br><span class="line"><span class="attr">log_groups:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">caddy</span></span><br><span class="line">    <span class="attr">subsystem:</span> <span class="string">caddy</span></span><br><span class="line">    <span class="attr">files:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">/var/log/caddy/wakapi.log</span></span><br><span class="line">      <span class="bullet">-</span> <span class="string">/var/log/caddy/muetschio.log</span></span><br><span class="line">      <span class="comment"># more</span></span><br><span class="line">    <span class="attr">labels:</span></span><br><span class="line">      <span class="attr">host:</span> <span class="string">&quot;<span class="template-variable">&#123;&#123;.request.host&#125;&#125;</span>&quot;</span></span><br><span class="line">      <span class="attr">proto:</span> <span class="string">&quot;<span class="template-variable">&#123;&#123;.request.proto&#125;&#125;</span>&quot;</span></span><br><span class="line">      <span class="attr">method:</span> <span class="string">&quot;<span class="template-variable">&#123;&#123;.request.method&#125;&#125;</span>&quot;</span></span><br><span class="line">      <span class="attr">response:</span> <span class="string">&quot;<span class="template-variable">&#123;&#123;.status&#125;&#125;</span>&quot;</span></span><br><span class="line">    <span class="attr">metrics:</span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">count_total</span></span><br><span class="line">        <span class="attr">type:</span> <span class="string">counter</span></span><br><span class="line">        <span class="attr">export_to:</span> <span class="string">default</span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">bytes_total</span></span><br><span class="line">        <span class="attr">type:</span> <span class="string">counter</span></span><br><span class="line">        <span class="attr">value:</span> <span class="string">&quot;<span class="template-variable">&#123;&#123;.size&#125;&#125;</span>&quot;</span></span><br><span class="line">        <span class="attr">export_to:</span> <span class="string">default</span></span><br><span class="line">      <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">duration_total</span></span><br><span class="line">        <span class="attr">type:</span> <span class="string">histogram</span></span><br><span class="line">        <span class="attr">buckets:</span></span><br><span class="line">          <span class="bullet">-</span> <span class="number">0.001</span></span><br><span class="line">          <span class="bullet">-</span> <span class="number">0.01</span></span><br><span class="line">          <span class="bullet">-</span> <span class="number">0.05</span></span><br><span class="line">          <span class="bullet">-</span> <span class="number">0.1</span></span><br><span class="line">          <span class="bullet">-</span> <span class="number">0.5</span></span><br><span class="line">          <span class="bullet">-</span> <span class="number">1</span></span><br><span class="line">          <span class="bullet">-</span> <span class="number">5</span></span><br><span class="line">          <span class="bullet">-</span> <span class="number">10</span></span><br><span class="line">          <span class="bullet">-</span> <span class="number">30</span></span><br><span class="line">          <span class="bullet">-</span> <span class="number">60</span></span><br><span class="line">        <span class="attr">value:</span> <span class="string">&quot;<span class="template-variable">&#123;&#123;.duration&#125;&#125;</span>&quot;</span></span><br><span class="line">        <span class="attr">export_to:</span> <span class="string">default</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="SystemD-service"><a href="#SystemD-service" class="headerlink" title="SystemD service"></a>SystemD service</h2><p>I created a simple SystemD service unit to run the exporter in the background:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"># &#x2F;etc&#x2F;systemd&#x2F;system&#x2F;json-log-exporter.service</span><br><span class="line"></span><br><span class="line">[Unit]</span><br><span class="line">Description&#x3D;JSON Log Exporter</span><br><span class="line"></span><br><span class="line">[Service]</span><br><span class="line">Type&#x3D;simple</span><br><span class="line">User&#x3D;json_log_exporter</span><br><span class="line">WorkingDirectory&#x3D;&#x2F;opt&#x2F;json-log-exporter</span><br><span class="line">ExecStart&#x3D;&#x2F;opt&#x2F;json-log-exporter&#x2F;json-log-exporter -config-file &#x2F;etc&#x2F;json-log-exporter&#x2F;json_log_exporter.yml -web.listen-address 127.0.0.1:9321</span><br><span class="line">Restart&#x3D;on-failure</span><br><span class="line">RestartSec&#x3D;90</span><br><span class="line">StartLimitInterval&#x3D;400</span><br><span class="line">StartLimitBurst&#x3D;3</span><br><span class="line"></span><br><span class="line">[Install]</span><br><span class="line">WantedBy&#x3D;multi-user.target</span><br></pre></td></tr></table></figure>
+
+<h2 id="Testing-it"><a href="#Testing-it" class="headerlink" title="Testing it"></a>Testing it</h2><p>Running this provides an endpoint at <a target="_blank" rel="noopener" href="http://localhost:9321/metrics">http://localhost:9321/metrics</a>, that exports the metrics defined above. Here’s an example: </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">jsonlog_caddy_bytes_total&#123;host&#x3D;&quot;wakapi.dev&quot;,method&#x3D;&quot;GET&quot;,proto&#x3D;&quot;HTTP&#x2F;2.0&quot;,response&#x3D;&quot;200&quot;&#125; 1.6983983e+07#</span><br><span class="line"></span><br><span class="line">jsonlog_caddy_count_total&#123;host&#x3D;&quot;wakapi.dev&quot;,method&#x3D;&quot;GET&quot;,proto&#x3D;&quot;HTTP&#x2F;2.0&quot;,response&#x3D;&quot;200&quot;&#125; 26202</span><br><span class="line"></span><br><span class="line">jsonlog_caddy_duration_total_bucket&#123;host&#x3D;&quot;wakapi.dev&quot;,method&#x3D;&quot;GET&quot;,proto&#x3D;&quot;HTTP&#x2F;2.0&quot;,response&#x3D;&quot;200&quot;,le&#x3D;&quot;0.001&quot;&#125; 81</span><br><span class="line">jsonlog_caddy_duration_total_bucket&#123;host&#x3D;&quot;wakapi.dev&quot;,method&#x3D;&quot;GET&quot;,proto&#x3D;&quot;HTTP&#x2F;2.0&quot;,response&#x3D;&quot;200&quot;,le&#x3D;&quot;0.01&quot;&#125; 8343</span><br><span class="line">jsonlog_caddy_duration_total_bucket&#123;host&#x3D;&quot;wakapi.dev&quot;,method&#x3D;&quot;GET&quot;,proto&#x3D;&quot;HTTP&#x2F;2.0&quot;,response&#x3D;&quot;200&quot;,le&#x3D;&quot;0.05&quot;&#125; 24542</span><br><span class="line">jsonlog_caddy_duration_total_bucket&#123;host&#x3D;&quot;wakapi.dev&quot;,method&#x3D;&quot;GET&quot;,proto&#x3D;&quot;HTTP&#x2F;2.0&quot;,response&#x3D;&quot;200&quot;,le&#x3D;&quot;0.1&quot;&#125; 25977</span><br><span class="line">jsonlog_caddy_duration_total_bucket&#123;host&#x3D;&quot;wakapi.dev&quot;,method&#x3D;&quot;GET&quot;,proto&#x3D;&quot;HTTP&#x2F;2.0&quot;,response&#x3D;&quot;200&quot;,le&#x3D;&quot;0.5&quot;&#125; 26190</span><br><span class="line">jsonlog_caddy_duration_total_bucket&#123;host&#x3D;&quot;wakapi.dev&quot;,method&#x3D;&quot;GET&quot;,proto&#x3D;&quot;HTTP&#x2F;2.0&quot;,response&#x3D;&quot;200&quot;,le&#x3D;&quot;1&quot;&#125; 26195</span><br><span class="line">jsonlog_caddy_duration_total_bucket&#123;host&#x3D;&quot;wakapi.dev&quot;,method&#x3D;&quot;GET&quot;,proto&#x3D;&quot;HTTP&#x2F;2.0&quot;,response&#x3D;&quot;200&quot;,le&#x3D;&quot;5&quot;&#125; 26196</span><br><span class="line">jsonlog_caddy_duration_total_bucket&#123;host&#x3D;&quot;wakapi.dev&quot;,method&#x3D;&quot;GET&quot;,proto&#x3D;&quot;HTTP&#x2F;2.0&quot;,response&#x3D;&quot;200&quot;,le&#x3D;&quot;10&quot;&#125; 26198</span><br><span class="line">jsonlog_caddy_duration_total_bucket&#123;host&#x3D;&quot;wakapi.dev&quot;,method&#x3D;&quot;GET&quot;,proto&#x3D;&quot;HTTP&#x2F;2.0&quot;,response&#x3D;&quot;200&quot;,le&#x3D;&quot;30&quot;&#125; 26202</span><br><span class="line">jsonlog_caddy_duration_total_bucket&#123;host&#x3D;&quot;wakapi.dev&quot;,method&#x3D;&quot;GET&quot;,proto&#x3D;&quot;HTTP&#x2F;2.0&quot;,response&#x3D;&quot;200&quot;,le&#x3D;&quot;60&quot;&#125; 26202</span><br><span class="line">jsonlog_caddy_duration_total_bucket&#123;host&#x3D;&quot;wakapi.dev&quot;,method&#x3D;&quot;GET&quot;,proto&#x3D;&quot;HTTP&#x2F;2.0&quot;,response&#x3D;&quot;200&quot;,le&#x3D;&quot;+Inf&quot;&#125; 26202</span><br></pre></td></tr></table></figure>
+
+<h2 id="Grafana-visualization"><a href="#Grafana-visualization" class="headerlink" title="Grafana visualization"></a>Grafana visualization</h2><p><img src="images/caddy_logging.webp"></p>
+<p>Using the following query in Grafana, you can plot cool charts showing your requests per seconds across all your sites.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sum(irate(jsonlog_caddy_count_total[5m])) by (host)</span><br></pre></td></tr></table></figure>
+
+
+  </div>
+</article>
+
+
+
+    </div>
+    
+      <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Blog</a></li>
+         
+          <li><a href="/imprint/">Imprint</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Introduction"><span class="toc-number">1.</span> <span class="toc-text">Introduction</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Problem"><span class="toc-number">2.</span> <span class="toc-text">Problem</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Who-needs-Common-Log-Format-anyway"><span class="toc-number">2.1.</span> <span class="toc-text">Who needs Common Log Format anyway?</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Solution"><span class="toc-number">3.</span> <span class="toc-text">Solution</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Switching-to-JSON-logging"><span class="toc-number">3.1.</span> <span class="toc-text">Switching to JSON logging</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Parsing-and-exporting-logs-to-Prometheus"><span class="toc-number">3.2.</span> <span class="toc-text">Parsing and exporting logs to Prometheus</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SystemD-service"><span class="toc-number">3.3.</span> <span class="toc-text">SystemD service</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Testing-it"><span class="toc-number">3.4.</span> <span class="toc-text">Testing it</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Grafana-visualization"><span class="toc-number">3.5.</span> <span class="toc-text">Grafana visualization</span></a></li></ol></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://muetsch.io/monitoring-caddy-requests-with-prometheus-and-grafana.html"><i class="fas fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://muetsch.io/monitoring-caddy-requests-with-prometheus-and-grafana.html&text=Monitoring Caddy requests with Prometheus and Grafana"><i class="fas fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://muetsch.io/monitoring-caddy-requests-with-prometheus-and-grafana.html&title=Monitoring Caddy requests with Prometheus and Grafana"><i class="fas fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://muetsch.io/monitoring-caddy-requests-with-prometheus-and-grafana.html&is_video=false&description=Monitoring Caddy requests with Prometheus and Grafana"><i class="fas fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Monitoring Caddy requests with Prometheus and Grafana&body=Check out this article: https://muetsch.io/monitoring-caddy-requests-with-prometheus-and-grafana.html"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://muetsch.io/monitoring-caddy-requests-with-prometheus-and-grafana.html&title=Monitoring Caddy requests with Prometheus and Grafana"><i class="fas fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://muetsch.io/monitoring-caddy-requests-with-prometheus-and-grafana.html&title=Monitoring Caddy requests with Prometheus and Grafana"><i class="fas fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://muetsch.io/monitoring-caddy-requests-with-prometheus-and-grafana.html&title=Monitoring Caddy requests with Prometheus and Grafana"><i class="fas fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://muetsch.io/monitoring-caddy-requests-with-prometheus-and-grafana.html&title=Monitoring Caddy requests with Prometheus and Grafana"><i class="fas fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://muetsch.io/monitoring-caddy-requests-with-prometheus-and-grafana.html&name=Monitoring Caddy requests with Prometheus and Grafana&description="><i class="fas fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+      <ul>
+        <li id="toc"><a class="icon" href="#" onclick='toggleById("toc-footer")'><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a></li>
+        <li id="share"><a class="icon" href="#" onclick='toggleById("share-footer")'><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a></li>
+        <li id="top" style="display:none"><a class="icon" href="#" onclick="window.scrollTo(0,0)"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a></li>
+        <li id="menu"><a class="icon" href="#" onclick='toggleById("nav-footer")'><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a></li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+    
+    <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2022 Ferdinand Mütsch
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Blog</a></li>
+         
+          <li><a href="/imprint/">Imprint</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+<!--
+<script defer type="text/javascript" src="js/pirsch.js"
+    id="pirschjs"
+    data-code="GoPk8VNmzk8Z6n7xikwZahvOxm1MNPud"></script>
+-->
+</body>
+</html>
+<!-- styles -->
+
+<link rel="stylesheet" href="/lib/roboto/css/roboto.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+
+
+
+<script src="/js/main.js"></script>
+
+<!-- Google Analytics -->
+
+<!-- Disqus Comments -->
+
+

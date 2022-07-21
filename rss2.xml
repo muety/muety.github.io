@@ -9,8 +9,28 @@
     <atom:link href="https://muetsch.io/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description>Hi and welcome! 👋 I&#39;m Ferdinand, a passionate web developer and technology enthusiast from Karlsruhe, Germany. My personal webpage is the right place to find out about me and my projects and to read about software development, DevOps, some machine learning and technology in general. Enjoy and feel free to leave me a message!</description>
-    <pubDate>Sun, 10 Apr 2022 19:33:30 GMT</pubDate>
+    <pubDate>Thu, 21 Jul 2022 20:42:30 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>Monitoring Caddy requests with Prometheus and Grafana</title>
+      <link>https://muetsch.io/monitoring-caddy-requests-with-prometheus-and-grafana.html</link>
+      <guid>https://muetsch.io/monitoring-caddy-requests-with-prometheus-and-grafana.html</guid>
+      <pubDate>Thu, 21 Jul 2022 20:03:57 GMT</pubDate>
+      
+        
+        
+      <description>&lt;h1 id=&quot;Introduction&quot;&gt;&lt;a href=&quot;#Introduction&quot; class=&quot;headerlink&quot; title=&quot;Introduction&quot;&gt;&lt;/a&gt;Introduction&lt;/h1&gt;&lt;p&gt;&lt;a href=&quot;https://caddyserver.c</description>
+        
+      
+      
+      
+      
+      
+      
+      <comments>https://muetsch.io/monitoring-caddy-requests-with-prometheus-and-grafana.html#disqus_thread</comments>
+      
+    </item>
     
     <item>
       <title>Sending Prometheus Alerts to Telegram with Telepush</title>
@@ -94,26 +114,6 @@
       
       
       <comments>https://muetsch.io/serving-raster-data-from-postgis-as-wms-using-python-and-fastapi-or-flask.html#disqus_thread</comments>
-      
-    </item>
-    
-    <item>
-      <title>Open-source, self-hosted location tracking with OwnTracks and Grafana</title>
-      <link>https://muetsch.io/open-source-self-hosted-location-tracking-with-owntracks-and-grafana.html</link>
-      <guid>https://muetsch.io/open-source-self-hosted-location-tracking-with-owntracks-and-grafana.html</guid>
-      <pubDate>Fri, 25 Jun 2021 06:49:45 GMT</pubDate>
-      
-        
-        
-      <description>&lt;h1 id=&quot;Introduction&quot;&gt;&lt;a href=&quot;#Introduction&quot; class=&quot;headerlink&quot; title=&quot;Introduction&quot;&gt;&lt;/a&gt;Introduction&lt;/h1&gt;&lt;p&gt;If you are using any kinds of </description>
-        
-      
-      
-      
-      
-      
-      
-      <comments>https://muetsch.io/open-source-self-hosted-location-tracking-with-owntracks-and-grafana.html#disqus_thread</comments>
       
     </item>
     
