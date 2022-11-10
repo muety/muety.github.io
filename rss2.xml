@@ -9,8 +9,29 @@
     <atom:link href="https://muetsch.io/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description>Hi and welcome! 👋 I&#39;m Ferdinand, a passionate web developer and technology enthusiast from Karlsruhe, Germany. My personal webpage is the right place to find out about me and my projects and to read about software development, DevOps, some machine learning and technology in general. Enjoy and feel free to leave me a message!</description>
-    <pubDate>Thu, 21 Jul 2022 20:42:30 GMT</pubDate>
+    <pubDate>Thu, 10 Nov 2022 15:54:56 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>How development history keeps repeating itself</title>
+      <link>https://muetsch.io/how-development-history-keeps-repeating-itself.html</link>
+      <guid>https://muetsch.io/how-development-history-keeps-repeating-itself.html</guid>
+      <pubDate>Fri, 04 Nov 2022 10:18:08 GMT</pubDate>
+      
+        
+        
+      <description>&lt;p&gt;&lt;img src=&quot;images/dev_history1.webp&quot; alt=&quot;Tools in a workshop&quot;&gt;&lt;/p&gt;
+&lt;p&gt;I want to share a couple of thoughts that repeatedly come to my min</description>
+        
+      
+      
+      
+      
+      
+      
+      <comments>https://muetsch.io/how-development-history-keeps-repeating-itself.html#disqus_thread</comments>
+      
+    </item>
     
     <item>
       <title>Monitoring Caddy requests with Prometheus and Grafana</title>
@@ -93,27 +114,6 @@
       
       
       <comments>https://muetsch.io/simple-continuous-docker-deployments-with-caddy.html#disqus_thread</comments>
-      
-    </item>
-    
-    <item>
-      <title>Serving raster data from PostGIS as WMS using Python and FastAPI or Flask</title>
-      <link>https://muetsch.io/serving-raster-data-from-postgis-as-wms-using-python-and-fastapi-or-flask.html</link>
-      <guid>https://muetsch.io/serving-raster-data-from-postgis-as-wms-using-python-and-fastapi-or-flask.html</guid>
-      <pubDate>Thu, 21 Oct 2021 15:13:53 GMT</pubDate>
-      
-        
-        
-      <description>&lt;p&gt;&lt;img src=&quot;https://apps.muetsch.io/images/o:auto/rs,s:640?image=https://muetsch.io/images/raster_data_2.jpg&quot;&gt;&lt;/p&gt;
-&lt;h1 id=&quot;Raster-Data&quot;&gt;&lt;a </description>
-        
-      
-      
-      
-      
-      
-      
-      <comments>https://muetsch.io/serving-raster-data-from-postgis-as-wms-using-python-and-fastapi-or-flask.html#disqus_thread</comments>
       
     </item>
     
