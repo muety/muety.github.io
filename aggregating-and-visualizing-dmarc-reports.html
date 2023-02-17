@@ -179,7 +179,7 @@
 <p>In essence, you will end up with a DNS record similar to this one: </p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">v&#x3D;DMARC1; p&#x3D;reject; adkim&#x3D;r; aspf&#x3D;r; rua&#x3D;mailto:dmarc@muetsch.io; ruf&#x3D;mailto:dmarc@muetsch.io</span><br></pre></td></tr></table></figure>
 
-<p>In the example, any mail server who actively implements DMARC reports, is instructed to send them to <em><a href="mailto:&#x64;&#x6d;&#97;&#x72;&#99;&#64;&#x6d;&#117;&#101;&#x74;&#115;&#99;&#104;&#46;&#105;&#111;">&#x64;&#x6d;&#97;&#x72;&#99;&#64;&#x6d;&#117;&#101;&#x74;&#115;&#99;&#104;&#46;&#105;&#111;</a></em>. I would recommend to have a separate address (different from your main address) for DMARC records, to you can easily set up rules like <em>“move everything addresses to <a href="mailto:&#100;&#109;&#97;&#114;&#x63;&#64;&#109;&#121;&#100;&#111;&#x6d;&#x61;&#x69;&#x6e;&#46;&#x74;&#108;&#x64;">&#100;&#109;&#97;&#114;&#x63;&#64;&#109;&#121;&#100;&#111;&#x6d;&#x61;&#x69;&#x6e;&#46;&#x74;&#108;&#x64;</a> into some IMAP folder and mark it as read”</em>. </p>
+<p>In the example, any mail server who actively implements DMARC reports, is instructed to send them to <em><a href="mailto:&#x64;&#109;&#x61;&#x72;&#99;&#x40;&#109;&#117;&#x65;&#x74;&#115;&#99;&#104;&#x2e;&#x69;&#111;">&#x64;&#109;&#x61;&#x72;&#99;&#x40;&#109;&#117;&#x65;&#x74;&#115;&#99;&#104;&#x2e;&#x69;&#111;</a></em>. I would recommend to have a separate address (different from your main address) for DMARC records, to you can easily set up rules like <em>“move everything addresses to <a href="mailto:&#100;&#x6d;&#97;&#x72;&#x63;&#64;&#109;&#121;&#100;&#x6f;&#x6d;&#97;&#x69;&#110;&#x2e;&#x74;&#108;&#100;">&#100;&#x6d;&#97;&#x72;&#x63;&#64;&#109;&#121;&#100;&#x6f;&#x6d;&#97;&#x69;&#110;&#x2e;&#x74;&#108;&#100;</a> into some IMAP folder and mark it as read”</em>. </p>
 <h1 id="Aggregation-and-visualization"><a href="#Aggregation-and-visualization" class="headerlink" title="Aggregation and visualization"></a>Aggregation and visualization</h1><p>As can be seen from the example above, DMARC records are a bit unpleasant to read and you probably do not want to go through every report (couple per day) manually. Luckily, a quick GitHub search led me to a project that helps with this, specifically it does:</p>
 <ol>
 <li>Read DMARC reports from your inbox via IMAP</li>
@@ -265,7 +265,7 @@
     
     <footer id="footer">
   <div class="footer-left">
-    Copyright &copy; 2022 Ferdinand Mütsch
+    Copyright &copy; 2023 Ferdinand Mütsch
   </div>
   <div class="footer-right">
     <nav>
