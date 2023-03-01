@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="referrer" content="no-referrer">
+    <meta name="description" content="On my desktop PC, I had a dual-boot setup with Fedora Linux and Windows 10, where both systems were placed on separate SSDs. In addition, there was a HDD just for data storage, that could be mounted">
+<meta property="og:type" content="article">
+<meta property="og:title" content="How to move two-disk dual-boot system to single SSD">
+<meta property="og:url" content="https://muetsch.io/how-to-move-two-disk-dual-boot-system-to-single-ssd.html">
+<meta property="og:site_name" content="Ferdinand Mütsch">
+<meta property="og:description" content="On my desktop PC, I had a dual-boot setup with Fedora Linux and Windows 10, where both systems were placed on separate SSDs. In addition, there was a HDD just for data storage, that could be mounted">
+<meta property="og:locale">
+<meta property="og:image" content="https://muetsch.io/images/hard_drive1.webp">
+<meta property="article:published_time" content="2023-03-01T19:09:22.000Z">
+<meta property="article:modified_time" content="2023-03-01T19:17:15.740Z">
+<meta property="article:author" content="Ferdinand Mütsch">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://muetsch.io/images/hard_drive1.webp">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/favicon.ico" sizes="192x192">
+          
+        
+        
+    
+    <!-- title -->
+    <title>How to move two-disk dual-boot system to single SSD</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- rss -->
+    
+    
+
+    <!-- rel-me links -->
+    
+      
+        <link href="http://github.com/muety" rel="me">
+      
+        <link href="https://social.tchncs.de/web/accounts/106761076750920593" rel="me">
+      
+        <link href="mailto:ferdinand@muetsch.io" rel="me">
+      
+    
+
+    <!-- Webmention link -->
+    
+      <link href="https://webmention.io/muetsch.io/webmention" rel="webmention">
+    
+
+    
+      <link href="https://webmention.io/muetsch.io/xmlrpc" rel="pingback">
+    
+<meta name="generator" content="Hexo 5.2.0"><link rel="alternate" href="/rss2.xml" title="Ferdinand Mütsch" type="application/rss+xml">
+</head>
+
+<body>
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="window.scrollTo(0, 0)" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Blog</a></li>
+         
+          <li><a href="/imprint/">Imprint</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" href="/how-development-history-keeps-repeating-itself.html"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover='toggleById("i-next").toggleById();' onmouseout='toggleById("i-next");'></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="window.scrollTo(0,0)"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover='toggleById("i-top");' onmouseout='toggleById("i-top");'></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover='toggleById("i-share");' onmouseout='toggleById("i-share");' onclick='toggleById("share");return false;'></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://muetsch.io/how-to-move-two-disk-dual-boot-system-to-single-ssd.html"><i class="fas fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://muetsch.io/how-to-move-two-disk-dual-boot-system-to-single-ssd.html&text=How to move two-disk dual-boot system to single SSD"><i class="fas fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://muetsch.io/how-to-move-two-disk-dual-boot-system-to-single-ssd.html&title=How to move two-disk dual-boot system to single SSD"><i class="fas fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://muetsch.io/how-to-move-two-disk-dual-boot-system-to-single-ssd.html&is_video=false&description=How to move two-disk dual-boot system to single SSD"><i class="fas fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=How to move two-disk dual-boot system to single SSD&body=Check out this article: https://muetsch.io/how-to-move-two-disk-dual-boot-system-to-single-ssd.html"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://muetsch.io/how-to-move-two-disk-dual-boot-system-to-single-ssd.html&title=How to move two-disk dual-boot system to single SSD"><i class="fas fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://muetsch.io/how-to-move-two-disk-dual-boot-system-to-single-ssd.html&title=How to move two-disk dual-boot system to single SSD"><i class="fas fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://muetsch.io/how-to-move-two-disk-dual-boot-system-to-single-ssd.html&title=How to move two-disk dual-boot system to single SSD"><i class="fas fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://muetsch.io/how-to-move-two-disk-dual-boot-system-to-single-ssd.html&title=How to move two-disk dual-boot system to single SSD"><i class="fas fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://muetsch.io/how-to-move-two-disk-dual-boot-system-to-single-ssd.html&name=How to move two-disk dual-boot system to single SSD&description="><i class="fas fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Starting-situation"><span class="toc-number">1.</span> <span class="toc-text">Starting situation</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Goal"><span class="toc-number">2.</span> <span class="toc-text">Goal</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Prerequisites"><span class="toc-number">3.</span> <span class="toc-text">Prerequisites</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Steps"><span class="toc-number">4.</span> <span class="toc-text">Steps</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Check-for-file-system-errors-optional"><span class="toc-number">4.1.</span> <span class="toc-text">Check for file system errors (optional)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Copy-first-OS-Linux"><span class="toc-number">4.2.</span> <span class="toc-text">Copy first OS (Linux)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Convert-MBR-to-GPT-optional"><span class="toc-number">4.3.</span> <span class="toc-text">Convert MBR to GPT (optional)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Copy-second-OS-Windows"><span class="toc-number">4.4.</span> <span class="toc-text">Copy second OS (Windows)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Fix-Windows-boot-loader"><span class="toc-number">4.5.</span> <span class="toc-text">Fix Windows boot loader</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Copy-data"><span class="toc-number">4.6.</span> <span class="toc-text">Copy data</span></a></li></ol></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index width mx-auto px2 my4">
+        
+        <article class="h-entry post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <a href="https://muetsch.io/how-to-move-two-disk-dual-boot-system-to-single-ssd.html" class="u-url">
+        <h1 class="posttitle p-name" itemprop="name headline" property="headline">
+            How to move two-disk dual-boot system to single SSD
+        </h1>
+    </a>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" property="author" itemscope itemtype="http://schema.org/Person" vocab="http://schema.org/" typeof="Person">
+        <span itemprop="name" property="name" class="p-author h-card">Ferdinand Mütsch</span>
+      </span>
+      
+    <div class="postdate">
+        <time datetime="2023-03-01T19:09:22.000Z" class="dt-published" itemprop="datePublished" property="datePublished">2023-03-01</time>
+    </div>
+
+
+      
+
+
+      <!--
+      <div style="margin-top: 30px">
+        <a href="https://liberapay.com/muety/" target="_blank"
+          style="background-image: none; text-decoration: none;"><img
+            src="https://badges.fw-web.space/liberapay/receives/muety.svg?logo=liberapay&style=flat-square" alt="Liberapay"
+            style="height: auto !important;width: auto !important;"></a>
+      </div>
+      -->
+    </div>
+  </header>
+  
+  <div class="content e-content" itemprop="articleBody" property="articleBody">
+    <p><img src="images/hard_drive1.webp" alt="Cover Image (a hard drive)"></p>
+<p>On my desktop PC, I had a dual-boot setup with Fedora Linux and Windows 10, where both systems were placed on separate SSDs. In addition, there was a HDD just for data storage, that could be mounted from both OS’. I wanted to replace those three disk with a single, big SSD, while, preferably, not having to re-install anything. Here are some rough instructions based on what I did to accomplish this. </p>
+<p>Please apologize for this being super informal and messy. This is just a rough sketch of my thoughts, but maybe someone with a similar problem will still benefit from it.</p>
+<h1 id="Starting-situation"><a href="#Starting-situation" class="headerlink" title="Starting situation"></a>Starting situation</h1><ul>
+<li>Linux SSD at <code>/dev/sda</code> (250 GB, MBR layout)<ul>
+<li>EFI partition at <code>/dev/sda1</code> (mounted to <code>/boot/efi</code>)</li>
+<li>Boot loader partition at <code>/dev/sda2</code> (mounted to <code>/boot</code>)</li>
+<li>OS partition (with subvolumes for root and home) (mounted to <code>/</code> and <code>/home</code>)</li>
+</ul>
+</li>
+<li>Windows SSD at <code>/dev/sdb</code> (250 GB, GPT layout)<ul>
+<li>Recovery partition at <code>/dev/sdb1</code></li>
+<li>EFI partition at <code>/dev/sdb2</code></li>
+<li>? partition at <code>/dev/sdb3</code></li>
+<li>OS partition at <code>/dev/sdb4</code></li>
+</ul>
+</li>
+<li>Data HDD at <code>/dev/sdc</code> (500 GB)<ul>
+<li>Data partition (NFTS) at <code>/dev/sdc1</code></li>
+</ul>
+</li>
+</ul>
+<h1 id="Goal"><a href="#Goal" class="headerlink" title="Goal"></a>Goal</h1><p>Move all of the above to a new 2 TB SSD at <code>/dev/sdd</code>.</p>
+<h1 id="Prerequisites"><a href="#Prerequisites" class="headerlink" title="Prerequisites"></a>Prerequisites</h1><ul>
+<li>1 USB stick containing a bootable Linux live system (I used Kali, you can use Debian or whatever you prefer)</li>
+<li>1 USB stick containing a bootable Windows (Win 10, in my case)</li>
+</ul>
+<h1 id="Steps"><a href="#Steps" class="headerlink" title="Steps"></a>Steps</h1><h2 id="Check-for-file-system-errors-optional"><a href="#Check-for-file-system-errors-optional" class="headerlink" title="Check for file system errors (optional)"></a>Check for file system errors (optional)</h2><p>This step will probably be obsolete for you, but I’m still going to mention it. I’m using Fedora 37, which, by default, uses <a target="_blank" rel="noopener" href="https://fedoraproject.org/wiki/Btrfs">btrfs</a> as a file system. While btrfs has a few advantages over ext4 (built-on compression, deduplication, snapshotting, …), it is sometimes a bit more bitchy. So before doing any modifications to the file system partition, check for errors (this has caused me quite a bit of trouble later on, so better do it right in the beginning). </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo btrfs check /dev/sda3</span><br></pre></td></tr></table></figure>
+
+<p>In fact, the commands reported a couple of <a target="_blank" rel="noopener" href="https://pastr.de/p/tzu5mznboxpfozp0lismsmug">broken inode errors</a>. Apparently, the easiest way to deal with this is to locate the corresponding files, hope they’re not important and simply delete them. </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># find file by inode, then delete it using &#x27;rm&#x27;</span></span><br><span class="line">sudo find / -inum 4865056</span><br></pre></td></tr></table></figure>
+
+<p>Running the check again didn’t yield any more errors, so all good. </p>
+<p>If you’re on a ext4 file system, it probably wouldn’t hurt to run <code>fsck</code> instead, before moving on.</p>
+<h2 id="Copy-first-OS-Linux"><a href="#Copy-first-OS-Linux" class="headerlink" title="Copy first OS (Linux)"></a>Copy first OS (Linux)</h2><ul>
+<li>Boot into the Kali (or whichever) live system</li>
+<li>Open GParted</li>
+<li>Copy and paste (Ctrl+C, Ctrl+V) (it’s actually as easy as that) every single partition of /dev/sda to the target SSD (/dev/sdd)<ul>
+<li>You could also use <code>dd</code> to block-wise copy the whole disk all at once, but I liked this method better</li>
+</ul>
+</li>
+<li>Optionally resize the OS partition to your preferred size</li>
+<li>Try to reboot from new disk (in your BIOS’ boot menu, choose the new disk and hope GRUB and afterwards your Linux pops up)</li>
+</ul>
+<h2 id="Convert-MBR-to-GPT-optional"><a href="#Convert-MBR-to-GPT-optional" class="headerlink" title="Convert MBR to GPT (optional)"></a>Convert MBR to GPT (optional)</h2><p>Since the disk hosting my Linux installation was still in old MBR partition table format, where you can only have 4 partitions at max (I believe…), I first had to convert it to GPT, like so:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">gdisk /dev/sda</span><br><span class="line">w</span><br><span class="line"><span class="built_in">exit</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="Copy-second-OS-Windows"><a href="#Copy-second-OS-Windows" class="headerlink" title="Copy second OS (Windows)"></a>Copy second OS (Windows)</h2><ul>
+<li>Boot into the live system again</li>
+<li>Open GParted</li>
+<li>Do the same copy- &amp; pasting for all Windows-related partitions</li>
+<li>Unplug both of the old SSDs</li>
+<li>Try to reboot, choose to boot Windows</li>
+<li>Hope a Windows-branded error screen pops up</li>
+</ul>
+<p>At this point, everything went well. You’ll only have to fix the Windows boot loader again, because Windows is now located at a different place on the disk than before.</p>
+<h2 id="Fix-Windows-boot-loader"><a href="#Fix-Windows-boot-loader" class="headerlink" title="Fix Windows boot loader"></a>Fix Windows boot loader</h2><ul>
+<li>Boot into the Windows installation medium</li>
+<li>Choose “Repair computer” -&gt; “Troubleshoot” -&gt; “Advanced Options” -&gt; “Command Prompt”</li>
+<li>Run <code>diskpart</code> (opens an interactive Shell) </li>
+<li>Run <code>list disk</code> to get the ID (index) of the new SSD (e.g. 0)</li>
+<li>Run <code>sel disk 0</code> to select it</li>
+<li>Run <code>list vol</code> to get the ID (index) of your Windows’ EFI partition (the one in FAT32 format) (e.g. 5)</li>
+<li>Run <code>sel vol 5</code></li>
+<li>Assign the volume some drive letter by running <code>assign letter=V:</code></li>
+<li>Exit the shell (<code>exit</code>)</li>
+<li>Open boot loader directory (<code>cd /d V:\EFI\Microsoft\Boot\</code>)</li>
+<li>Run <code>bootrec /FixBoot</code></li>
+<li>Backup your old boot loader file with <code>ren BCD BCD.old</code></li>
+<li>Repair the boot loader with <code>bcdboot c:\Windows /l en-us /s V: /f ALL</code></li>
+</ul>
+<p>Reboot. Everything should be working fine now (…).</p>
+<h2 id="Copy-data"><a href="#Copy-data" class="headerlink" title="Copy data"></a>Copy data</h2><p>If you have another disk just for data storage, that you want to move, preferably just perform a file-level copy (using <code>rsync</code>) to the newly created, empty partition from above.</p>
+<p><strong>Good luck!</strong></p>
+
+  </div>
+</article>
+
+
+
+    </div>
+    
+      <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Blog</a></li>
+         
+          <li><a href="/imprint/">Imprint</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Starting-situation"><span class="toc-number">1.</span> <span class="toc-text">Starting situation</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Goal"><span class="toc-number">2.</span> <span class="toc-text">Goal</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Prerequisites"><span class="toc-number">3.</span> <span class="toc-text">Prerequisites</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Steps"><span class="toc-number">4.</span> <span class="toc-text">Steps</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Check-for-file-system-errors-optional"><span class="toc-number">4.1.</span> <span class="toc-text">Check for file system errors (optional)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Copy-first-OS-Linux"><span class="toc-number">4.2.</span> <span class="toc-text">Copy first OS (Linux)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Convert-MBR-to-GPT-optional"><span class="toc-number">4.3.</span> <span class="toc-text">Convert MBR to GPT (optional)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Copy-second-OS-Windows"><span class="toc-number">4.4.</span> <span class="toc-text">Copy second OS (Windows)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Fix-Windows-boot-loader"><span class="toc-number">4.5.</span> <span class="toc-text">Fix Windows boot loader</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Copy-data"><span class="toc-number">4.6.</span> <span class="toc-text">Copy data</span></a></li></ol></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://muetsch.io/how-to-move-two-disk-dual-boot-system-to-single-ssd.html"><i class="fas fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://muetsch.io/how-to-move-two-disk-dual-boot-system-to-single-ssd.html&text=How to move two-disk dual-boot system to single SSD"><i class="fas fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://muetsch.io/how-to-move-two-disk-dual-boot-system-to-single-ssd.html&title=How to move two-disk dual-boot system to single SSD"><i class="fas fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://muetsch.io/how-to-move-two-disk-dual-boot-system-to-single-ssd.html&is_video=false&description=How to move two-disk dual-boot system to single SSD"><i class="fas fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=How to move two-disk dual-boot system to single SSD&body=Check out this article: https://muetsch.io/how-to-move-two-disk-dual-boot-system-to-single-ssd.html"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://muetsch.io/how-to-move-two-disk-dual-boot-system-to-single-ssd.html&title=How to move two-disk dual-boot system to single SSD"><i class="fas fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://muetsch.io/how-to-move-two-disk-dual-boot-system-to-single-ssd.html&title=How to move two-disk dual-boot system to single SSD"><i class="fas fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://muetsch.io/how-to-move-two-disk-dual-boot-system-to-single-ssd.html&title=How to move two-disk dual-boot system to single SSD"><i class="fas fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://muetsch.io/how-to-move-two-disk-dual-boot-system-to-single-ssd.html&title=How to move two-disk dual-boot system to single SSD"><i class="fas fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://muetsch.io/how-to-move-two-disk-dual-boot-system-to-single-ssd.html&name=How to move two-disk dual-boot system to single SSD&description="><i class="fas fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+      <ul>
+        <li id="toc"><a class="icon" href="#" onclick='toggleById("toc-footer")'><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a></li>
+        <li id="share"><a class="icon" href="#" onclick='toggleById("share-footer")'><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a></li>
+        <li id="top" style="display:none"><a class="icon" href="#" onclick="window.scrollTo(0,0)"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a></li>
+        <li id="menu"><a class="icon" href="#" onclick='toggleById("nav-footer")'><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a></li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+    
+    <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2023 Ferdinand Mütsch
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Blog</a></li>
+         
+          <li><a href="/imprint/">Imprint</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+<!--
+<script defer type="text/javascript" src="js/pirsch.js"
+    id="pirschjs"
+    data-code="GoPk8VNmzk8Z6n7xikwZahvOxm1MNPud"></script>
+-->
+</body>
+</html>
+<!-- styles -->
+
+<link rel="stylesheet" href="/lib/roboto/css/roboto.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+
+
+
+<script src="/js/main.js"></script>
+
+<!-- Google Analytics -->
+
+<!-- Disqus Comments -->
+
+

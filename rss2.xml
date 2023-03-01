@@ -9,8 +9,29 @@
     <atom:link href="https://muetsch.io/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description>Hi and welcome! 👋 I&#39;m Ferdinand, a passionate software- and data engineer and technology enthusiast from Karlsruhe, Germany. My personal webpage is the right place to find out about me and my projects and to read about software development, DevOps, some machine learning and technology in general. Enjoy and feel free to leave me a message!</description>
-    <pubDate>Thu, 10 Nov 2022 15:54:56 GMT</pubDate>
+    <pubDate>Wed, 01 Mar 2023 19:17:15 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>How to move two-disk dual-boot system to single SSD</title>
+      <link>https://muetsch.io/how-to-move-two-disk-dual-boot-system-to-single-ssd.html</link>
+      <guid>https://muetsch.io/how-to-move-two-disk-dual-boot-system-to-single-ssd.html</guid>
+      <pubDate>Wed, 01 Mar 2023 19:09:22 GMT</pubDate>
+      
+        
+        
+      <description>&lt;p&gt;&lt;img src=&quot;images/hard_drive1.webp&quot; alt=&quot;Cover Image (a hard drive)&quot;&gt;&lt;/p&gt;
+&lt;p&gt;On my desktop PC, I had a dual-boot setup with Fedora Linux a</description>
+        
+      
+      
+      
+      
+      
+      
+      <comments>https://muetsch.io/how-to-move-two-disk-dual-boot-system-to-single-ssd.html#disqus_thread</comments>
+      
+    </item>
     
     <item>
       <title>How development history keeps repeating itself</title>
@@ -94,26 +115,6 @@
       
       
       <comments>https://muetsch.io/wakapi-s-year-2021.html#disqus_thread</comments>
-      
-    </item>
-    
-    <item>
-      <title>Simple continuous Docker deployments with Caddy</title>
-      <link>https://muetsch.io/simple-continuous-docker-deployments-with-caddy.html</link>
-      <guid>https://muetsch.io/simple-continuous-docker-deployments-with-caddy.html</guid>
-      <pubDate>Sun, 28 Nov 2021 11:52:11 GMT</pubDate>
-      
-        
-        
-      <description>&lt;h1 id=&quot;CI-and-CD&quot;&gt;&lt;a href=&quot;#CI-and-CD&quot; class=&quot;headerlink&quot; title=&quot;CI and CD&quot;&gt;&lt;/a&gt;CI and CD&lt;/h1&gt;&lt;p&gt;&lt;img src=&quot;https://apps.muetsch.io/images/o</description>
-        
-      
-      
-      
-      
-      
-      
-      <comments>https://muetsch.io/simple-continuous-docker-deployments-with-caddy.html#disqus_thread</comments>
       
     </item>
     
