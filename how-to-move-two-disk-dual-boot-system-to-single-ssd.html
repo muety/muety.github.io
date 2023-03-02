@@ -16,7 +16,7 @@
 <meta property="og:locale">
 <meta property="og:image" content="https://muetsch.io/images/hard_drive1.webp">
 <meta property="article:published_time" content="2023-03-01T19:09:22.000Z">
-<meta property="article:modified_time" content="2023-03-01T19:17:15.740Z">
+<meta property="article:modified_time" content="2023-03-02T07:42:31.695Z">
 <meta property="article:author" content="Ferdinand Mütsch">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://muetsch.io/images/hard_drive1.webp">
@@ -189,7 +189,7 @@
 <li>1 USB stick containing a bootable Linux live system (I used Kali, you can use Debian or whatever you prefer)</li>
 <li>1 USB stick containing a bootable Windows (Win 10, in my case)</li>
 </ul>
-<h1 id="Steps"><a href="#Steps" class="headerlink" title="Steps"></a>Steps</h1><h2 id="Check-for-file-system-errors-optional"><a href="#Check-for-file-system-errors-optional" class="headerlink" title="Check for file system errors (optional)"></a>Check for file system errors (optional)</h2><p>This step will probably be obsolete for you, but I’m still going to mention it. I’m using Fedora 37, which, by default, uses <a target="_blank" rel="noopener" href="https://fedoraproject.org/wiki/Btrfs">btrfs</a> as a file system. While btrfs has a few advantages over ext4 (built-on compression, deduplication, snapshotting, …), it is sometimes a bit more bitchy. So before doing any modifications to the file system partition, check for errors (this has caused me quite a bit of trouble later on, so better do it right in the beginning). </p>
+<h1 id="Steps"><a href="#Steps" class="headerlink" title="Steps"></a>Steps</h1><h2 id="Check-for-file-system-errors-optional"><a href="#Check-for-file-system-errors-optional" class="headerlink" title="Check for file system errors (optional)"></a>Check for file system errors (optional)</h2><p>This step will probably not be needed for you, but I’m still going to mention it. I’m using Fedora 37, which, by default, uses <a target="_blank" rel="noopener" href="https://fedoraproject.org/wiki/Btrfs">btrfs</a> as a file system. While btrfs has a few advantages over ext4 (built-on compression, deduplication, snapshotting, …), it is sometimes a bit more bitchy. So before doing any modifications to the file system partition, check for errors (this has caused me quite a bit of trouble later on, so better do it right in the beginning). </p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo btrfs check /dev/sda3</span><br></pre></td></tr></table></figure>
 
 <p>In fact, the commands reported a couple of <a target="_blank" rel="noopener" href="https://pastr.de/p/tzu5mznboxpfozp0lismsmug">broken inode errors</a>. Apparently, the easiest way to deal with this is to locate the corresponding files, hope they’re not important and simply delete them. </p>
@@ -200,14 +200,14 @@
 <h2 id="Copy-first-OS-Linux"><a href="#Copy-first-OS-Linux" class="headerlink" title="Copy first OS (Linux)"></a>Copy first OS (Linux)</h2><ul>
 <li>Boot into the Kali (or whichever) live system</li>
 <li>Open GParted</li>
-<li>Copy and paste (Ctrl+C, Ctrl+V) (it’s actually as easy as that) every single partition of /dev/sda to the target SSD (/dev/sdd)<ul>
+<li>Copy and paste (Ctrl+C, Ctrl+V) (it’s actually as easy as that) every single partition of <code>/dev/sda</code> to the target SSD (<code>/dev/sdd</code>)<ul>
 <li>You could also use <code>dd</code> to block-wise copy the whole disk all at once, but I liked this method better</li>
 </ul>
 </li>
 <li>Optionally resize the OS partition to your preferred size</li>
 <li>Try to reboot from new disk (in your BIOS’ boot menu, choose the new disk and hope GRUB and afterwards your Linux pops up)</li>
 </ul>
-<h2 id="Convert-MBR-to-GPT-optional"><a href="#Convert-MBR-to-GPT-optional" class="headerlink" title="Convert MBR to GPT (optional)"></a>Convert MBR to GPT (optional)</h2><p>Since the disk hosting my Linux installation was still in old MBR partition table format, where you can only have 4 partitions at max (I believe…), I first had to convert it to GPT, like so:</p>
+<h2 id="Convert-MBR-to-GPT-optional"><a href="#Convert-MBR-to-GPT-optional" class="headerlink" title="Convert MBR to GPT (optional)"></a>Convert MBR to GPT (optional)</h2><p>You might not need this step either. Only run this (⚠️), if one of your disks still uses the old MBR partition table format (like in my case). With MBR, there can only be 4 partitions at max (I believe…), so I first had to convert to GPT, like this:</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">gdisk /dev/sda</span><br><span class="line">w</span><br><span class="line"><span class="built_in">exit</span></span><br></pre></td></tr></table></figure>
 
 <h2 id="Copy-second-OS-Windows"><a href="#Copy-second-OS-Windows" class="headerlink" title="Copy second OS (Windows)"></a>Copy second OS (Windows)</h2><ul>
@@ -230,10 +230,11 @@
 <li>Assign the volume some drive letter by running <code>assign letter=V:</code></li>
 <li>Exit the shell (<code>exit</code>)</li>
 <li>Open boot loader directory (<code>cd /d V:\EFI\Microsoft\Boot\</code>)</li>
-<li>Run <code>bootrec /FixBoot</code></li>
-<li>Backup your old boot loader file with <code>ren BCD BCD.old</code></li>
-<li>Repair the boot loader with <code>bcdboot c:\Windows /l en-us /s V: /f ALL</code></li>
+<li>Run <code>bootrec /FixBoot</code> (might fail, but that’s fine)</li>
+<li>Backup your old boot loader config file (BCD) with <code>ren BCD BCD.old</code></li>
+<li>Repair the BCD with <code>bcdboot c:\Windows /l en-us /s V: /f ALL</code></li>
 </ul>
+<p>(<a target="_blank" rel="noopener" href="https://www.heise.de/tipps-tricks/Windows-10-Bootmanager-reparieren-so-geht-s-4268553.html">Source</a>)</p>
 <p>Reboot. Everything should be working fine now (…).</p>
 <h2 id="Copy-data"><a href="#Copy-data" class="headerlink" title="Copy data"></a>Copy data</h2><p>If you have another disk just for data storage, that you want to move, preferably just perform a file-level copy (using <code>rsync</code>) to the newly created, empty partition from above.</p>
 <p><strong>Good luck!</strong></p>
