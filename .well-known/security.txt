@@ -1,0 +1,4 @@
+Contact: ferdinand@muetsch.io
+Canonical: https://muetsch.io/.well-known/security.txt
+Expires: 2099-12-31T23:00:00.000Z
+Preferred-Languages: en, de
