@@ -9,8 +9,49 @@
     <atom:link href="https://muetsch.io/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description>Hi and welcome! 👋 I&#39;m Ferdinand, a passionate software- and data engineer and technology enthusiast from Karlsruhe, Germany. My personal webpage is the right place to find out about me and my projects and to read about software development, DevOps, some machine learning and technology in general. Enjoy and feel free to leave me a message!</description>
-    <pubDate>Thu, 02 Mar 2023 07:42:31 GMT</pubDate>
+    <pubDate>Tue, 08 Aug 2023 19:08:05 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>Server.Camp - Friendly Open-Source SaaS Hosting</title>
+      <link>https://muetsch.io/server-camp-friendly-open-source-saas-hosting.html</link>
+      <guid>https://muetsch.io/server-camp-friendly-open-source-saas-hosting.html</guid>
+      <pubDate>Tue, 08 Aug 2023 16:48:14 GMT</pubDate>
+      
+        
+        
+      <description>&lt;p&gt;&lt;img src=&quot;images/servercamp_logo.webp&quot; alt=&quot;server.camp logo&quot;&gt;&lt;/p&gt;
+&lt;p&gt;This week, two friends and I started &lt;a href=&quot;https://server.camp/&quot;</description>
+        
+      
+      
+      
+      
+      
+      
+      <comments>https://muetsch.io/server-camp-friendly-open-source-saas-hosting.html#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>How to integrate Caddy with fail2ban</title>
+      <link>https://muetsch.io/how-to-integrate-caddy-with-fail2ban.html</link>
+      <guid>https://muetsch.io/how-to-integrate-caddy-with-fail2ban.html</guid>
+      <pubDate>Sun, 14 May 2023 18:58:57 GMT</pubDate>
+      
+        
+        
+      <description>&lt;p&gt;&lt;a href=&quot;https://github.com/fail2ban/fail2ban&quot;&gt;Fail2ban&lt;/a&gt; is an awesome security tool for servers. It allows to define rules (such as m</description>
+        
+      
+      
+      
+      
+      
+      
+      <comments>https://muetsch.io/how-to-integrate-caddy-with-fail2ban.html#disqus_thread</comments>
+      
+    </item>
     
     <item>
       <title>How to move two-disk dual-boot system to single SSD</title>
@@ -71,50 +112,6 @@
       
       
       <comments>https://muetsch.io/monitoring-caddy-requests-with-prometheus-and-grafana.html#disqus_thread</comments>
-      
-    </item>
-    
-    <item>
-      <title>Sending Prometheus Alerts to Telegram with Telepush</title>
-      <link>https://muetsch.io/sending-prometheus-alerts-to-telegram-with-telepush.html</link>
-      <guid>https://muetsch.io/sending-prometheus-alerts-to-telegram-with-telepush.html</guid>
-      <pubDate>Fri, 11 Mar 2022 19:13:37 GMT</pubDate>
-      
-        
-        
-      <description>&lt;img src=&quot;images/prometheus_telepush.webp&quot; width=&quot;256px&quot;&gt;
-
-&lt;h1 id=&quot;Prometheus-Alerting&quot;&gt;&lt;a href=&quot;#Prometheus-Alerting&quot; class=&quot;headerlink&quot; ti</description>
-        
-      
-      
-      
-      
-      
-      
-      <comments>https://muetsch.io/sending-prometheus-alerts-to-telegram-with-telepush.html#disqus_thread</comments>
-      
-    </item>
-    
-    <item>
-      <title>Wakapi&#39;s Year 2021</title>
-      <link>https://muetsch.io/wakapi-s-year-2021.html</link>
-      <guid>https://muetsch.io/wakapi-s-year-2021.html</guid>
-      <pubDate>Sun, 26 Dec 2021 20:11:41 GMT</pubDate>
-      
-        
-        
-      <description>&lt;img src=&quot;https://wakapi.dev/assets/images/logo.svg&quot; width=&quot;200px&quot;&gt;
-
-&lt;p&gt;&lt;img src=&quot;https://apps.muetsch.io/images/o:auto/rs,s:640?image=https</description>
-        
-      
-      
-      
-      
-      
-      
-      <comments>https://muetsch.io/wakapi-s-year-2021.html#disqus_thread</comments>
       
     </item>
     
