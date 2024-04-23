@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="referrer" content="no-referrer">
+    <meta name="description" content="OpenDRIVE and Lanelet2 are both representation formats for maps, particularly for road networks and commonly used in autonomous driving. Despite being designed for pretty much the same purpose, both f">
+<meta property="og:type" content="article">
+<meta property="og:title" content="How to convert OpenDRIVE to Lanelet2">
+<meta property="og:url" content="https://muetsch.io/how-to-convert-opendrive-to-lanelet2.html">
+<meta property="og:site_name" content="Ferdinand Mütsch">
+<meta property="og:description" content="OpenDRIVE and Lanelet2 are both representation formats for maps, particularly for road networks and commonly used in autonomous driving. Despite being designed for pretty much the same purpose, both f">
+<meta property="og:locale">
+<meta property="og:image" content="https://muetsch.io/images/opendrive-cover.webp">
+<meta property="og:image" content="https://muetsch.io/images/lanelet_map.webp">
+<meta property="article:published_time" content="2024-04-19T21:44:12.000Z">
+<meta property="article:modified_time" content="2024-04-23T07:42:50.767Z">
+<meta property="article:author" content="Ferdinand Mütsch">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://muetsch.io/images/opendrive-cover.webp">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/favicon.ico">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/favicon.ico" sizes="192x192">
+          
+        
+        
+    
+    <!-- title -->
+    <title>How to convert OpenDRIVE to Lanelet2</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- rss -->
+    
+    
+
+    <!-- rel-me links -->
+    
+      
+        <link href="http://github.com/muety" rel="me">
+      
+        <link href="https://social.tchncs.de/web/accounts/106761076750920593" rel="me">
+      
+        <link href="mailto:ferdinand@muetsch.io" rel="me">
+      
+    
+
+    <!-- Webmention link -->
+    
+      <link href="https://webmention.io/muetsch.io/webmention" rel="webmention">
+    
+
+    
+      <link href="https://webmention.io/muetsch.io/xmlrpc" rel="pingback">
+    
+<meta name="generator" content="Hexo 5.2.0"><link rel="alternate" href="/rss2.xml" title="Ferdinand Mütsch" type="application/rss+xml">
+</head>
+
+<body>
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="window.scrollTo(0, 0)" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Blog</a></li>
+         
+          <li><a href="/imprint/">Imprint</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" href="/server-camp-friendly-open-source-saas-hosting.html"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover='toggleById("i-next").toggleById();' onmouseout='toggleById("i-next");'></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="window.scrollTo(0,0)"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover='toggleById("i-top");' onmouseout='toggleById("i-top");'></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover='toggleById("i-share");' onmouseout='toggleById("i-share");' onclick='toggleById("share");return false;'></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://muetsch.io/how-to-convert-opendrive-to-lanelet2.html"><i class="fas fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://muetsch.io/how-to-convert-opendrive-to-lanelet2.html&text=How to convert OpenDRIVE to Lanelet2"><i class="fas fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://muetsch.io/how-to-convert-opendrive-to-lanelet2.html&title=How to convert OpenDRIVE to Lanelet2"><i class="fas fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://muetsch.io/how-to-convert-opendrive-to-lanelet2.html&is_video=false&description=How to convert OpenDRIVE to Lanelet2"><i class="fas fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=How to convert OpenDRIVE to Lanelet2&body=Check out this article: https://muetsch.io/how-to-convert-opendrive-to-lanelet2.html"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://muetsch.io/how-to-convert-opendrive-to-lanelet2.html&title=How to convert OpenDRIVE to Lanelet2"><i class="fas fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://muetsch.io/how-to-convert-opendrive-to-lanelet2.html&title=How to convert OpenDRIVE to Lanelet2"><i class="fas fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://muetsch.io/how-to-convert-opendrive-to-lanelet2.html&title=How to convert OpenDRIVE to Lanelet2"><i class="fas fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://muetsch.io/how-to-convert-opendrive-to-lanelet2.html&title=How to convert OpenDRIVE to Lanelet2"><i class="fas fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://muetsch.io/how-to-convert-opendrive-to-lanelet2.html&name=How to convert OpenDRIVE to Lanelet2&description="><i class="fas fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Primer-on-OpenDRIVE-and-Lanelet2"><span class="toc-number">1.</span> <span class="toc-text">Primer on OpenDRIVE and Lanelet2</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Converting-OpenDRIVE-to-Lanelet2"><span class="toc-number">2.</span> <span class="toc-text">Converting OpenDRIVE to Lanelet2</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Prerequisites"><span class="toc-number">2.1.</span> <span class="toc-text">Prerequisites</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Installation"><span class="toc-number">2.2.</span> <span class="toc-text">Installation</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Conversion"><span class="toc-number">2.3.</span> <span class="toc-text">Conversion</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Projections-and-coordinate-systems"><span class="toc-number">3.</span> <span class="toc-text">Projections and coordinate systems</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index width mx-auto px2 my4">
+        
+        <article class="h-entry post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <a href="https://muetsch.io/how-to-convert-opendrive-to-lanelet2.html" class="u-url">
+        <h1 class="posttitle p-name" itemprop="name headline" property="headline">
+            How to convert OpenDRIVE to Lanelet2
+        </h1>
+    </a>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" property="author" itemscope itemtype="http://schema.org/Person" vocab="http://schema.org/" typeof="Person">
+        <span itemprop="name" property="name" class="p-author h-card">Ferdinand Mütsch</span>
+      </span>
+      
+    <div class="postdate">
+        <time datetime="2024-04-19T21:44:12.000Z" class="dt-published" itemprop="datePublished" property="datePublished">2024-04-19</time>
+    </div>
+
+
+      
+
+
+      <!--
+      <div style="margin-top: 30px">
+        <a href="https://liberapay.com/muety/" target="_blank"
+          style="background-image: none; text-decoration: none;"><img
+            src="https://badges.fw-web.space/liberapay/receives/muety.svg?logo=liberapay&style=flat-square" alt="Liberapay"
+            style="height: auto !important;width: auto !important;"></a>
+      </div>
+      -->
+    </div>
+  </header>
+  
+  <div class="content e-content" itemprop="articleBody" property="articleBody">
+    <p><a target="_blank" rel="noopener" href="https://www.asam.net/standards/detail/opendrive/">OpenDRIVE</a> and <a target="_blank" rel="noopener" href="https://github.com/fzi-forschungszentrum-informatik/Lanelet2">Lanelet2</a> are both representation formats for maps, particularly for road networks and commonly used in autonomous driving. Despite being designed for pretty much the same purpose, both formats differ quite heavily from a conceptual perspective, especially in how they model road networks internally. However, one can be converted to the other.</p>
+<p><img src="images/opendrive-cover.webp"><br>(<a target="_blank" rel="noopener" href="https://carla.readthedocs.io/en/latest/tuto_content_authoring_maps/">Source</a>)</p>
+<h1 id="Primer-on-OpenDRIVE-and-Lanelet2"><a href="#Primer-on-OpenDRIVE-and-Lanelet2" class="headerlink" title="Primer on OpenDRIVE and Lanelet2"></a>Primer on OpenDRIVE and Lanelet2</h1><p>OpenDRIVE is much more standardized and structured, less ambiguous, but also more complex conceptually. Lanelet2, on the other hand, is very open and flexible, but thus also leaves room for interpretation in many cases.</p>
+<p>In OpenDRIVE, the entire road network is defined relative to a reference line, along which individual lanes and other road elements extend at given offsets. OpenDRIVE files (<code>.xodr</code>) themselves are XML files following a standardized schema.  You can find an example <a target="_blank" rel="noopener" href="https://github.com/carla-simulator/carla/blob/dev/PythonAPI/util/opendrive/TownBig.xodr">here</a>.</p>
+<p>Lanelet2, on the other hand, essentially represents the world in form of simple geometric structures, including points, linestrings, polygons and - first and foremost - so called <em>lanelets</em>. Lanelets are essentially polygons that follow a few special constraints and that represent individual, elementary pieces of lanes (and thus of entire roads). Each of these <a target="_blank" rel="noopener" href="https://github.com/fzi-forschungszentrum-informatik/Lanelet2/blob/master/lanelet2_core/doc/LaneletPrimitives.md">primitives</a>, can (and usually will) have a set of <em>tags</em> attached to them, which describe their role and “meaning”. Lanelet2 maps are stored as OpenStreetMap files (<code>.osm</code>), that is, XML files consisting of nodes and relations between these nodes. <a target="_blank" rel="noopener" href="https://github.com/fzi-forschungszentrum-informatik/Lanelet2/blob/master/lanelet2_maps/res/mapping_example.osm">Here</a> is an example.</p>
+<p>Lanelet2 maps can be viewed and edited using <a target="_blank" rel="noopener" href="https://josm.openstreetmap.de/">JOSM</a>. For viewing OpenDRIVE maps, you can use <a target="_blank" rel="noopener" href="https://odrviewer.io/">odrviewer.io</a>. For creating and editing, you can use the (non-free) <a target="_blank" rel="noopener" href="https://carla.readthedocs.io/en/latest/tuto_content_authoring_maps/#create-a-road-network-using-roadrunner">RoadRunner</a> software, <a target="_blank" rel="noopener" href="https://www.truevision.ai/designer">TrueVision Designer</a> or the <a target="_blank" rel="noopener" href="https://github.com/johschmitz/blender-driving-scenario-creator">Driving Scenario Creator add-on</a> for Blender.</p>
+<h1 id="Converting-OpenDRIVE-to-Lanelet2"><a href="#Converting-OpenDRIVE-to-Lanelet2" class="headerlink" title="Converting OpenDRIVE to Lanelet2"></a>Converting OpenDRIVE to Lanelet2</h1><p>As Lanelet2 is the structurally “simpler” format, it can be created from OpenDRIVE in a fairly straightforward way. Converting OpenDRIVE to Lanelet, on the other hand, is much harder. There have been <a target="_blank" rel="noopener" href="https://carla.readthedocs.io/en/latest/tuto_G_openstreetmap/#convert-openstreetmap-format-to-opendrive-format">attempts</a> to come up with conversion tools, but - to my knowledge - none of them works great, yet. We’re focusing on the <code>.xodr</code> -&gt; <code>.osm</code> conversion in this article.</p>
+<p>Luckily, a research group at <a target="_blank" rel="noopener" href="https://www.tum.de/">TUM</a> has come up with a very convenient tool for this, called <a target="_blank" rel="noopener" href="https://commonroad.in.tum.de/tools/scenario-designer">CommonRoad Scenario Designer</a>. They even published a <a target="_blank" rel="noopener" href="https://mediatum.ub.tum.de/1449005">paper</a> on <em>Automatic Conversion of Road Networks from OpenDRIVE to Lanelets</em>.</p>
+<h2 id="Prerequisites"><a href="#Prerequisites" class="headerlink" title="Prerequisites"></a>Prerequisites</h2><p>You will need to have a recent version of <strong>Python</strong> (preferably Python 3.11) installed. Also, of course, you will need the <code>.xodr</code> file to be converted.</p>
+<h2 id="Installation"><a href="#Installation" class="headerlink" title="Installation"></a>Installation</h2><p>Install the scenario designer using pip:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ pip install commonroad-scenario-designer</span><br></pre></td></tr></table></figure>
+
+<h2 id="Conversion"><a href="#Conversion" class="headerlink" title="Conversion"></a>Conversion</h2><p>Run the conversion:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ crdesigner --input_file my_map_01.xodr --output_file my_map_01.osm odrlanelet2</span><br></pre></td></tr></table></figure>
+
+<p>That’s it! There’s literally nothing more to it.</p>
+<p><img src="images/lanelet_map.webp"><br>(Lanelet map visualized in <a target="_blank" rel="noopener" href="https://qgis.org/">QGIS</a>)</p>
+<h1 id="Projections-and-coordinate-systems"><a href="#Projections-and-coordinate-systems" class="headerlink" title="Projections and coordinate systems"></a>Projections and coordinate systems</h1><p>The scenario designer will, by default, not perform any coordinate conversions. Output will be in the same coordinate reference system (CRS) as your XODR input. Often times, you will see <a target="_blank" rel="noopener" href="https://epsg.io/4258"><code>EPSG:4258</code></a> or <a target="_blank" rel="noopener" href="https://epsg.io/4326"><code>EPSG:4326</code></a> to be used, that is, latitude / longitude pairs - or what is commonly referred to as GPS coordinates. However, when loading your Lanelet2 file programatically (see example below) using their tool suite, things look much differently. You will find coordinates in a vastly different range.</p>
+<p>The reason is that the Lanelet2 library converts to Cartesian, that is x- and y, coordinates upon loading the map. Cartesian (“projected”) coordinates are much easier to work with, because you can apply Euclidean arithemtic, etc. (simply get the distance between two points like you learned in high school), which does not work as is when dealing with lat / lon angles. More specifically, Lanelet2, by default, uses something they call a <a target="_blank" rel="noopener" href="https://github.com/fzi-forschungszentrum-informatik/Lanelet2/blob/master/lanelet2_io/include/lanelet2_io/Projection.h#L54">Spherical Mercator projection</a>. To my understanding, this is some custom-made thing, does not correspond to an official CRS / projection and thus will cause you a lot of problems when working with in other contexts.</p>
+<p>Thus, I recommend to instruct Lanelet2 to use <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Universal_Transverse_Mercator_coordinate_system">UTM coordinates</a> (see <a target="_blank" rel="noopener" href="https://github.com/fzi-forschungszentrum-informatik/Lanelet2/blob/master/lanelet2_projection/src/UTM.cpp#L8"><code>UtmProjector</code></a>) instead. UTM is is a widely adopted framework, even though special in a way that it splits the world into so called <em>zones</em> and then has CRS’ that are only defined for certain parts of the globe. It is, nevertheless, very useful and my recommendation if you want to work with your Lanelets’ coordinates somewhere else than only inside the Lanelet2 map itself.</p>
+<p>Here’s a code example to load and reproject the map in Python:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> lanelet2</span><br><span class="line"><span class="keyword">from</span> lanelet2.projection <span class="keyword">import</span> UtmProjector</span><br><span class="line"><span class="keyword">from</span> lanelet2.io imprt Origin</span><br><span class="line"></span><br><span class="line">origin = Origin(<span class="number">42.344889</span>, <span class="number">-71.044961</span>)  <span class="comment"># some arbitrary point somewhere close to (within a few km) to the center of your map</span></span><br><span class="line">utm_projector = UtmProjector(origin, useOffset=<span class="literal">False</span>, throwInPaddingArea=<span class="literal">False</span>)</span><br><span class="line">lanelet_map = lanelet2.io.load(<span class="string">&#x27;my_map_01.osm&#x27;</span>, utm_projector)</span><br><span class="line"></span><br><span class="line">print(<span class="string">f&#x27;Loaded <span class="subst">&#123;<span class="built_in">len</span>(<span class="built_in">list</span>(lanelet_map.laneletLayer))&#125;</span> lanelets ...&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<p>Happy coding!</p>
+
+  </div>
+</article>
+
+
+
+    </div>
+    
+      <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Blog</a></li>
+         
+          <li><a href="/imprint/">Imprint</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Primer-on-OpenDRIVE-and-Lanelet2"><span class="toc-number">1.</span> <span class="toc-text">Primer on OpenDRIVE and Lanelet2</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Converting-OpenDRIVE-to-Lanelet2"><span class="toc-number">2.</span> <span class="toc-text">Converting OpenDRIVE to Lanelet2</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Prerequisites"><span class="toc-number">2.1.</span> <span class="toc-text">Prerequisites</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Installation"><span class="toc-number">2.2.</span> <span class="toc-text">Installation</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Conversion"><span class="toc-number">2.3.</span> <span class="toc-text">Conversion</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Projections-and-coordinate-systems"><span class="toc-number">3.</span> <span class="toc-text">Projections and coordinate systems</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://muetsch.io/how-to-convert-opendrive-to-lanelet2.html"><i class="fas fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://muetsch.io/how-to-convert-opendrive-to-lanelet2.html&text=How to convert OpenDRIVE to Lanelet2"><i class="fas fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://muetsch.io/how-to-convert-opendrive-to-lanelet2.html&title=How to convert OpenDRIVE to Lanelet2"><i class="fas fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://muetsch.io/how-to-convert-opendrive-to-lanelet2.html&is_video=false&description=How to convert OpenDRIVE to Lanelet2"><i class="fas fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=How to convert OpenDRIVE to Lanelet2&body=Check out this article: https://muetsch.io/how-to-convert-opendrive-to-lanelet2.html"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://muetsch.io/how-to-convert-opendrive-to-lanelet2.html&title=How to convert OpenDRIVE to Lanelet2"><i class="fas fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://muetsch.io/how-to-convert-opendrive-to-lanelet2.html&title=How to convert OpenDRIVE to Lanelet2"><i class="fas fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://muetsch.io/how-to-convert-opendrive-to-lanelet2.html&title=How to convert OpenDRIVE to Lanelet2"><i class="fas fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://muetsch.io/how-to-convert-opendrive-to-lanelet2.html&title=How to convert OpenDRIVE to Lanelet2"><i class="fas fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://muetsch.io/how-to-convert-opendrive-to-lanelet2.html&name=How to convert OpenDRIVE to Lanelet2&description="><i class="fas fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+      <ul>
+        <li id="toc"><a class="icon" href="#" onclick='toggleById("toc-footer")'><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a></li>
+        <li id="share"><a class="icon" href="#" onclick='toggleById("share-footer")'><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a></li>
+        <li id="top" style="display:none"><a class="icon" href="#" onclick="window.scrollTo(0,0)"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a></li>
+        <li id="menu"><a class="icon" href="#" onclick='toggleById("nav-footer")'><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a></li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+    
+    <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2024 Ferdinand Mütsch
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Blog</a></li>
+         
+          <li><a href="/imprint/">Imprint</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+<!--
+<script defer type="text/javascript" src="js/pirsch.js"
+    id="pirschjs"
+    data-code="GoPk8VNmzk8Z6n7xikwZahvOxm1MNPud"></script>
+-->
+</body>
+</html>
+<!-- styles -->
+
+<link rel="stylesheet" href="/lib/roboto/css/roboto.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+
+
+
+<script src="/js/main.js"></script>
+
+<!-- Google Analytics -->
+
+<!-- Disqus Comments -->
+
+

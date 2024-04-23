@@ -1,0 +1,573 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  
+  <url>
+    <loc>https://muetsch.io/how-to-convert-opendrive-to-lanelet2.html</loc>
+    
+    <lastmod>2024-04-23</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://muetsch.io/about/index.html</loc>
+    
+    <lastmod>2024-04-23</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://muetsch.io/server-camp-friendly-open-source-saas-hosting.html</loc>
+    
+    <lastmod>2023-08-08</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://muetsch.io/how-to-integrate-caddy-with-fail2ban.html</loc>
+    
+    <lastmod>2023-08-08</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://muetsch.io/how-to-move-two-disk-dual-boot-system-to-single-ssd.html</loc>
+    
+    <lastmod>2023-03-02</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://muetsch.io/how-development-history-keeps-repeating-itself.html</loc>
+    
+    <lastmod>2022-11-10</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://muetsch.io/imprint/index.html</loc>
+    
+    <lastmod>2022-11-08</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://muetsch.io/monitoring-caddy-requests-with-prometheus-and-grafana.html</loc>
+    
+    <lastmod>2022-07-21</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://muetsch.io/sending-prometheus-alerts-to-telegram-with-telepush.html</loc>
+    
+    <lastmod>2022-04-10</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://muetsch.io/wakapi-s-year-2021.html</loc>
+    
+    <lastmod>2022-04-10</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://muetsch.io/simple-continuous-docker-deployments-with-caddy.html</loc>
+    
+    <lastmod>2021-12-18</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://muetsch.io/serving-raster-data-from-postgis-as-wms-using-python-and-fastapi-or-flask.html</loc>
+    
+    <lastmod>2021-11-08</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://muetsch.io/open-source-self-hosted-location-tracking-with-owntracks-and-grafana.html</loc>
+    
+    <lastmod>2021-06-25</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://muetsch.io/aggregating-and-visualizing-dmarc-reports.html</loc>
+    
+    <lastmod>2021-06-25</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://muetsch.io/time-tracking-for-developers-%E2%80%93-wakatime-vs-hakatime-vs-wakapi.html</loc>
+    
+    <lastmod>2021-04-10</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://muetsch.io/my-experiences-with-the-oracle-java-11-developer-certification.html</loc>
+    
+    <lastmod>2021-03-20</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://muetsch.io/consider-sponsoring-open-source.html</loc>
+    
+    <lastmod>2021-01-04</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://muetsch.io/donating-for-a-good-cause.html</loc>
+    
+    <lastmod>2020-12-12</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://muetsch.io/watching-stock-prices-with-node-red-and-webhook2telegram.html</loc>
+    
+    <lastmod>2020-11-30</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://muetsch.io/mastering-software-versioning-in-javascript-projects.html</loc>
+    
+    <lastmod>2020-11-07</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://muetsch.io/how-to-load-svg-into-imageview-by-url-in-android.html</loc>
+    
+    <lastmod>2020-10-30</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://muetsch.io/migrating-nextcloud-from-sqlite-to-mysql-with-docker.html</loc>
+    
+    <lastmod>2020-10-30</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://muetsch.io/overgrive-not-starting-on-ubuntu-18-04.html</loc>
+    
+    <lastmod>2020-10-30</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://muetsch.io/how-to-receive-sharing-intents-in-flutter.html</loc>
+    
+    <lastmod>2020-10-30</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://muetsch.io/what-i-like-about-developing-apps-with-flutter.html</loc>
+    
+    <lastmod>2020-10-30</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://muetsch.io/telegram-bot-example-code-in-nodejs.html</loc>
+    
+    <lastmod>2020-10-30</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://muetsch.io/web-development-technology-stack.html</loc>
+    
+    <lastmod>2020-10-30</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://muetsch.io/ml-telegram-chat-message-classification.html</loc>
+    
+    <lastmod>2020-10-30</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://muetsch.io/my-teck-stack-if-i-had-to-build-an-app-today.html</loc>
+    
+    <lastmod>2020-10-30</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://muetsch.io/how-to-make-telegram-bots.html</loc>
+    
+    <lastmod>2020-10-30</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://muetsch.io/http-performance-java-jersey-vs-go-vs-nodejs.html</loc>
+    
+    <lastmod>2020-10-30</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://muetsch.io/linux-cache-information-bash-script.html</loc>
+    
+    <lastmod>2020-10-30</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://muetsch.io/migrate-maildir-to-new-server-using-imapsync.html</loc>
+    
+    <lastmod>2020-10-30</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://muetsch.io/how-to-load-yago-into-apache-jena-fuseki.html</loc>
+    
+    <lastmod>2020-10-30</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://muetsch.io/pgp-encrypted-personal-e-mail-inbox.html</loc>
+    
+    <lastmod>2020-10-30</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://muetsch.io/unhostedorg-applications-with-remotestorageio-and-webfingernet.html</loc>
+    
+    <lastmod>2020-10-30</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://muetsch.io/webdevlistnet-the-developers-resource-collection.html</loc>
+    
+    <lastmod>2020-10-30</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://muetsch.io/why-raid-10-is-better-than-raid-01.html</loc>
+    
+    <lastmod>2020-10-30</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://muetsch.io/talkycars-a-distributed-software-platform-for-cooperative-perception.html</loc>
+    
+    <lastmod>2020-10-30</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://muetsch.io/telegram-expensebot-doodlerbot.html</loc>
+    
+    <lastmod>2020-10-30</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://muetsch.io/telegram-middleman-bot-push-notifications-as-easy-as-post.html</loc>
+    
+    <lastmod>2020-10-30</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://muetsch.io/transfer-learning-for-multi-digit-recognition-using-tensorflow-object-detection-and-svhn-classifier.html</loc>
+    
+    <lastmod>2020-10-30</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://muetsch.io/learning-angular2-what-is-new.html</loc>
+    
+    <lastmod>2020-10-30</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://muetsch.io/linkeddata-trivia-game.html</loc>
+    
+    <lastmod>2020-10-30</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://muetsch.io/modern-reactive-web-apis-with-graphql-go-and-server-sent-events-part-1.html</loc>
+    
+    <lastmod>2020-10-30</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://muetsch.io/modern-reactive-web-apis-with-graphql-go-and-server-sent-events-part-2.html</loc>
+    
+    <lastmod>2020-10-30</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://muetsch.io/quiznerd-my-experiences-with-the-android-developer-nanodegree.html</loc>
+    
+    <lastmod>2020-10-30</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://muetsch.io/halite-a-rule-based-ai-bot.html</loc>
+    
+    <lastmod>2020-10-30</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://muetsch.io/how-to-enable-dns-over-tls-on-ubuntu-using-coredns.html</loc>
+    
+    <lastmod>2020-10-30</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://muetsch.io/http20-server-push-proxy.html</loc>
+    
+    <lastmod>2020-10-30</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://muetsch.io/innovation-in-germany-not.html</loc>
+    
+    <lastmod>2020-10-30</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://muetsch.io/instant-messenger-security-encryption-overview.html</loc>
+    
+    <lastmod>2020-10-30</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://muetsch.io/detecting-academics-major-from-facial-images.html</loc>
+    
+    <lastmod>2020-10-30</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://muetsch.io/digitalocean-my-preferred-cloud-hosting-provider.html</loc>
+    
+    <lastmod>2020-10-30</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://muetsch.io/exploratory-analysis-on-github-data.html</loc>
+    
+    <lastmod>2020-10-30</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://muetsch.io/flying-a-dji-tello-drone-with-go.html</loc>
+    
+    <lastmod>2020-10-30</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://muetsch.io/cartpole-with-a-deep-q-network.html</loc>
+    
+    <lastmod>2020-10-30</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://muetsch.io/cartpole-with-qlearning-first-experiences-with-openai-gym.html</loc>
+    
+    <lastmod>2020-10-30</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://muetsch.io/design-of-a-linked-dataenabled-microservice-platform-for-the-industrial-internet-of-things.html</loc>
+    
+    <lastmod>2020-10-30</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://muetsch.io/anchr-io-image-uploads-bookmarks-and-shortlink-service.html</loc>
+    
+    <lastmod>2020-10-30</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://muetsch.io/basic-benchmarks-of-5-different-mqtt-brokers.html</loc>
+    
+    <lastmod>2020-10-30</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://muetsch.io/building-a-cloud-native-web-scraper-using-8-different-aws-services.html</loc>
+    
+    <lastmod>2020-10-30</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+
+  <url>
+    <loc>https://muetsch.io/</loc>
+    <lastmod>2024-04-23</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+  </url>
+
+  
+
+  
+</urlset>
