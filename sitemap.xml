@@ -2,9 +2,27 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://muetsch.io/how-to-convert-opendrive-to-lanelet2.html</loc>
+    <loc>https://muetsch.io/multi-threaded-brotli-compression-tool.html</loc>
     
-    <lastmod>2024-04-23</lastmod>
+    <lastmod>2024-07-13</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://muetsch.io/norospy-using-ros-without-ros.html</loc>
+    
+    <lastmod>2024-07-13</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://muetsch.io/statement-about-generative-ai.html</loc>
+    
+    <lastmod>2024-07-13</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -12,6 +30,24 @@
   
   <url>
     <loc>https://muetsch.io/about/index.html</loc>
+    
+    <lastmod>2024-07-13</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://muetsch.io/don-t-get-a-contabo-server.html</loc>
+    
+    <lastmod>2024-05-02</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://muetsch.io/how-to-convert-opendrive-to-lanelet2.html</loc>
     
     <lastmod>2024-04-23</lastmod>
     
@@ -562,7 +598,7 @@
 
   <url>
     <loc>https://muetsch.io/</loc>
-    <lastmod>2024-04-23</lastmod>
+    <lastmod>2024-07-13</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>

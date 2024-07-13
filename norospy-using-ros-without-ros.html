@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="referrer" content="no-referrer">
+    <meta name="description" content="Wait, what? Okay, one thing at a time. First of all, what is ROS even? What is ROS?ROS is short for Robot Operating System. However, the name is somewhat misleading in my understanding. ROS is pretty">
+<meta property="og:type" content="article">
+<meta property="og:title" content="norospy - Using ROS without ROS">
+<meta property="og:url" content="https://muetsch.io/norospy-using-ros-without-ros.html">
+<meta property="og:site_name" content="Ferdinand Mütsch">
+<meta property="og:description" content="Wait, what? Okay, one thing at a time. First of all, what is ROS even? What is ROS?ROS is short for Robot Operating System. However, the name is somewhat misleading in my understanding. ROS is pretty">
+<meta property="og:locale">
+<meta property="og:image" content="https://muetsch.io/images/ros_logo.svg">
+<meta property="og:image" content="https://muetsch.io/images/norospy_01.svg">
+<meta property="article:published_time" content="2024-07-02T20:15:23.000Z">
+<meta property="article:modified_time" content="2024-07-13T08:52:24.610Z">
+<meta property="article:author" content="Ferdinand Mütsch">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://muetsch.io/images/ros_logo.svg">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.png">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon.png" sizes="192x192">
+          
+        
+        
+    
+    <!-- title -->
+    <title>norospy - Using ROS without ROS</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- rss -->
+    
+    
+
+    <!-- rel-me links -->
+    
+      
+        <link href="http://github.com/muety" rel="me">
+      
+        <link href="https://social.tchncs.de/@ferdi" rel="me">
+      
+        <link href="mailto:ferdinand@muetsch.io" rel="me">
+      
+    
+
+    <!-- Webmention link -->
+    
+      <link href="https://webmention.io/muetsch.io/webmention" rel="webmention">
+    
+
+    
+      <link href="https://webmention.io/muetsch.io/xmlrpc" rel="pingback">
+    
+<meta name="generator" content="Hexo 5.2.0"><link rel="alternate" href="/rss2.xml" title="Ferdinand Mütsch" type="application/rss+xml">
+</head>
+
+<body>
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="window.scrollTo(0, 0)" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Blog</a></li>
+         
+          <li><a href="/imprint/">Imprint</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/multi-threaded-brotli-compression-tool.html"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover='toggleById("i-prev");' onmouseout='toggleById("i-prev");'></i></a></li>
+        
+        
+        <li><a class="icon" href="/statement-about-generative-ai.html"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover='toggleById("i-next").toggleById();' onmouseout='toggleById("i-next");'></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="window.scrollTo(0,0)"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover='toggleById("i-top");' onmouseout='toggleById("i-top");'></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover='toggleById("i-share");' onmouseout='toggleById("i-share");' onclick='toggleById("share");return false;'></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://muetsch.io/norospy-using-ros-without-ros.html"><i class="fas fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://muetsch.io/norospy-using-ros-without-ros.html&text=norospy - Using ROS without ROS"><i class="fas fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://muetsch.io/norospy-using-ros-without-ros.html&title=norospy - Using ROS without ROS"><i class="fas fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://muetsch.io/norospy-using-ros-without-ros.html&is_video=false&description=norospy - Using ROS without ROS"><i class="fas fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=norospy - Using ROS without ROS&body=Check out this article: https://muetsch.io/norospy-using-ros-without-ros.html"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://muetsch.io/norospy-using-ros-without-ros.html&title=norospy - Using ROS without ROS"><i class="fas fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://muetsch.io/norospy-using-ros-without-ros.html&title=norospy - Using ROS without ROS"><i class="fas fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://muetsch.io/norospy-using-ros-without-ros.html&title=norospy - Using ROS without ROS"><i class="fas fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://muetsch.io/norospy-using-ros-without-ros.html&title=norospy - Using ROS without ROS"><i class="fas fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://muetsch.io/norospy-using-ros-without-ros.html&name=norospy - Using ROS without ROS&description="><i class="fas fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#What-is-ROS"><span class="toc-number">1.</span> <span class="toc-text">What is ROS?</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#ROS-Version-Compatibility"><span class="toc-number">2.</span> <span class="toc-text">ROS Version Compatibility</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#norospy-Docker-Image-and-Python-Client"><span class="toc-number">3.</span> <span class="toc-text">norospy - Docker Image and Python Client</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#How-to-use"><span class="toc-number">3.1.</span> <span class="toc-text">How to use?</span></a></li></ol></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index width mx-auto px2 my4">
+        
+        <article class="h-entry post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <a href="https://muetsch.io/norospy-using-ros-without-ros.html" class="u-url">
+        <h1 class="posttitle p-name" itemprop="name headline" property="headline">
+            norospy - Using ROS without ROS
+        </h1>
+    </a>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" property="author" itemscope itemtype="http://schema.org/Person" vocab="http://schema.org/" typeof="Person">
+        <span itemprop="name" property="name" class="p-author h-card">Ferdinand Mütsch</span>
+      </span>
+      
+    <div class="postdate">
+        <time datetime="2024-07-02T20:15:23.000Z" class="dt-published" itemprop="datePublished" property="datePublished">2024-07-02</time>
+    </div>
+
+
+      
+
+
+      <!--
+      <div style="margin-top: 30px">
+        <a href="https://liberapay.com/muety/" target="_blank"
+          style="background-image: none; text-decoration: none;"><img
+            src="https://badges.fw-web.space/liberapay/receives/muety.svg?logo=liberapay&style=flat-square" alt="Liberapay"
+            style="height: auto !important;width: auto !important;"></a>
+      </div>
+      -->
+    </div>
+  </header>
+  
+  <div class="content e-content" itemprop="articleBody" property="articleBody">
+    <p>Wait, what? Okay, one thing at a time. First of all, what is ROS even?</p>
+<h1 id="What-is-ROS"><a href="#What-is-ROS" class="headerlink" title="What is ROS?"></a>What is ROS?</h1><p><a target="_blank" rel="noopener" href="https://wiki.ros.org/">ROS</a> is short for <em>Robot Operating System</em>. However, the name is somewhat misleading in my understanding. ROS is pretty comprehensive, but I wouldn’t consider it an operating system. Rather, it’s a rich suite of libraries and tools specifically suited for building robotics applications and thus sort of the de-facto standard software platform in robotics and related fields - such as autonomous driving.</p>
+<p><img src="images/ros_logo.svg"></p>
+<p>Essentially, it mainly features a <strong>communication middlware layer</strong>, a <strong>binary message serialization</strong> format and a lot of <strong>useful algorithms</strong> and utilities for common robotics use cases (coordinate transformations, navigation, image processing, sensor- and actuator drivers, etc.).</p>
+<p>For the messaging part, it’s pretty much similar to technologies like the MQTT and AMQP protocol. ROS primarily provides <strong>asynchronous</strong> communication, where <strong>providers</strong> publish messages to <strong>topics</strong> and <strong>subscribers</strong> read them according to their needs. Not only TCP/IP-based communication is supported, but also local, inter-process communication (IPC). The latter is especially useful in robotics use cases, for which it’s not uncommon to have real-time requirements and send especially large payloads (like point lidar point clouds or uncompressed, raw images).</p>
+<p>Additionally, ROS comes with its own binary, schema-based message format used for payload serialization. You can think of it like the ROS-specific variant of technologies like <a target="_blank" rel="noopener" href="https://protobuf.dev/">Protobuf</a>, <a target="_blank" rel="noopener" href="https://avro.apache.org/">Avro</a>, <a target="_blank" rel="noopener" href="https://flatbuffers.dev/">Flatbuffers</a>, <a target="_blank" rel="noopener" href="https://mcap.dev/">mcap</a>, <a target="_blank" rel="noopener" href="https://msgpack.org/">MessagePack</a>, any many more.</p>
+<h1 id="ROS-Version-Compatibility"><a href="#ROS-Version-Compatibility" class="headerlink" title="ROS Version Compatibility"></a>ROS Version Compatibility</h1><p>When talking about ROS versions, first thing to mention is that every new reversion (aka. distribution) comes with its own super cool and artistic <a target="_blank" rel="noopener" href="https://wiki.ros.org/Distributions">logo</a>!</p>
+<p>But apart from that, it is important to know that there are <a target="_blank" rel="noopener" href="https://roboticsbackend.com/ros1-vs-ros2-practical-overview/">two major-version distributions</a> of ROS. The first ROS 2 distro was released back in 2017 already, but ROS 1 is still widely in use. Its last release - <a target="_blank" rel="noopener" href="https://wiki.ros.org/noetic">Noetic</a> - will reach its end of life in May 2025, though. The big problem - as you would expect with major version releases - there is no backwards compatible. Consequently, dev teams will have to migrate their entire code base to switch from v1.x to v2.x, which is a non-trivial endeavor and the main reason for many robots, cars, etc. still running on the outdated ROS 1.</p>
+<p>When developing for ROS 1, a big hurdle is the fact that is necessarily requires Ubuntu 20.04 (about to be deprecated mid 2025) and outdated library versions. Setting up a ROS 1 distribution on a modern OS (like Ubuntu 24.04, Fedora 40, …) is close to impossible. At the same time, most developers will likely not be willing to intentionally downgrade to a deprecated stack, though.</p>
+<h1 id="norospy-Docker-Image-and-Python-Client"><a href="#norospy-Docker-Image-and-Python-Client" class="headerlink" title="norospy - Docker Image and Python Client"></a>norospy - Docker Image and Python Client</h1><p><img src="images/norospy_01.svg"></p>
+<p>As a workaround, I developed <a target="_blank" rel="noopener" href="https://gitlab.kit.edu/kit/aifb/ATKS/public/norospy">norospy</a>. It involves a Docker setup and ROS-free Python client for streaming data from ROS 1 without requiring an actual ROS distribution to be installed. This way, you can encapsulate all ROS-related inside a Docker container, while not being forced to run your actual application code on an ancient (pre-22.04) OS. It also includes functionality to bridge from <a target="_blank" rel="noopener" href="https://carla.org/">CARLA</a> via ROS / Foxglove to Python.</p>
+<p>Using the provided Dockerfile, you can run an entire ROS distribution - primarily including a <a target="_blank" rel="noopener" href="https://wiki.ros.org/roscore">roscore</a> and most common tools, modules and libraries - inside Docker without installing any ROS-related software in your actual host system.</p>
+<p>The second part is a small Python client library that I wrote on top of the excellent tooling provided as open source by <a target="_blank" rel="noopener" href="https://foxglove.dev/">Foxglove</a>. It addresses the problem that you’d need to have a full ROS distro installed on your system in order to use the <a target="_blank" rel="noopener" href="https://wiki.ros.org/rospy">rospy</a> Python package. That is, for any sort of interaction with ROS - e.g. subscribing to topics, deserializing binary messages, performing coordinate conversions, etc. - you’ll need the ROS C++ stack and thus forces you into Ubuntu &lt;= 20.04.</p>
+<p>To work around this, an instance of <a target="_blank" rel="noopener" href="https://docs.foxglove.dev/docs/connecting-to-data/ros-foxglove-bridge/">ROS Foxglove bridge</a> runs inside the container and exposes ROS topics via Websockets, following Foxglove’s <a target="_blank" rel="noopener" href="https://github.com/foxglove/ws-protocol">ws-protocol</a> specification. From thereon, you can interact with other ROS nodes via plain websockets in a platform-independent way. Well, almost, but not quite. For reading and writing the binary serialized messages, you’d still need ROS. Luckily, Fovglove open-sourced an entirely independent, pure Python <a target="_blank" rel="noopener" href="https://pypi.org/project/mcap-ros1-support/">library</a> ROS 1-compatible (de-)serialization, which norospy builds upon (btw. if you’re interested in reading and writing <a target="_blank" rel="noopener" href="https://wiki.ros.org/rosbag">rosbags</a> purely with Python, there is the excellent <a target="_blank" rel="noopener" href="https://pypi.org/project/rosbags/">rosbags library</a> provided by <a target="_blank" rel="noopener" href="https://gitlab.com/ternaris/marv-robotics">MARV</a>).</p>
+<h2 id="How-to-use"><a href="#How-to-use" class="headerlink" title="How to use?"></a>How to use?</h2><p>To interact with the ROS ecosystem via norospy without having to install ROS itself, you’ll simply have to build the according Docker image, spawn up a container and connect to the websocket bridge via norospy’s <code>ROSFoxgloveClient</code>.</p>
+<p><strong>Build image</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker build -t localhost/foxglove-ros-bridge .</span><br></pre></td></tr></table></figure>
+
+<p><strong>Create container</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">docker run -t -d \</span><br><span class="line">  --net=host \</span><br><span class="line">  --name foxglove-ros-bridge \</span><br><span class="line">  -e ROS_IP=127.0.0.1 \</span><br><span class="line">  -e ROS_HOSTNAME=localhost \</span><br><span class="line">  localhost/foxglove-ros-bridge</span><br></pre></td></tr></table></figure>
+
+<p><strong>Connect and subscribe</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> signal</span><br><span class="line"><span class="keyword">from</span> norospy <span class="keyword">import</span> ROSFoxgloveClient</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># Callback for receiving images (used later)</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">on_image</span>(<span class="params">msg, ts</span>):</span></span><br><span class="line">    <span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">f&#x27;/tmp/<span class="subst">&#123;ts&#125;</span>.jpg&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">        f.write(msg.data)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># Create a new client and start it</span></span><br><span class="line">client = ROSFoxgloveClient(<span class="string">&#x27;ws://localhost:8765&#x27;</span>)</span><br><span class="line">client.run_background()</span><br><span class="line"></span><br><span class="line"><span class="comment"># Use case 1: Subscribe to data (e.g. images from CARLA, in this example)</span></span><br><span class="line">client.subscribe(<span class="string">&#x27;/carla/ego_vehicle/rgb_front/image/compressed&#x27;</span>, <span class="string">&#x27;sensor_msgs/CompressedImage&#x27;</span>, on_image)</span><br><span class="line"></span><br><span class="line"><span class="keyword">try</span>:</span><br><span class="line">    signal.pause()</span><br><span class="line"><span class="keyword">finally</span>:</span><br><span class="line">    client.close()</span><br></pre></td></tr></table></figure>
+
+<p>The above code snippet is a simple example for a Python client that subscribes to a topic and persist the received RGB images in a callback.</p>
+<p>For further details, best consult the provided <a target="_blank" rel="noopener" href="https://gitlab.kit.edu/kit/aifb/ATKS/public/norospy/-/blob/main/README.md">documentation</a>.</p>
+
+  </div>
+</article>
+
+
+
+    </div>
+    
+      <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Blog</a></li>
+         
+          <li><a href="/imprint/">Imprint</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#What-is-ROS"><span class="toc-number">1.</span> <span class="toc-text">What is ROS?</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#ROS-Version-Compatibility"><span class="toc-number">2.</span> <span class="toc-text">ROS Version Compatibility</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#norospy-Docker-Image-and-Python-Client"><span class="toc-number">3.</span> <span class="toc-text">norospy - Docker Image and Python Client</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#How-to-use"><span class="toc-number">3.1.</span> <span class="toc-text">How to use?</span></a></li></ol></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://muetsch.io/norospy-using-ros-without-ros.html"><i class="fas fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://muetsch.io/norospy-using-ros-without-ros.html&text=norospy - Using ROS without ROS"><i class="fas fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://muetsch.io/norospy-using-ros-without-ros.html&title=norospy - Using ROS without ROS"><i class="fas fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://muetsch.io/norospy-using-ros-without-ros.html&is_video=false&description=norospy - Using ROS without ROS"><i class="fas fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=norospy - Using ROS without ROS&body=Check out this article: https://muetsch.io/norospy-using-ros-without-ros.html"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://muetsch.io/norospy-using-ros-without-ros.html&title=norospy - Using ROS without ROS"><i class="fas fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://muetsch.io/norospy-using-ros-without-ros.html&title=norospy - Using ROS without ROS"><i class="fas fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://muetsch.io/norospy-using-ros-without-ros.html&title=norospy - Using ROS without ROS"><i class="fas fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://muetsch.io/norospy-using-ros-without-ros.html&title=norospy - Using ROS without ROS"><i class="fas fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://muetsch.io/norospy-using-ros-without-ros.html&name=norospy - Using ROS without ROS&description="><i class="fas fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+      <ul>
+        <li id="toc"><a class="icon" href="#" onclick='toggleById("toc-footer")'><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a></li>
+        <li id="share"><a class="icon" href="#" onclick='toggleById("share-footer")'><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a></li>
+        <li id="top" style="display:none"><a class="icon" href="#" onclick="window.scrollTo(0,0)"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a></li>
+        <li id="menu"><a class="icon" href="#" onclick='toggleById("nav-footer")'><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a></li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+    
+    <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2024 Ferdinand Mütsch
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Blog</a></li>
+         
+          <li><a href="/imprint/">Imprint</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+<!--
+<script defer type="text/javascript" src="js/pirsch.js"
+    id="pirschjs"
+    data-code="GoPk8VNmzk8Z6n7xikwZahvOxm1MNPud"></script>
+-->
+</body>
+</html>
+<!-- styles -->
+
+<link rel="stylesheet" href="/lib/roboto/css/roboto.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+
+
+
+<script src="/js/main.js"></script>
+
+<!-- Google Analytics -->
+
+<!-- Disqus Comments -->
+
+

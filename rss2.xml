@@ -8,9 +8,90 @@
     
     <atom:link href="https://muetsch.io/rss2.xml" rel="self" type="application/rss+xml"/>
     
-    <description>Hi and welcome! 👋 I&#39;m Ferdinand, a passionate software- and data engineer and technology enthusiast from Karlsruhe, Germany. My personal webpage is the right place to find out about me and my projects and to read about software development, DevOps, some machine learning and technology in general. Enjoy and feel free to leave me a message!</description>
-    <pubDate>Tue, 23 Apr 2024 07:42:50 GMT</pubDate>
+    <description>Hi and welcome! 👋 I&#39;m Ferdinand, a passionate software- and data engineer and technology enthusiast from Karlsruhe, Germany. My personal webpage is the right place to find out about me and my projects and to read about software development, DevOps, some machine learning and technology in general. All content you will find here is [human-written](/statement-about-generative-ai.html). Enjoy and feel free to leave me a message!</description>
+    <pubDate>Sat, 13 Jul 2024 09:27:47 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>Multi-threaded Brotli compression tool</title>
+      <link>https://muetsch.io/multi-threaded-brotli-compression-tool.html</link>
+      <guid>https://muetsch.io/multi-threaded-brotli-compression-tool.html</guid>
+      <pubDate>Sat, 13 Jul 2024 08:52:52 GMT</pubDate>
+      
+        
+        
+      <description>&lt;h2 id=&quot;Brotli-compression-is-slow&quot;&gt;&lt;a href=&quot;#Brotli-compression-is-slow&quot; class=&quot;headerlink&quot; title=&quot;Brotli compression is slow&quot;&gt;&lt;/a&gt;Brotli c</description>
+        
+      
+      
+      
+      
+      
+      
+      <comments>https://muetsch.io/multi-threaded-brotli-compression-tool.html#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>norospy - Using ROS without ROS</title>
+      <link>https://muetsch.io/norospy-using-ros-without-ros.html</link>
+      <guid>https://muetsch.io/norospy-using-ros-without-ros.html</guid>
+      <pubDate>Tue, 02 Jul 2024 20:15:23 GMT</pubDate>
+      
+        
+        
+      <description>&lt;p&gt;Wait, what? Okay, one thing at a time. First of all, what is ROS even?&lt;/p&gt;
+&lt;h1 id=&quot;What-is-ROS&quot;&gt;&lt;a href=&quot;#What-is-ROS&quot; class=&quot;headerlink&quot;</description>
+        
+      
+      
+      
+      
+      
+      
+      <comments>https://muetsch.io/norospy-using-ros-without-ros.html#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>Statement about generative AI</title>
+      <link>https://muetsch.io/statement-about-generative-ai.html</link>
+      <guid>https://muetsch.io/statement-about-generative-ai.html</guid>
+      <pubDate>Thu, 13 Jun 2024 06:46:14 GMT</pubDate>
+      
+        
+        
+      <description>&lt;p&gt;Inspired by &lt;a href=&quot;https://www.leftfold.tech/pages/noai/&quot;&gt;this blog&lt;/a&gt;, I want to make a statement about the use of generative AI on m</description>
+        
+      
+      
+      
+      
+      
+      
+      <comments>https://muetsch.io/statement-about-generative-ai.html#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>Don&#39;t get a Contabo server</title>
+      <link>https://muetsch.io/don-t-get-a-contabo-server.html</link>
+      <guid>https://muetsch.io/don-t-get-a-contabo-server.html</guid>
+      <pubDate>Thu, 25 Apr 2024 07:50:19 GMT</pubDate>
+      
+        
+        
+      <description>&lt;p&gt;I’m usually not a person to rant on companies. But in this case, my experience with &lt;a href=&quot;https://contabo.com/&quot;&gt;Contabo&lt;/a&gt; was so bad</description>
+        
+      
+      
+      
+      
+      
+      
+      <comments>https://muetsch.io/don-t-get-a-contabo-server.html#disqus_thread</comments>
+      
+    </item>
     
     <item>
       <title>How to convert OpenDRIVE to Lanelet2</title>
@@ -29,89 +110,6 @@
       
       
       <comments>https://muetsch.io/how-to-convert-opendrive-to-lanelet2.html#disqus_thread</comments>
-      
-    </item>
-    
-    <item>
-      <title>Server.Camp - Friendly Open-Source SaaS Hosting</title>
-      <link>https://muetsch.io/server-camp-friendly-open-source-saas-hosting.html</link>
-      <guid>https://muetsch.io/server-camp-friendly-open-source-saas-hosting.html</guid>
-      <pubDate>Tue, 08 Aug 2023 16:48:14 GMT</pubDate>
-      
-        
-        
-      <description>&lt;p&gt;&lt;img src=&quot;images/servercamp_logo.webp&quot; alt=&quot;server.camp logo&quot;&gt;&lt;/p&gt;
-&lt;p&gt;This week, two friends and I started &lt;a href=&quot;https://server.camp/&quot;</description>
-        
-      
-      
-      
-      
-      
-      
-      <comments>https://muetsch.io/server-camp-friendly-open-source-saas-hosting.html#disqus_thread</comments>
-      
-    </item>
-    
-    <item>
-      <title>How to integrate Caddy with fail2ban</title>
-      <link>https://muetsch.io/how-to-integrate-caddy-with-fail2ban.html</link>
-      <guid>https://muetsch.io/how-to-integrate-caddy-with-fail2ban.html</guid>
-      <pubDate>Sun, 14 May 2023 18:58:57 GMT</pubDate>
-      
-        
-        
-      <description>&lt;p&gt;&lt;a href=&quot;https://github.com/fail2ban/fail2ban&quot;&gt;Fail2ban&lt;/a&gt; is an awesome security tool for servers. It allows to define rules (such as m</description>
-        
-      
-      
-      
-      
-      
-      
-      <comments>https://muetsch.io/how-to-integrate-caddy-with-fail2ban.html#disqus_thread</comments>
-      
-    </item>
-    
-    <item>
-      <title>How to move two-disk dual-boot system to single SSD</title>
-      <link>https://muetsch.io/how-to-move-two-disk-dual-boot-system-to-single-ssd.html</link>
-      <guid>https://muetsch.io/how-to-move-two-disk-dual-boot-system-to-single-ssd.html</guid>
-      <pubDate>Wed, 01 Mar 2023 19:09:22 GMT</pubDate>
-      
-        
-        
-      <description>&lt;p&gt;&lt;img src=&quot;images/hard_drive1.webp&quot; alt=&quot;Cover Image (a hard drive)&quot;&gt;&lt;/p&gt;
-&lt;p&gt;On my desktop PC, I had a dual-boot setup with Fedora Linux a</description>
-        
-      
-      
-      
-      
-      
-      
-      <comments>https://muetsch.io/how-to-move-two-disk-dual-boot-system-to-single-ssd.html#disqus_thread</comments>
-      
-    </item>
-    
-    <item>
-      <title>How development history keeps repeating itself</title>
-      <link>https://muetsch.io/how-development-history-keeps-repeating-itself.html</link>
-      <guid>https://muetsch.io/how-development-history-keeps-repeating-itself.html</guid>
-      <pubDate>Fri, 04 Nov 2022 10:18:08 GMT</pubDate>
-      
-        
-        
-      <description>&lt;p&gt;&lt;img src=&quot;images/dev_history1.webp&quot; alt=&quot;Tools in a workshop&quot;&gt;&lt;/p&gt;
-&lt;p&gt;I want to share a couple of thoughts that repeatedly come to my min</description>
-        
-      
-      
-      
-      
-      
-      
-      <comments>https://muetsch.io/how-development-history-keeps-repeating-itself.html#disqus_thread</comments>
       
     </item>
     
