@@ -15,7 +15,7 @@
 <meta property="og:description" content="Brotli compression is slowBrotli is an extremely efficient compression format (alternative to gzip, zstd, etc.), with google&#x2F;brotli being sort of its reference implementation. What always bugged me wi">
 <meta property="og:locale">
 <meta property="article:published_time" content="2024-07-13T08:52:52.000Z">
-<meta property="article:modified_time" content="2024-07-13T09:27:47.742Z">
+<meta property="article:modified_time" content="2024-07-13T09:33:27.773Z">
 <meta property="article:author" content="Ferdinand Mütsch">
 <meta name="twitter:card" content="summary">
     
@@ -181,10 +181,10 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">make</span><br><span class="line"><span class="built_in">cd</span> c/go</span><br><span class="line">go build -o brotli-rust</span><br></pre></td></tr></table></figure>
 
 <p>Eventually, I was able to Brotli-compress a file while utilizing 100 % of my CPU 🙌:</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat random.txt | ./brotli-rust &gt; random.txt.br</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat random.txt | ./brotli-rust -w &gt; random.txt.br</span><br></pre></td></tr></table></figure>
 
 <h2 id="Benchmark"><a href="#Benchmark" class="headerlink" title="Benchmark"></a>Benchmark</h2><p>I ran a few quick test to compare performance on a 128 MB high-entropy text file and these are the results (on a 12-core CPU):</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">time brotli random.txt                              <span class="comment"># 197.83 s</span></span><br><span class="line">time cat random.txt | brotli-rust &gt; random.txt.br   <span class="comment"># 7.62 s</span></span><br><span class="line">time gzip random.txt                                <span class="comment"># 4.91 s</span></span><br><span class="line">time pigz random.txt                                <span class="comment"># 0.35 s</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">time brotli random.txt                              <span class="comment"># 197.83 s</span></span><br><span class="line">time cat random.txt | brotli-rust -w &gt; random.txt.br   <span class="comment"># 7.62 s</span></span><br><span class="line">time gzip random.txt                                <span class="comment"># 4.91 s</span></span><br><span class="line">time pigz random.txt                                <span class="comment"># 0.35 s</span></span><br></pre></td></tr></table></figure>
 
 <p>In this case, the multi-threaded version is 26x faster than the original one. For comparison, I ran <em>gzip</em> as well (single- and multi-threaded, the latter using <code>pigz</code>). However, the comparison is unfair, of course, as gzip compression rate is much worse on average.</p>
 
