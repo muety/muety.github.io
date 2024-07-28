@@ -2,6 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://muetsch.io/statement-about-generative-ai.html</loc>
+    
+    <lastmod>2024-07-28</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://muetsch.io/multi-threaded-brotli-compression-tool.html</loc>
     
     <lastmod>2024-07-13</lastmod>
@@ -12,15 +21,6 @@
   
   <url>
     <loc>https://muetsch.io/norospy-using-ros-without-ros.html</loc>
-    
-    <lastmod>2024-07-13</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://muetsch.io/statement-about-generative-ai.html</loc>
     
     <lastmod>2024-07-13</lastmod>
     
@@ -598,7 +598,7 @@
 
   <url>
     <loc>https://muetsch.io/</loc>
-    <lastmod>2024-07-13</lastmod>
+    <lastmod>2024-07-28</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
