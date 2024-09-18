@@ -64,7 +64,7 @@
     
       <link href="https://webmention.io/muetsch.io/xmlrpc" rel="pingback">
     
-<meta name="generator" content="Hexo 5.2.0"><link rel="alternate" href="/rss2.xml" title="Ferdinand Mütsch" type="application/rss+xml">
+<meta name="generator" content="Hexo 7.3.0"><link rel="alternate" href="/rss2.xml" title="Ferdinand Mütsch" type="application/rss+xml">
 </head>
 
 <body>
@@ -107,16 +107,16 @@
     <br/>
     <div id="share" style="display: none">
       <ul>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://muetsch.io/http20-server-push-proxy.html"><i class="fas fa-facebook " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://muetsch.io/http20-server-push-proxy.html&text=HTTP/2.0 server push proxy"><i class="fas fa-twitter " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://muetsch.io/http20-server-push-proxy.html&title=HTTP/2.0 server push proxy"><i class="fas fa-linkedin " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://muetsch.io/http20-server-push-proxy.html&is_video=false&description=HTTP/2.0 server push proxy"><i class="fas fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://muetsch.io/http20-server-push-proxy.html"><i class="fas fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://muetsch.io/http20-server-push-proxy.html&text=HTTP/2.0 server push proxy"><i class="fas fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://muetsch.io/http20-server-push-proxy.html&title=HTTP/2.0 server push proxy"><i class="fas fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://muetsch.io/http20-server-push-proxy.html&is_video=false&description=HTTP/2.0 server push proxy"><i class="fas fa-pinterest " aria-hidden="true"></i></a></li>
   <li><a class="icon" href="mailto:?subject=HTTP/2.0 server push proxy&body=Check out this article: https://muetsch.io/http20-server-push-proxy.html"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://muetsch.io/http20-server-push-proxy.html&title=HTTP/2.0 server push proxy"><i class="fas fa-get-pocket " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://muetsch.io/http20-server-push-proxy.html&title=HTTP/2.0 server push proxy"><i class="fas fa-reddit " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://muetsch.io/http20-server-push-proxy.html&title=HTTP/2.0 server push proxy"><i class="fas fa-stumbleupon " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://muetsch.io/http20-server-push-proxy.html&title=HTTP/2.0 server push proxy"><i class="fas fa-digg " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://muetsch.io/http20-server-push-proxy.html&name=HTTP/2.0 server push proxy&description="><i class="fas fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://muetsch.io/http20-server-push-proxy.html&title=HTTP/2.0 server push proxy"><i class="fas fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://muetsch.io/http20-server-push-proxy.html&title=HTTP/2.0 server push proxy"><i class="fas fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://muetsch.io/http20-server-push-proxy.html&title=HTTP/2.0 server push proxy"><i class="fas fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://muetsch.io/http20-server-push-proxy.html&title=HTTP/2.0 server push proxy"><i class="fas fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://muetsch.io/http20-server-push-proxy.html&name=HTTP/2.0 server push proxy&description="><i class="fas fa-tumblr " aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
@@ -165,10 +165,10 @@
   </header>
   
   <div class="content e-content" itemprop="articleBody" property="articleBody">
-    <p>I just released a new, little Node project on GitHub and NPM, which is called <a target="_blank" rel="noopener" href="https://www.npmjs.com/package/http2-serverpush-proxy">http2-serverpush-proxy</a> and does exactly what the name suggests. It spawns a reverse proxy between a web application and its clients, that serves via HTTP/2 and automatically server-pushes assets contained in the HTML. It can be used as either standalone server or as <em>connect</em> middleware for ExpressJS.</p>
-<h3 id="How-it-works"><a href="#How-it-works" class="headerlink" title="How it works"></a>How it works</h3><p>Usually, websites consist of multiple assets, like CSS and JS files as well as images like PNGs, JPGs and SVGs. Traditionally, a user’s browser fetches the HTML first, parses it and then downloads all linked assets. However, this is slow, since the assets can’t be loaded before the HTML is completely fetched and parsed. With server push, your webserver can actively send those assets to the client browser even before it requested them. To prevent you from having to implement this functionality, <em>http2-serverpush-proxy</em> sits as a proxy between your actual webserver and the user. In contrast to some other approaches like <a target="_blank" rel="noopener" href="https://github.com/GoogleChrome/http2-push-manifest">http2-push-manifest</a>, where the assets to be pushed are declared statically, this library <strong>dynamically parses the HTML</strong> files and extracts contained assets that should be pushed.</p>
+    <p>I just released a new, little Node project on GitHub and NPM, which is called <a href="https://www.npmjs.com/package/http2-serverpush-proxy">http2-serverpush-proxy</a> and does exactly what the name suggests. It spawns a reverse proxy between a web application and its clients, that serves via HTTP/2 and automatically server-pushes assets contained in the HTML. It can be used as either standalone server or as <em>connect</em> middleware for ExpressJS.</p>
+<h3 id="How-it-works"><a href="#How-it-works" class="headerlink" title="How it works"></a>How it works</h3><p>Usually, websites consist of multiple assets, like CSS and JS files as well as images like PNGs, JPGs and SVGs. Traditionally, a user’s browser fetches the HTML first, parses it and then downloads all linked assets. However, this is slow, since the assets can’t be loaded before the HTML is completely fetched and parsed. With server push, your webserver can actively send those assets to the client browser even before it requested them. To prevent you from having to implement this functionality, <em>http2-serverpush-proxy</em> sits as a proxy between your actual webserver and the user. In contrast to some other approaches like <a href="https://github.com/GoogleChrome/http2-push-manifest">http2-push-manifest</a>, where the assets to be pushed are declared statically, this library <strong>dynamically parses the HTML</strong> files and extracts contained assets that should be pushed.</p>
 <p><img src="https://apps.muetsch.io/images/o:auto?image=https://muetsch.io/images/push_screenshot1.png"><br>Without server push<br><img src="https://apps.muetsch.io/images/o:auto?image=https://muetsch.io/images/push_screenshot2.png"><br>With server push</p>
-<p>Details on how to use this library are to be found on the <a target="_blank" rel="noopener" href="https://github.com/muety/http2-serverpush-proxy">project site</a>. Please feel free to give me feedback!</p>
+<p>Details on how to use this library are to be found on the <a href="https://github.com/muety/http2-serverpush-proxy">project site</a>. Please feel free to give me feedback!</p>
 
   </div>
 </article>
@@ -200,16 +200,16 @@
 
     <div id="share-footer" style="display: none">
       <ul>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://muetsch.io/http20-server-push-proxy.html"><i class="fas fa-facebook fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://muetsch.io/http20-server-push-proxy.html&text=HTTP/2.0 server push proxy"><i class="fas fa-twitter fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://muetsch.io/http20-server-push-proxy.html&title=HTTP/2.0 server push proxy"><i class="fas fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://muetsch.io/http20-server-push-proxy.html&is_video=false&description=HTTP/2.0 server push proxy"><i class="fas fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://muetsch.io/http20-server-push-proxy.html"><i class="fas fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://muetsch.io/http20-server-push-proxy.html&text=HTTP/2.0 server push proxy"><i class="fas fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://muetsch.io/http20-server-push-proxy.html&title=HTTP/2.0 server push proxy"><i class="fas fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://muetsch.io/http20-server-push-proxy.html&is_video=false&description=HTTP/2.0 server push proxy"><i class="fas fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
   <li><a class="icon" href="mailto:?subject=HTTP/2.0 server push proxy&body=Check out this article: https://muetsch.io/http20-server-push-proxy.html"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://muetsch.io/http20-server-push-proxy.html&title=HTTP/2.0 server push proxy"><i class="fas fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://muetsch.io/http20-server-push-proxy.html&title=HTTP/2.0 server push proxy"><i class="fas fa-reddit fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://muetsch.io/http20-server-push-proxy.html&title=HTTP/2.0 server push proxy"><i class="fas fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://muetsch.io/http20-server-push-proxy.html&title=HTTP/2.0 server push proxy"><i class="fas fa-digg fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://muetsch.io/http20-server-push-proxy.html&name=HTTP/2.0 server push proxy&description="><i class="fas fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://muetsch.io/http20-server-push-proxy.html&title=HTTP/2.0 server push proxy"><i class="fas fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://muetsch.io/http20-server-push-proxy.html&title=HTTP/2.0 server push proxy"><i class="fas fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://muetsch.io/http20-server-push-proxy.html&title=HTTP/2.0 server push proxy"><i class="fas fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://muetsch.io/http20-server-push-proxy.html&title=HTTP/2.0 server push proxy"><i class="fas fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://muetsch.io/http20-server-push-proxy.html&name=HTTP/2.0 server push proxy&description="><i class="fas fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
