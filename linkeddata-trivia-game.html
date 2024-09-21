@@ -63,7 +63,7 @@
     
       <link href="https://webmention.io/muetsch.io/xmlrpc" rel="pingback">
     
-<meta name="generator" content="Hexo 5.2.0"><link rel="alternate" href="/rss2.xml" title="Ferdinand Mütsch" type="application/rss+xml">
+<meta name="generator" content="Hexo 7.3.0"><link rel="alternate" href="/rss2.xml" title="Ferdinand Mütsch" type="application/rss+xml">
 </head>
 
 <body>
@@ -106,16 +106,16 @@
     <br/>
     <div id="share" style="display: none">
       <ul>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://muetsch.io/linkeddata-trivia-game.html"><i class="fas fa-facebook " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://muetsch.io/linkeddata-trivia-game.html&text=LinkedData Trivia Game"><i class="fas fa-twitter " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://muetsch.io/linkeddata-trivia-game.html&title=LinkedData Trivia Game"><i class="fas fa-linkedin " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://muetsch.io/linkeddata-trivia-game.html&is_video=false&description=LinkedData Trivia Game"><i class="fas fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://muetsch.io/linkeddata-trivia-game.html"><i class="fas fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://muetsch.io/linkeddata-trivia-game.html&text=LinkedData Trivia Game"><i class="fas fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://muetsch.io/linkeddata-trivia-game.html&title=LinkedData Trivia Game"><i class="fas fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://muetsch.io/linkeddata-trivia-game.html&is_video=false&description=LinkedData Trivia Game"><i class="fas fa-pinterest " aria-hidden="true"></i></a></li>
   <li><a class="icon" href="mailto:?subject=LinkedData Trivia Game&body=Check out this article: https://muetsch.io/linkeddata-trivia-game.html"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://muetsch.io/linkeddata-trivia-game.html&title=LinkedData Trivia Game"><i class="fas fa-get-pocket " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://muetsch.io/linkeddata-trivia-game.html&title=LinkedData Trivia Game"><i class="fas fa-reddit " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://muetsch.io/linkeddata-trivia-game.html&title=LinkedData Trivia Game"><i class="fas fa-stumbleupon " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://muetsch.io/linkeddata-trivia-game.html&title=LinkedData Trivia Game"><i class="fas fa-digg " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://muetsch.io/linkeddata-trivia-game.html&name=LinkedData Trivia Game&description="><i class="fas fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://muetsch.io/linkeddata-trivia-game.html&title=LinkedData Trivia Game"><i class="fas fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://muetsch.io/linkeddata-trivia-game.html&title=LinkedData Trivia Game"><i class="fas fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://muetsch.io/linkeddata-trivia-game.html&title=LinkedData Trivia Game"><i class="fas fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://muetsch.io/linkeddata-trivia-game.html&title=LinkedData Trivia Game"><i class="fas fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://muetsch.io/linkeddata-trivia-game.html&name=LinkedData Trivia Game&description="><i class="fas fa-tumblr " aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
@@ -164,12 +164,12 @@
   </header>
   
   <div class="content e-content" itemprop="articleBody" property="articleBody">
-    <p>Originally I got inspired by <a target="_blank" rel="noopener" href="https://news.ycombinator.com/item?id=13677748">this recent post</a> on HackerNews, where <a target="_blank" rel="noopener" href="https://news.ycombinator.com/user?id=alex_g">alex_g</a> has built a quiz, which automatically generates questions from Wikipedia articles using natural language processing (NLP). However, I found the results not that satisfying, yet, and decides to build my own dynamic quiz. Instead of NLP processing I decided to use Linked Data as a base for generating questions. More precisely I’m using the <a target="_blank" rel="noopener" href="https://dbpedia.org/">DBPedia</a> knowledge base to retreive fact information from, which mostly originates in Wikipedia articles as well. The data is structured as an RDF graph and can be queried using SPARQL. Despite from the official DBPedia SPARQL endpoint this little proof-of-concept-like app uses another webservice, <a target="_blank" rel="noopener" href="https://github.com/muety/kit-lod16-knowledge-panel">kit-lod16-knowledge-panel</a>, which I developed in the context of the Linked Open Data seminar at university. It is responsible for ranking RDF properties for specific RDF entities by relevance in order to decide, which one to display to an end-user (or include to a quiz).</p>
-<p><a target="_blank" rel="noopener" href="https://github.com/muety/linkeddata-trivia">Code on GitHub</a></p>
+    <p>Originally I got inspired by <a href="https://news.ycombinator.com/item?id=13677748">this recent post</a> on HackerNews, where <a href="https://news.ycombinator.com/user?id=alex_g">alex_g</a> has built a quiz, which automatically generates questions from Wikipedia articles using natural language processing (NLP). However, I found the results not that satisfying, yet, and decides to build my own dynamic quiz. Instead of NLP processing I decided to use Linked Data as a base for generating questions. More precisely I’m using the <a href="https://dbpedia.org/">DBPedia</a> knowledge base to retreive fact information from, which mostly originates in Wikipedia articles as well. The data is structured as an RDF graph and can be queried using SPARQL. Despite from the official DBPedia SPARQL endpoint this little proof-of-concept-like app uses another webservice, <a href="https://github.com/muety/kit-lod16-knowledge-panel">kit-lod16-knowledge-panel</a>, which I developed in the context of the Linked Open Data seminar at university. It is responsible for ranking RDF properties for specific RDF entities by relevance in order to decide, which one to display to an end-user (or include to a quiz).</p>
+<p><a href="https://github.com/muety/linkeddata-trivia">Code on GitHub</a></p>
 <p><img src="https://apps.muetsch.io/images/o:auto?image=https://muetsch.io/images/trivia.jpg"></p>
 <h3 id="Limitations"><a href="#Limitations" class="headerlink" title="Limitations"></a>Limitations</h3><p>This project is <strong>not a production-ready</strong> app at all, but rather a <strong>proof-of-concept</strong> to experiment with. Currently, the <strong>major issue is performance</strong>. Since the app fires a bunch of rather expensive, non-optimized SPARQL queries at the public DBPedia endpoint, the whole process of generating a quiz question takes several seconds on average, sometimes even up to a minute. This could be optimized to a certain extent (e.g. currently there are at least 8 separate HTTP requests from this app plus a few more from the ranking webservice), but all in all querying RDF data is still pretty slow. </p>
 <p>Another limitation is the way “wrong” answer options are generated. Currently, random values within a certain interval around the “correct” answer are generated for dates and numbers. For properties, whose <em>rdfs:range</em> are entities of a class, a random set of other entities from the same class is fetched from DBPedia and shown as alternative answers. However, <strong>string-valued answers, among others, are ignored</strong> completely, because it’s hard to auto-generate an alternative value for a plain string. There’s room for enhancement here.</p>
-<p>A third way for improvement would be to include not only DBPedia, but also <a target="_blank" rel="noopener" href="https://yago-knowledge.org/">Yago</a>, Wikidata and other sources. </p>
+<p>A third way for improvement would be to include not only DBPedia, but also <a href="https://yago-knowledge.org/">Yago</a>, Wikidata and other sources. </p>
 
   </div>
 </article>
@@ -201,16 +201,16 @@
 
     <div id="share-footer" style="display: none">
       <ul>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://muetsch.io/linkeddata-trivia-game.html"><i class="fas fa-facebook fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://muetsch.io/linkeddata-trivia-game.html&text=LinkedData Trivia Game"><i class="fas fa-twitter fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://muetsch.io/linkeddata-trivia-game.html&title=LinkedData Trivia Game"><i class="fas fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://muetsch.io/linkeddata-trivia-game.html&is_video=false&description=LinkedData Trivia Game"><i class="fas fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://muetsch.io/linkeddata-trivia-game.html"><i class="fas fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://muetsch.io/linkeddata-trivia-game.html&text=LinkedData Trivia Game"><i class="fas fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://muetsch.io/linkeddata-trivia-game.html&title=LinkedData Trivia Game"><i class="fas fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://muetsch.io/linkeddata-trivia-game.html&is_video=false&description=LinkedData Trivia Game"><i class="fas fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
   <li><a class="icon" href="mailto:?subject=LinkedData Trivia Game&body=Check out this article: https://muetsch.io/linkeddata-trivia-game.html"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://muetsch.io/linkeddata-trivia-game.html&title=LinkedData Trivia Game"><i class="fas fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://muetsch.io/linkeddata-trivia-game.html&title=LinkedData Trivia Game"><i class="fas fa-reddit fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://muetsch.io/linkeddata-trivia-game.html&title=LinkedData Trivia Game"><i class="fas fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://muetsch.io/linkeddata-trivia-game.html&title=LinkedData Trivia Game"><i class="fas fa-digg fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://muetsch.io/linkeddata-trivia-game.html&name=LinkedData Trivia Game&description="><i class="fas fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://muetsch.io/linkeddata-trivia-game.html&title=LinkedData Trivia Game"><i class="fas fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://muetsch.io/linkeddata-trivia-game.html&title=LinkedData Trivia Game"><i class="fas fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://muetsch.io/linkeddata-trivia-game.html&title=LinkedData Trivia Game"><i class="fas fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://muetsch.io/linkeddata-trivia-game.html&title=LinkedData Trivia Game"><i class="fas fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://muetsch.io/linkeddata-trivia-game.html&name=LinkedData Trivia Game&description="><i class="fas fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
