@@ -11,6 +11,15 @@
   </url>
   
   <url>
+    <loc>https://muetsch.io/energy-monitoring-pt-2-optimizing-my-consumption-with-data.html</loc>
+    
+    <lastmod>2024-09-21</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://muetsch.io/how-to-convert-opendrive-to-lanelet2.html</loc>
     
     <lastmod>2024-09-20</lastmod>

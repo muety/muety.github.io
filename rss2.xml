@@ -9,8 +9,28 @@
     <atom:link href="https://muetsch.io/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description>Hi and welcome! 👋 I&#39;m Ferdinand, a passionate software- and data engineer and technology enthusiast from Karlsruhe, Germany. My personal webpage is the right place to find out about me and my projects and to read about software development, DevOps, some machine learning and technology in general. All content you will find here is [human-written](/statement-about-generative-ai.html). Enjoy and feel free to leave me a message!</description>
-    <pubDate>Sat, 21 Sep 2024 07:41:26 GMT</pubDate>
+    <pubDate>Sat, 21 Sep 2024 09:33:03 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>Smart Home Energy Monitoring Pt. 2 - Optimizing my consumption with data</title>
+      <link>https://muetsch.io/energy-monitoring-pt-2-optimizing-my-consumption-with-data.html</link>
+      <guid>https://muetsch.io/energy-monitoring-pt-2-optimizing-my-consumption-with-data.html</guid>
+      <pubDate>Sat, 21 Sep 2024 07:48:58 GMT</pubDate>
+      
+        
+        
+      <description>&lt;h1 id=&quot;Introduction&quot;&gt;&lt;a href=&quot;#Introduction&quot; class=&quot;headerlink&quot; title=&quot;Introduction&quot;&gt;&lt;/a&gt;Introduction&lt;/h1&gt;&lt;p&gt;This is the second article in </description>
+        
+      
+      
+      
+      
+      
+      
+      <comments>https://muetsch.io/energy-monitoring-pt-2-optimizing-my-consumption-with-data.html#disqus_thread</comments>
+      
+    </item>
     
     <item>
       <title>Smart Home Energy Monitoring Pt. 1 - IR readers, SML, MQTT, Node-RED, Prometheus + Grafana</title>
@@ -91,26 +111,6 @@
       
       
       <comments>https://muetsch.io/statement-about-generative-ai.html#disqus_thread</comments>
-      
-    </item>
-    
-    <item>
-      <title>Don&#39;t get a Contabo server</title>
-      <link>https://muetsch.io/don-t-get-a-contabo-server.html</link>
-      <guid>https://muetsch.io/don-t-get-a-contabo-server.html</guid>
-      <pubDate>Thu, 25 Apr 2024 07:50:19 GMT</pubDate>
-      
-        
-        
-      <description>&lt;p&gt;I’m usually not a person to rant on companies. But in this case, my experience with &lt;a href=&quot;https://contabo.com/&quot;&gt;Contabo&lt;/a&gt; was so bad</description>
-        
-      
-      
-      
-      
-      
-      
-      <comments>https://muetsch.io/don-t-get-a-contabo-server.html#disqus_thread</comments>
       
     </item>
     
