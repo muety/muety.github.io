@@ -9,7 +9,7 @@
     <atom:link href="https://muetsch.io/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description>Hi and welcome! 👋 I&#39;m Ferdinand, a passionate software- and data engineer and technology enthusiast from Karlsruhe, Germany. My personal webpage is the right place to find out about me and my projects and to read about software development, DevOps, some machine learning and technology in general. All content you will find here is [human-written](/statement-about-generative-ai.html). Enjoy and feel free to leave me a message!</description>
-    <pubDate>Sat, 21 Sep 2024 09:37:07 GMT</pubDate>
+    <pubDate>Sat, 21 Sep 2024 10:19:15 GMT</pubDate>
     <generator>http://hexo.io/</generator>
     
     <item>
@@ -26,6 +26,10 @@
       
       
       
+      
+      <category domain="https://muetsch.io/tags/energy/">energy</category>
+      
+      <category domain="https://muetsch.io/tags/smarthome/">smarthome</category>
       
       
       <comments>https://muetsch.io/energy-monitoring-pt-2-optimizing-my-consumption-with-data.html#disqus_thread</comments>
@@ -48,6 +52,10 @@
       
       
       
+      <category domain="https://muetsch.io/tags/energy/">energy</category>
+      
+      <category domain="https://muetsch.io/tags/smarthome/">smarthome</category>
+      
       
       <comments>https://muetsch.io/energy-monitoring-pt-1-ir-readers-sml-mqtt-node-red-prometheus-grafana.html#disqus_thread</comments>
       
@@ -67,6 +75,10 @@
       
       
       
+      
+      <category domain="https://muetsch.io/tags/devtools/">devtools</category>
+      
+      <category domain="https://muetsch.io/tags/algorithms/">algorithms</category>
       
       
       <comments>https://muetsch.io/multi-threaded-brotli-compression-tool.html#disqus_thread</comments>
@@ -89,6 +101,8 @@
       
       
       
+      <category domain="https://muetsch.io/tags/self-driving/">self-driving</category>
+      
       
       <comments>https://muetsch.io/norospy-using-ros-without-ros.html#disqus_thread</comments>
       
@@ -108,6 +122,10 @@
       
       
       
+      
+      <category domain="https://muetsch.io/tags/ai/">ai</category>
+      
+      <category domain="https://muetsch.io/tags/machine-learning/">machine-learning</category>
       
       
       <comments>https://muetsch.io/statement-about-generative-ai.html#disqus_thread</comments>
