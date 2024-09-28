@@ -9,8 +9,57 @@
     <atom:link href="https://muetsch.io/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description>Hi and welcome! 👋 I&#39;m Ferdinand, a passionate software- and data engineer and technology enthusiast from Karlsruhe, Germany. My personal webpage is the right place to find out about me and my projects and to read about software development, DevOps, some machine learning and technology in general. All content you will find here is [human-written](/statement-about-generative-ai.html). Enjoy and feel free to leave me a message!</description>
-    <pubDate>Sat, 13 Jul 2024 12:39:26 GMT</pubDate>
+    <pubDate>Sat, 28 Sep 2024 08:36:52 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>Smart Home Energy Monitoring Pt. 2 - Optimizing my consumption with data</title>
+      <link>https://muetsch.io/energy-monitoring-pt-2-optimizing-my-consumption-with-data.html</link>
+      <guid>https://muetsch.io/energy-monitoring-pt-2-optimizing-my-consumption-with-data.html</guid>
+      <pubDate>Sat, 21 Sep 2024 07:48:58 GMT</pubDate>
+      
+        
+        
+      <description>&lt;h1 id=&quot;Introduction&quot;&gt;&lt;a href=&quot;#Introduction&quot; class=&quot;headerlink&quot; title=&quot;Introduction&quot;&gt;&lt;/a&gt;Introduction&lt;/h1&gt;&lt;p&gt;This is the second article in </description>
+        
+      
+      
+      
+      
+      
+      <category domain="https://muetsch.io/tags/energy/">energy</category>
+      
+      <category domain="https://muetsch.io/tags/smarthome/">smarthome</category>
+      
+      
+      <comments>https://muetsch.io/energy-monitoring-pt-2-optimizing-my-consumption-with-data.html#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>Smart Home Energy Monitoring Pt. 1 - IR readers, SML, MQTT, Node-RED, Prometheus + Grafana</title>
+      <link>https://muetsch.io/energy-monitoring-pt-1-ir-readers-sml-mqtt-node-red-prometheus-grafana.html</link>
+      <guid>https://muetsch.io/energy-monitoring-pt-1-ir-readers-sml-mqtt-node-red-prometheus-grafana.html</guid>
+      <pubDate>Sat, 21 Sep 2024 05:21:30 GMT</pubDate>
+      
+        
+        
+      <description>&lt;p&gt;&lt;img src=&quot;/images/energy_monitoring_grafana1.png&quot; alt=&quot;Grafana dashboard for energy monitoring&quot;&gt;&lt;/p&gt;
+&lt;h1 id=&quot;Introduction&quot;&gt;&lt;a href=&quot;#Intr</description>
+        
+      
+      
+      
+      
+      
+      <category domain="https://muetsch.io/tags/energy/">energy</category>
+      
+      <category domain="https://muetsch.io/tags/smarthome/">smarthome</category>
+      
+      
+      <comments>https://muetsch.io/energy-monitoring-pt-1-ir-readers-sml-mqtt-node-red-prometheus-grafana.html#disqus_thread</comments>
+      
+    </item>
     
     <item>
       <title>Multi-threaded Brotli compression tool</title>
@@ -26,6 +75,10 @@
       
       
       
+      
+      <category domain="https://muetsch.io/tags/devtools/">devtools</category>
+      
+      <category domain="https://muetsch.io/tags/algorithms/">algorithms</category>
       
       
       <comments>https://muetsch.io/multi-threaded-brotli-compression-tool.html#disqus_thread</comments>
@@ -48,6 +101,8 @@
       
       
       
+      <category domain="https://muetsch.io/tags/self-driving/">self-driving</category>
+      
       
       <comments>https://muetsch.io/norospy-using-ros-without-ros.html#disqus_thread</comments>
       
@@ -68,48 +123,12 @@
       
       
       
+      <category domain="https://muetsch.io/tags/ai/">ai</category>
+      
+      <category domain="https://muetsch.io/tags/machine-learning/">machine-learning</category>
+      
       
       <comments>https://muetsch.io/statement-about-generative-ai.html#disqus_thread</comments>
-      
-    </item>
-    
-    <item>
-      <title>Don&#39;t get a Contabo server</title>
-      <link>https://muetsch.io/don-t-get-a-contabo-server.html</link>
-      <guid>https://muetsch.io/don-t-get-a-contabo-server.html</guid>
-      <pubDate>Thu, 25 Apr 2024 07:50:19 GMT</pubDate>
-      
-        
-        
-      <description>&lt;p&gt;I’m usually not a person to rant on companies. But in this case, my experience with &lt;a href=&quot;https://contabo.com/&quot;&gt;Contabo&lt;/a&gt; was so bad</description>
-        
-      
-      
-      
-      
-      
-      
-      <comments>https://muetsch.io/don-t-get-a-contabo-server.html#disqus_thread</comments>
-      
-    </item>
-    
-    <item>
-      <title>How to convert OpenDRIVE to Lanelet2</title>
-      <link>https://muetsch.io/how-to-convert-opendrive-to-lanelet2.html</link>
-      <guid>https://muetsch.io/how-to-convert-opendrive-to-lanelet2.html</guid>
-      <pubDate>Fri, 19 Apr 2024 21:44:12 GMT</pubDate>
-      
-        
-        
-      <description>&lt;p&gt;&lt;a href=&quot;https://www.asam.net/standards/detail/opendrive/&quot;&gt;OpenDRIVE&lt;/a&gt; and &lt;a href=&quot;https://github.com/fzi-forschungszentrum-informatik</description>
-        
-      
-      
-      
-      
-      
-      
-      <comments>https://muetsch.io/how-to-convert-opendrive-to-lanelet2.html#disqus_thread</comments>
       
     </item>
     

@@ -20,8 +20,9 @@
 <meta property="og:image" content="https://apps.muetsch.io/images/o:auto/rs,s:320?image=https://muetsch.io/images/owntracks2.png">
 <meta property="og:image" content="https://apps.muetsch.io/images/o:auto/rs,s:640?image=https://muetsch.io/images/owntracks3.png">
 <meta property="article:published_time" content="2021-06-25T06:49:45.000Z">
-<meta property="article:modified_time" content="2021-06-25T08:18:24.417Z">
+<meta property="article:modified_time" content="2024-09-28T08:36:52.167Z">
 <meta property="article:author" content="Ferdinand Mütsch">
+<meta property="article:tag" content="selfhosted">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://apps.muetsch.io/images/o:auto/rs,s:640?image=https://muetsch.io/images/owntracks4.jpg">
     
@@ -39,7 +40,8 @@
         
     
     <!-- title -->
-    <title>Open-source, self-hosted location tracking with OwnTracks and Grafana</title>
+    
+    <title>Open-source, self-hosted location tracking with OwnTracks and Grafana  | Ferdinand Mütsch</title>
     <!-- styles -->
     
 <link rel="stylesheet" href="/css/style.css">
@@ -154,6 +156,11 @@
 
 
       
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/tags/selfhosted/" rel="tag">selfhosted</a>
+    </div>
+
 
 
       <!--
@@ -172,10 +179,10 @@
 <p><img src="https://apps.muetsch.io/images/o:auto/rs,s:640?image=https://muetsch.io/images/owntracks4.jpg" alt="Google Location Timeline Screenshot"><br>(<a href="https://techwelkin.com/wp-content/uploads/2017/04/google-timeline-location-history.jpg">Source</a>)</p>
 <p>This is a pretty cool feature and for me it is super interesting to see in retrospect which places I have visited in the past. However, it is also a bit concerning to see how precisely Google tracks your daily life. That is why I turned the location tracking off and decided to go for a rather privacy-focused approach instead.</p>
 <h1 id="Your-Own-Setup"><a href="#Your-Own-Setup" class="headerlink" title="Your Own Setup"></a>Your Own Setup</h1><p>To build your own, self-hosted location tracking system, you are going to need a bit of technical expertise, a few different open-source software components and a small server to host them.</p>
-<h2 id="Requirements-Components"><a href="#Requirements-Components" class="headerlink" title="Requirements / Components"></a>Requirements / Components</h2><ul>
+<h2 id="Requirements-Components"><a href="#Requirements-Components" class="headerlink" title="Requirements &#x2F; Components"></a>Requirements &#x2F; Components</h2><ul>
 <li>Android- or iOS smartphone</li>
 <li>Web server (Caddy, nginx, Apache 2, …)</li>
-<li>PHP &gt;= 7.x</li>
+<li>PHP &gt;&#x3D; 7.x</li>
 <li>MySQL or MariaDB</li>
 <li>Grafana</li>
 </ul>
@@ -198,8 +205,8 @@
 </tr>
 <tr>
 <td><strong>Significant changes mode</strong></td>
-<td>After &gt;= 500 meters and &gt;= 5 minutes</td>
-<td>After &gt;= <code>x</code> meters and &gt;= <code>t</code> seconds</td>
+<td>After &gt;&#x3D; 500 meters and &gt;&#x3D; 5 minutes</td>
+<td>After &gt;&#x3D; <code>x</code> meters and &gt;&#x3D; <code>t</code> seconds</td>
 </tr>
 <tr>
 <td><strong>Manual mode</strong></td>
@@ -214,7 +221,7 @@
 </tbody></table>
 <p>In fact, things are a bit more complex than this, as you will have to distinguish between how often the app <strong>requests</strong> your location from the device’s sensors and how often it <strong>sends</strong> it. Also, there are different options regarding the desired precision (e.g. GPS is more accurate, but uses more power). Moreover, on iOS, there are <em>region monitoring</em> and <em>iBeacon</em> monitoring modes in addition. </p>
 <p>I would suggest to read through the docs and decide which modes suits you best, depending on your smartphone’s OS. I, however, decided to go for the <em>significant changes</em> mode on Android with the following custom config variables.</p>
-<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">&quot;locatorDisplacement&quot;</span>: <span class="number">25</span>,</span><br><span class="line">    <span class="attr">&quot;locatorInterval&quot;</span>: <span class="number">60</span>,</span><br><span class="line">    <span class="attr">&quot;locatorPriority&quot;</span>: <span class="number">2</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;locatorDisplacement&quot;</span><span class="punctuation">:</span> <span class="number">25</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;locatorInterval&quot;</span><span class="punctuation">:</span> <span class="number">60</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;locatorPriority&quot;</span><span class="punctuation">:</span> <span class="number">2</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
 
 <p>This basically tells the app to <em>request my location with block-level accuracy (100 meters) every time I move by more than 25 meters, but at most every 60 seconds</em>. These settings work quite well for me and I did not recognize any significant impact on battery consumption. </p>
 <p><img src="https://apps.muetsch.io/images/o:auto/rs,s:320?image=https://muetsch.io/images/owntracks2.png"></p>
@@ -223,13 +230,13 @@
 <p><strong>UPDATE:</strong> I found <a href="https://github.com/owntracks/frontend"><code>owntracks/frontend</code></a> in the meantime, which seems to be a lot more advanced than the recorder’s web UI. You may want to use this as an alternative to Grafana, which will make the setup a lot easier.</p>
 <hr>
 <p>A heartbeat request’s payload looks like this.</p>
-<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">&quot;_type&quot;</span>: <span class="string">&quot;location&quot;</span>,</span><br><span class="line">  <span class="attr">&quot;acc&quot;</span>: <span class="number">13</span>,</span><br><span class="line">  <span class="attr">&quot;alt&quot;</span>: <span class="number">163</span>,</span><br><span class="line">  <span class="attr">&quot;batt&quot;</span>: <span class="number">91</span>,</span><br><span class="line">  <span class="attr">&quot;bs&quot;</span>: <span class="number">1</span>,</span><br><span class="line">  <span class="attr">&quot;conn&quot;</span>: <span class="string">&quot;w&quot;</span>,</span><br><span class="line">  <span class="attr">&quot;created_at&quot;</span>: <span class="number">1624607444</span>,</span><br><span class="line">  <span class="attr">&quot;lat&quot;</span>: <span class="number">48.9995682</span>,</span><br><span class="line">  <span class="attr">&quot;lon&quot;</span>: <span class="number">8.3940805</span>,</span><br><span class="line">  <span class="attr">&quot;t&quot;</span>: <span class="string">&quot;u&quot;</span>,</span><br><span class="line">  <span class="attr">&quot;tid&quot;</span>: <span class="string">&quot;l3&quot;</span>,</span><br><span class="line">  <span class="attr">&quot;tst&quot;</span>: <span class="number">1624607139</span>,</span><br><span class="line">  <span class="attr">&quot;vac&quot;</span>: <span class="number">3</span>,</span><br><span class="line">  <span class="attr">&quot;vel&quot;</span>: <span class="number">0</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;_type&quot;</span><span class="punctuation">:</span> <span class="string">&quot;location&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;acc&quot;</span><span class="punctuation">:</span> <span class="number">13</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;alt&quot;</span><span class="punctuation">:</span> <span class="number">163</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;batt&quot;</span><span class="punctuation">:</span> <span class="number">91</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;bs&quot;</span><span class="punctuation">:</span> <span class="number">1</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;conn&quot;</span><span class="punctuation">:</span> <span class="string">&quot;w&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;created_at&quot;</span><span class="punctuation">:</span> <span class="number">1624607444</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;lat&quot;</span><span class="punctuation">:</span> <span class="number">48.9995682</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;lon&quot;</span><span class="punctuation">:</span> <span class="number">8.3940805</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;t&quot;</span><span class="punctuation">:</span> <span class="string">&quot;u&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;tid&quot;</span><span class="punctuation">:</span> <span class="string">&quot;l3&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;tst&quot;</span><span class="punctuation">:</span> <span class="number">1624607139</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;vac&quot;</span><span class="punctuation">:</span> <span class="number">3</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;vel&quot;</span><span class="punctuation">:</span> <span class="number">0</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
 
 <p>I quickly wrote <a href="https://gist.github.com/muety/3dcbb22916a4812cf3ed40ff17f1d9e2">a little PHP script</a> to take OwnTracks location heartbeats and write them to a MySQL database. It can live at any web server with PHP support (I am using <a href="https://caddyserver.com/">Caddy2</a> with <code>php-fpm</code>). Assuming it is deployed under <code>https://my.server.tld/track.php</code> then that is the URL you need to configure as an HTTP target endpoint in the OwnTracks app. Optionally, you can configure HTTP Basic auth inside your web server’s config. OwnTrack’s client app has support for that built in.</p>
 <h2 id="Grafana-dashboard"><a href="#Grafana-dashboard" class="headerlink" title="Grafana dashboard"></a>Grafana dashboard</h2><p>The last missing part is to actually visualize your location data. I am a big fan of Grafana, as you can easily build beautiful visualizations with low effort. Grafana integrates with MySQL as a data source, so it can read the location data previously ingested by the above script. Using the <a href="https://github.com/panodata/grafana-map-panel">grafana-map-panel</a> plugin, you can visualize geo data in dashboard. In addition, I added another two graphs for plotting my velocity and my phone’s battery level over time. This is what it looks like in the end. </p>
 <p><img src="https://apps.muetsch.io/images/o:auto/rs,s:640?image=https://muetsch.io/images/owntracks3.png" alt="Grafana Dashboard Screenshot"></p>
 <p>The geo data panel is generated from this underlying SQL query:</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span></span><br><span class="line">  tst <span class="keyword">AS</span> <span class="string">&quot;time&quot;</span>,</span><br><span class="line">  lat,</span><br><span class="line">  lon,</span><br><span class="line">  vel</span><br><span class="line"><span class="keyword">FROM</span> recordings</span><br><span class="line"><span class="keyword">WHERE</span></span><br><span class="line">  $__unixEpochFilter(tst) <span class="keyword">AND</span></span><br><span class="line">  <span class="keyword">user</span> = <span class="string">&#x27;$user&#x27;</span> <span class="keyword">AND</span></span><br><span class="line">  device = <span class="string">&#x27;$device&#x27;</span></span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> tst</span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span></span><br><span class="line">  tst <span class="keyword">AS</span> &quot;time&quot;,</span><br><span class="line">  lat,</span><br><span class="line">  lon,</span><br><span class="line">  vel</span><br><span class="line"><span class="keyword">FROM</span> recordings</span><br><span class="line"><span class="keyword">WHERE</span></span><br><span class="line">  $__unixEpochFilter(tst) <span class="keyword">AND</span></span><br><span class="line">  <span class="keyword">user</span> <span class="operator">=</span> <span class="string">&#x27;$user&#x27;</span> <span class="keyword">AND</span></span><br><span class="line">  device <span class="operator">=</span> <span class="string">&#x27;$device&#x27;</span></span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> tst</span><br></pre></td></tr></table></figure>
 
 <h1 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h1><p>This is it! You have your own, self-hosted, Google-free location timeline now. Have fun!</p>
 

@@ -17,8 +17,10 @@
 <meta property="og:image" content="https://apps.muetsch.io/images/o:auto/rs,s:640?image=https://muetsch.io/images/dmarc-cover.jpg">
 <meta property="og:image" content="https://apps.muetsch.io/images/o:auto/rs,s:640?image=https://muetsch.io/images/dmarc1.png">
 <meta property="article:published_time" content="2021-05-07T19:23:08.000Z">
-<meta property="article:modified_time" content="2021-06-25T06:47:56.688Z">
+<meta property="article:modified_time" content="2024-09-28T08:36:52.166Z">
 <meta property="article:author" content="Ferdinand Mütsch">
+<meta property="article:tag" content="sysadmin">
+<meta property="article:tag" content="linux">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://apps.muetsch.io/images/o:auto/rs,s:640?image=https://muetsch.io/images/dmarc-cover.jpg">
     
@@ -36,7 +38,8 @@
         
     
     <!-- title -->
-    <title>Aggregating and Visualizing DMARC Reports</title>
+    
+    <title>Aggregating and Visualizing DMARC Reports  | Ferdinand Mütsch</title>
     <!-- styles -->
     
 <link rel="stylesheet" href="/css/style.css">
@@ -151,6 +154,11 @@
 
 
       
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/tags/linux/" rel="tag">linux</a>, <a class="tag-link-link" href="/tags/sysadmin/" rel="tag">sysadmin</a>
+    </div>
+
 
 
       <!--
@@ -177,9 +185,9 @@
 <p>The report (from Google, in this case) notifies me, owner of <em>wakapi.dev</em>, that one mail from the above IP was received within a certain time span and that both SPF and DKIM checks were alright. Seems like my DNS records are correct and nobody tried to scam in my name. Perfect.</p>
 <h1 id="Configuring-DMARC"><a href="#Configuring-DMARC" class="headerlink" title="Configuring DMARC"></a>Configuring DMARC</h1><p>Setting up SPF and DKIM for your domain is highly recommended, as the chances of your mails being considered spam by a receiver are significantly lower then. Afterwards, you still need to set up DMARC. It is probably best to just google how to do that, there are many great posts out there (like <a href="https://www.ionos.de/digitalguide/e-mail/e-mail-sicherheit/dmarc-erklaert/">this (German-language) one</a>).</p>
 <p>In essence, you will end up with a DNS record similar to this one: </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">v&#x3D;DMARC1; p&#x3D;reject; adkim&#x3D;r; aspf&#x3D;r; rua&#x3D;mailto:dmarc@muetsch.io; ruf&#x3D;mailto:dmarc@muetsch.io</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">v=DMARC1; p=reject; adkim=r; aspf=r; rua=mailto:dmarc@muetsch.io; ruf=mailto:dmarc@muetsch.io</span><br></pre></td></tr></table></figure>
 
-<p>In the example, any mail server who actively implements DMARC reports, is instructed to send them to <em><a href="mailto:&#100;&#109;&#x61;&#x72;&#x63;&#x40;&#x6d;&#117;&#101;&#x74;&#x73;&#99;&#104;&#46;&#105;&#111;">&#100;&#109;&#x61;&#x72;&#x63;&#x40;&#x6d;&#117;&#101;&#x74;&#x73;&#99;&#104;&#46;&#105;&#111;</a></em>. I would recommend to have a separate address (different from your main address) for DMARC records, to you can easily set up rules like <em>“move everything addresses to <a href="mailto:&#x64;&#x6d;&#x61;&#114;&#99;&#64;&#x6d;&#x79;&#100;&#111;&#x6d;&#x61;&#x69;&#x6e;&#x2e;&#116;&#108;&#x64;">&#x64;&#x6d;&#x61;&#114;&#99;&#64;&#x6d;&#x79;&#100;&#111;&#x6d;&#x61;&#x69;&#x6e;&#x2e;&#116;&#108;&#x64;</a> into some IMAP folder and mark it as read”</em>. </p>
+<p>In the example, any mail server who actively implements DMARC reports, is instructed to send them to <em><a href="mailto:&#100;&#109;&#97;&#x72;&#99;&#64;&#x6d;&#x75;&#101;&#x74;&#115;&#99;&#104;&#46;&#105;&#x6f;">&#100;&#109;&#97;&#x72;&#99;&#64;&#x6d;&#x75;&#101;&#x74;&#115;&#99;&#104;&#46;&#105;&#x6f;</a></em>. I would recommend to have a separate address (different from your main address) for DMARC records, to you can easily set up rules like <em>“move everything addresses to <a href="mailto:&#100;&#x6d;&#x61;&#114;&#x63;&#x40;&#109;&#x79;&#x64;&#x6f;&#x6d;&#97;&#105;&#x6e;&#x2e;&#x74;&#x6c;&#x64;">&#100;&#x6d;&#x61;&#114;&#x63;&#x40;&#109;&#x79;&#x64;&#x6f;&#x6d;&#97;&#105;&#x6e;&#x2e;&#x74;&#x6c;&#x64;</a> into some IMAP folder and mark it as read”</em>. </p>
 <h1 id="Aggregation-and-visualization"><a href="#Aggregation-and-visualization" class="headerlink" title="Aggregation and visualization"></a>Aggregation and visualization</h1><p>As can be seen from the example above, DMARC records are a bit unpleasant to read and you probably do not want to go through every report (couple per day) manually. Luckily, a quick GitHub search led me to a project that helps with this, specifically it does:</p>
 <ol>
 <li>Read DMARC reports from your inbox via IMAP</li>
@@ -190,19 +198,19 @@
 <p><img src="https://apps.muetsch.io/images/o:auto/rs,s:640?image=https://muetsch.io/images/dmarc1.png"><br>(Source: <a href="https://www.techsneeze.com/">https://www.techsneeze.com</a>)</p>
 <p>To be precise, the tool is two separate scripts, the parser and the web dashboard.</p>
 <h2 id="Database-setup"><a href="#Database-setup" class="headerlink" title="Database setup"></a>Database setup</h2><p>First, you will need a MySQL or MariaDB database, which the parser can write to and the dashboard can read from. If you do not already have a running MySQL instance anyway, you can easily set one up, e.g. using Docker.</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -d -p 3306:3306 -e MYSQL_RANDOM_ROOT_PASSWORD=yes -e MYSQL_DATABASE=dmarc -e MYSQL_USER=dmarc -e MYSQL_PASSWORD=sshhh --name mariadb-dmarc mariadb</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -d -p 3306:3306 -e MYSQL_RANDOM_ROOT_PASSWORD=<span class="built_in">yes</span> -e MYSQL_DATABASE=dmarc -e MYSQL_USER=dmarc -e MYSQL_PASSWORD=sshhh --name mariadb-dmarc mariadb</span><br></pre></td></tr></table></figure>
 
 <p>This command already creates a database and user for you. If you don’t want to spawn a whole new database instance or don’t want to use Docker, you will have to create the database and user manually.</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ mysql -u root -p</span><br></pre></td></tr></table></figure>
 
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="keyword">USE</span> dmarc;</span><br><span class="line">$ <span class="keyword">CREATE</span> <span class="keyword">USER</span> <span class="string">&#x27;dmarc&#x27;</span>@<span class="string">&#x27;%&#x27;</span> <span class="keyword">IDENTIFIED</span> <span class="keyword">WITH</span> mysql_native_password <span class="keyword">BY</span> <span class="string">&#x27;sshhh&#x27;</span>;</span><br><span class="line">$ <span class="keyword">GRANT</span> <span class="keyword">ALL</span> <span class="keyword">PRIVILEGES</span> <span class="keyword">ON</span> <span class="string">&#x27;dmarc&#x27;</span>.* <span class="keyword">TO</span> <span class="string">&#x27;dmarc&#x27;</span>@<span class="string">&#x27;%&#x27;</span>;</span><br><span class="line">$ <span class="keyword">FLUSH</span> <span class="keyword">PRIVILEGES</span>;</span><br><span class="line">$ quit;</span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ USE dmarc;</span><br><span class="line">$ <span class="keyword">CREATE</span> <span class="keyword">USER</span> <span class="string">&#x27;dmarc&#x27;</span>@<span class="string">&#x27;%&#x27;</span> IDENTIFIED <span class="keyword">WITH</span> mysql_native_password <span class="keyword">BY</span> <span class="string">&#x27;sshhh&#x27;</span>;</span><br><span class="line">$ <span class="keyword">GRANT</span> <span class="keyword">ALL</span> PRIVILEGES <span class="keyword">ON</span> <span class="string">&#x27;dmarc&#x27;</span>.<span class="operator">*</span> <span class="keyword">TO</span> <span class="string">&#x27;dmarc&#x27;</span>@<span class="string">&#x27;%&#x27;</span>;</span><br><span class="line">$ FLUSH PRIVILEGES;</span><br><span class="line">$ quit;</span><br></pre></td></tr></table></figure>
 
-<h2 id="Parser-setup"><a href="#Parser-setup" class="headerlink" title="Parser setup"></a>Parser setup</h2><p>The parser can be found at <a href="https://github.com/techsneeze/dmarcts-report-parser">techsneeze/dmarcts-report-parser</a> and is written as a single-file Perl script, alongside a configuration file. The repo’s README explains the setup process quite well. </p>
+<h2 id="Parser-setup"><a href="#Parser-setup" class="headerlink" title="Parser setup"></a>Parser setup</h2><p>The parser can be found at <a href="https://github.com/techsneeze/dmarcts-report-parser">techsneeze&#x2F;dmarcts-report-parser</a> and is written as a single-file Perl script, alongside a configuration file. The repo’s README explains the setup process quite well. </p>
 <p>In the config file, you need to set your above database connection (usually something like <code>imap.yourprovider.com</code>, port 993, SSL) and credentials as well as your IMAP credentials to log in to your mail account. With <code>$imapreadfolder</code> you tell the parser which IMAP folder to search for DMARC mails. This should preferably not be your inbox’ root folder to not distract the parser and not risk losing any mail. I, personally, set up a sub folder <em>dmarc</em> in my inbox (IMAP path is <code>INBOX/dmarc</code> then) and created a rule to automatically put all DMARC mails in there. </p>
 <p>Since the parser is a one-shot script and not a long-running process, you will probably want to invoke it on a regular basis, which you can set up a cron job for, using <code>crontab -e</code></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">@hourly 	cd ~&#x2F;dev&#x2F;dmarcts-report-parser &amp;&amp; .&#x2F;dmarcts-report-parser.pl -i</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">@hourly 	cd ~/dev/dmarcts-report-parser &amp;&amp; ./dmarcts-report-parser.pl -i</span><br></pre></td></tr></table></figure>
 
-<h2 id="Viewer-setup"><a href="#Viewer-setup" class="headerlink" title="Viewer setup"></a>Viewer setup</h2><p>The viewer / web dashboard is located at <a href="https://github.com/techsneeze/dmarcts-report-viewer">techsneeze/dmarcts-report-viewer</a> and implemented as a simple PHP application. That means, you will need a web server like Apache2, nginx or Caddy (I’d recommend the latter) alongside a PHP installation (e.g, using PHP-FPM). Explaining how to set these things up is beyond the scope of this article, but you can just google it. After putting your database credentials once again (this time for reading), you are good to go. </p>
+<h2 id="Viewer-setup"><a href="#Viewer-setup" class="headerlink" title="Viewer setup"></a>Viewer setup</h2><p>The viewer &#x2F; web dashboard is located at <a href="https://github.com/techsneeze/dmarcts-report-viewer">techsneeze&#x2F;dmarcts-report-viewer</a> and implemented as a simple PHP application. That means, you will need a web server like Apache2, nginx or Caddy (I’d recommend the latter) alongside a PHP installation (e.g, using PHP-FPM). Explaining how to set these things up is beyond the scope of this article, but you can just google it. After putting your database credentials once again (this time for reading), you are good to go. </p>
 <p>Hit <code>http://localhost/dmarcts-report-viewer.php</code> (or whatever your domain name is) in your browser and you will be presented a (not that nice-looking, but) very convenient and practical web UI to get an overview over all DMARC reports, grouped by domains, recipient providers and date. Much cooler than reading XML files one by one!</p>
 <p>Thanks a lot for the great work by <a href="https://github.com/techsneeze">@techsneeze</a>.</p>
 

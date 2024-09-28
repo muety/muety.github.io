@@ -16,8 +16,10 @@
 <meta property="og:locale">
 <meta property="og:image" content="https://muetsch.io/images/hard_drive1.webp">
 <meta property="article:published_time" content="2023-03-01T19:09:22.000Z">
-<meta property="article:modified_time" content="2023-03-02T07:42:31.695Z">
+<meta property="article:modified_time" content="2024-09-28T08:36:52.167Z">
 <meta property="article:author" content="Ferdinand Mütsch">
+<meta property="article:tag" content="sysadmin">
+<meta property="article:tag" content="linux">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://muetsch.io/images/hard_drive1.webp">
     
@@ -35,7 +37,8 @@
         
     
     <!-- title -->
-    <title>How to move two-disk dual-boot system to single SSD</title>
+    
+    <title>How to move two-disk dual-boot system to single SSD  | Ferdinand Mütsch</title>
     <!-- styles -->
     
 <link rel="stylesheet" href="/css/style.css">
@@ -150,6 +153,11 @@
 
 
       
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/tags/linux/" rel="tag">linux</a>, <a class="tag-link-link" href="/tags/sysadmin/" rel="tag">sysadmin</a>
+    </div>
+
 
 
       <!--
@@ -164,7 +172,7 @@
   </header>
   
   <div class="content e-content" itemprop="articleBody" property="articleBody">
-    <p><img src="images/hard_drive1.webp" alt="Cover Image (a hard drive)"></p>
+    <p><img src="/images/hard_drive1.webp" alt="Cover Image (a hard drive)"></p>
 <p>On my desktop PC, I had a dual-boot setup with Fedora Linux and Windows 10, where both systems were placed on separate SSDs. In addition, there was a HDD just for data storage, that could be mounted from both OS’. I wanted to replace those three disk with a single, big SSD, while, preferably, not having to re-install anything. Here are some rough instructions based on what I did to accomplish this. </p>
 <p>Please apologize for this being super informal and messy. This is just a rough sketch of my thoughts, but maybe someone with a similar problem will still benefit from it.</p>
 <h1 id="Starting-situation"><a href="#Starting-situation" class="headerlink" title="Starting situation"></a>Starting situation</h1><ul>
@@ -192,10 +200,10 @@
 <li>1 USB stick containing a bootable Windows (Win 10, in my case)</li>
 </ul>
 <h1 id="Steps"><a href="#Steps" class="headerlink" title="Steps"></a>Steps</h1><h2 id="Check-for-file-system-errors-optional"><a href="#Check-for-file-system-errors-optional" class="headerlink" title="Check for file system errors (optional)"></a>Check for file system errors (optional)</h2><p>This step will probably not be needed for you, but I’m still going to mention it. I’m using Fedora 37, which, by default, uses <a href="https://fedoraproject.org/wiki/Btrfs">btrfs</a> as a file system. While btrfs has a few advantages over ext4 (built-on compression, deduplication, snapshotting, …), it is sometimes a bit more bitchy. So before doing any modifications to the file system partition, check for errors (this has caused me quite a bit of trouble later on, so better do it right in the beginning). </p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo btrfs check /dev/sda3</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> btrfs check /dev/sda3</span><br></pre></td></tr></table></figure>
 
 <p>In fact, the commands reported a couple of <a href="https://pastr.de/p/tzu5mznboxpfozp0lismsmug">broken inode errors</a>. Apparently, the easiest way to deal with this is to locate the corresponding files, hope they’re not important and simply delete them. </p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># find file by inode, then delete it using &#x27;rm&#x27;</span></span><br><span class="line">sudo find / -inum 4865056</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># find file by inode, then delete it using &#x27;rm&#x27;</span></span><br><span class="line"><span class="built_in">sudo</span> find / -inum 4865056</span><br></pre></td></tr></table></figure>
 
 <p>Running the check again didn’t yield any more errors, so all good. </p>
 <p>If you’re on a ext4 file system, it probably wouldn’t hurt to run <code>fsck</code> instead, before moving on.</p>

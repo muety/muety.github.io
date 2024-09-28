@@ -2,9 +2,36 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://muetsch.io/how-to-convert-opendrive-to-lanelet2.html</loc>
+    <loc>https://muetsch.io/about/index.html</loc>
     
-    <lastmod>2024-09-18</lastmod>
+    <lastmod>2024-09-28</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://muetsch.io/sending-prometheus-alerts-to-telegram-with-telepush.html</loc>
+    
+    <lastmod>2024-09-28</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://muetsch.io/serving-raster-data-from-postgis-as-wms-using-python-and-fastapi-or-flask.html</loc>
+    
+    <lastmod>2024-09-28</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://muetsch.io/simple-continuous-docker-deployments-with-caddy.html</loc>
+    
+    <lastmod>2024-09-28</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -13,7 +40,43 @@
   <url>
     <loc>https://muetsch.io/statement-about-generative-ai.html</loc>
     
-    <lastmod>2024-07-28</lastmod>
+    <lastmod>2024-09-28</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://muetsch.io/how-to-convert-opendrive-to-lanelet2.html</loc>
+    
+    <lastmod>2024-09-28</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://muetsch.io/how-to-integrate-caddy-with-fail2ban.html</loc>
+    
+    <lastmod>2024-09-28</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://muetsch.io/how-to-move-two-disk-dual-boot-system-to-single-ssd.html</loc>
+    
+    <lastmod>2024-09-28</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://muetsch.io/open-source-self-hosted-location-tracking-with-owntracks-and-grafana.html</loc>
+    
+    <lastmod>2024-09-28</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -22,7 +85,7 @@
   <url>
     <loc>https://muetsch.io/multi-threaded-brotli-compression-tool.html</loc>
     
-    <lastmod>2024-07-13</lastmod>
+    <lastmod>2024-09-28</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -31,16 +94,34 @@
   <url>
     <loc>https://muetsch.io/norospy-using-ros-without-ros.html</loc>
     
-    <lastmod>2024-07-13</lastmod>
+    <lastmod>2024-09-28</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
-    <loc>https://muetsch.io/about/index.html</loc>
+    <loc>https://muetsch.io/aggregating-and-visualizing-dmarc-reports.html</loc>
     
-    <lastmod>2024-07-13</lastmod>
+    <lastmod>2024-09-28</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://muetsch.io/consider-sponsoring-open-source.html</loc>
+    
+    <lastmod>2024-09-28</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://muetsch.io/how-development-history-keeps-repeating-itself.html</loc>
+    
+    <lastmod>2024-09-28</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -49,7 +130,25 @@
   <url>
     <loc>https://muetsch.io/don-t-get-a-contabo-server.html</loc>
     
-    <lastmod>2024-05-02</lastmod>
+    <lastmod>2024-09-28</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://muetsch.io/energy-monitoring-pt-1-ir-readers-sml-mqtt-node-red-prometheus-grafana.html</loc>
+    
+    <lastmod>2024-09-28</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://muetsch.io/energy-monitoring-pt-2-optimizing-my-consumption-with-data.html</loc>
+    
+    <lastmod>2024-09-28</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -59,33 +158,6 @@
     <loc>https://muetsch.io/server-camp-friendly-open-source-saas-hosting.html</loc>
     
     <lastmod>2023-08-08</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://muetsch.io/how-to-integrate-caddy-with-fail2ban.html</loc>
-    
-    <lastmod>2023-08-08</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://muetsch.io/how-to-move-two-disk-dual-boot-system-to-single-ssd.html</loc>
-    
-    <lastmod>2023-03-02</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://muetsch.io/how-development-history-keeps-repeating-itself.html</loc>
-    
-    <lastmod>2022-11-10</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -110,54 +182,9 @@
   </url>
   
   <url>
-    <loc>https://muetsch.io/sending-prometheus-alerts-to-telegram-with-telepush.html</loc>
-    
-    <lastmod>2022-04-10</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://muetsch.io/wakapi-s-year-2021.html</loc>
     
     <lastmod>2022-04-10</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://muetsch.io/simple-continuous-docker-deployments-with-caddy.html</loc>
-    
-    <lastmod>2021-12-18</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://muetsch.io/serving-raster-data-from-postgis-as-wms-using-python-and-fastapi-or-flask.html</loc>
-    
-    <lastmod>2021-11-08</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://muetsch.io/open-source-self-hosted-location-tracking-with-owntracks-and-grafana.html</loc>
-    
-    <lastmod>2021-06-25</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://muetsch.io/aggregating-and-visualizing-dmarc-reports.html</loc>
-    
-    <lastmod>2021-06-25</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -176,15 +203,6 @@
     <loc>https://muetsch.io/my-experiences-with-the-oracle-java-11-developer-certification.html</loc>
     
     <lastmod>2021-03-20</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://muetsch.io/consider-sponsoring-open-source.html</loc>
-    
-    <lastmod>2021-01-04</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
@@ -598,11 +616,102 @@
 
   <url>
     <loc>https://muetsch.io/</loc>
-    <lastmod>2024-09-18</lastmod>
+    <lastmod>2024-09-28</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
 
+  
+  <url>
+    <loc>https://muetsch.io/tags/sysadmin/</loc>
+    <lastmod>2024-09-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://muetsch.io/tags/linux/</loc>
+    <lastmod>2024-09-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://muetsch.io/tags/software-engineering/</loc>
+    <lastmod>2024-09-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://muetsch.io/tags/opensource/</loc>
+    <lastmod>2024-09-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://muetsch.io/tags/energy/</loc>
+    <lastmod>2024-09-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://muetsch.io/tags/smarthome/</loc>
+    <lastmod>2024-09-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://muetsch.io/tags/self-driving/</loc>
+    <lastmod>2024-09-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://muetsch.io/tags/gis/</loc>
+    <lastmod>2024-09-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://muetsch.io/tags/devtools/</loc>
+    <lastmod>2024-09-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://muetsch.io/tags/algorithms/</loc>
+    <lastmod>2024-09-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://muetsch.io/tags/selfhosted/</loc>
+    <lastmod>2024-09-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://muetsch.io/tags/ai/</loc>
+    <lastmod>2024-09-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://muetsch.io/tags/machine-learning/</loc>
+    <lastmod>2024-09-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
   
 
   

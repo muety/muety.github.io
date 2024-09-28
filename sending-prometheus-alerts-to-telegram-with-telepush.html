@@ -17,8 +17,10 @@
 <meta property="og:image" content="https://muetsch.io/images/prometheus_telepush.webp">
 <meta property="og:image" content="https://muetsch.io/images/telepush1.webp">
 <meta property="article:published_time" content="2022-03-11T19:13:37.000Z">
-<meta property="article:modified_time" content="2022-04-10T19:33:30.946Z">
+<meta property="article:modified_time" content="2024-09-28T08:36:52.168Z">
 <meta property="article:author" content="Ferdinand Mütsch">
+<meta property="article:tag" content="sysadmin">
+<meta property="article:tag" content="linux">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://muetsch.io/images/prometheus_telepush.webp">
     
@@ -36,7 +38,8 @@
         
     
     <!-- title -->
-    <title>Sending Prometheus Alerts to Telegram with Telepush</title>
+    
+    <title>Sending Prometheus Alerts to Telegram with Telepush  | Ferdinand Mütsch</title>
     <!-- styles -->
     
 <link rel="stylesheet" href="/css/style.css">
@@ -151,6 +154,11 @@
 
 
       
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/tags/linux/" rel="tag">linux</a>, <a class="tag-link-link" href="/tags/sysadmin/" rel="tag">sysadmin</a>
+    </div>
+
 
 
       <!--
@@ -172,7 +180,7 @@
 <h1 id="Receiving-alerts-in-Telegram"><a href="#Receiving-alerts-in-Telegram" class="headerlink" title="Receiving alerts in Telegram"></a>Receiving alerts in Telegram</h1><p>E-Mail is well and good, but also feels a bit “heavy-weight” and outdated. You might rather want to receive your server monitoring alerts through your favorite messenger, for instance, Telegram. In the following, you’ll learn how to do so with minimal effort by using <a href="https://telepush.dev/"><strong>Telepush</strong></a>. As an example, we are going to set up Prometheus to watch a locally running web service and send a Telegram messages once it’s unavailable.</p>
 <h2 id="Prerequisites"><a href="#Prerequisites" class="headerlink" title="Prerequisites"></a>Prerequisites</h2><p>I assume you have an up and running setup of Prometheus, Alertmanager and Blackbox Exporter (only required for this example) already.</p>
 <h2 id="Obtain-a-token-from-Telepush"><a href="#Obtain-a-token-from-Telepush" class="headerlink" title="Obtain a token from Telepush"></a>Obtain a token from <a href="https://telepush.dev/">Telepush</a></h2><p>You will receive notifications through Telepush’s bot. From a technical perspective, an alert takes this way:</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Prometheus --&gt; Alertmanager --&gt; Telepush API --&gt; Telegram</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Prometheus --&gt; Alertmanager --&gt; Telepush API --&gt; Telegram</span><br></pre></td></tr></table></figure>
 
 <p>That is, Alertmanager sends all alerts to Telepush’s web API, which then forwards it to your Telegram chat with the bot. To instruct Telepush where to route which messages, you initially have to get in contact with Telepush’s Telegram bot and obtain a token.</p>
 <p>Open a new chat with <a href="https://t.me/MiddlemanBot">TelepushBot</a> (<em>Telepush was formerly called MiddlemanBot</em>) and simply send <code>/start</code>. You’ll receive a <strong>token</strong>. Keep it for the next step.</p>
@@ -194,7 +202,7 @@
 <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># blackbox.yml</span></span><br><span class="line"></span><br><span class="line"><span class="attr">modules:</span></span><br><span class="line">  <span class="attr">http_2xx:</span></span><br><span class="line">    <span class="attr">prober:</span> <span class="string">http</span></span><br></pre></td></tr></table></figure>
 
 <h1 id="Testing-it"><a href="#Testing-it" class="headerlink" title="Testing it"></a>Testing it</h1><p>To set the set up, we simply reload Prometheus (just like reloading the Alertmanager above) and wait for a minute.</p>
-<p><img src="images/telepush1.webp"></p>
+<p><img src="/images/telepush1.webp"></p>
 
   </div>
 </article>

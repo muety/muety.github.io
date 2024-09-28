@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="referrer" content="no-referrer">
+    <meta name="description" content="IntroductionThis is the first in a series of two blog posts on monitoring the energy (primarily electricity) consumption and production in my (and my parents’) home. I’ve been fascinated by topics ar">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Smart Home Energy Monitoring Pt. 1 - IR readers, SML, MQTT, Node-RED, Prometheus + Grafana">
+<meta property="og:url" content="https://muetsch.io/energy-monitoring-pt-1-ir-readers-sml-mqtt-node-red-prometheus-grafana.html">
+<meta property="og:site_name" content="Ferdinand Mütsch">
+<meta property="og:description" content="IntroductionThis is the first in a series of two blog posts on monitoring the energy (primarily electricity) consumption and production in my (and my parents’) home. I’ve been fascinated by topics ar">
+<meta property="og:locale">
+<meta property="og:image" content="https://muetsch.io/images/energy_monitoring_grafana1.png">
+<meta property="og:image" content="https://muetsch.io/images/energy_monitoring1.jpg">
+<meta property="og:image" content="https://cdn.prod.website-files.com/65b3e159d25a6097b6ca5815/65f1b8b2ee103b3a8b62e356_smart%20meter%20(2).png">
+<meta property="og:image" content="https://muetsch.io/images/hitchi_reader.webp">
+<meta property="og:image" content="https://muetsch.io/images/sml_parser.png">
+<meta property="og:image" content="https://muetsch.io/images/energy_monitoring_nodered1.png">
+<meta property="og:image" content="https://muetsch.io/images/smarthome_ubb.svg">
+<meta property="article:published_time" content="2024-09-21T05:21:30.000Z">
+<meta property="article:modified_time" content="2024-09-28T08:36:52.166Z">
+<meta property="article:author" content="Ferdinand Mütsch">
+<meta property="article:tag" content="energy">
+<meta property="article:tag" content="smarthome">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://muetsch.io/images/energy_monitoring_grafana1.png">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.png">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon.png" sizes="192x192">
+          
+        
+        
+    
+    <!-- title -->
+    
+    <title>Smart Home Energy Monitoring Pt. 1 - IR readers, SML, MQTT, Node-RED, Prometheus + Grafana  | Ferdinand Mütsch</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- rss -->
+    
+    
+
+    <!-- rel-me links -->
+    
+      
+        <link href="http://github.com/muety" rel="me">
+      
+        <link href="https://social.tchncs.de/@ferdi" rel="me">
+      
+        <link href="mailto:ferdinand@muetsch.io" rel="me">
+      
+    
+
+    <!-- Webmention link -->
+    
+      <link href="https://webmention.io/muetsch.io/webmention" rel="webmention">
+    
+
+    
+      <link href="https://webmention.io/muetsch.io/xmlrpc" rel="pingback">
+    
+<meta name="generator" content="Hexo 7.3.0"><link rel="alternate" href="/rss2.xml" title="Ferdinand Mütsch" type="application/rss+xml">
+</head>
+
+<body>
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="window.scrollTo(0, 0)" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Blog</a></li>
+         
+          <li><a href="/imprint/">Imprint</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" href="/energy-monitoring-pt-2-optimizing-my-consumption-with-data.html"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover='toggleById("i-prev");' onmouseout='toggleById("i-prev");'></i></a></li>
+        
+        
+        <li><a class="icon" href="/multi-threaded-brotli-compression-tool.html"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover='toggleById("i-next").toggleById();' onmouseout='toggleById("i-next");'></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="window.scrollTo(0,0)"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover='toggleById("i-top");' onmouseout='toggleById("i-top");'></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover='toggleById("i-share");' onmouseout='toggleById("i-share");' onclick='toggleById("share");return false;'></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://muetsch.io/energy-monitoring-pt-1-ir-readers-sml-mqtt-node-red-prometheus-grafana.html"><i class="fas fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://muetsch.io/energy-monitoring-pt-1-ir-readers-sml-mqtt-node-red-prometheus-grafana.html&text=Smart Home Energy Monitoring Pt. 1 - IR readers, SML, MQTT, Node-RED, Prometheus + Grafana"><i class="fas fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://muetsch.io/energy-monitoring-pt-1-ir-readers-sml-mqtt-node-red-prometheus-grafana.html&title=Smart Home Energy Monitoring Pt. 1 - IR readers, SML, MQTT, Node-RED, Prometheus + Grafana"><i class="fas fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://muetsch.io/energy-monitoring-pt-1-ir-readers-sml-mqtt-node-red-prometheus-grafana.html&is_video=false&description=Smart Home Energy Monitoring Pt. 1 - IR readers, SML, MQTT, Node-RED, Prometheus + Grafana"><i class="fas fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Smart Home Energy Monitoring Pt. 1 - IR readers, SML, MQTT, Node-RED, Prometheus + Grafana&body=Check out this article: https://muetsch.io/energy-monitoring-pt-1-ir-readers-sml-mqtt-node-red-prometheus-grafana.html"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://muetsch.io/energy-monitoring-pt-1-ir-readers-sml-mqtt-node-red-prometheus-grafana.html&title=Smart Home Energy Monitoring Pt. 1 - IR readers, SML, MQTT, Node-RED, Prometheus + Grafana"><i class="fas fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://muetsch.io/energy-monitoring-pt-1-ir-readers-sml-mqtt-node-red-prometheus-grafana.html&title=Smart Home Energy Monitoring Pt. 1 - IR readers, SML, MQTT, Node-RED, Prometheus + Grafana"><i class="fas fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://muetsch.io/energy-monitoring-pt-1-ir-readers-sml-mqtt-node-red-prometheus-grafana.html&title=Smart Home Energy Monitoring Pt. 1 - IR readers, SML, MQTT, Node-RED, Prometheus + Grafana"><i class="fas fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://muetsch.io/energy-monitoring-pt-1-ir-readers-sml-mqtt-node-red-prometheus-grafana.html&title=Smart Home Energy Monitoring Pt. 1 - IR readers, SML, MQTT, Node-RED, Prometheus + Grafana"><i class="fas fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://muetsch.io/energy-monitoring-pt-1-ir-readers-sml-mqtt-node-red-prometheus-grafana.html&name=Smart Home Energy Monitoring Pt. 1 - IR readers, SML, MQTT, Node-RED, Prometheus + Grafana&description="><i class="fas fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Introduction"><span class="toc-number">1.</span> <span class="toc-text">Introduction</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Goal"><span class="toc-number">2.</span> <span class="toc-text">Goal</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Initial-Situation"><span class="toc-number">3.</span> <span class="toc-text">Initial Situation</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Excursus-Smart-Meter-Gateways"><span class="toc-number">3.1.</span> <span class="toc-text">Excursus: Smart Meter Gateways</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Monitoring-Setup"><span class="toc-number">4.</span> <span class="toc-text">Monitoring Setup</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Power-meter-reading"><span class="toc-number">4.1.</span> <span class="toc-text">Power meter reading</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Side-story-USB-drivers-on-ARMv7-Synology-DSM"><span class="toc-number">4.1.1.</span> <span class="toc-text">Side story: USB drivers on ARMv7 Synology DSM</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Data-transfer-and-ingest"><span class="toc-number">4.2.</span> <span class="toc-text">Data transfer and ingest</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Overall-Architecture"><span class="toc-number">5.</span> <span class="toc-text">Overall Architecture</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Alternative-Setups"><span class="toc-number">6.</span> <span class="toc-text">Alternative Setups</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Outlook"><span class="toc-number">7.</span> <span class="toc-text">Outlook</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index width mx-auto px2 my4">
+        
+        <article class="h-entry post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <a href="https://muetsch.io/energy-monitoring-pt-1-ir-readers-sml-mqtt-node-red-prometheus-grafana.html" class="u-url">
+        <h1 class="posttitle p-name" itemprop="name headline" property="headline">
+            Smart Home Energy Monitoring Pt. 1 - IR readers, SML, MQTT, Node-RED, Prometheus + Grafana
+        </h1>
+    </a>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" property="author" itemscope itemtype="http://schema.org/Person" vocab="http://schema.org/" typeof="Person">
+        <span itemprop="name" property="name" class="p-author h-card">Ferdinand Mütsch</span>
+      </span>
+      
+    <div class="postdate">
+        <time datetime="2024-09-21T05:21:30.000Z" class="dt-published" itemprop="datePublished" property="datePublished">2024-09-21</time>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/tags/energy/" rel="tag">energy</a>, <a class="tag-link-link" href="/tags/smarthome/" rel="tag">smarthome</a>
+    </div>
+
+
+
+      <!--
+      <div style="margin-top: 30px">
+        <a href="https://liberapay.com/muety/" target="_blank"
+          style="background-image: none; text-decoration: none;"><img
+            src="https://badges.fw-web.space/liberapay/receives/muety.svg?logo=liberapay&style=flat-square" alt="Liberapay"
+            style="height: auto !important;width: auto !important;"></a>
+      </div>
+      -->
+    </div>
+  </header>
+  
+  <div class="content e-content" itemprop="articleBody" property="articleBody">
+    <p><img src="/images/energy_monitoring_grafana1.png" alt="Grafana dashboard for energy monitoring"></p>
+<h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1><p>This is the first in a series of two blog posts on monitoring the energy (primarily electricity) consumption and production in my (and my parents’) home. I’ve been fascinated by topics around energy informatics, renewable energy, smart grids, etc. for years. Plus, I’m quite passionate about monitoring various kinds of things, gathering data over time and then plotting nerdy statistics. This includes technical aspects like monitoring server utilization, but also extends to my personal life, including nutrition tracking or gathering facts about my body health with my Fitbit.</p>
+<p>One of the things that I was most curious about though, was to get insights about my personal energy consumption - and possibly even <em>optimize</em> it based on these. At latest when I got my own balcony power plant a few years ago, this whole project started to take off.</p>
+<p>Effectively, I had built two different setups for electricity monitoring - one for myself and another one for my parents’ home. In this article, I’ll cover the latter, while my own, personal setup (which is a little more sophisticated ;-)) will be covered in the <a href="/energy-monitoring-pt-2-optimizing-my-consumption-with-data.html">next blog post</a>.</p>
+<h1 id="Goal"><a href="#Goal" class="headerlink" title="Goal"></a>Goal</h1><p>My goal was to track power consumption and production as precisely as possible to eventually be able to gather (a) “real-time” insights about when there is overcapacity and (b) analyze historical data to potentially find interesting patterns, etc.</p>
+<h1 id="Initial-Situation"><a href="#Initial-Situation" class="headerlink" title="Initial Situation"></a>Initial Situation</h1><p>First step in this whole endeavor was to take stock of the given situation. The circumstances were as follows. In my parents’ home, we have three digital <a href="https://wiki.volkszaehler.org/hardware/channels/meters/power/edl-ehz/itron_openway_3_hz">Itron OpenWay® 3.HZ</a> power meters and a fourth old, analogue one. The digital meters feature an infrared, optical interface for very basic metrics. More precisely, they provide data for these <a href="https://de.wikipedia.org/wiki/OBIS-Kennzahlen">OBIS identifiers</a>:</p>
+<ul>
+<li><code>1.8.0</code> - Total energy (Wh) inbound (total)</li>
+<li><code>1.8.1</code> - Total energy (Wh) inbound (tariff 1)</li>
+<li><code>1.8.2</code> - Total energy (Wh) inbound (tariff 2)</li>
+<li><code>2.8.0</code> - Total energy (Wh) outbound </li>
+<li><code>16.7.0</code> - Current net power (W)</li>
+</ul>
+<p>That is, the meters support two separate tariffs as well as to distinguish between consumption and production. For the analogue meter, there - obviously - was no straightforward way to automatically read it (people have built systems involving a <a href="https://wiki.volkszaehler.org/hardware/channels/meters/water/wasserzaehler_ohne_s0">camera and some OCR</a>, but that’s maybe for another time). I reached out to the grid operator to ask if they were willing to install <a href="https://www.gridx.ai/knowledge/smart-meter">smart meter gateways</a> in our house - which probably would have made things a lot easier - but unfortunately they declined my request. </p>
+<p>On the production side, my parents’ house has a photovoltaic installation with around 5 kWp on its roof.</p>
+<p><img src="/images/energy_monitoring1.jpg" alt="Breaker panel"></p>
+<h2 id="Excursus-Smart-Meter-Gateways"><a href="#Excursus-Smart-Meter-Gateways" class="headerlink" title="Excursus: Smart Meter Gateways"></a>Excursus: Smart Meter Gateways</h2><p>Short side node: smart meter gateways (SMG) come with a ton of benefits and are considered a crucial part of the energy transformation and a requirement to keep electricity grids robust and stable in the future, with increasing percentage of renewable source on the grid. Among others, they enable for smart grid management and demand-side management for higher flexibility. While many countries in the EU already have a high percentage of SMG (e.g. Sweden and Spain have 100 %), Germany still lacks behind with a rollout percentage of only 1 %.</p>
+<p><img src="https://cdn.prod.website-files.com/65b3e159d25a6097b6ca5815/65f1b8b2ee103b3a8b62e356_smart%20meter%20(2).png" alt="Chart about EU smart meter gateway deployment 2022"><br>(Source: <a href="https://www.gridx.ai/knowledge/smart-meter">https://www.gridx.ai/knowledge/smart-meter</a>)</p>
+<h1 id="Monitoring-Setup"><a href="#Monitoring-Setup" class="headerlink" title="Monitoring Setup"></a>Monitoring Setup</h1><h2 id="Power-meter-reading"><a href="#Power-meter-reading" class="headerlink" title="Power meter reading"></a>Power meter reading</h2><p>Given the above circumstances, the obvious approach to gather data about power consumption and production was to deploy infrared (IR) readers to the power meters. After some research, I chose to buy three of <a href="https://www.ebay.de/itm/315022714074">these</a> optical IR readers with USB interface. Alternatively, they also come with only a serial interface, but for my use case, having a built-in USB controller came in quite handy. More details on the readers to be found <a href="https://wiki.volkszaehler.org/hardware/controllers/ir-schreib-lesekopf-usb-ausgang">on this wiki</a>. </p>
+<p><img src="/images/hitchi_reader.webp" alt="Hitchi IR reader"></p>
+<p>(Source: <a href="https://www.ebay.de/itm/315022714074">https://www.ebay.de/itm/315022714074</a>)</p>
+<p>When connected to a computer, data can be read from these using a very simple, binary serial protocol called the <a href="https://de.wikipedia.org/wiki/Smart_Message_Language">Smart Meter Language</a>. I started out with a self-written Python script to parse the data, but then decided to switch for an existing implementation for better robustness. There is <a href="https://github.com/volkszaehler/libsml">libsmal</a> for C, <a href="https://github.com/olliiiver/sml_parser">sml_parser</a> as a C++ client, <a href="https://www.openmuc.org/sml/">jSML</a> for Java, or <a href="https://www.kabza.de/MyHome/SmartMeter/SmartMeter.py">SmartMeter.py</a>. I opted for the script referenced <a href="https://www.photovoltaikforum.com/thread/158266-itron-openway-3-hz-stty-nicht-lesebar/?postID=2314551#post2314551">in this blog post</a>, though, because I thought it would best fit my needs. It not only includes an SML parser, but also a higher-level Python class for reading smart meters and even an MQTT interface - perfect!</p>
+<p><img src="/images/sml_parser.png" alt="Screenshot of SML parser Python scripts"></p>
+<p>I fixed a few minor bugs in that script and adapted it to my specific needs here and there. Eventually, I was able to simple run it from the command-line (or as a SystemD service unit), only passing it the path to a usb serial interface file descriptor (<code>/dev/ttyUSB0</code> to <code>/dev/ttyUSB2</code> on in my case - so one instance of the script for each of the three readers). </p>
+<h3 id="Side-story-USB-drivers-on-ARMv7-Synology-DSM"><a href="#Side-story-USB-drivers-on-ARMv7-Synology-DSM" class="headerlink" title="Side story: USB drivers on ARMv7 Synology DSM"></a>Side story: USB drivers on ARMv7 Synology DSM</h3><p>Probably the biggest struggle in this whole project was related to the fact that I wanted to connect the readers to a (fairly old) Synology NAS, that’s anyways already located right next to the breaker panel. The NAS runs on some ancient Linux kernel version and has a Marvell ARMv7 CPU. Getting the Hitchi IR readers’ USB controllers be recognized by the OS was not as straightforward as I thought. Eventually, I ended up installing a SynoCommunity package (<a href="https://synocommunity.com/package/synokernel-usbserial">synokernel-usbserial</a>, thanks a lot to the authors!) that contains USB serial drivers (<code>CP210x</code>) for the controller used in the reader heads. Details described <a href="https://www.reddit.com/r/synology/comments/y92eyu/usb_serial_drivers_cp210x_for_dsm_62/">here</a> and <a href="https://community.openhab.org/t/get-serial-devices-working-on-synology-ds216-ii-diskstation/36072/4">here</a>. In addition, I put <a href="https://wiki.archlinux.org/title/Udev">udev</a> rules in place to always map the same reader to the same file descriptor.</p>
+<h2 id="Data-transfer-and-ingest"><a href="#Data-transfer-and-ingest" class="headerlink" title="Data transfer and ingest"></a>Data transfer and ingest</h2><p>After I got the readings per power meter in Python, the rest of the setup was straightforward. I used the (modified) script provided above to send readings to an MQTT topic provided by the <a href="https://mosquitto.org/">Mosquitto</a> running on my cloud VPS. From there, a simple Node-RED flow picks them up and ingests them into <a href="https://victoriametrics.com/">VictoriaMetrics</a> (a Prometheus-compatible - but much better for many reasons! - time-series database) via the <a href="https://docs.victoriametrics.com/guides/migrate-from-influx/readme/?highlight=influx#write-data">InfluxDB line protocol</a>.</p>
+<p><img src="/images/energy_monitoring_nodered1.png" alt="Screenshot of Node-RED flow"></p>
+<p>The Grafana server - that I’m already using for many other monitoring use cases - connects to it and plots some nice-looking graphs (see screenshot above)- awesome! 🙌</p>
+<h1 id="Overall-Architecture"><a href="#Overall-Architecture" class="headerlink" title="Overall Architecture"></a>Overall Architecture</h1><p>The overall setup schematically looks like this.</p>
+<p><img src="/images/smarthome_ubb.svg" alt="Architecture sketch"></p>
+<h1 id="Alternative-Setups"><a href="#Alternative-Setups" class="headerlink" title="Alternative Setups"></a>Alternative Setups</h1><p>When I planned out the above setup, I considered a couple different alternatives.</p>
+<p>One option was to employ <a href="https://wiki.volkszaehler.org/overview">Volkszaehler</a>, which is an amazing community-mainted project specifically for energy monitoring and integrations &#x2F; drivers for a lot of different power- and water meter devices and its own frontend &#x2F; visualization UI.</p>
+<p>Another option was to flash ESP32 microcontrollers with <a href="https://tasmota.github.io/">Tasmota</a>, which also inherently comes with support <a href="https://tasmota.github.io/docs/Smart-Meter-Interface/">SML</a> and pre-defined configs for many difference <a href="https://tasmota.github.io/docs/Smart-Meter-Interface/#smart-meter-descriptors">devices</a>. There’s even a <a href="https://www.ebay.de/itm/315375748332">variant</a> of the Hitchi IR reader that already comes with a Tasmota-flashed microcontroller and WiFi on it.</p>
+<p>The third architecture I considered, inspired by <a href="https://crycode.de/serielle-schnittstelle-ueber-ethernet/">this post</a> on serial over Ethernet, was similar to this one, but would not read and parse the SML readings “on the edge”, but instead proxy the raw serial data over MQTT (e.g. using <a href="https://github.com/mycontroller-org/2mqtt">2mqtt</a> or <a href="https://docs.openmqttgateway.com/#products-powered-by-openmqttgateway">OpenMQTTGateway</a>) and then processing them on the server side.</p>
+<p>Ultimately, I found my setup described in this article to be the best trade-off between (a) utilizing systems that I already had (Prometheus, Grafana, Mosquitto, the NAS, …), (b) keeping the setup rather simple and (c) cost-effective.</p>
+<h1 id="Outlook"><a href="#Outlook" class="headerlink" title="Outlook"></a>Outlook</h1><p><a href="/energy-monitoring-pt-2-optimizing-my-consumption-with-data.html">Part 2</a> of this mini-series will cover the monitoring setup employed in my own apartment. It’s a lot more comprehensive, technically challenging, but also even more insightful. Stay tuned!</p>
+
+  </div>
+</article>
+
+
+
+    </div>
+    
+      <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Blog</a></li>
+         
+          <li><a href="/imprint/">Imprint</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Introduction"><span class="toc-number">1.</span> <span class="toc-text">Introduction</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Goal"><span class="toc-number">2.</span> <span class="toc-text">Goal</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Initial-Situation"><span class="toc-number">3.</span> <span class="toc-text">Initial Situation</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Excursus-Smart-Meter-Gateways"><span class="toc-number">3.1.</span> <span class="toc-text">Excursus: Smart Meter Gateways</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Monitoring-Setup"><span class="toc-number">4.</span> <span class="toc-text">Monitoring Setup</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Power-meter-reading"><span class="toc-number">4.1.</span> <span class="toc-text">Power meter reading</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Side-story-USB-drivers-on-ARMv7-Synology-DSM"><span class="toc-number">4.1.1.</span> <span class="toc-text">Side story: USB drivers on ARMv7 Synology DSM</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Data-transfer-and-ingest"><span class="toc-number">4.2.</span> <span class="toc-text">Data transfer and ingest</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Overall-Architecture"><span class="toc-number">5.</span> <span class="toc-text">Overall Architecture</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Alternative-Setups"><span class="toc-number">6.</span> <span class="toc-text">Alternative Setups</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Outlook"><span class="toc-number">7.</span> <span class="toc-text">Outlook</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://muetsch.io/energy-monitoring-pt-1-ir-readers-sml-mqtt-node-red-prometheus-grafana.html"><i class="fas fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://muetsch.io/energy-monitoring-pt-1-ir-readers-sml-mqtt-node-red-prometheus-grafana.html&text=Smart Home Energy Monitoring Pt. 1 - IR readers, SML, MQTT, Node-RED, Prometheus + Grafana"><i class="fas fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://muetsch.io/energy-monitoring-pt-1-ir-readers-sml-mqtt-node-red-prometheus-grafana.html&title=Smart Home Energy Monitoring Pt. 1 - IR readers, SML, MQTT, Node-RED, Prometheus + Grafana"><i class="fas fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://muetsch.io/energy-monitoring-pt-1-ir-readers-sml-mqtt-node-red-prometheus-grafana.html&is_video=false&description=Smart Home Energy Monitoring Pt. 1 - IR readers, SML, MQTT, Node-RED, Prometheus + Grafana"><i class="fas fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Smart Home Energy Monitoring Pt. 1 - IR readers, SML, MQTT, Node-RED, Prometheus + Grafana&body=Check out this article: https://muetsch.io/energy-monitoring-pt-1-ir-readers-sml-mqtt-node-red-prometheus-grafana.html"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://muetsch.io/energy-monitoring-pt-1-ir-readers-sml-mqtt-node-red-prometheus-grafana.html&title=Smart Home Energy Monitoring Pt. 1 - IR readers, SML, MQTT, Node-RED, Prometheus + Grafana"><i class="fas fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://muetsch.io/energy-monitoring-pt-1-ir-readers-sml-mqtt-node-red-prometheus-grafana.html&title=Smart Home Energy Monitoring Pt. 1 - IR readers, SML, MQTT, Node-RED, Prometheus + Grafana"><i class="fas fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://muetsch.io/energy-monitoring-pt-1-ir-readers-sml-mqtt-node-red-prometheus-grafana.html&title=Smart Home Energy Monitoring Pt. 1 - IR readers, SML, MQTT, Node-RED, Prometheus + Grafana"><i class="fas fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://muetsch.io/energy-monitoring-pt-1-ir-readers-sml-mqtt-node-red-prometheus-grafana.html&title=Smart Home Energy Monitoring Pt. 1 - IR readers, SML, MQTT, Node-RED, Prometheus + Grafana"><i class="fas fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://muetsch.io/energy-monitoring-pt-1-ir-readers-sml-mqtt-node-red-prometheus-grafana.html&name=Smart Home Energy Monitoring Pt. 1 - IR readers, SML, MQTT, Node-RED, Prometheus + Grafana&description="><i class="fas fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+      <ul>
+        <li id="toc"><a class="icon" href="#" onclick='toggleById("toc-footer")'><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a></li>
+        <li id="share"><a class="icon" href="#" onclick='toggleById("share-footer")'><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a></li>
+        <li id="top" style="display:none"><a class="icon" href="#" onclick="window.scrollTo(0,0)"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a></li>
+        <li id="menu"><a class="icon" href="#" onclick='toggleById("nav-footer")'><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a></li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+    
+    <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2024 Ferdinand Mütsch
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Blog</a></li>
+         
+          <li><a href="/imprint/">Imprint</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+<!--
+<script defer type="text/javascript" src="js/pirsch.js"
+    id="pirschjs"
+    data-code="GoPk8VNmzk8Z6n7xikwZahvOxm1MNPud"></script>
+-->
+</body>
+</html>
+<!-- styles -->
+
+<link rel="stylesheet" href="/lib/roboto/css/roboto.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+
+
+
+<script src="/js/main.js"></script>
+
+<!-- Google Analytics -->
+
+<!-- Disqus Comments -->
+
+

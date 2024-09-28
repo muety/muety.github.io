@@ -19,8 +19,10 @@
 <meta property="og:image" content="https://muetsch.io/images/contabo_3.png">
 <meta property="og:image" content="https://muetsch.io/images/contabo_4.png">
 <meta property="article:published_time" content="2024-04-25T07:50:19.000Z">
-<meta property="article:modified_time" content="2024-05-02T12:51:51.972Z">
+<meta property="article:modified_time" content="2024-09-28T08:36:52.166Z">
 <meta property="article:author" content="Ferdinand Mütsch">
+<meta property="article:tag" content="sysadmin">
+<meta property="article:tag" content="linux">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://muetsch.io/images/contabo_1.png">
     
@@ -38,7 +40,8 @@
         
     
     <!-- title -->
-    <title>Don&#39;t get a Contabo server</title>
+    
+    <title>Don&#39;t get a Contabo server  | Ferdinand Mütsch</title>
     <!-- styles -->
     
 <link rel="stylesheet" href="/css/style.css">
@@ -153,6 +156,11 @@
 
 
       
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/tags/linux/" rel="tag">linux</a>, <a class="tag-link-link" href="/tags/sysadmin/" rel="tag">sysadmin</a>
+    </div>
+
 
 
       <!--
@@ -168,18 +176,18 @@
   
   <div class="content e-content" itemprop="articleBody" property="articleBody">
     <p>I’m usually not a person to rant on companies. But in this case, my experience with <a href="https://contabo.com/">Contabo</a> was so bad I felt like wanting to sort of warn people from taking a bad decision and present better alternatives instead.</p>
-<h1 id="Contabo-offerings"><a href="#Contabo-offerings" class="headerlink" title="Contabo offerings"></a>Contabo offerings</h1><p>Contabo is one of many hosting providers that typically offer classic webhosting, virtual private servers (VPS), virtual dedicated servers (VDS), managed block storage, etc. - essentially infrastructure for hobbyists or companies who don’t want to run an own data center or go to AWS (because <a href="https://www.trickster.dev/post/you-probably-dont-need-aws-and-are-better-off-without-it/">they’ll probably not need it</a>). Contabo has super cheap deals, for example, you can get a 4 CPUs, 6 GB RAM, 400 GB SSD VPS for just 4.50 € / month. The prices are actually quite appealing. Plus, they run their virtual servers on <a href="https://linux-kvm.org/page/Main_Page">KVM</a> - compared to other cheap hosting providers, who often times use <a href="https://en.wikipedia.org/wiki/OS-level_virtualization">OS-level virtualization</a> (e.g. with <a href="https://openvz.org/">OpenVZ</a>) that comes with a lot of inconvenient limitations.</p>
-<p>However, this comes at a price. The downside to these cheap offerings if only a <strong><a href="https://contabo.com/en/legal/terms-and-conditions/">95 % annual uptime guarantee</a></strong>. This means that your server may be down for a whole <strong>18 days per year</strong>, or, <strong>1 hour 12 mins per day</strong> on average (see <a href="https://uptime.is/">uptime / SLA calculator</a>). That’s quite bad, if you think about it - especially considering that other providers (e.g. <a href="https://www.netcup.de/">netcup</a>) give you over 99 % SLAs.</p>
-<p><img src="images/contabo_1.png"></p>
+<h1 id="Contabo-offerings"><a href="#Contabo-offerings" class="headerlink" title="Contabo offerings"></a>Contabo offerings</h1><p>Contabo is one of many hosting providers that typically offer classic webhosting, virtual private servers (VPS), virtual dedicated servers (VDS), managed block storage, etc. - essentially infrastructure for hobbyists or companies who don’t want to run an own data center or go to AWS (because <a href="https://www.trickster.dev/post/you-probably-dont-need-aws-and-are-better-off-without-it/">they’ll probably not need it</a>). Contabo has super cheap deals, for example, you can get a 4 CPUs, 6 GB RAM, 400 GB SSD VPS for just 4.50 € &#x2F; month. The prices are actually quite appealing. Plus, they run their virtual servers on <a href="https://linux-kvm.org/page/Main_Page">KVM</a> - compared to other cheap hosting providers, who often times use <a href="https://en.wikipedia.org/wiki/OS-level_virtualization">OS-level virtualization</a> (e.g. with <a href="https://openvz.org/">OpenVZ</a>) that comes with a lot of inconvenient limitations.</p>
+<p>However, this comes at a price. The downside to these cheap offerings if only a <strong><a href="https://contabo.com/en/legal/terms-and-conditions/">95 % annual uptime guarantee</a></strong>. This means that your server may be down for a whole <strong>18 days per year</strong>, or, <strong>1 hour 12 mins per day</strong> on average (see <a href="https://uptime.is/">uptime &#x2F; SLA calculator</a>). That’s quite bad, if you think about it - especially considering that other providers (e.g. <a href="https://www.netcup.de/">netcup</a>) give you over 99 % SLAs.</p>
+<p><img src="/images/contabo_1.png"></p>
 <h1 id="My-experiences"><a href="#My-experiences" class="headerlink" title="My experiences"></a>My experiences</h1><p>I’ve had a couple of personal services, as well as <a href="https://wakapi.dev/">Wakapi.dev</a>, <a href="https://anchr.io/">Anchr.io</a> and a few others running on a Contabo VPS for years. The server went down more or less regularly - on average, probably like once a month for one or two hours. While it was annoying, it didn’t hurt me a lot, because I didn’t have <em>super important</em> stuff running on it. What really bothered me, though, was their communication: usually they didn’t provide any information on the incident or at least a notice that something was wrong and that they would be working on fixing it.</p>
 <h2 id="The-last-straw-breaking-the-camel’s-back"><a href="#The-last-straw-breaking-the-camel’s-back" class="headerlink" title="The last straw breaking the camel’s back"></a>The last straw breaking the camel’s back</h2><p>I thought about switching providers every now and then, but always got to the conclusion that it wouldn’t be worth the efforts. Last week, though, the overstretched my patience. On Saturday at around 10 pm I received a Telegram message from my <a href="https://github.com/louislam/uptime-kuma">Uptime Kuma</a> monitoring, telling me that the server was down again. At this point, I was already used to it. However, this downtime was meant to last for days.</p>
-<p>After my VPS was still offline the next morning, I started to become nervous. I checked their X page (<a href="https://twitter.com/ContaboCom">@ContaboCom</a>) and it realized I wasn’t the only one facing issues. Apparently, not only the Nuremberg location was affected, but also data centers in Singapore, the US and other Contabo data centers in Germany. But it wasn’t a total outage: my friend’s VPS, located in the same DC, was still up. We <code>traceroute</code>d the packets and concluded that there must be some networking / routing problem. Their <a href="https://contabo-status.com/">status page</a> was still pretending that everything was fine and there were “no interrupations”. Thanks. In the meanwhile, people on X started ranting.</p>
-<p><a href="https://twitter.com/Dotsy_Delivery/status/1781805104233861517"><img src="images/contabo_2.png"></a></p>
+<p>After my VPS was still offline the next morning, I started to become nervous. I checked their X page (<a href="https://twitter.com/ContaboCom">@ContaboCom</a>) and it realized I wasn’t the only one facing issues. Apparently, not only the Nuremberg location was affected, but also data centers in Singapore, the US and other Contabo data centers in Germany. But it wasn’t a total outage: my friend’s VPS, located in the same DC, was still up. We <code>traceroute</code>d the packets and concluded that there must be some networking &#x2F; routing problem. Their <a href="https://contabo-status.com/">status page</a> was still pretending that everything was fine and there were “no interrupations”. Thanks. In the meanwhile, people on X started ranting.</p>
+<p><a href="https://twitter.com/Dotsy_Delivery/status/1781805104233861517"><img src="/images/contabo_2.png"></a></p>
 <p>Again, they didn’t communicate any problems and didn’t respond to tickets. If you follow their X page, those issues seem to have been around for quite a while already and seem to still continue. </p>
-<p><a href="https://twitter.com/jmfinlay/status/1783242088072597684"><img src="images/contabo_3.png"></a></p>
+<p><a href="https://twitter.com/jmfinlay/status/1783242088072597684"><img src="/images/contabo_3.png"></a></p>
 <p>The longer my server was inaccissble, the more nervous I became. A few semi-important customer services were running on the VPS as well, which would have needed to be up again at latest Monday morning. So I started restoring the most important things from backups and moved temporarily moved them to another server at a different provider.</p>
 <p>Eventually, it wasn’t until Monday noon when my VPS came back online - again, without any notice from their support team since the incident had started. Our suspicion regarding the networking issue turned out correct: the server itself had been running for the whole time. It just didn’t have internet connection.</p>
-<p><img src="images/contabo_4.png"></p>
+<p><img src="/images/contabo_4.png"></p>
 <p>For me, this was the last straw that broke the camel’s back. I decided to switch providers and cancel my Contabo subscription as soon as possible. Thanks to <a href="https://webwork.blog/servermigration-mit-dd-uber-ssh/">this great article</a> (use Firefox- or Chrome translation features to translate into English) on cloning an entire disk via <code>dd</code> over SSH, migration was actually super easy and hassle-free.</p>
 <h1 id="Alternatives"><a href="#Alternatives" class="headerlink" title="Alternatives"></a>Alternatives</h1><p>Again, I don’t intend to <em>rant</em> on Contabo. Considering my past experiences, however, I just think there are much better alternatives.</p>
 <ul>
