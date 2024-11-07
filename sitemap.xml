@@ -2,6 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://muetsch.io/energy-monitoring-pt-2-optimizing-my-consumption-with-data.html</loc>
+    
+    <lastmod>2024-11-07</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://muetsch.io/heterogeneous-graph-classification-using-graph-neural-networks-gnn.html</loc>
     
     <lastmod>2024-11-07</lastmod>
@@ -23,15 +32,6 @@
     <loc>https://muetsch.io/about/index.html</loc>
     
     <lastmod>2024-10-28</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://muetsch.io/energy-monitoring-pt-2-optimizing-my-consumption-with-data.html</loc>
-    
-    <lastmod>2024-09-22</lastmod>
     
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
