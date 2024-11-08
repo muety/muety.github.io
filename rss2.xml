@@ -9,11 +9,35 @@
     <atom:link href="https://muetsch.io/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description>Hi and welcome! 👋 I&#39;m Ferdinand, a passionate software- and data engineer and technology enthusiast from Karlsruhe, Germany. My personal webpage is the right place to find out about me and my projects and to read about software development, DevOps, some machine learning and technology in general. All content you will find here is [human-written](/statement-about-generative-ai.html). Enjoy and feel free to leave me a message!</description>
-    <pubDate>Sat, 28 Sep 2024 08:36:52 GMT</pubDate>
+    <pubDate>Fri, 08 Nov 2024 05:56:30 GMT</pubDate>
     <generator>http://hexo.io/</generator>
     
     <item>
-      <title>Smart Home Energy Monitoring Pt. 2 - Optimizing my consumption with data</title>
+      <title>Heterogeneous Graph Classification using Graph Neural Networks (GNN)</title>
+      <link>https://muetsch.io/heterogeneous-graph-classification-using-graph-neural-networks-gnn.html</link>
+      <guid>https://muetsch.io/heterogeneous-graph-classification-using-graph-neural-networks-gnn.html</guid>
+      <pubDate>Mon, 28 Oct 2024 07:51:13 GMT</pubDate>
+      
+        
+        
+      <description>&lt;h1 id=&quot;GNNs-101&quot;&gt;&lt;a href=&quot;#GNNs-101&quot; class=&quot;headerlink&quot; title=&quot;GNNs 101&quot;&gt;&lt;/a&gt;GNNs 101&lt;/h1&gt;&lt;p&gt;Neural networks (NNs), in various flavors, hav</description>
+        
+      
+      
+      
+      
+      
+      <category domain="https://muetsch.io/tags/ai/">ai</category>
+      
+      <category domain="https://muetsch.io/tags/machine-learning/">machine-learning</category>
+      
+      
+      <comments>https://muetsch.io/heterogeneous-graph-classification-using-graph-neural-networks-gnn.html#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>Smart Home Energy Monitoring Pt. 2 - Optimizing my electricity consumption with data</title>
       <link>https://muetsch.io/energy-monitoring-pt-2-optimizing-my-consumption-with-data.html</link>
       <guid>https://muetsch.io/energy-monitoring-pt-2-optimizing-my-consumption-with-data.html</guid>
       <pubDate>Sat, 21 Sep 2024 07:48:58 GMT</pubDate>
@@ -105,30 +129,6 @@
       
       
       <comments>https://muetsch.io/norospy-using-ros-without-ros.html#disqus_thread</comments>
-      
-    </item>
-    
-    <item>
-      <title>Statement about generative AI</title>
-      <link>https://muetsch.io/statement-about-generative-ai.html</link>
-      <guid>https://muetsch.io/statement-about-generative-ai.html</guid>
-      <pubDate>Thu, 13 Jun 2024 06:46:14 GMT</pubDate>
-      
-        
-        
-      <description>&lt;p&gt;Inspired by &lt;a href=&quot;https://www.leftfold.tech/pages/noai/&quot;&gt;this blog&lt;/a&gt;, I want to make a statement about the use of generative AI on m</description>
-        
-      
-      
-      
-      
-      
-      <category domain="https://muetsch.io/tags/ai/">ai</category>
-      
-      <category domain="https://muetsch.io/tags/machine-learning/">machine-learning</category>
-      
-      
-      <comments>https://muetsch.io/statement-about-generative-ai.html#disqus_thread</comments>
       
     </item>
     

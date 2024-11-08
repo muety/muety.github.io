@@ -525,7 +525,7 @@ body {
 }
 .width {
   width: 100%;
-  max-width: 42rem;
+  max-width: 46rem;
 }
 @media (max-width: 480px) {
   .px3 {
@@ -1234,7 +1234,7 @@ article .content .caption {
   line-height: 20px;
   vertical-align: middle;
 }
-@media (min-width: 42rem) {
+@media (min-width: 46rem) {
   #footer {
     padding-top: 20px;
     padding-bottom: 20px;

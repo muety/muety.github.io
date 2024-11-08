@@ -9,7 +9,7 @@
     <meta name="referrer" content="no-referrer">
     <meta name="description" content="IntroductionThis is the second article in my mini-series on smart home energy monitoring. In the previous post I described my setup for monitoring electricity consumption in my parents’ home using var">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Smart Home Energy Monitoring Pt. 2 - Optimizing my consumption with data">
+<meta property="og:title" content="Smart Home Energy Monitoring Pt. 2 - Optimizing my electricity consumption with data">
 <meta property="og:url" content="https://muetsch.io/energy-monitoring-pt-2-optimizing-my-consumption-with-data.html">
 <meta property="og:site_name" content="Ferdinand Mütsch">
 <meta property="og:description" content="IntroductionThis is the second article in my mini-series on smart home energy monitoring. In the previous post I described my setup for monitoring electricity consumption in my parents’ home using var">
@@ -19,7 +19,7 @@
 <meta property="og:image" content="https://muetsch.io/images/energy_monitoring3.webp">
 <meta property="og:image" content="https://muetsch.io/images/smarthome_setup.svg">
 <meta property="article:published_time" content="2024-09-21T07:48:58.000Z">
-<meta property="article:modified_time" content="2024-09-28T08:36:52.166Z">
+<meta property="article:modified_time" content="2024-11-08T05:55:25.654Z">
 <meta property="article:author" content="Ferdinand Mütsch">
 <meta property="article:tag" content="energy">
 <meta property="article:tag" content="smarthome">
@@ -41,7 +41,7 @@
     
     <!-- title -->
     
-    <title>Smart Home Energy Monitoring Pt. 2 - Optimizing my consumption with data  | Ferdinand Mütsch</title>
+    <title>Smart Home Energy Monitoring Pt. 2 - Optimizing my electricity consumption with data  | Ferdinand Mütsch</title>
     <!-- styles -->
     
 <link rel="stylesheet" href="/css/style.css">
@@ -96,6 +96,8 @@
     <span id="actions">
       <ul>
         
+        <li><a class="icon" href="/heterogeneous-graph-classification-using-graph-neural-networks-gnn.html"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover='toggleById("i-prev");' onmouseout='toggleById("i-prev");'></i></a></li>
+        
         
         <li><a class="icon" href="/energy-monitoring-pt-1-ir-readers-sml-mqtt-node-red-prometheus-grafana.html"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover='toggleById("i-next").toggleById();' onmouseout='toggleById("i-next");'></i></a></li>
         
@@ -111,15 +113,15 @@
     <div id="share" style="display: none">
       <ul>
   <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://muetsch.io/energy-monitoring-pt-2-optimizing-my-consumption-with-data.html"><i class="fas fa-facebook " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://twitter.com/share?url=https://muetsch.io/energy-monitoring-pt-2-optimizing-my-consumption-with-data.html&text=Smart Home Energy Monitoring Pt. 2 - Optimizing my consumption with data"><i class="fas fa-twitter " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://muetsch.io/energy-monitoring-pt-2-optimizing-my-consumption-with-data.html&title=Smart Home Energy Monitoring Pt. 2 - Optimizing my consumption with data"><i class="fas fa-linkedin " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://muetsch.io/energy-monitoring-pt-2-optimizing-my-consumption-with-data.html&is_video=false&description=Smart Home Energy Monitoring Pt. 2 - Optimizing my consumption with data"><i class="fas fa-pinterest " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=Smart Home Energy Monitoring Pt. 2 - Optimizing my consumption with data&body=Check out this article: https://muetsch.io/energy-monitoring-pt-2-optimizing-my-consumption-with-data.html"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://getpocket.com/save?url=https://muetsch.io/energy-monitoring-pt-2-optimizing-my-consumption-with-data.html&title=Smart Home Energy Monitoring Pt. 2 - Optimizing my consumption with data"><i class="fas fa-get-pocket " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://reddit.com/submit?url=https://muetsch.io/energy-monitoring-pt-2-optimizing-my-consumption-with-data.html&title=Smart Home Energy Monitoring Pt. 2 - Optimizing my consumption with data"><i class="fas fa-reddit " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://muetsch.io/energy-monitoring-pt-2-optimizing-my-consumption-with-data.html&title=Smart Home Energy Monitoring Pt. 2 - Optimizing my consumption with data"><i class="fas fa-stumbleupon " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://digg.com/submit?url=https://muetsch.io/energy-monitoring-pt-2-optimizing-my-consumption-with-data.html&title=Smart Home Energy Monitoring Pt. 2 - Optimizing my consumption with data"><i class="fas fa-digg " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://muetsch.io/energy-monitoring-pt-2-optimizing-my-consumption-with-data.html&name=Smart Home Energy Monitoring Pt. 2 - Optimizing my consumption with data&description="><i class="fas fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://muetsch.io/energy-monitoring-pt-2-optimizing-my-consumption-with-data.html&text=Smart Home Energy Monitoring Pt. 2 - Optimizing my electricity consumption with data"><i class="fas fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://muetsch.io/energy-monitoring-pt-2-optimizing-my-consumption-with-data.html&title=Smart Home Energy Monitoring Pt. 2 - Optimizing my electricity consumption with data"><i class="fas fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://muetsch.io/energy-monitoring-pt-2-optimizing-my-consumption-with-data.html&is_video=false&description=Smart Home Energy Monitoring Pt. 2 - Optimizing my electricity consumption with data"><i class="fas fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Smart Home Energy Monitoring Pt. 2 - Optimizing my electricity consumption with data&body=Check out this article: https://muetsch.io/energy-monitoring-pt-2-optimizing-my-consumption-with-data.html"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://muetsch.io/energy-monitoring-pt-2-optimizing-my-consumption-with-data.html&title=Smart Home Energy Monitoring Pt. 2 - Optimizing my electricity consumption with data"><i class="fas fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://muetsch.io/energy-monitoring-pt-2-optimizing-my-consumption-with-data.html&title=Smart Home Energy Monitoring Pt. 2 - Optimizing my electricity consumption with data"><i class="fas fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://muetsch.io/energy-monitoring-pt-2-optimizing-my-consumption-with-data.html&title=Smart Home Energy Monitoring Pt. 2 - Optimizing my electricity consumption with data"><i class="fas fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://muetsch.io/energy-monitoring-pt-2-optimizing-my-consumption-with-data.html&title=Smart Home Energy Monitoring Pt. 2 - Optimizing my electricity consumption with data"><i class="fas fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://muetsch.io/energy-monitoring-pt-2-optimizing-my-consumption-with-data.html&name=Smart Home Energy Monitoring Pt. 2 - Optimizing my electricity consumption with data&description="><i class="fas fa-tumblr " aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
@@ -137,7 +139,7 @@
     
     <a href="https://muetsch.io/energy-monitoring-pt-2-optimizing-my-consumption-with-data.html" class="u-url">
         <h1 class="posttitle p-name" itemprop="name headline" property="headline">
-            Smart Home Energy Monitoring Pt. 2 - Optimizing my consumption with data
+            Smart Home Energy Monitoring Pt. 2 - Optimizing my electricity consumption with data
         </h1>
     </a>
 
@@ -242,15 +244,15 @@
     <div id="share-footer" style="display: none">
       <ul>
   <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://muetsch.io/energy-monitoring-pt-2-optimizing-my-consumption-with-data.html"><i class="fas fa-facebook fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://twitter.com/share?url=https://muetsch.io/energy-monitoring-pt-2-optimizing-my-consumption-with-data.html&text=Smart Home Energy Monitoring Pt. 2 - Optimizing my consumption with data"><i class="fas fa-twitter fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://muetsch.io/energy-monitoring-pt-2-optimizing-my-consumption-with-data.html&title=Smart Home Energy Monitoring Pt. 2 - Optimizing my consumption with data"><i class="fas fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://muetsch.io/energy-monitoring-pt-2-optimizing-my-consumption-with-data.html&is_video=false&description=Smart Home Energy Monitoring Pt. 2 - Optimizing my consumption with data"><i class="fas fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=Smart Home Energy Monitoring Pt. 2 - Optimizing my consumption with data&body=Check out this article: https://muetsch.io/energy-monitoring-pt-2-optimizing-my-consumption-with-data.html"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="https://getpocket.com/save?url=https://muetsch.io/energy-monitoring-pt-2-optimizing-my-consumption-with-data.html&title=Smart Home Energy Monitoring Pt. 2 - Optimizing my consumption with data"><i class="fas fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://reddit.com/submit?url=https://muetsch.io/energy-monitoring-pt-2-optimizing-my-consumption-with-data.html&title=Smart Home Energy Monitoring Pt. 2 - Optimizing my consumption with data"><i class="fas fa-reddit fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://muetsch.io/energy-monitoring-pt-2-optimizing-my-consumption-with-data.html&title=Smart Home Energy Monitoring Pt. 2 - Optimizing my consumption with data"><i class="fas fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://digg.com/submit?url=https://muetsch.io/energy-monitoring-pt-2-optimizing-my-consumption-with-data.html&title=Smart Home Energy Monitoring Pt. 2 - Optimizing my consumption with data"><i class="fas fa-digg fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://muetsch.io/energy-monitoring-pt-2-optimizing-my-consumption-with-data.html&name=Smart Home Energy Monitoring Pt. 2 - Optimizing my consumption with data&description="><i class="fas fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://muetsch.io/energy-monitoring-pt-2-optimizing-my-consumption-with-data.html&text=Smart Home Energy Monitoring Pt. 2 - Optimizing my electricity consumption with data"><i class="fas fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://muetsch.io/energy-monitoring-pt-2-optimizing-my-consumption-with-data.html&title=Smart Home Energy Monitoring Pt. 2 - Optimizing my electricity consumption with data"><i class="fas fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://muetsch.io/energy-monitoring-pt-2-optimizing-my-consumption-with-data.html&is_video=false&description=Smart Home Energy Monitoring Pt. 2 - Optimizing my electricity consumption with data"><i class="fas fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Smart Home Energy Monitoring Pt. 2 - Optimizing my electricity consumption with data&body=Check out this article: https://muetsch.io/energy-monitoring-pt-2-optimizing-my-consumption-with-data.html"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://muetsch.io/energy-monitoring-pt-2-optimizing-my-consumption-with-data.html&title=Smart Home Energy Monitoring Pt. 2 - Optimizing my electricity consumption with data"><i class="fas fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://muetsch.io/energy-monitoring-pt-2-optimizing-my-consumption-with-data.html&title=Smart Home Energy Monitoring Pt. 2 - Optimizing my electricity consumption with data"><i class="fas fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://muetsch.io/energy-monitoring-pt-2-optimizing-my-consumption-with-data.html&title=Smart Home Energy Monitoring Pt. 2 - Optimizing my electricity consumption with data"><i class="fas fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://muetsch.io/energy-monitoring-pt-2-optimizing-my-consumption-with-data.html&title=Smart Home Energy Monitoring Pt. 2 - Optimizing my electricity consumption with data"><i class="fas fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://muetsch.io/energy-monitoring-pt-2-optimizing-my-consumption-with-data.html&name=Smart Home Energy Monitoring Pt. 2 - Optimizing my electricity consumption with data&description="><i class="fas fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
 </ul>
 
     </div>

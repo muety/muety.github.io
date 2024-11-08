@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="referrer" content="no-referrer">
+    <meta name="description" content="GNNs 101Neural networks (NNs), in various flavors, have become the de-facto standard in pretty much every subfield of machine learning nowadays. They are being used on structured data like tables and">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Heterogeneous Graph Classification using Graph Neural Networks (GNN)">
+<meta property="og:url" content="https://muetsch.io/heterogeneous-graph-classification-using-graph-neural-networks-gnn.html">
+<meta property="og:site_name" content="Ferdinand Mütsch">
+<meta property="og:description" content="GNNs 101Neural networks (NNs), in various flavors, have become the de-facto standard in pretty much every subfield of machine learning nowadays. They are being used on structured data like tables and">
+<meta property="og:locale">
+<meta property="og:image" content="https://muetsch.io/images/gnn_pipeline.svg">
+<meta property="og:image" content="https://muetsch.io/images/traffic_scenario_graph_02.svg">
+<meta property="og:image" content="https://muetsch.io/images/traffic_scenario_graph_01.svg">
+<meta property="og:image" content="https://muetsch.io/images/nuplan_scenario_types.svg">
+<meta property="og:image" content="https://muetsch.io/images/nuplan_map.png">
+<meta property="og:image" content="https://muetsch.io/images/gnn_classification_pipeline.svg">
+<meta property="og:image" content="https://muetsch.io/images/gnn_classification_training.svg">
+<meta property="og:image" content="https://muetsch.io/images/gnn_classification_tsne.svg">
+<meta property="article:published_time" content="2024-10-28T07:51:13.000Z">
+<meta property="article:modified_time" content="2024-11-08T05:56:30.133Z">
+<meta property="article:author" content="Ferdinand Mütsch">
+<meta property="article:tag" content="ai">
+<meta property="article:tag" content="machine-learning">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://muetsch.io/images/gnn_pipeline.svg">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.png">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon.png" sizes="192x192">
+          
+        
+        
+    
+    <!-- title -->
+    
+    <title>Heterogeneous Graph Classification using Graph Neural Networks (GNN)  | Ferdinand Mütsch</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- rss -->
+    
+    
+
+    <!-- rel-me links -->
+    
+      
+        <link href="http://github.com/muety" rel="me">
+      
+        <link href="https://social.tchncs.de/@ferdi" rel="me">
+      
+        <link href="mailto:ferdinand@muetsch.io" rel="me">
+      
+    
+
+    <!-- Webmention link -->
+    
+      <link href="https://webmention.io/muetsch.io/webmention" rel="webmention">
+    
+
+    
+      <link href="https://webmention.io/muetsch.io/xmlrpc" rel="pingback">
+    
+<meta name="generator" content="Hexo 7.3.0"><link rel="alternate" href="/rss2.xml" title="Ferdinand Mütsch" type="application/rss+xml">
+</head>
+
+<body>
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="window.scrollTo(0, 0)" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Blog</a></li>
+         
+          <li><a href="/imprint/">Imprint</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" href="/energy-monitoring-pt-2-optimizing-my-consumption-with-data.html"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover='toggleById("i-next").toggleById();' onmouseout='toggleById("i-next");'></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="window.scrollTo(0,0)"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover='toggleById("i-top");' onmouseout='toggleById("i-top");'></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover='toggleById("i-share");' onmouseout='toggleById("i-share");' onclick='toggleById("share");return false;'></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://muetsch.io/heterogeneous-graph-classification-using-graph-neural-networks-gnn.html"><i class="fas fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://muetsch.io/heterogeneous-graph-classification-using-graph-neural-networks-gnn.html&text=Heterogeneous Graph Classification using Graph Neural Networks (GNN)"><i class="fas fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://muetsch.io/heterogeneous-graph-classification-using-graph-neural-networks-gnn.html&title=Heterogeneous Graph Classification using Graph Neural Networks (GNN)"><i class="fas fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://muetsch.io/heterogeneous-graph-classification-using-graph-neural-networks-gnn.html&is_video=false&description=Heterogeneous Graph Classification using Graph Neural Networks (GNN)"><i class="fas fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Heterogeneous Graph Classification using Graph Neural Networks (GNN)&body=Check out this article: https://muetsch.io/heterogeneous-graph-classification-using-graph-neural-networks-gnn.html"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://muetsch.io/heterogeneous-graph-classification-using-graph-neural-networks-gnn.html&title=Heterogeneous Graph Classification using Graph Neural Networks (GNN)"><i class="fas fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://muetsch.io/heterogeneous-graph-classification-using-graph-neural-networks-gnn.html&title=Heterogeneous Graph Classification using Graph Neural Networks (GNN)"><i class="fas fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://muetsch.io/heterogeneous-graph-classification-using-graph-neural-networks-gnn.html&title=Heterogeneous Graph Classification using Graph Neural Networks (GNN)"><i class="fas fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://muetsch.io/heterogeneous-graph-classification-using-graph-neural-networks-gnn.html&title=Heterogeneous Graph Classification using Graph Neural Networks (GNN)"><i class="fas fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://muetsch.io/heterogeneous-graph-classification-using-graph-neural-networks-gnn.html&name=Heterogeneous Graph Classification using Graph Neural Networks (GNN)&description="><i class="fas fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#GNNs-101"><span class="toc-number">1.</span> <span class="toc-text">GNNs 101</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Traffic-Scenarios-as-Graphs"><span class="toc-number">2.</span> <span class="toc-text">Traffic Scenarios as Graphs</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Modeling-Considerations"><span class="toc-number">2.1.</span> <span class="toc-text">Modeling Considerations</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Heterogeneous-Traffic-Scenario-Graph-Model"><span class="toc-number">2.2.</span> <span class="toc-text">Heterogeneous Traffic Scenario Graph Model</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Temporal-Kernel-Size"><span class="toc-number">2.2.1.</span> <span class="toc-text">Temporal Kernel Size</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Scaling-and-Positional-Encoding"><span class="toc-number">2.2.2.</span> <span class="toc-text">Scaling and Positional Encoding</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Scenario-Graph-Classification"><span class="toc-number">3.</span> <span class="toc-text">Scenario Graph Classification</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Problem-Description"><span class="toc-number">3.1.</span> <span class="toc-text">Problem Description</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#nuPlan-Dataset"><span class="toc-number">3.1.1.</span> <span class="toc-text">nuPlan Dataset</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Classes"><span class="toc-number">3.1.1.1.</span> <span class="toc-text">Classes</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Maps"><span class="toc-number">3.1.1.2.</span> <span class="toc-text">Maps</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Network-Architecture"><span class="toc-number">3.2.</span> <span class="toc-text">Network Architecture</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Implementation-Details"><span class="toc-number">3.3.</span> <span class="toc-text">Implementation Details</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Experiments"><span class="toc-number">4.</span> <span class="toc-text">Experiments</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Similarity-Clustering"><span class="toc-number">4.1.</span> <span class="toc-text">Similarity Clustering</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Ablation-Study"><span class="toc-number">4.2.</span> <span class="toc-text">Ablation Study</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Conclusion"><span class="toc-number">5.</span> <span class="toc-text">Conclusion</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#References"><span class="toc-number">6.</span> <span class="toc-text">References</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index width mx-auto px2 my4">
+        
+        <article class="h-entry post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <a href="https://muetsch.io/heterogeneous-graph-classification-using-graph-neural-networks-gnn.html" class="u-url">
+        <h1 class="posttitle p-name" itemprop="name headline" property="headline">
+            Heterogeneous Graph Classification using Graph Neural Networks (GNN)
+        </h1>
+    </a>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" property="author" itemscope itemtype="http://schema.org/Person" vocab="http://schema.org/" typeof="Person">
+        <span itemprop="name" property="name" class="p-author h-card">Ferdinand Mütsch</span>
+      </span>
+      
+    <div class="postdate">
+        <time datetime="2024-10-28T07:51:13.000Z" class="dt-published" itemprop="datePublished" property="datePublished">2024-10-28</time>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/tags/ai/" rel="tag">ai</a>, <a class="tag-link-link" href="/tags/machine-learning/" rel="tag">machine-learning</a>
+    </div>
+
+
+
+      <!--
+      <div style="margin-top: 30px">
+        <a href="https://liberapay.com/muety/" target="_blank"
+          style="background-image: none; text-decoration: none;"><img
+            src="https://badges.fw-web.space/liberapay/receives/muety.svg?logo=liberapay&style=flat-square" alt="Liberapay"
+            style="height: auto !important;width: auto !important;"></a>
+      </div>
+      -->
+    </div>
+  </header>
+  
+  <div class="content e-content" itemprop="articleBody" property="articleBody">
+    <h1 id="GNNs-101"><a href="#GNNs-101" class="headerlink" title="GNNs 101"></a>GNNs 101</h1><p>Neural networks (NNs), in various flavors, have become the de-facto standard in pretty much every subfield of machine learning nowadays. They are being used on structured data like tables and time-series, raster data like images and sequential data like natural language sentences. More recently, graph neural networks have emerged in addition, in order to apply established deep learning techniques to graph-structured data as well. Graphs are a super flexible and universally applicable data model, that can be used anywhere from biology &#x2F; chemistry to medicine, social networks analysis, recommender systems and static code analysis to energy grids or autonomous driving. In my research, I apply GNNs for <strong>clustering and generating traffic scenarios</strong>, but more on that later… I might do a separate blog posts only on the fundamentals of how GNNs work, but for now, let’s only stick to the very basics.</p>
+<p>Graphs consist of <strong>nodes and edges</strong>, where edges interconnect between nodes in a directed or undirected fashion. Nodes will usually be accompanied by a <strong>feature vector</strong> composed of various attributes about the node (e.g. the position and velocity of a car or pedestrian on the road). Optionally, edges can have attributes as well. <em>Heterogeneous</em> graphs are a special type of graphs, namely such that consist of different <em>types</em> of nodes, likely having different sorts of attributes. Besides, <em>spatio-temporal</em> graphs are such that feature a temporal domain in some sense, usually either encoded via <em>temporal aggregation</em> &#x2F; <em>temporal unrolling</em> or sequentially in form of a <em>dynamic graph</em> [4]. </p>
+<p>Most graph neural networks are based on the <strong>message passing</strong> scheme, where feature information is being propagated between interconnected nodes along their edges in an iterative fashion. The core part of GNNs are the <strong>graph convolution</strong> layers, the job of which is to aggregate and combine node features in a sensible way, that is, to generate <strong>node embeddings</strong>. The inner workings of these layers can be broken down into three separate components: a <strong>message function</strong>, an <strong>aggregation operator</strong> and an <strong>update function</strong>. These convolution layers are primarily used for feature extraction. Depending on the type of learning task (there are <strong>node-level</strong>-, <strong>link-level</strong>- and <strong>graph-level</strong> tasks), those layers are followed by some sort of aggregation- or <em>pooling</em> layer. Finally, in the <em>readout</em> stage, classical neural network layers (usually simple linear layers) are used to map from the embeddings to the final prediction (e.g. a class). </p>
+<img src="images/gnn_pipeline.svg" width="100%" style="margin-top: 30px; margin-bottom: 15px; padding: 10px; background: #fff">
+<small>Fig. 1: GNN Learning Pipeline &copy; 2024, Karlsruhe Institute of Technology</small>
+
+<h1 id="Traffic-Scenarios-as-Graphs"><a href="#Traffic-Scenarios-as-Graphs" class="headerlink" title="Traffic Scenarios as Graphs"></a>Traffic Scenarios as Graphs</h1><h2 id="Modeling-Considerations"><a href="#Modeling-Considerations" class="headerlink" title="Modeling Considerations"></a>Modeling Considerations</h2><p>In my research, I concern myself a lot with traffic scenarios. A scenario can be viewed as a sequence of scenes, which, in turn, can be modeled considering different types of information. Often times, a 6-layer model [1] is considered to distinguish between information about:</p>
+<ol>
+<li>the <strong>road network</strong>,</li>
+<li><strong>traffic infrastructure</strong> (signs, trees, …),</li>
+<li><strong>temporary modifications</strong> (constructions, …),</li>
+<li><strong>dynamic objects</strong> (cars, pedestrians, cyclists, …),</li>
+<li>the <strong>environment</strong> (weather, time of day, …) and</li>
+<li><strong>digital information</strong> (traffic light state, V2X information, …).</li>
+</ol>
+<p>Moreover, another taxonomy distinguishes scenario descriptions into (1) <strong>functional</strong>, (2) <strong>logical</strong> and (3) <strong>concrete</strong>, based on the level of detail [2]. </p>
+<p>When coming up with a suitable traffic scenario model, there are a couple of design decisions to be made, including:</p>
+<ol>
+<li>What information to consider (see above)</li>
+<li>What data representation to choose<ul>
+<li>Graph-based</li>
+<li>Vector-based (maps only)</li>
+<li>Rasterized (2D image)</li>
+<li>Object lists (agent states only)</li>
+<li>Logical (e.g. OpenDRIVE, OpenSCENARIO)</li>
+<li>Ontology-based ([3])</li>
+</ul>
+</li>
+<li>Scene- or agent-centric representation</li>
+<li>How to represent time dimension</li>
+</ol>
+<p>A commonly seen pattern is also to use separate encodings for maps and agent state, e.g. VectorNet [5], LaneGCN [6] or some custom CNN (cf. [7]) as an upstream map encoder, followed by a sequence model [7] or transformer [8] for the dynamic state.</p>
+<h2 id="Heterogeneous-Traffic-Scenario-Graph-Model"><a href="#Heterogeneous-Traffic-Scenario-Graph-Model" class="headerlink" title="Heterogeneous Traffic Scenario Graph Model"></a>Heterogeneous Traffic Scenario Graph Model</h2><p>For my research, I decided to opt for a representation in which traffic scenarios are encoded entirely as a single graph, including map topology &#x2F; road geometry, traffic agents and the temporal dimension. It’s heavily inspired by the graph models presented in [9] and [10], but varies in some aspects. I’m using a graph that is <em>heterogeneous</em> (map- and agent &#x2F; obstacle nodes), <em>directed</em> and <em>spatio-temporal</em> (using <strong>temporal unrolling</strong> [4]), yet <em>static</em> (single graph). </p>
+<img src="images/traffic_scenario_graph_02.svg" width="100%" style="margin-top: 30px; margin-bottom: 15px; padding: 10px;">
+<small>Fig. 2: Traffic scenario graph representation schema ()</small>
+
+<p>Another option that I considered initially was to use the <em>Semantic Scene Graph</em> proposed by [11], then stack multiple scenes to extend it to scenarios and eventually feed these through a sequence model to obtain a global (latent) representation. However, I discarded the idea again in favor of that one single, comprehensive data model for entire scenarios.</p>
+<p><strong><code>Obstacle</code></strong> nodes are used to encode both static obstacles like road infrastructure and dynamic obstacles, primarily traffic participants. <strong><code>RoadSegment</code></strong> nodes represent the map, broken down into <em>lanelets</em>, that is, short segments of driving lanes, walkways, intersections, etc. Nodes are connected by edges of four different types:</p>
+<ul>
+<li><strong><code>ObstacleToObstacle:</code></strong> Semantic relations between two actors, e.g. “car A follows car B” or “car A gives way to cyclist B”.</li>
+<li><strong><code>RoadToRoad:</code></strong> Map topology and -hierarchy, e.g. “lane 1 is right of lane 2”.</li>
+<li><strong><code>ObstacleToRoad:</code></strong> Association between actors and their current positions on the map, e.g. “car A is driving on lane B”.</li>
+<li><strong><code>ObstacleToObstacleTemporal:</code></strong> Modeling the temporal dimension of dynamic actors</li>
+</ul>
+<p>Obstacles include attributes about their individual properties (type, dimensions, …) and their current state (position, velocity, orientation, …). Road segments are represented by their centerline and according widths, sampled at discrete steps (<code>k=100</code>). Inspired by [12] and [13], all <strong>positions are relative</strong> to the mean positions of all agents at <code>t=0</code>. Also, for every scenario, the <strong>map is cropped</strong> to the scenario’s maximum extent, plus a buffer of 100 meters.</p>
+<img src="images/traffic_scenario_graph_01.svg" width="100%" style="margin-top: 30px; margin-bottom: 15px; padding: 10px;">
+<small>Fig. 3: Traffic scenario graph data model</small>
+
+<p>In addition, <strong>edge attributes</strong> are employed as well. Specifically, every edge encodes relative information about the interconnected nodes, e.g. the <em>relative</em> velocities between obstacle or an obstacle’s displacement <em>relative</em> to a lane’s centerline. Only the temporal edges do not contain any feature information. Instead, the chronological ordering of obstacle states is modeled implicitly by the presence or absence of temporal edges between node pairs. Note that while fig. 3 lists <code>timestep</code> as an attribute of the <code>Obstacle</code> class (implemented as actual Python classes), the attribute is dropped later when constructing actual node feature vectors. <strong>No explicit timestep</strong> information ends up in the final graph, however, optional <strong>positional encoding</strong> is added (see below).</p>
+<p>Every node’s and every edge’s features are eventually flattened into fixed-size feature vectors. For example, an obstacle node’s feature vector is of size 30, including two components for x- and y position, longitudinal and lateral velocity, a one-hot-encoded type attribute, etc. Road segment feature vectors are larger (210 components in total), primarily because they are sampled equidistant at 100 <code>(x, y)</code> points (note: other than shown in fig. 3, only a lane’s entry- and exit widths are kept for the final feature vector).</p>
+<h3 id="Temporal-Kernel-Size"><a href="#Temporal-Kernel-Size" class="headerlink" title="Temporal Kernel Size"></a>Temporal Kernel Size</h3><p>For the temporal edges, I additionally came up with the concept of “temporal kernel size” to ultimately facilitate GNN learning. The idea is to not only connect obstacle states from <code>t -&gt; t+1</code>, but add edges for up to <code>k</code> steps into the future. While this doesn’t add any information into the data model itself, it sort of artificially extends the receptive field of nodes along temporal edges. The intuition behind this is that a network can incorporate information from more states in a single convolution operation.</p>
+<h3 id="Scaling-and-Positional-Encoding"><a href="#Scaling-and-Positional-Encoding" class="headerlink" title="Scaling and Positional Encoding"></a>Scaling and Positional Encoding</h3><p>Since the attributes are from vastly different domains and defined in different value ranges, min-max-scaling (using Scikit-Learn’s <a href="https://scikit-learn.org/stable/modules/generated/sklearn.preprocessing.MinMaxScaler.html"><code>MinMaxScaler</code></a>) is applied as a preprocessing step to every feature vector, resulting in attributed normalized to <code>[0, 1]</code>.</p>
+<p>Moreover, optional positional encoding can be added to the obstacle state feature vectors to encode their temporal ordering. I decided to apply standard <a href="https://pytorch-geometric.readthedocs.io/en/latest/modules/nn.html?highlight=positional#torch_geometric.nn.encoding.PositionalEncoding">sinusoidal</a> encoding, where <code>x</code> is the respective scene’s timestamp normalized to <code>[0, T]</code>. Following the original paper, the encoding is simply added to the original feature via summation.</p>
+<h1 id="Scenario-Graph-Classification"><a href="#Scenario-Graph-Classification" class="headerlink" title="Scenario Graph Classification"></a>Scenario Graph Classification</h1><h2 id="Problem-Description"><a href="#Problem-Description" class="headerlink" title="Problem Description"></a>Problem Description</h2><p>As a simple graph-level learning task, I decided to build a network to <em>classify</em> traffic scenarios using the <strong><a href="https://www.nuscenes.org/nuplan">nuPlan dataset</a></strong>. Goal is to be able to feed a scenario encoded in the above graph format into the classification network and predict the category (out of 74) it most likely belongs to. The fact that these classes are (a) distributed very unevenly (see below) and (b) can be inferred trivially in a purely analytical way for the most parts makes the learning problem a lot less spectacular. Also, there is no actually sensible real-world use case for this type of classifier. However, I still wanted to build a fully-fledged GNN-based classifier to gain some more practice and to put my above data model to the test.</p>
+<p>From a machine learning perspective, the problem essentially boils down to <strong>representation learning</strong> (obtaining descriptive latent graph embeddings), followed by simple <strong>multi-class classification</strong>.</p>
+<h3 id="nuPlan-Dataset"><a href="#nuPlan-Dataset" class="headerlink" title="nuPlan Dataset"></a>nuPlan Dataset</h3><p>NuPlan consists of more than 100,000 scenarios (&gt; 500 hours of driving) of varying duration recorded in four different locations, featuring traffic agent- and ego trajectories as well as - for some parts - raw camera- and lidar sensor readings. The dataset is primarily meant to be used for trajectory prediction and traffic simulation in the context of the <a href="https://nuplan-devkit.readthedocs.io/en/latest/competition.html">nuPlan competition</a>. However, it also comes with simple labels per scenario. Every scenario is categorized into one of <strong>51 different classes</strong> (for the Boston train dataset I used - in total nuPlan has 74 classes) using an auto-labelling process based on simple heuristics. Particular classes are, for example:</p>
+<ul>
+<li><code>high_magnitude_speed</code></li>
+<li><code>low_magnitude_speed</code></li>
+<li><code>on_stopline_traffic_light</code></li>
+<li><code>accelerating_at_crosswalk</code></li>
+<li><code>changing_lane</code></li>
+<li><code>traversing_narrow_lane</code></li>
+<li>…</li>
+</ul>
+<p>… and many more. As can be seen, every class corresponds roughly to a simple traffic maneuver, which is what I aim to predict. </p>
+<img src="images/nuplan_scenario_types.svg" width="100%" style="margin-top: 30px; margin-bottom: 15px; padding: 10px; background: #fff">
+<small>Fig. 4: Resampled nuPlan Scenario Type Distribution ("train_boston" split)</small><br><br>
+
+<h4 id="Classes"><a href="#Classes" class="headerlink" title="Classes"></a>Classes</h4><p>By default, classes are distributed very unevenly. The large majority of scenarios are of type <code>stationary</code> and a few others, so a classification model is likely to overfit to simply predict one of these classes and still achieve decent performance. There are several ways to account for class imbalances, one of which is to use a <strong>weighted loss</strong>, that is, to assign higher importance to errors made on the minority class (e.g. see <a href="https://pytorch.org/docs/stable/generated/torch.nn.CrossEntropyLoss.html"><code>CrossEntropyLoss</code></a>). Another method is <strong>weighted sampling</strong>, i.e. to physically oversample the minority- or undersample the majority class during mini-batching or a <a href="https://imbalanced-learn.org/stable/combine.html">combination of both</a>. </p>
+<p>Luckily, as nuPlan has way more data samples than I planned to train on for this task, I could simply draw actually <em>unique</em> samples in a way that yields a more or less uniform distribution with some exemptions (see fig. 4). Some classes are still heavily underrepresented, for which I could additionally apply oversampling (draw with replacement) as described above, but I decided to ignore that for now.</p>
+<h4 id="Maps"><a href="#Maps" class="headerlink" title="Maps"></a>Maps</h4><p>Maps come as GeoPackage (<code>.gpkg</code>) files containing various different vector- and raster layers, each with their own properties and semantics. </p>
+<img src="images/nuplan_map.png" width="100%" style="margin-top: 30px; margin-bottom: 15px; padding: 10px;">
+<small>Fig. 5: Selected layers of nuPlan Boston map visualized in QGIS (&copy; OpenStreetMap)</small>
+
+<h2 id="Network-Architecture"><a href="#Network-Architecture" class="headerlink" title="Network Architecture"></a>Network Architecture</h2><p>The classification model’s architecture that I developed is very simple and straightforward and essentially involves a GNN-based feature extraction stage followed by a classification head. </p>
+<img src="images/gnn_classification_pipeline.svg" width="100%" style="margin-top: 30px; margin-bottom: 15px; padding: 10px; background: #fff">
+<small>Fig. 6: GNN-based graph classification model architecture</small>
+
+<p>First, the heterogeneous graph (obstacle- and road segment nodes interconnected by four different types of attributed edges) is fed into a series of three consecutive message passing layers, effectively yielding a receptive field of 3 hops. Hidden embedding dimensions are chosen as 32, 64 and 128 for obstacles and 64, 128 and 256 for road segments. Batch normalization is applied before every convolution layer. Edge features are considered as part of inter-obstacle message passing, but are not being updated themselves. A modified variant of PyG’s <a href="https://pytorch-geometric.readthedocs.io/en/latest/generated/torch_geometric.nn.conv.SAGEConv.html#torch_geometric.nn.conv.SAGEConv"><code>SAGEConv</code></a> layer is used, which additionally supports edge features. It does so by passing them through a single linear layer to project them to the according source node’s feature dimensionality and subsequently adding them onto that node feature vector.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">EdgeSAGEConv</span>(<span class="title class_ inherited__">SAGEConv</span>):</span><br><span class="line">    <span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">    Extension of SAGEConv to include edge attributes by adding (sum) them to every source neighbor node&#x27;s message.</span></span><br><span class="line"><span class="string">    Inspired by https://github.com/pyg-team/pytorch_geometric/discussions/2495#discussioncomment-687410.</span></span><br><span class="line"><span class="string">    &#x27;&#x27;&#x27;</span></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self, *args, edge_in, root_node_dim=<span class="literal">None</span>, **kwargs</span>):  <span class="comment"># root node is &quot;left&quot; node of relation</span></span><br><span class="line">        <span class="built_in">super</span>().__init__(*args, **kwargs)</span><br><span class="line">        <span class="keyword">if</span> root_node_dim <span class="keyword">is</span> <span class="literal">None</span>:</span><br><span class="line">            root_node_dim = <span class="variable language_">self</span>.in_channels[<span class="number">0</span>] <span class="keyword">if</span> <span class="built_in">isinstance</span>(<span class="variable language_">self</span>.in_channels, <span class="built_in">tuple</span>) <span class="keyword">else</span> <span class="variable language_">self</span>.in_channels</span><br><span class="line">        <span class="variable language_">self</span>.edge_lin = Linear(edge_in, root_node_dim <span class="keyword">or</span> <span class="variable language_">self</span>.out_channels)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">forward</span>(<span class="params">self, x, edge_index, edge_attr</span>):</span><br><span class="line">        <span class="variable language_">self</span>._edge_attr = edge_attr</span><br><span class="line">        out = <span class="built_in">super</span>().forward(x, edge_index)</span><br><span class="line">        <span class="variable language_">self</span>._edge_attr = <span class="literal">None</span></span><br><span class="line">        <span class="keyword">return</span> out</span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">message</span>(<span class="params">self, x_j</span>):</span><br><span class="line">        <span class="keyword">return</span> (x_j + <span class="variable language_">self</span>.edge_lin(<span class="variable language_">self</span>._edge_attr))  <span class="comment"># <span class="doctag">TODO:</span> concatenate instead of add via summing</span></span><br></pre></td></tr></table></figure>
+<p><small>Listing 1: Modified variant of SAGEConv to consider edge attributes</small></p>
+<p>As a second step, the transformed obstacle node embeddings are fed through three parallel pooling layers (min-, max- and mean pooling) and subsequent concatenation to obtain a graph embedding. Edge features are not used any further after the initial message passing layers.</p>
+<p>Lastly, this graph embedding is passed through a single linear layer to obtain the logits that correspond to the predicted scenario type class probabilities.</p>
+<h2 id="Implementation-Details"><a href="#Implementation-Details" class="headerlink" title="Implementation Details"></a>Implementation Details</h2><p>The <a href="https://github.com/motional/nuplan-devkit">nuplan-devkit</a> is used to read map information and actual scenarios from nuPlan into Python classes to benefit from an object-oriented programming style through the code base. A <code>to_graph()</code> method is implemented to map the scenarios to <a href="https://networkx.org/documentation/stable/reference/classes/digraph.html">NetworkX <code>DiGraph</code></a>s as an intermediate representation (to perform additional graph analyses, etc.) before, eventually, another converter yields <a href="https://pytorch-geometric.readthedocs.io/en/latest/generated/torch_geometric.data.HeteroData.html#torch_geometric.data.HeteroData">PyG <code>HeteroData</code></a> objects from them, including vectorized feature representations. </p>
+<p>The entire ML-model is implemented using the excellent <a href="https://pytorch-geometric.readthedocs.io/">PyTorch Geometric</a> framework and all data handling in this context is implemented in a <a href="https://pytorch-geometric.readthedocs.io/en/latest/generated/torch_geometric.data.Dataset.html#torch_geometric.data.Dataset"><code>Dataset</code></a> object with additional support for in-memory caching.</p>
+<p>Listing 2 shows an excerpt from my implementation of the scenario dataset, depicting its constructor signature and relevant method stubs. In addition, listing 3 shows an excerpt from the actual model definition, specifically the parts where convolution-, pooling- and classification layers are defined.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">NuplanDataset</span>(<span class="title class_ inherited__">Dataset</span>):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params"></span></span><br><span class="line"><span class="params">            self,</span></span><br><span class="line"><span class="params">            root: <span class="type">Optional</span>[<span class="built_in">str</span>] = <span class="literal">None</span>,</span></span><br><span class="line"><span class="params">            transform: <span class="type">Optional</span>[<span class="type">Callable</span>] = <span class="literal">None</span>,</span></span><br><span class="line"><span class="params">            pre_transform: <span class="type">Optional</span>[<span class="type">Callable</span>] = <span class="literal">None</span>,</span></span><br><span class="line"><span class="params">            pre_filter: <span class="type">Optional</span>[<span class="type">Callable</span>] = <span class="literal">None</span>,</span></span><br><span class="line"><span class="params">            objective: <span class="built_in">str</span> = <span class="type">Literal</span>[<span class="string">&#x27;scenario_classification&#x27;</span>],</span></span><br><span class="line"><span class="params">            max_n: <span class="built_in">int</span> = -<span class="number">1</span>,</span></span><br><span class="line"><span class="params">            min_obstacles: <span class="built_in">int</span> = <span class="number">0</span>,</span></span><br><span class="line"><span class="params">            in_memory: <span class="built_in">bool</span> = <span class="literal">False</span>,</span></span><br><span class="line"><span class="params">            positional_encoding: <span class="type">Optional</span>[<span class="type">Literal</span>[<span class="string">&#x27;sinusoidal&#x27;</span>, <span class="string">&#x27;rotary&#x27;</span>]] = <span class="string">&#x27;sinusoidal&#x27;</span>,</span></span><br><span class="line"><span class="params">            minmax_scaling: <span class="built_in">bool</span> = <span class="literal">True</span>,</span></span><br><span class="line"><span class="params">            force_reload: <span class="built_in">bool</span> = <span class="literal">False</span>,</span></span><br><span class="line"><span class="params">            device: torch.device = torch.device(<span class="params"><span class="string">f&#x27;cuda:<span class="subst">&#123;torch.cuda.device_count()-<span class="number">1</span>&#125;</span>&#x27;</span> <span class="keyword">if</span> torch.cuda.is_available(<span class="params"></span>) <span class="keyword">else</span> <span class="string">&#x27;cpu&#x27;</span></span>),</span></span><br><span class="line"><span class="params">    </span>):</span><br><span class="line">        <span class="comment"># ...</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">process</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="comment"># ...</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">get</span>(<span class="params">self, idx</span>):</span><br><span class="line">        <span class="comment"># ...</span></span><br></pre></td></tr></table></figure>
+
+<p><small>Listing 2: Nuplan scenario graph dataset implementation</small></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">DeeptestSimpleGNN</span>(torch.nn.Module):</span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">__init__</span>(<span class="params">self</span>):</span><br><span class="line">        <span class="comment"># ...</span></span><br><span class="line"></span><br><span class="line">        <span class="variable language_">self</span>.convs1.append(HeteroConv(&#123;</span><br><span class="line">            (<span class="string">&#x27;obstacle&#x27;</span>, <span class="string">&#x27;obstacle_to_obstacle_temporal&#x27;</span>, <span class="string">&#x27;obstacle&#x27;</span>): SAGEConv(obstacle_in, OBSTACLE_OUT_1, normalize=<span class="literal">True</span>),</span><br><span class="line">            (<span class="string">&#x27;obstacle&#x27;</span>, <span class="string">&#x27;obstacle_to_obstacle&#x27;</span>, <span class="string">&#x27;obstacle&#x27;</span>): EdgeSAGEConv(obstacle_in, OBSTACLE_OUT_1, edge_in=FEATURES_OBSTACLE_TO_OBSTACLE, normalize=<span class="literal">True</span>),</span><br><span class="line">            (<span class="string">&#x27;obstacle&#x27;</span>, <span class="string">&#x27;obstacle_to_road&#x27;</span>, <span class="string">&#x27;road_segment&#x27;</span>): EdgeSAGEConv((obstacle_in, road_segment_in), ROAD_OUT_1, edge_in=FEATURES_OBSTACLE_TO_ROAD, normalize=<span class="literal">True</span>),</span><br><span class="line">            (<span class="string">&#x27;road_segment&#x27;</span>, <span class="string">&#x27;road_to_road&#x27;</span>, <span class="string">&#x27;road_segment&#x27;</span>): EdgeSAGEConv(road_segment_in, ROAD_OUT_1, edge_in=FEATURES_ROAD_TO_ROAD, normalize=<span class="literal">True</span>),</span><br><span class="line">        &#125;))</span><br><span class="line"></span><br><span class="line">        <span class="comment"># ...</span></span><br><span class="line"></span><br><span class="line">        <span class="variable language_">self</span>.pool1_mean = MeanAggregation()</span><br><span class="line">        <span class="variable language_">self</span>.pool1_max = MaxAggregation()</span><br><span class="line">        <span class="variable language_">self</span>.pool1_min = MinAggregation()</span><br><span class="line"></span><br><span class="line">        <span class="variable language_">self</span>.lin1 = Linear(OBSTACLE_OUT_3 * <span class="number">3</span>, n_classes)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># ...</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">def</span> <span class="title function_">forward</span>(<span class="params"></span></span><br><span class="line"><span class="params">        self,</span></span><br><span class="line"><span class="params">        x_dict: <span class="type">Dict</span>[<span class="built_in">str</span>, Tensor],</span></span><br><span class="line"><span class="params">        edge_index_dict: <span class="type">Dict</span>[<span class="type">Tuple</span>[<span class="built_in">str</span>, <span class="built_in">str</span>, <span class="built_in">str</span>], Tensor],</span></span><br><span class="line"><span class="params">        batch_dict: <span class="type">Dict</span>[<span class="built_in">str</span>, Tensor],</span></span><br><span class="line"><span class="params">        edge_attr_dict: <span class="type">Optional</span>[<span class="type">Dict</span>[<span class="built_in">str</span>, Tensor]] = <span class="literal">None</span></span></span><br><span class="line"><span class="params">    </span>) -&gt; Tensor:</span><br><span class="line">        <span class="comment"># ...</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> conv <span class="keyword">in</span> <span class="variable language_">self</span>.convs1:</span><br><span class="line">            x_dict = conv(x_dict, edge_index_dict, edge_attr_dict <span class="keyword">if</span> <span class="variable language_">self</span>.include_edge_attrs <span class="keyword">else</span> &#123;&#125;)</span><br><span class="line">            x_dict = &#123;k: x.relu() <span class="keyword">for</span> k, x <span class="keyword">in</span> x_dict.items()&#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment"># ...</span></span><br><span class="line"></span><br><span class="line">        x = x_dict[<span class="string">&#x27;obstacle&#x27;</span>]</span><br><span class="line"></span><br><span class="line">        pooled1 = torch.cat([</span><br><span class="line">            <span class="variable language_">self</span>.pool1_mean(x, batch), <span class="comment"># (batch_size, OBSTACLE_OUT_3)</span></span><br><span class="line">            <span class="variable language_">self</span>.pool1_max(x, batch),  <span class="comment"># (batch_size, OBSTACLE_OUT_3)</span></span><br><span class="line">            <span class="variable language_">self</span>.pool1_min(x, batch),  <span class="comment"># (batch_size, OBSTACLE_OUT_3)</span></span><br><span class="line">        ], dim=<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">        x = <span class="variable language_">self</span>.lin1(x)</span><br><span class="line">        <span class="keyword">return</span> x</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># ...</span></span><br></pre></td></tr></table></figure>
+
+<p><small>Listing 3: Scenario classification model definition</small></p>
+<!-- 
+- UnScenE: Toward Unsupervised Scenario Extraction for Automated Driving Systems from Urban Naturalistic Road Traffic Data
+-->
+
+<h1 id="Experiments"><a href="#Experiments" class="headerlink" title="Experiments"></a>Experiments</h1><p>For my experiments, 10,122 scenarios from nuPlans <code>train_boston</code> data split were extracted in order to classify them. They were split into train, test and validation with a ratio of 70 : 15 : 15. In addition, I extracted individual scenes (that is, “snapshots” of scenarios, i.e. scenarios with only one timestep) to perform classification on as well. However, I’ll exclude these in the following and only focus on full scenarios.</p>
+<p>Training the model proposed above, including all tweaks such as scaling, positional encoding and edge attributes, for 150 episodes results in a classification <strong>accuracy of 56.1 %</strong>. While this is certainly not a spectacular result, I’d still call it a success, considering that apriori probability is ~ 2 % and that we didn’t do any sort of hyperparameter tuning so far. The training process is depicted in fig 7.</p>
+<p><img src="/images/gnn_classification_training.svg" alt="Training Loss Chart"></p>
+<h2 id="Similarity-Clustering"><a href="#Similarity-Clustering" class="headerlink" title="Similarity Clustering"></a>Similarity Clustering</h2><p>As I’m particular interested in <a href="https://atks.aifb.kit.edu/146_258.php">graph similarity learning</a> for traffic scenarios for a later project (stay tuned!), I was curious to see how well our classification model has already learned to model (dis-)similarity between graphs. To gain some first insights, I decided to visualize the model’s <strong>embedding space</strong> (output of the second-last layer, right before the final linear layer) in 2D. The intuition is that similar scenarios shall be located close to each other in the latent space, while distinct scenarios shall be far apart, i.e. have a large distance (Euclidean distance, in this case). Of course, this narrows the notion of “similarity” down to only a scenario’s class, while there might be a lot more latent aspects with respect to which two scenarios might be semantically related. Yet, this analysis still provides some interesting insights into what the model had learned internally.</p>
+<p><img src="/images/gnn_classification_tsne.svg"></p>
+<p><small>Fig. 7: GNN Embeddings in 2D using t-SNE</small></p>
+<p>For the sake of clarity, only a (randomly selected) subset of classes was chosen to be visualized in fig. 7. While we certainly didn’t obtain a perfect clustering, you can still clearly see how individual groupings have established for some types of scenarios. Considering that similarity clustering was not the primary learning objective, results look quite promising.</p>
+<h2 id="Ablation-Study"><a href="#Ablation-Study" class="headerlink" title="Ablation Study"></a>Ablation Study</h2><p>Lastly, I was interested to see how different aspects of my data model influence its overall expressiveness - in other words, how well my classifier trains when including or omitting certain parts of the scenarios graphs. Specifically, I wanted to investigate the effectiveness of including (1) positional encoding, (2) temporal edges, (3) edge features and (4) map information. I decided to systematically exclude these features and see how badly this affects model performance. For reference, I also did another pass without any attribute information whatsoever.</p>
+<p>Note that, to iterate faster, I only trained for 30 episodes for every test (compared to 150 epochs before).</p>
+<p>These are the results I obtained:</p>
+<table>
+<thead>
+<tr>
+<th><strong>Test</strong></th>
+<th><strong>Validation Accuracy</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>Baseline</strong> (all-in)</td>
+<td>44.1 % (56.1 % @ T&#x3D;150)</td>
+</tr>
+<tr>
+<td><strong>w&#x2F;o positional encoding</strong></td>
+<td>33.5 %</td>
+</tr>
+<tr>
+<td><strong>w&#x2F;o temporal edges</strong></td>
+<td>24.6 %</td>
+</tr>
+<tr>
+<td><strong>w&#x2F;o edge attributes</strong></td>
+<td>25.1 %</td>
+</tr>
+<tr>
+<td><strong>w&#x2F;o map</strong> (<code>road_segment</code> nodes)</td>
+<td>38.5 %</td>
+</tr>
+<tr>
+<td><strong>w&#x2F;o attributes</strong> (node + edge)</td>
+<td>10.7 %</td>
+</tr>
+</tbody></table>
+<p>Unsurprisingly, when masking all feature information, model performance is very poor, yet still better than random guessing, since the model can still exploit connectivity information. Both temporal edges as well as edge attributes in general seem to add additional information and help the model learn better, which gives me confidence in the expressiveness of the data model. Positional encoding seems to guide the model in making sense of the sequential ordering of the scenario and appears to be another crucial component. The fact that accuracy is much lower, yet decent when ignoring map information gives indication that the model does fairly well in extracting insights from the agent dynamics only. </p>
+<h1 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h1><p>In conclusion, the data model proposed above appears to be a suitable way of representing scenarios in graphical form and enables for simple classification using GNNs. Further experiments might include to tweak the model’s hyper-parameters, to try more complex convolution layers (such as <a href="https://pytorch-geometric.readthedocs.io/en/latest/generated/torch_geometric.nn.conv.GATv2Conv.html#torch_geometric.nn.conv.GATv2Conv">GATv2Conv</a>) and to expand the training and testing data set to other nuPlan locations to see if the model is able to generalize from the underlying map topology. Also, it would be worth to train on the entire nuPlan dataset instead of just a small subsample of it.</p>
+<p>With respect to similarity learning, it would be interesting to implement unsupervised or semi-supervised learning approaches like graph autoencoders [14], bootstrapping- or contrastive learning-based methods [15] or to employ graph matching networks [16] in conjunction with traditional <a href="https://ysig.github.io/GraKeL/0.1a8/kernels.html">graph kernels</a>.</p>
+<p>While none of the above is significantly novel research, this present article provides a good wrap-up of the insights I gathered around traffic scenario modeling, graph neural networks and similarity learning. These will be used in my further research about scenario classification, clustering and generation and thus are particularly relevant for the subfield of scenario-based testing in autonomous driving. I’m looking forward to publishing additional, possibly more advanced articles on related topics in the future. </p>
+<p>Disclaimer: The experiments conducted in the context of this work are deliberately not 100 % academically proper. Instead, I took a few shortcuts here and there to iterate faster.</p>
+<h1 id="References"><a href="#References" class="headerlink" title="References"></a>References</h1><ol>
+<li>M. Scholtes et al., “6-Layer Model for a Structured Description and Categorization of Urban Traffic and Environment,” IEEE Access, vol. 9, 2021, doi: 10.1109&#x2F;ACCESS.2021.3072739.</li>
+<li>W. Ding, C. Xu, M. Arief, H. Lin, B. Li, and D. Zhao, “A Survey on Safety-Critical Driving Scenario Generation – A Methodological Perspective,” arXiv, 2022, doi: 10.48550&#x2F;arXiv.2202.02215.</li>
+<li>D. Bogdoll, S. Guneshka, and J. M. Zöllner, “One Ontology to Rule Them All: Corner Case Scenarios for Autonomous Driving,” arXiv, 2022, doi: 10.48550&#x2F;arXiv.2209.00342.</li>
+<li>L. Wu, P. Cui, J. Pei, and L. Zhao, Graph Neural Networks: Foundations, Frontiers, and Applications. Singapore: Springer, 2022, doi: 10.1007&#x2F;978-981-16-6054-2.</li>
+<li>J. Gao et al., “VectorNet: Encoding HD Maps and Agent Dynamics from Vectorized Representation,” arXiv, 2020, doi: 10.48550&#x2F;arXiv.2005.04259.</li>
+<li>M. Liang et al., “Learning Lane Graph Representations for Motion Forecasting,” in Proc. ECCV, 2020, doi: 10.1007&#x2F;978-3-030-58536-5_32.</li>
+<li>T. Salzmann, B. Ivanovic, P. Chakravarty, and M. Pavone, “Trajectron++: Dynamically-Feasible Trajectory Forecasting With Heterogeneous Data,” arXiv, 2021, doi: 10.48550&#x2F;arXiv.2001.03093.</li>
+<li>X. Jia et al., “HDGT: Heterogeneous Driving Graph Transformer for Multi-Agent Trajectory Prediction via Scene Encoding,” IEEE Trans. Pattern Anal. Mach. Intell., vol. 45, no. 11, 2023, doi: 10.1109&#x2F;TPAMI.2023.3298301.</li>
+<li>D. Grimm et al., “Heterogeneous Graph-based Trajectory Prediction using Local Map Context and a Social Interaction Graph,” 2023.</li>
+<li>E. Meyer et al., “Geometric Deep Learning for Autonomous Driving: Unlocking the Power of Graph Neural Networks With CommonRoad-Geometric,” arXiv, 2023.</li>
+<li>M. Zipfl and J. M. Zöllner, “Towards Traffic Scene Description: The Semantic Scene Graph,” in Proc. IEEE Intell. Transp. Syst. Conf., 2022, doi: 10.1109&#x2F;ITSC55140.2022.9922469.</li>
+<li>A. Cui et al., “GoRela: Go Relative for Viewpoint-Invariant Motion Forecasting,” arXiv, 2022, doi: 10.48550&#x2F;arXiv.2211.02545.</li>
+<li>Y. Yuan, X. Weng, Y. Ou, and K. M. Kitani, “AgentFormer: Agent-Aware Transformers for Socio-Temporal Multi-Agent Forecasting,” in Proc. IEEE&#x2F;CVF Int. Conf. Comput. Vis., 2021.</li>
+<li>R. Winter, F. Noe, and D.-A. Clevert, “Permutation-Invariant Variational Autoencoder for Graph-Level Representation Learning,” in Adv. Neural Inf. Process. Syst., 2021.</li>
+<li>W. Ju et al., “GLCC: A General Framework for Graph-Level Clustering,” in Proc. AAAI Conf. Artif. Intell., 2023.</li>
+<li>Y. Li, C. Gu, T. Dullien, O. Vinyals, and P. Kohli, “Graph Matching Networks for Learning the Similarity of Graph Structured Objects,” in Proc. Int. Conf. Mach. Learn., 2019.</li>
+</ol>
+
+  </div>
+</article>
+
+
+
+    </div>
+    
+      <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Blog</a></li>
+         
+          <li><a href="/imprint/">Imprint</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#GNNs-101"><span class="toc-number">1.</span> <span class="toc-text">GNNs 101</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Traffic-Scenarios-as-Graphs"><span class="toc-number">2.</span> <span class="toc-text">Traffic Scenarios as Graphs</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Modeling-Considerations"><span class="toc-number">2.1.</span> <span class="toc-text">Modeling Considerations</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Heterogeneous-Traffic-Scenario-Graph-Model"><span class="toc-number">2.2.</span> <span class="toc-text">Heterogeneous Traffic Scenario Graph Model</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Temporal-Kernel-Size"><span class="toc-number">2.2.1.</span> <span class="toc-text">Temporal Kernel Size</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Scaling-and-Positional-Encoding"><span class="toc-number">2.2.2.</span> <span class="toc-text">Scaling and Positional Encoding</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Scenario-Graph-Classification"><span class="toc-number">3.</span> <span class="toc-text">Scenario Graph Classification</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Problem-Description"><span class="toc-number">3.1.</span> <span class="toc-text">Problem Description</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#nuPlan-Dataset"><span class="toc-number">3.1.1.</span> <span class="toc-text">nuPlan Dataset</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Classes"><span class="toc-number">3.1.1.1.</span> <span class="toc-text">Classes</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Maps"><span class="toc-number">3.1.1.2.</span> <span class="toc-text">Maps</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Network-Architecture"><span class="toc-number">3.2.</span> <span class="toc-text">Network Architecture</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Implementation-Details"><span class="toc-number">3.3.</span> <span class="toc-text">Implementation Details</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Experiments"><span class="toc-number">4.</span> <span class="toc-text">Experiments</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Similarity-Clustering"><span class="toc-number">4.1.</span> <span class="toc-text">Similarity Clustering</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Ablation-Study"><span class="toc-number">4.2.</span> <span class="toc-text">Ablation Study</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Conclusion"><span class="toc-number">5.</span> <span class="toc-text">Conclusion</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#References"><span class="toc-number">6.</span> <span class="toc-text">References</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://muetsch.io/heterogeneous-graph-classification-using-graph-neural-networks-gnn.html"><i class="fas fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://muetsch.io/heterogeneous-graph-classification-using-graph-neural-networks-gnn.html&text=Heterogeneous Graph Classification using Graph Neural Networks (GNN)"><i class="fas fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://muetsch.io/heterogeneous-graph-classification-using-graph-neural-networks-gnn.html&title=Heterogeneous Graph Classification using Graph Neural Networks (GNN)"><i class="fas fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://muetsch.io/heterogeneous-graph-classification-using-graph-neural-networks-gnn.html&is_video=false&description=Heterogeneous Graph Classification using Graph Neural Networks (GNN)"><i class="fas fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Heterogeneous Graph Classification using Graph Neural Networks (GNN)&body=Check out this article: https://muetsch.io/heterogeneous-graph-classification-using-graph-neural-networks-gnn.html"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://muetsch.io/heterogeneous-graph-classification-using-graph-neural-networks-gnn.html&title=Heterogeneous Graph Classification using Graph Neural Networks (GNN)"><i class="fas fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://muetsch.io/heterogeneous-graph-classification-using-graph-neural-networks-gnn.html&title=Heterogeneous Graph Classification using Graph Neural Networks (GNN)"><i class="fas fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://muetsch.io/heterogeneous-graph-classification-using-graph-neural-networks-gnn.html&title=Heterogeneous Graph Classification using Graph Neural Networks (GNN)"><i class="fas fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://muetsch.io/heterogeneous-graph-classification-using-graph-neural-networks-gnn.html&title=Heterogeneous Graph Classification using Graph Neural Networks (GNN)"><i class="fas fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://muetsch.io/heterogeneous-graph-classification-using-graph-neural-networks-gnn.html&name=Heterogeneous Graph Classification using Graph Neural Networks (GNN)&description="><i class="fas fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+      <ul>
+        <li id="toc"><a class="icon" href="#" onclick='toggleById("toc-footer")'><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a></li>
+        <li id="share"><a class="icon" href="#" onclick='toggleById("share-footer")'><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a></li>
+        <li id="top" style="display:none"><a class="icon" href="#" onclick="window.scrollTo(0,0)"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a></li>
+        <li id="menu"><a class="icon" href="#" onclick='toggleById("nav-footer")'><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a></li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+    
+    <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2024 Ferdinand Mütsch
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Blog</a></li>
+         
+          <li><a href="/imprint/">Imprint</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+<!--
+<script defer type="text/javascript" src="js/pirsch.js"
+    id="pirschjs"
+    data-code="GoPk8VNmzk8Z6n7xikwZahvOxm1MNPud"></script>
+-->
+</body>
+</html>
+<!-- styles -->
+
+<link rel="stylesheet" href="/lib/roboto/css/roboto.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+
+
+
+<script src="/js/main.js"></script>
+
+<!-- Google Analytics -->
+
+<!-- Disqus Comments -->
+
+

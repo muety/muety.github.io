@@ -2,6 +2,24 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://muetsch.io/heterogeneous-graph-classification-using-graph-neural-networks-gnn.html</loc>
+    
+    <lastmod>2024-11-08</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://muetsch.io/energy-monitoring-pt-2-optimizing-my-consumption-with-data.html</loc>
+    
+    <lastmod>2024-11-08</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://muetsch.io/imprint/index.html</loc>
     
     <lastmod>2024-10-01</lastmod>
@@ -147,15 +165,6 @@
   
   <url>
     <loc>https://muetsch.io/energy-monitoring-pt-1-ir-readers-sml-mqtt-node-red-prometheus-grafana.html</loc>
-    
-    <lastmod>2024-09-28</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
-    <loc>https://muetsch.io/energy-monitoring-pt-2-optimizing-my-consumption-with-data.html</loc>
     
     <lastmod>2024-09-28</lastmod>
     
@@ -616,7 +625,7 @@
 
   <url>
     <loc>https://muetsch.io/</loc>
-    <lastmod>2024-10-01</lastmod>
+    <lastmod>2024-11-08</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
@@ -624,91 +633,91 @@
   
   <url>
     <loc>https://muetsch.io/tags/sysadmin/</loc>
-    <lastmod>2024-10-01</lastmod>
+    <lastmod>2024-11-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://muetsch.io/tags/linux/</loc>
-    <lastmod>2024-10-01</lastmod>
+    <lastmod>2024-11-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://muetsch.io/tags/software-engineering/</loc>
-    <lastmod>2024-10-01</lastmod>
+    <lastmod>2024-11-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://muetsch.io/tags/opensource/</loc>
-    <lastmod>2024-10-01</lastmod>
+    <lastmod>2024-11-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://muetsch.io/tags/energy/</loc>
-    <lastmod>2024-10-01</lastmod>
+    <lastmod>2024-11-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://muetsch.io/tags/smarthome/</loc>
-    <lastmod>2024-10-01</lastmod>
+    <lastmod>2024-11-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://muetsch.io/tags/self-driving/</loc>
-    <lastmod>2024-10-01</lastmod>
+    <lastmod>2024-11-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://muetsch.io/tags/gis/</loc>
-    <lastmod>2024-10-01</lastmod>
+    <lastmod>2024-11-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://muetsch.io/tags/devtools/</loc>
-    <lastmod>2024-10-01</lastmod>
+    <lastmod>2024-11-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://muetsch.io/tags/algorithms/</loc>
-    <lastmod>2024-10-01</lastmod>
+    <lastmod>2024-11-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://muetsch.io/tags/selfhosted/</loc>
-    <lastmod>2024-10-01</lastmod>
+    <lastmod>2024-11-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://muetsch.io/tags/ai/</loc>
-    <lastmod>2024-10-01</lastmod>
+    <lastmod>2024-11-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://muetsch.io/tags/machine-learning/</loc>
-    <lastmod>2024-10-01</lastmod>
+    <lastmod>2024-11-08</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
