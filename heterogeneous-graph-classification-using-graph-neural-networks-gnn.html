@@ -7,6 +7,7 @@
     <meta name="HandheldFriendly" content="True">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
     <meta name="referrer" content="no-referrer">
+    <meta name="robots" content="noarchive">
     <meta name="description" content="GNNs 101Neural networks (NNs), in various flavors, have become the de-facto standard in pretty much every subfield of machine learning nowadays. They are being used on structured data like tables and">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Heterogeneous Graph Classification using Graph Neural Networks (GNN)">
@@ -23,7 +24,7 @@
 <meta property="og:image" content="https://muetsch.io/images/gnn_classification_training.svg">
 <meta property="og:image" content="https://muetsch.io/images/gnn_classification_tsne.svg">
 <meta property="article:published_time" content="2024-10-28T07:51:13.000Z">
-<meta property="article:modified_time" content="2024-11-07T14:18:37.820Z">
+<meta property="article:modified_time" content="2024-12-16T13:53:08.369Z">
 <meta property="article:author" content="Ferdinand Mütsch">
 <meta property="article:tag" content="ai">
 <meta property="article:tag" content="machine-learning">
@@ -99,6 +100,8 @@
     <br/>
     <span id="actions">
       <ul>
+        
+        <li><a class="icon" href="/running-fcos3d-monodular-3d-detection-on-custom-images.html"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover='toggleById("i-prev");' onmouseout='toggleById("i-prev");'></i></a></li>
         
         
         <li><a class="icon" href="/energy-monitoring-pt-2-optimizing-my-consumption-with-data.html"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover='toggleById("i-next").toggleById();' onmouseout='toggleById("i-next");'></i></a></li>
@@ -275,7 +278,7 @@
 -->
 
 <h1 id="Experiments"><a href="#Experiments" class="headerlink" title="Experiments"></a>Experiments</h1><p>For my experiments, 10,122 scenarios from nuPlans <code>train_boston</code> data split were extracted in order to classify them. They were split into train, test and validation with a ratio of 70 : 15 : 15. In addition, I extracted individual scenes (that is, “snapshots” of scenarios, i.e. scenarios with only one timestep) to perform classification on as well. However, I’ll exclude these in the following and only focus on full scenarios.</p>
-<p>Training the model proposed above, including all tweaks such as scaling, positional encoding and edge attributes, for 150 episodes results in a classification <strong>accuracy of 51.6 %</strong>. While this is certainly not a spectacular result, I’d still call it a success, considering that apriori probability is ~ 2 % and that we didn’t do any sort of hyperparameter tuning so far. The training process is depicted in fig 7.</p>
+<p>Training the model proposed above, including all tweaks such as scaling, positional encoding and edge attributes, for 150 episodes results in a classification <strong>accuracy of 56.1 %</strong>. While this is certainly not a spectacular result, I’d still call it a success, considering that apriori probability is ~ 2 % and that we didn’t do any sort of hyperparameter tuning so far. The training process is depicted in fig 7.</p>
 <p><img src="/images/gnn_classification_training.svg" alt="Training Loss Chart"></p>
 <h2 id="Similarity-Clustering"><a href="#Similarity-Clustering" class="headerlink" title="Similarity Clustering"></a>Similarity Clustering</h2><p>As I’m particular interested in <a href="https://atks.aifb.kit.edu/146_258.php">graph similarity learning</a> for traffic scenarios for a later project (stay tuned!), I was curious to see how well our classification model has already learned to model (dis-)similarity between graphs. To gain some first insights, I decided to visualize the model’s <strong>embedding space</strong> (output of the second-last layer, right before the final linear layer) in 2D. The intuition is that similar scenarios shall be located close to each other in the latent space, while distinct scenarios shall be far apart, i.e. have a large distance (Euclidean distance, in this case). Of course, this narrows the notion of “similarity” down to only a scenario’s class, while there might be a lot more latent aspects with respect to which two scenarios might be semantically related. Yet, this analysis still provides some interesting insights into what the model had learned internally.</p>
 <p><img src="/images/gnn_classification_tsne.svg"></p>
@@ -293,7 +296,7 @@
 </thead>
 <tbody><tr>
 <td><strong>Baseline</strong> (all-in)</td>
-<td>44.1 %</td>
+<td>44.1 % (56.1 % @ T&#x3D;150)</td>
 </tr>
 <tr>
 <td><strong>w&#x2F;o positional encoding</strong></td>
