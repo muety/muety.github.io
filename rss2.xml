@@ -9,8 +9,28 @@
     <atom:link href="https://muetsch.io/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description>Hi and welcome! 👋 I&#39;m Ferdinand, a passionate software- and data engineer and technology enthusiast from Karlsruhe, Germany. My personal webpage is the right place to find out about me and my projects and to read about software development, DevOps, some machine learning and technology in general. All content you will find here is [human-written](/statement-about-generative-ai.html). Enjoy and feel free to leave me a message!</description>
-    <pubDate>Fri, 08 Nov 2024 05:56:30 GMT</pubDate>
+    <pubDate>Sun, 26 Jan 2025 21:27:04 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>Running FCOS3D Monocular 3D Detection on custom Images</title>
+      <link>https://muetsch.io/running-fcos3d-monocular-3d-detection-on-custom-images.html</link>
+      <guid>https://muetsch.io/running-fcos3d-monocular-3d-detection-on-custom-images.html</guid>
+      <pubDate>Mon, 16 Dec 2024 13:54:17 GMT</pubDate>
+      
+        
+        
+      <description>&lt;h1 id=&quot;Introduction&quot;&gt;&lt;a href=&quot;#Introduction&quot; class=&quot;headerlink&quot; title=&quot;Introduction&quot;&gt;&lt;/a&gt;Introduction&lt;/h1&gt;&lt;p&gt;&lt;a href=&quot;https://arxiv.org/abs</description>
+        
+      
+      
+      
+      
+      
+      
+      <comments>https://muetsch.io/running-fcos3d-monocular-3d-detection-on-custom-images.html#disqus_thread</comments>
+      
+    </item>
     
     <item>
       <title>Heterogeneous Graph Classification using Graph Neural Networks (GNN)</title>
@@ -106,29 +126,6 @@
       
       
       <comments>https://muetsch.io/multi-threaded-brotli-compression-tool.html#disqus_thread</comments>
-      
-    </item>
-    
-    <item>
-      <title>norospy - Using ROS without ROS</title>
-      <link>https://muetsch.io/norospy-using-ros-without-ros.html</link>
-      <guid>https://muetsch.io/norospy-using-ros-without-ros.html</guid>
-      <pubDate>Tue, 02 Jul 2024 20:15:23 GMT</pubDate>
-      
-        
-        
-      <description>&lt;p&gt;Wait, what? Okay, one thing at a time. First of all, what is ROS even?&lt;/p&gt;
-&lt;h1 id=&quot;What-is-ROS&quot;&gt;&lt;a href=&quot;#What-is-ROS&quot; class=&quot;headerlink&quot;</description>
-        
-      
-      
-      
-      
-      
-      <category domain="https://muetsch.io/tags/self-driving/">self-driving</category>
-      
-      
-      <comments>https://muetsch.io/norospy-using-ros-without-ros.html#disqus_thread</comments>
       
     </item>
     

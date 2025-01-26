@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="referrer" content="no-referrer">
+    <meta name="robots" content="noarchive">
+    <meta name="description" content="IntroductionFCOS3D (ICCV 2021) is a deep learning-based model for monocular 3D object detection in images. That is, other than common object detectors like YOLO, it estimates three-dimensional boundin">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Running FCOS3D Monocular 3D Detection on custom Images">
+<meta property="og:url" content="https://muetsch.io/running-fcos3d-monocular-3d-detection-on-custom-images.html">
+<meta property="og:site_name" content="Ferdinand Mütsch">
+<meta property="og:description" content="IntroductionFCOS3D (ICCV 2021) is a deep learning-based model for monocular 3D object detection in images. That is, other than common object detectors like YOLO, it estimates three-dimensional boundin">
+<meta property="og:locale">
+<meta property="og:image" content="https://muetsch.io/images/fcos3d.webp">
+<meta property="article:published_time" content="2024-12-16T13:54:17.000Z">
+<meta property="article:modified_time" content="2025-01-26T21:27:04.294Z">
+<meta property="article:author" content="Ferdinand Mütsch">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://muetsch.io/images/fcos3d.webp">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.png">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon.png" sizes="192x192">
+          
+        
+        
+    
+    <!-- title -->
+    
+    <title>Running FCOS3D Monocular 3D Detection on custom Images  | Ferdinand Mütsch</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- rss -->
+    
+    
+
+    <!-- rel-me links -->
+    
+      
+        <link href="http://github.com/muety" rel="me">
+      
+        <link href="https://social.tchncs.de/@ferdi" rel="me">
+      
+        <link href="mailto:ferdinand@muetsch.io" rel="me">
+      
+    
+
+    <!-- Webmention link -->
+    
+      <link href="https://webmention.io/muetsch.io/webmention" rel="webmention">
+    
+
+    
+      <link href="https://webmention.io/muetsch.io/xmlrpc" rel="pingback">
+    
+<meta name="generator" content="Hexo 7.3.0"><link rel="alternate" href="/rss2.xml" title="Ferdinand Mütsch" type="application/rss+xml">
+</head>
+
+<body>
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="window.scrollTo(0, 0)" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Blog</a></li>
+         
+          <li><a href="/imprint/">Imprint</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" href="/heterogeneous-graph-classification-using-graph-neural-networks-gnn.html"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover='toggleById("i-next").toggleById();' onmouseout='toggleById("i-next");'></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="window.scrollTo(0,0)"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover='toggleById("i-top");' onmouseout='toggleById("i-top");'></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover='toggleById("i-share");' onmouseout='toggleById("i-share");' onclick='toggleById("share");return false;'></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://muetsch.io/running-fcos3d-monocular-3d-detection-on-custom-images.html"><i class="fas fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://muetsch.io/running-fcos3d-monocular-3d-detection-on-custom-images.html&text=Running FCOS3D Monocular 3D Detection on custom Images"><i class="fas fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://muetsch.io/running-fcos3d-monocular-3d-detection-on-custom-images.html&title=Running FCOS3D Monocular 3D Detection on custom Images"><i class="fas fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://muetsch.io/running-fcos3d-monocular-3d-detection-on-custom-images.html&is_video=false&description=Running FCOS3D Monocular 3D Detection on custom Images"><i class="fas fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Running FCOS3D Monocular 3D Detection on custom Images&body=Check out this article: https://muetsch.io/running-fcos3d-monocular-3d-detection-on-custom-images.html"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://muetsch.io/running-fcos3d-monocular-3d-detection-on-custom-images.html&title=Running FCOS3D Monocular 3D Detection on custom Images"><i class="fas fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://muetsch.io/running-fcos3d-monocular-3d-detection-on-custom-images.html&title=Running FCOS3D Monocular 3D Detection on custom Images"><i class="fas fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://muetsch.io/running-fcos3d-monocular-3d-detection-on-custom-images.html&title=Running FCOS3D Monocular 3D Detection on custom Images"><i class="fas fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://muetsch.io/running-fcos3d-monocular-3d-detection-on-custom-images.html&title=Running FCOS3D Monocular 3D Detection on custom Images"><i class="fas fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://muetsch.io/running-fcos3d-monocular-3d-detection-on-custom-images.html&name=Running FCOS3D Monocular 3D Detection on custom Images&description="><i class="fas fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Introduction"><span class="toc-number">1.</span> <span class="toc-text">Introduction</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Prerequisites"><span class="toc-number">2.</span> <span class="toc-text">Prerequisites</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Setup"><span class="toc-number">3.</span> <span class="toc-text">Setup</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Step-1-Clone-repo-and-download-pre-trained-model"><span class="toc-number">3.1.</span> <span class="toc-text">Step 1: Clone repo and download pre-trained model</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Step-2-Use-Python-3-8-and-virtual-environment"><span class="toc-number">3.2.</span> <span class="toc-text">Step 2: Use Python 3.8 and virtual environment</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Step-3-Install-dependencies"><span class="toc-number">3.3.</span> <span class="toc-text">Step 3: Install dependencies</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Step-4-Inject-custom-config"><span class="toc-number">3.4.</span> <span class="toc-text">Step 4: Inject custom config</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Step-5-Apply-some-hacks"><span class="toc-number">3.5.</span> <span class="toc-text">Step 5: Apply some hacks</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Step-6-Run-inference-%F0%9F%9A%80"><span class="toc-number">3.6.</span> <span class="toc-text">Step 6: Run inference 🚀</span></a></li></ol></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index width mx-auto px2 my4">
+        
+        <article class="h-entry post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <a href="https://muetsch.io/running-fcos3d-monocular-3d-detection-on-custom-images.html" class="u-url">
+        <h1 class="posttitle p-name" itemprop="name headline" property="headline">
+            Running FCOS3D Monocular 3D Detection on custom Images
+        </h1>
+    </a>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" property="author" itemscope itemtype="http://schema.org/Person" vocab="http://schema.org/" typeof="Person">
+        <span itemprop="name" property="name" class="p-author h-card">Ferdinand Mütsch</span>
+      </span>
+      
+    <div class="postdate">
+        <time datetime="2024-12-16T13:54:17.000Z" class="dt-published" itemprop="datePublished" property="datePublished">2024-12-16</time>
+    </div>
+
+
+      
+
+
+      <!--
+      <div style="margin-top: 30px">
+        <a href="https://liberapay.com/muety/" target="_blank"
+          style="background-image: none; text-decoration: none;"><img
+            src="https://badges.fw-web.space/liberapay/receives/muety.svg?logo=liberapay&style=flat-square" alt="Liberapay"
+            style="height: auto !important;width: auto !important;"></a>
+      </div>
+      -->
+    </div>
+  </header>
+  
+  <div class="content e-content" itemprop="articleBody" property="articleBody">
+    <h1 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h1><p><a href="https://arxiv.org/abs/2104.10956">FCOS3D</a> (ICCV 2021) is a deep learning-based model for monocular 3D object detection in images. That is, other than common object detectors like YOLO, it estimates <strong>three-dimensional</strong> bounding boxes for objects, i.e. involving a depth component next to x and y positions. Moreover, it does so in a <em>monocular</em> way, that is, from just a single image. Considering that most object detector use at least stereo images or even lidar point clouds, you can guess that this is an especially hard problem. On the one hand, this is super useful, because it could technically run on arbitrary pictures taken by your smartphone. On the other hand, you’ll have to be aware that detection accuracy is, of course, much worse compared to detectors that utilize richer sensor data.</p>
+<p>While FCOS3D, having been published in 2021 already, is arguably not actually state of the art anymore, I still wanted to use it as part of my research, especially because it’s still one of the most widely adopted models in that realm. However, it took me quite a while to get it running on my own images. To save other people from similar struggles, here is a brief, hacky description of how to get it running locally.</p>
+<p>Please note that this is the way that <strong>I</strong> managed to get the model running. Perhaps there are different or simpler ways, but this is what worked for me.</p>
+<p><img src="/images/fcos3d.webp"></p>
+<h1 id="Prerequisites"><a href="#Prerequisites" class="headerlink" title="Prerequisites"></a>Prerequisites</h1><p>You’ll need the <a href="https://docs.opencv.org/4.x/dc/dbb/tutorial_py_calibration.html"><strong>intrinsic calibration</strong></a> of your camera as a 3x3 matrix. You may use OpenCV to estimate it.</p>
+<h1 id="Setup"><a href="#Setup" class="headerlink" title="Setup"></a>Setup</h1><p>FCOS3D is implemented in the <a href="https://mmdetection3d.readthedocs.io/">MMDetection3D</a> framework, which, btw. supports a whole lot of other detection models in addition. The framework’s code base is quite a mess and probably not particularly what you what consider well-structured and self-documenting code. Nevertheless, I luckily managed to dig my way through it. So here’s what I did, roughly following MMDetection’s <a href="https://mmdetection3d.readthedocs.io/en/latest/get_started.html">Getting Started</a> and their <a href="https://mmdetection3d.readthedocs.io/en/latest/user_guides/inference.html#monocular-3d-demo">docs</a> on inference.</p>
+<p>First of all, I had to fall back to older versions of Python, PyTorch and CUDA to get things working. </p>
+<h2 id="Step-1-Clone-repo-and-download-pre-trained-model"><a href="#Step-1-Clone-repo-and-download-pre-trained-model" class="headerlink" title="Step 1: Clone repo and download pre-trained model"></a>Step 1: Clone repo and download pre-trained model</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">clone</span> https://github.com/open-mmlab/mmdetection3d.git</span><br><span class="line">git reset --hard fe25f7a51d36e3702f961e198894580d83c4387b  <span class="comment"># for reproducibility</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">cd</span> demo/data</span><br><span class="line">wget https://download.openmmlab.com/mmdetection3d/v0.1.0_models/fcos3d/fcos3d_r101_caffe_fpn_gn-head_dcn_2x8_1x_nus-mono3d_finetune/fcos3d_r101_caffe_fpn_gn-head_dcn_2x8_1x_nus-mono3d_finetune_20210717_095645-8d806dc2.pth</span><br></pre></td></tr></table></figure>
+
+<p>We’re using the model that was pre-trained on the <a href="https://www.nuscenes.org/">nuScenes</a> dataset.</p>
+<h2 id="Step-2-Use-Python-3-8-and-virtual-environment"><a href="#Step-2-Use-Python-3-8-and-virtual-environment" class="headerlink" title="Step 2: Use Python 3.8 and virtual environment"></a>Step 2: Use Python 3.8 and virtual environment</h2><p>I used <a href="https://github.com/pyenv/pyenv">pyenv</a> to install a separate Python distro alongside my system-wide installation. Alternatively, you may install Python 3.8 natively, or use a different version manager such as <a href="https://github.com/asdf-vm/asdf">asdf</a>.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">pyenv install 3.8.19        <span class="comment"># install 3.8</span></span><br><span class="line">pyenv <span class="built_in">local</span> 3.8.19          <span class="comment"># use 3.8 for this project</span></span><br><span class="line">python -m venv venv         <span class="comment"># create virtual env</span></span><br><span class="line"><span class="built_in">source</span> venv/bin/activate    <span class="comment"># activate virtual env</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="Step-3-Install-dependencies"><a href="#Step-3-Install-dependencies" class="headerlink" title="Step 3: Install dependencies"></a>Step 3: Install dependencies</h2><p>From some GitHub issue (which I can’t find anymore, unfortunately) I learned that I’d have to use PyTorch with CUDA 11.7. Also, I used the (outdated) MMDetection-specific versions mentioned in their docs.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">pip install torch==2.0.0+cu117 torchvision==0.15.1+cu117 --index-url https://download.pytorch.org/whl/cu117</span><br><span class="line">pip install -U openmim</span><br><span class="line">mim install mmengine</span><br><span class="line">mim install <span class="string">&#x27;mmcv&gt;=2.0.0rc4&#x27;</span></span><br><span class="line">pip install -v -e .  <span class="comment"># install mmdet3d from local source</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="Step-4-Inject-custom-config"><a href="#Step-4-Inject-custom-config" class="headerlink" title="Step 4: Inject custom config"></a>Step 4: Inject custom config</h2><p>This is probably the second-most hacky part of all, but I couldn’t find a better way at first sight. We need to inject our custom calibration matrix into the (pickled, binary) config parameters file (aka. <code>ANNOTATION_FILE</code>). To do so, we load the nuScenes-specific config provided by the repo, modify it, and save it again.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pickle</span><br><span class="line"></span><br><span class="line">custom_calib = [</span><br><span class="line">        [ <span class="number">1243.09579</span>,    <span class="number">0.</span>     ,  <span class="number">953.87192</span>,   ],</span><br><span class="line">        [ <span class="number">0.</span>     , <span class="number">1245.01287</span>,  <span class="number">558.13058</span>,      ],</span><br><span class="line">        [ <span class="number">0.</span>     ,    <span class="number">0.</span>     ,    <span class="number">1.</span>,           ],</span><br><span class="line">    ]</span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;demo/data/nuscenes/n015-2018-07-24-11-22-45+0800.pkl&#x27;</span>, <span class="string">&#x27;rb&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">    d = pickle.load(f)</span><br><span class="line"></span><br><span class="line">d[<span class="string">&#x27;data_list&#x27;</span>][<span class="number">0</span>][<span class="string">&#x27;images&#x27;</span>][<span class="string">&#x27;CAM_CUSTOM&#x27;</span>] = &#123;<span class="string">&#x27;cam2img&#x27;</span>: custom_calib&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">with</span> <span class="built_in">open</span>(<span class="string">&#x27;demo/data/custom.pkl&#x27;</span>, <span class="string">&#x27;wb&#x27;</span>) <span class="keyword">as</span> f:</span><br><span class="line">    pickle.dump(d, f)</span><br></pre></td></tr></table></figure>
+
+<h2 id="Step-5-Apply-some-hacks"><a href="#Step-5-Apply-some-hacks" class="headerlink" title="Step 5: Apply some hacks"></a>Step 5: Apply some hacks</h2><p>In addition, I had to apply a bunch of custom changes to the MMDetection3D, including:</p>
+<ol>
+<li>Passing the <code>cam_type</code> command-line argument on to the inferencer. </li>
+<li>Ignoring lidar-specific parameters (see <a href="https://github.com/open-mmlab/mmdetection3d/issues/2868">#2868</a>)</li>
+<li>Ignoring unneeded hard-coded image path param</li>
+</ol>
+<p>Here’s the according Git patch: <a href="https://gist.github.com/muety/a53bbc5c7d896cb4bd6f6a25f63d15b6"><code>mmdet3d_fixes.patch</code></a>.</p>
+<p>Apply it with <code>git am mmdet3d_fixes.patch</code>.</p>
+<h2 id="Step-6-Run-inference-🚀"><a href="#Step-6-Run-inference-🚀" class="headerlink" title="Step 6: Run inference 🚀"></a>Step 6: Run inference 🚀</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">python demo/mono_det_demo.py \</span><br><span class="line">    /tmp/custom-image-0001.png \</span><br><span class="line">    demo/data/custom.pkl \</span><br><span class="line">    configs/fcos3d/fcos3d_r101-caffe-dcn_fpn_head-gn_8xb2-1x_nus-mono3d_finetune.py \</span><br><span class="line">    demo/data/fcos3d_r101_caffe_fpn_gn-head_dcn_2x8_1x_nus-mono3d_finetune_20210717_095645-8d806dc2.pth \</span><br><span class="line">    --cam-type CAM_CUSTOM \</span><br><span class="line">    --pred-score-thr 0.05 \</span><br><span class="line">    --show </span><br></pre></td></tr></table></figure>
+  </div>
+</article>
+
+
+
+    </div>
+    
+      <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Blog</a></li>
+         
+          <li><a href="/imprint/">Imprint</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Introduction"><span class="toc-number">1.</span> <span class="toc-text">Introduction</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Prerequisites"><span class="toc-number">2.</span> <span class="toc-text">Prerequisites</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#Setup"><span class="toc-number">3.</span> <span class="toc-text">Setup</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Step-1-Clone-repo-and-download-pre-trained-model"><span class="toc-number">3.1.</span> <span class="toc-text">Step 1: Clone repo and download pre-trained model</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Step-2-Use-Python-3-8-and-virtual-environment"><span class="toc-number">3.2.</span> <span class="toc-text">Step 2: Use Python 3.8 and virtual environment</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Step-3-Install-dependencies"><span class="toc-number">3.3.</span> <span class="toc-text">Step 3: Install dependencies</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Step-4-Inject-custom-config"><span class="toc-number">3.4.</span> <span class="toc-text">Step 4: Inject custom config</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Step-5-Apply-some-hacks"><span class="toc-number">3.5.</span> <span class="toc-text">Step 5: Apply some hacks</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Step-6-Run-inference-%F0%9F%9A%80"><span class="toc-number">3.6.</span> <span class="toc-text">Step 6: Run inference 🚀</span></a></li></ol></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://muetsch.io/running-fcos3d-monocular-3d-detection-on-custom-images.html"><i class="fas fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://muetsch.io/running-fcos3d-monocular-3d-detection-on-custom-images.html&text=Running FCOS3D Monocular 3D Detection on custom Images"><i class="fas fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://muetsch.io/running-fcos3d-monocular-3d-detection-on-custom-images.html&title=Running FCOS3D Monocular 3D Detection on custom Images"><i class="fas fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://muetsch.io/running-fcos3d-monocular-3d-detection-on-custom-images.html&is_video=false&description=Running FCOS3D Monocular 3D Detection on custom Images"><i class="fas fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Running FCOS3D Monocular 3D Detection on custom Images&body=Check out this article: https://muetsch.io/running-fcos3d-monocular-3d-detection-on-custom-images.html"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://muetsch.io/running-fcos3d-monocular-3d-detection-on-custom-images.html&title=Running FCOS3D Monocular 3D Detection on custom Images"><i class="fas fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://muetsch.io/running-fcos3d-monocular-3d-detection-on-custom-images.html&title=Running FCOS3D Monocular 3D Detection on custom Images"><i class="fas fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://muetsch.io/running-fcos3d-monocular-3d-detection-on-custom-images.html&title=Running FCOS3D Monocular 3D Detection on custom Images"><i class="fas fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://muetsch.io/running-fcos3d-monocular-3d-detection-on-custom-images.html&title=Running FCOS3D Monocular 3D Detection on custom Images"><i class="fas fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://muetsch.io/running-fcos3d-monocular-3d-detection-on-custom-images.html&name=Running FCOS3D Monocular 3D Detection on custom Images&description="><i class="fas fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+      <ul>
+        <li id="toc"><a class="icon" href="#" onclick='toggleById("toc-footer")'><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a></li>
+        <li id="share"><a class="icon" href="#" onclick='toggleById("share-footer")'><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a></li>
+        <li id="top" style="display:none"><a class="icon" href="#" onclick="window.scrollTo(0,0)"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a></li>
+        <li id="menu"><a class="icon" href="#" onclick='toggleById("nav-footer")'><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a></li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+    
+    <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2025 Ferdinand Mütsch
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Blog</a></li>
+         
+          <li><a href="/imprint/">Imprint</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+<!--
+<script defer type="text/javascript" src="js/pirsch.js"
+    id="pirschjs"
+    data-code="GoPk8VNmzk8Z6n7xikwZahvOxm1MNPud"></script>
+-->
+</body>
+</html>
+<!-- styles -->
+
+<link rel="stylesheet" href="/lib/roboto/css/roboto.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+
+
+
+<script src="/js/main.js"></script>
+
+<!-- Google Analytics -->
+
+<!-- Disqus Comments -->
+
+
