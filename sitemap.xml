@@ -2,6 +2,24 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://muetsch.io/cycling-around-lake-constance.html</loc>
+    
+    <lastmod>2025-06-09</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://muetsch.io/graph-autoencoders-and-the-reconstruction-loss-problem.html</loc>
+    
+    <lastmod>2025-06-09</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://muetsch.io/multi-threaded-brotli-compression-tool.html</loc>
     
     <lastmod>2025-02-20</lastmod>
@@ -643,7 +661,7 @@
 
   <url>
     <loc>https://muetsch.io/</loc>
-    <lastmod>2025-02-20</lastmod>
+    <lastmod>2025-06-09</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
@@ -651,91 +669,105 @@
   
   <url>
     <loc>https://muetsch.io/tags/sysadmin/</loc>
-    <lastmod>2025-02-20</lastmod>
+    <lastmod>2025-06-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://muetsch.io/tags/linux/</loc>
-    <lastmod>2025-02-20</lastmod>
+    <lastmod>2025-06-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://muetsch.io/tags/software-engineering/</loc>
-    <lastmod>2025-02-20</lastmod>
+    <lastmod>2025-06-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://muetsch.io/tags/opensource/</loc>
-    <lastmod>2025-02-20</lastmod>
+    <lastmod>2025-06-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://muetsch.io/tags/energy/</loc>
-    <lastmod>2025-02-20</lastmod>
+    <lastmod>2025-06-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://muetsch.io/tags/smarthome/</loc>
-    <lastmod>2025-02-20</lastmod>
+    <lastmod>2025-06-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://muetsch.io/tags/self-driving/</loc>
-    <lastmod>2025-02-20</lastmod>
+    <lastmod>2025-06-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://muetsch.io/tags/gis/</loc>
-    <lastmod>2025-02-20</lastmod>
+    <lastmod>2025-06-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://muetsch.io/tags/devtools/</loc>
-    <lastmod>2025-02-20</lastmod>
+    <lastmod>2025-06-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://muetsch.io/tags/algorithms/</loc>
-    <lastmod>2025-02-20</lastmod>
+    <lastmod>2025-06-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://muetsch.io/tags/selfhosted/</loc>
-    <lastmod>2025-02-20</lastmod>
+    <lastmod>2025-06-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://muetsch.io/tags/ai/</loc>
-    <lastmod>2025-02-20</lastmod>
+    <lastmod>2025-06-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
     <loc>https://muetsch.io/tags/machine-learning/</loc>
-    <lastmod>2025-02-20</lastmod>
+    <lastmod>2025-06-09</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://muetsch.io/tags/offtopic/</loc>
+    <lastmod>2025-06-09</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>https://muetsch.io/tags/sports/</loc>
+    <lastmod>2025-06-09</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>

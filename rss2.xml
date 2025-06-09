@@ -9,8 +9,57 @@
     <atom:link href="https://muetsch.io/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description>Hi and welcome! 👋 I&#39;m Ferdinand, a passionate software- and data engineer and technology enthusiast from Karlsruhe, Germany. My personal webpage is the right place to find out about me and my projects and to read about software development, DevOps, some machine learning and technology in general. All content you will find here is [human-written](/statement-about-generative-ai.html). Enjoy and feel free to leave me a message!</description>
-    <pubDate>Sun, 26 Jan 2025 21:27:04 GMT</pubDate>
+    <pubDate>Mon, 09 Jun 2025 18:05:45 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>Cycling around Lake Constance</title>
+      <link>https://muetsch.io/cycling-around-lake-constance.html</link>
+      <guid>https://muetsch.io/cycling-around-lake-constance.html</guid>
+      <pubDate>Wed, 21 May 2025 14:02:36 GMT</pubDate>
+      
+        
+        
+      <description>&lt;p&gt;Exciting news: I’m moving from tech to travel blog now 🏝.&lt;/p&gt;
+&lt;p&gt;Just kidding. Nevertheless I thought it might be cool to share some not</description>
+        
+      
+      
+      
+      
+      
+      <category domain="https://muetsch.io/tags/offtopic/">offtopic</category>
+      
+      <category domain="https://muetsch.io/tags/sports/">sports</category>
+      
+      
+      <comments>https://muetsch.io/cycling-around-lake-constance.html#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>Graph Autoencoders and the Reconstruction Loss Problem</title>
+      <link>https://muetsch.io/graph-autoencoders-and-the-reconstruction-loss-problem.html</link>
+      <guid>https://muetsch.io/graph-autoencoders-and-the-reconstruction-loss-problem.html</guid>
+      <pubDate>Mon, 14 Apr 2025 07:07:10 GMT</pubDate>
+      
+        
+        
+      <description>&lt;h1 id=&quot;Foreword&quot;&gt;&lt;a href=&quot;#Foreword&quot; class=&quot;headerlink&quot; title=&quot;Foreword&quot;&gt;&lt;/a&gt;Foreword&lt;/h1&gt;&lt;p&gt;This article is meant to give a brief introduc</description>
+        
+      
+      
+      
+      
+      
+      <category domain="https://muetsch.io/tags/ai/">ai</category>
+      
+      <category domain="https://muetsch.io/tags/machine-learning/">machine-learning</category>
+      
+      
+      <comments>https://muetsch.io/graph-autoencoders-and-the-reconstruction-loss-problem.html#disqus_thread</comments>
+      
+    </item>
     
     <item>
       <title>Running FCOS3D Monocular 3D Detection on custom Images</title>
@@ -77,55 +126,6 @@
       
       
       <comments>https://muetsch.io/energy-monitoring-pt-2-optimizing-my-consumption-with-data.html#disqus_thread</comments>
-      
-    </item>
-    
-    <item>
-      <title>Smart Home Energy Monitoring Pt. 1 - IR readers, SML, MQTT, Node-RED, Prometheus + Grafana</title>
-      <link>https://muetsch.io/energy-monitoring-pt-1-ir-readers-sml-mqtt-node-red-prometheus-grafana.html</link>
-      <guid>https://muetsch.io/energy-monitoring-pt-1-ir-readers-sml-mqtt-node-red-prometheus-grafana.html</guid>
-      <pubDate>Sat, 21 Sep 2024 05:21:30 GMT</pubDate>
-      
-        
-        
-      <description>&lt;p&gt;&lt;img src=&quot;/images/energy_monitoring_grafana1.png&quot; alt=&quot;Grafana dashboard for energy monitoring&quot;&gt;&lt;/p&gt;
-&lt;h1 id=&quot;Introduction&quot;&gt;&lt;a href=&quot;#Intr</description>
-        
-      
-      
-      
-      
-      
-      <category domain="https://muetsch.io/tags/energy/">energy</category>
-      
-      <category domain="https://muetsch.io/tags/smarthome/">smarthome</category>
-      
-      
-      <comments>https://muetsch.io/energy-monitoring-pt-1-ir-readers-sml-mqtt-node-red-prometheus-grafana.html#disqus_thread</comments>
-      
-    </item>
-    
-    <item>
-      <title>Multi-threaded Brotli compression tool</title>
-      <link>https://muetsch.io/multi-threaded-brotli-compression-tool.html</link>
-      <guid>https://muetsch.io/multi-threaded-brotli-compression-tool.html</guid>
-      <pubDate>Sat, 13 Jul 2024 08:52:52 GMT</pubDate>
-      
-        
-        
-      <description>&lt;h2 id=&quot;Brotli-compression-is-slow&quot;&gt;&lt;a href=&quot;#Brotli-compression-is-slow&quot; class=&quot;headerlink&quot; title=&quot;Brotli compression is slow&quot;&gt;&lt;/a&gt;Brotli c</description>
-        
-      
-      
-      
-      
-      
-      <category domain="https://muetsch.io/tags/devtools/">devtools</category>
-      
-      <category domain="https://muetsch.io/tags/algorithms/">algorithms</category>
-      
-      
-      <comments>https://muetsch.io/multi-threaded-brotli-compression-tool.html#disqus_thread</comments>
       
     </item>
     
