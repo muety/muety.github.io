@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="referrer" content="no-referrer">
+    <meta name="robots" content="noarchive">
+    <meta name="description" content="After Nextcloud broke the Linux desktop client for NTFS filesystems (see #7613), I tried to switch from syncing my folders to simply mounting them via WebDAV. On Linux, the official to accomplish this">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Fixing slow Nextcloud WebDAV mount with rclone">
+<meta property="og:url" content="https://muetsch.io/fixing-slow-nextcloud-webdav-mount-with-rclone.html">
+<meta property="og:site_name" content="Ferdinand Mütsch">
+<meta property="og:description" content="After Nextcloud broke the Linux desktop client for NTFS filesystems (see #7613), I tried to switch from syncing my folders to simply mounting them via WebDAV. On Linux, the official to accomplish this">
+<meta property="og:locale">
+<meta property="article:published_time" content="2025-06-29T11:45:24.000Z">
+<meta property="article:modified_time" content="2025-06-29T12:13:52.858Z">
+<meta property="article:author" content="Ferdinand Mütsch">
+<meta property="article:tag" content="sysadmin">
+<meta property="article:tag" content="linux">
+<meta name="twitter:card" content="summary">
+    
+    
+        
+          
+              <link rel="shortcut icon" href="/images/favicon.png">
+          
+        
+        
+          
+            <link rel="icon" type="image/png" href="/images/favicon.png" sizes="192x192">
+          
+        
+        
+    
+    <!-- title -->
+    
+    <title>Fixing slow Nextcloud WebDAV mount with rclone  | Ferdinand Mütsch</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- rss -->
+    
+    
+
+    <!-- rel-me links -->
+    
+      
+        <link href="http://github.com/muety" rel="me">
+      
+        <link href="https://social.tchncs.de/@ferdi" rel="me">
+      
+        <link href="mailto:ferdinand@muetsch.io" rel="me">
+      
+    
+
+    <!-- Webmention link -->
+    
+      <link href="https://webmention.io/muetsch.io/webmention" rel="webmention">
+    
+
+    
+      <link href="https://webmention.io/muetsch.io/xmlrpc" rel="pingback">
+    
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="/vendor/katex.min.css">
+
+<link rel="stylesheet" href="/vendor/math.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 7.3.0"><link rel="alternate" href="/rss2.xml" title="Ferdinand Mütsch" type="application/rss+xml">
+</head>
+
+<body>
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" onclick="window.scrollTo(0, 0)" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Blog</a></li>
+         
+          <li><a href="/reads/">Reads</a></li>
+         
+          <li><a href="/imprint/">Imprint</a></li>
+        
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" href="/cycling-around-lake-constance.html"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover='toggleById("i-next").toggleById();' onmouseout='toggleById("i-next");'></i></a></li>
+        
+        <li><a class="icon" href="#" onclick="window.scrollTo(0,0)"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover='toggleById("i-top");' onmouseout='toggleById("i-top");'></i></a></li>
+        <li><a class="icon" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover='toggleById("i-share");' onmouseout='toggleById("i-share");' onclick='toggleById("share");return false;'></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://muetsch.io/fixing-slow-nextcloud-webdav-mount-with-rclone.html"><i class="fas fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://muetsch.io/fixing-slow-nextcloud-webdav-mount-with-rclone.html&text=Fixing slow Nextcloud WebDAV mount with rclone"><i class="fas fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://muetsch.io/fixing-slow-nextcloud-webdav-mount-with-rclone.html&title=Fixing slow Nextcloud WebDAV mount with rclone"><i class="fas fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://muetsch.io/fixing-slow-nextcloud-webdav-mount-with-rclone.html&is_video=false&description=Fixing slow Nextcloud WebDAV mount with rclone"><i class="fas fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Fixing slow Nextcloud WebDAV mount with rclone&body=Check out this article: https://muetsch.io/fixing-slow-nextcloud-webdav-mount-with-rclone.html"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://muetsch.io/fixing-slow-nextcloud-webdav-mount-with-rclone.html&title=Fixing slow Nextcloud WebDAV mount with rclone"><i class="fas fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://muetsch.io/fixing-slow-nextcloud-webdav-mount-with-rclone.html&title=Fixing slow Nextcloud WebDAV mount with rclone"><i class="fas fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://muetsch.io/fixing-slow-nextcloud-webdav-mount-with-rclone.html&title=Fixing slow Nextcloud WebDAV mount with rclone"><i class="fas fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://muetsch.io/fixing-slow-nextcloud-webdav-mount-with-rclone.html&title=Fixing slow Nextcloud WebDAV mount with rclone"><i class="fas fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://muetsch.io/fixing-slow-nextcloud-webdav-mount-with-rclone.html&name=Fixing slow Nextcloud WebDAV mount with rclone&description="><i class="fas fa-tumblr " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Setup"><span class="toc-number">1.</span> <span class="toc-text">Setup</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index width mx-auto px2 my4">
+        
+        <article class="h-entry post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <a href="https://muetsch.io/fixing-slow-nextcloud-webdav-mount-with-rclone.html" class="u-url">
+        <h1 class="posttitle p-name" itemprop="name headline" property="headline">
+            Fixing slow Nextcloud WebDAV mount with rclone
+        </h1>
+    </a>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" property="author" itemscope itemtype="http://schema.org/Person" vocab="http://schema.org/" typeof="Person">
+        <span itemprop="name" property="name" class="p-author h-card">Ferdinand Mütsch</span>
+      </span>
+      
+    <div class="postdate">
+        <time datetime="2025-06-29T11:45:24.000Z" class="dt-published" itemprop="datePublished" property="datePublished">2025-06-29</time>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/tags/linux/" rel="tag">linux</a>, <a class="tag-link-link" href="/tags/sysadmin/" rel="tag">sysadmin</a>
+    </div>
+
+
+
+      <!--
+      <div style="margin-top: 30px">
+        <a href="https://liberapay.com/muety/" target="_blank"
+          style="background-image: none; text-decoration: none;"><img
+            src="https://badges.fw-web.space/liberapay/receives/muety.svg?logo=liberapay&style=flat-square" alt="Liberapay"
+            style="height: auto !important;width: auto !important;"></a>
+      </div>
+      -->
+    </div>
+  </header>
+  
+  <div class="content e-content" itemprop="articleBody" property="articleBody">
+    <p>After Nextcloud broke the Linux desktop client for NTFS filesystems (see <a href="https://github.com/nextcloud/desktop/issues/7613">#7613</a>), I tried to switch from syncing my folders to simply mounting them via WebDAV. On Linux, the <a href="https://docs.nextcloud.com/server/latest/user_manual/en/files/access_webdav.html">official</a> to accomplish this uses the <a href="https://wiki.archlinux.org/title/Davfs2"><code>davfs2</code></a> driver. Unfortunately, due to some long-lasting issue with that driver, directory listings are <a href="https://help.nextcloud.com/t/webdav-extremely-slow-on-linux-using-davfs2-mount/123811">unbearably</a> <a href="https://github.com/nextcloud/server/issues/32729">slow</a>, though. Different mount options or driver parameters (like adapting caching- and locking behavior, etc.) didn’t help for me.</p>
+<p>Eventually, I found a good solution, which uses <a href="https://rclone.org/">rclone</a> in place of the <code>davfs2</code> FUSE driver for the mount. Apparently, their <a href="https://github.com/rclone/rclone/blob/master/backend/webdav/webdav.go">WebDAV implementation</a> is more robust and has better performance (orders of magnitude faster in my case), at least in case of a Nextcloud remote. While rclone’s primary purpose is backups, it is well suitable for my very simple use case as well. Besides common storage services like S3, Google Cloud Storage, Dropbox and <a href="https://github.com/rclone/rclone?tab=readme-ov-file#storage-providers">countless</a> others, rclone has a <a href="https://rclone.org/webdav/">WebDAV backend</a>, which allows to create a local mount point from a WebDAV resource. Here is how:</p>
+<h2 id="Setup"><a href="#Setup" class="headerlink" title="Setup"></a>Setup</h2><ol>
+<li><p><strong><a href="https://rclone.org/install/">Install</a></strong> rclone</p>
+</li>
+<li><p><a href="https://rclone.org/webdav/#configuration">Configure</a> a <strong>new remote</strong> for Nextcloud WebDAV</p>
+</li>
+<li><p><strong>Mount it manually</strong> (to verify things are working)</p>
+ <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rclone mount nextcloud: /mnt/nextcloud --vfs-cache-mode full</span><br></pre></td></tr></table></figure>
+
+<p> Note: Your mount point can vary from <code>/mnt/nextcloud</code>, of course.</p>
+</li>
+<li><p>Create a <strong>systemd service</strong> for auto-mounting</p>
+<ol>
+<li><p>Create a new file at <code>/etc/systemd/system/rclone-nextcloud.service</code></p>
+ <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">[Unit]</span><br><span class="line">Description=RClone mount for Nextcloud</span><br><span class="line">Documentation=man:rclone(1)</span><br><span class="line">After=network-online.target</span><br><span class="line">Wants=network-online.target</span><br><span class="line">AssertPathIsDirectory=/mnt/nextcloud</span><br><span class="line"></span><br><span class="line">[Service]</span><br><span class="line">Type=simple</span><br><span class="line">User=your-username</span><br><span class="line">Group=your-groupname</span><br><span class="line">ExecStart=/usr/bin/rclone mount nextcloud: /mnt/nextcloud \</span><br><span class="line">    --config=/home/your-username/.config/rclone/rclone.conf \</span><br><span class="line">    --vfs-cache-mode full \</span><br><span class="line">    --vfs-cache-max-age 1h \</span><br><span class="line">    --vfs-cache-max-size 1G \</span><br><span class="line">    --buffer-size 16M \</span><br><span class="line">    --dir-cache-time 72h \</span><br><span class="line">    --umask 002 \</span><br><span class="line">    --uid 1000 \</span><br><span class="line">    --gid 1000 \</span><br><span class="line">    --daemon-timeout 30s</span><br><span class="line">ExecStop=/bin/fusermount -u /mnt/nextcloud</span><br><span class="line">TimeoutStartSec=60</span><br><span class="line">TimeoutStopSec=20</span><br><span class="line">KillMode=process</span><br><span class="line">Restart=on-failure</span><br><span class="line">RestartSec=30</span><br><span class="line">StartLimitInterval=300</span><br><span class="line">StartLimitBurst=3</span><br><span class="line"></span><br><span class="line">[Install]</span><br><span class="line">WantedBy=multi-user.target</span><br></pre></td></tr></table></figure>
+
+<p> <strong>Important:</strong> Replace <code>your-username</code> and <code>your-groupname</code> by your actual user- and group names and adapt <code>uid</code> and <code>gid</code> accordingly. Also, feel free to experiment with different <a href="https://rclone.org/commands/rclone_mount/#vfs-virtual-file-system">VFS caching options</a>. </p>
+</li>
+<li><p>Start the service and enable it for being executed during startup</p>
+<pre><code class="bash">sudo systemctl daemon-reload &amp;&amp; \
+sudo systemctl start rclone-nextcloud.service &amp;&amp; \
+sudo systemctl enable rclone-nextcloud.service
+</code></pre>
+</li>
+</ol>
+</li>
+</ol>
+<p>Note that if you’re using a custom DNS resolver (like <a href="https://github.com/DNSCrypt/dnscrypt-proxy">dnscrypt-proxy</a> in my case) or anything else that must be running <em>before</em> your Nextcloud remote can be reached, you’ll have to adapt the <code>After=</code> and <code>Wants=</code> options.</p>
+
+  </div>
+</article>
+
+
+
+    </div>
+    
+      <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Blog</a></li>
+         
+          <li><a href="/reads/">Reads</a></li>
+         
+          <li><a href="/imprint/">Imprint</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Setup"><span class="toc-number">1.</span> <span class="toc-text">Setup</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" href="http://www.facebook.com/sharer.php?u=https://muetsch.io/fixing-slow-nextcloud-webdav-mount-with-rclone.html"><i class="fas fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://twitter.com/share?url=https://muetsch.io/fixing-slow-nextcloud-webdav-mount-with-rclone.html&text=Fixing slow Nextcloud WebDAV mount with rclone"><i class="fas fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.linkedin.com/shareArticle?url=https://muetsch.io/fixing-slow-nextcloud-webdav-mount-with-rclone.html&title=Fixing slow Nextcloud WebDAV mount with rclone"><i class="fas fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://pinterest.com/pin/create/bookmarklet/?url=https://muetsch.io/fixing-slow-nextcloud-webdav-mount-with-rclone.html&is_video=false&description=Fixing slow Nextcloud WebDAV mount with rclone"><i class="fas fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Fixing slow Nextcloud WebDAV mount with rclone&body=Check out this article: https://muetsch.io/fixing-slow-nextcloud-webdav-mount-with-rclone.html"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="https://getpocket.com/save?url=https://muetsch.io/fixing-slow-nextcloud-webdav-mount-with-rclone.html&title=Fixing slow Nextcloud WebDAV mount with rclone"><i class="fas fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://reddit.com/submit?url=https://muetsch.io/fixing-slow-nextcloud-webdav-mount-with-rclone.html&title=Fixing slow Nextcloud WebDAV mount with rclone"><i class="fas fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.stumbleupon.com/submit?url=https://muetsch.io/fixing-slow-nextcloud-webdav-mount-with-rclone.html&title=Fixing slow Nextcloud WebDAV mount with rclone"><i class="fas fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://digg.com/submit?url=https://muetsch.io/fixing-slow-nextcloud-webdav-mount-with-rclone.html&title=Fixing slow Nextcloud WebDAV mount with rclone"><i class="fas fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="http://www.tumblr.com/share/link?url=https://muetsch.io/fixing-slow-nextcloud-webdav-mount-with-rclone.html&name=Fixing slow Nextcloud WebDAV mount with rclone&description="><i class="fas fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+      <ul>
+        <li id="toc"><a class="icon" href="#" onclick='toggleById("toc-footer")'><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a></li>
+        <li id="share"><a class="icon" href="#" onclick='toggleById("share-footer")'><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a></li>
+        <li id="top" style="display:none"><a class="icon" href="#" onclick="window.scrollTo(0,0)"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a></li>
+        <li id="menu"><a class="icon" href="#" onclick='toggleById("nav-footer")'><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a></li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+    
+    <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy; 2025 Ferdinand Mütsch
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Blog</a></li>
+         
+          <li><a href="/reads/">Reads</a></li>
+         
+          <li><a href="/imprint/">Imprint</a></li>
+        
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+<!--
+<script defer type="text/javascript" src="js/pirsch.js"
+    id="pirschjs"
+    data-code="GoPk8VNmzk8Z6n7xikwZahvOxm1MNPud"></script>
+-->
+</body>
+</html>
+<!-- styles -->
+
+<link rel="stylesheet" href="/lib/roboto/css/roboto.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+
+
+
+<script src="/js/main.js"></script>
+
+<!-- Google Analytics -->
+
+<!-- Disqus Comments -->
+
+

@@ -9,8 +9,32 @@
     <atom:link href="https://muetsch.io/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description>Hi and welcome! 👋 I&#39;m Ferdinand, a passionate software- and data engineer and technology enthusiast from Karlsruhe, Germany. My personal webpage is the right place to find out about me and my projects and to read about software development, DevOps, some machine learning and technology in general. All content you will find here is [human-written](/statement-about-generative-ai.html). Enjoy and feel free to leave me a message!</description>
-    <pubDate>Mon, 09 Jun 2025 18:05:45 GMT</pubDate>
+    <pubDate>Sun, 29 Jun 2025 12:13:52 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>Fixing slow Nextcloud WebDAV mount with rclone</title>
+      <link>https://muetsch.io/fixing-slow-nextcloud-webdav-mount-with-rclone.html</link>
+      <guid>https://muetsch.io/fixing-slow-nextcloud-webdav-mount-with-rclone.html</guid>
+      <pubDate>Sun, 29 Jun 2025 11:45:24 GMT</pubDate>
+      
+        
+        
+      <description>&lt;p&gt;After Nextcloud broke the Linux desktop client for NTFS filesystems (see &lt;a href=&quot;https://github.com/nextcloud/desktop/issues/7613&quot;&gt;#7613</description>
+        
+      
+      
+      
+      
+      
+      <category domain="https://muetsch.io/tags/sysadmin/">sysadmin</category>
+      
+      <category domain="https://muetsch.io/tags/linux/">linux</category>
+      
+      
+      <comments>https://muetsch.io/fixing-slow-nextcloud-webdav-mount-with-rclone.html#disqus_thread</comments>
+      
+    </item>
     
     <item>
       <title>Cycling around Lake Constance</title>
@@ -102,30 +126,6 @@
       
       
       <comments>https://muetsch.io/heterogeneous-graph-classification-using-graph-neural-networks-gnn.html#disqus_thread</comments>
-      
-    </item>
-    
-    <item>
-      <title>Smart Home Energy Monitoring Pt. 2 - Optimizing my electricity consumption with data</title>
-      <link>https://muetsch.io/energy-monitoring-pt-2-optimizing-my-consumption-with-data.html</link>
-      <guid>https://muetsch.io/energy-monitoring-pt-2-optimizing-my-consumption-with-data.html</guid>
-      <pubDate>Sat, 21 Sep 2024 07:48:58 GMT</pubDate>
-      
-        
-        
-      <description>&lt;h1 id=&quot;Introduction&quot;&gt;&lt;a href=&quot;#Introduction&quot; class=&quot;headerlink&quot; title=&quot;Introduction&quot;&gt;&lt;/a&gt;Introduction&lt;/h1&gt;&lt;p&gt;This is the second article in </description>
-        
-      
-      
-      
-      
-      
-      <category domain="https://muetsch.io/tags/energy/">energy</category>
-      
-      <category domain="https://muetsch.io/tags/smarthome/">smarthome</category>
-      
-      
-      <comments>https://muetsch.io/energy-monitoring-pt-2-optimizing-my-consumption-with-data.html#disqus_thread</comments>
       
     </item>
     
